@@ -1,0 +1,73 @@
+[{"stream_name":"stderr","time":0.572833677,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.572869539,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.594137442,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.627366483,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.634360816,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.639615863,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.659313116,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.659328544,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.659697253,"data":"$ PART=e2e bash scripts/run_all.sh\n"}
+,{"stream_name":"stdout","time":49.70666594,"data":"439/439 passed\n"}
+,{"stream_name":"stdout","time":68.833168005,"data":"loading HF model...\n"}
+,{"stream_name":"stdout","time":69.093212623,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":86.810277251,"data":"\n"}
+,{"stream_name":"stdout","time":86.988974666,"data":"Loading weights:   0%|          | 0/201 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":87.119827071,"data":"Loading weights:   0%|          | 1/201 [00:00\u003c00:36,  5.55it/s]\n"}
+,{"stream_name":"stdout","time":87.23788815,"data":"Loading weights:  20%|█▉        | 40/201 [00:00\u003c00:01, 154.48it/s]\n"}
+,{"stream_name":"stdout","time":87.358047817,"data":"Loading weights:  33%|███▎      | 67/201 [00:00\u003c00:00, 183.89it/s]\n"}
+,{"stream_name":"stdout","time":87.477581548,"data":"Loading weights:  47%|████▋     | 94/201 [00:00\u003c00:00, 198.79it/s]\n"}
+,{"stream_name":"stdout","time":87.594158626,"data":"Loading weights:  60%|██████    | 121/201 [00:00\u003c00:00, 208.18it/s]\n"}
+,{"stream_name":"stdout","time":87.715646544,"data":"Loading weights:  74%|███████▎  | 148/201 [00:00\u003c00:00, 215.63it/s]\n"}
+,{"stream_name":"stdout","time":87.798010875,"data":"Loading weights:  87%|████████▋ | 175/201 [00:00\u003c00:00, 217.76it/s]\n"}
+,{"stream_name":"stdout","time":87.798045547,"data":"Loading weights: 100%|██████████| 201/201 [00:00\u003c00:00, 203.17it/s]\n"}
+,{"stream_name":"stdout","time":88.974992389,"data":"\n"}
+,{"stream_name":"stdout","time":88.975027299,"data":"===== ppl =====\n"}
+,{"stream_name":"stdout","time":91.415700091,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":91.417424222,"data":"  File \"/kaggle/repo/bench/e2e.py\", line 285, in \u003cmodule\u003e\n"}
+,{"stream_name":"stdout","time":91.417440308,"data":"    {\"ppl\": bench_ppl, \"agree\": bench_agree, \"speed\": bench_speed, \"profile\": bench_profile}[s]()\n"}
+,{"stream_name":"stdout","time":91.417445565,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n"}
+,{"stream_name":"stdout","time":91.41744972,"data":"  File \"/kaggle/repo/bench/e2e.py\", line 68, in bench_ppl\n"}
+,{"stream_name":"stdout","time":91.41745392,"data":"    wins, ntok = wikitext_windows()\n"}
+,{"stream_name":"stdout","time":91.417468537,"data":"                 ~~~~~~~~~~~~~~~~^^\n"}
+,{"stream_name":"stdout","time":91.417472507,"data":"  File \"/kaggle/repo/bench/e2e.py\", line 55, in wikitext_windows\n"}
+,{"stream_name":"stdout","time":91.417476193,"data":"    ds = load_dataset(\"wikitext\", \"wikitext-2-raw-v1\", split=\"test\")\n"}
+,{"stream_name":"stdout","time":91.417481659,"data":"  File \"/usr/local/lib/python3.13/dist-packages/datasets/load.py\", line 1688, in load_dataset\n"}
+,{"stream_name":"stdout","time":91.417485505,"data":"    builder_instance = load_dataset_builder(\n"}
+,{"stream_name":"stdout","time":91.417489317,"data":"        path=path,\n"}
+,{"stream_name":"stdout","time":91.417493003,"data":"    ...\u003c10 lines\u003e...\n"}
+,{"stream_name":"stdout","time":91.417496494,"data":"        **config_kwargs,\n"}
+,{"stream_name":"stdout","time":91.417500033,"data":"    )\n"}
+,{"stream_name":"stdout","time":91.417503761,"data":"  File \"/usr/local/lib/python3.13/dist-packages/datasets/load.py\", line 1315, in load_dataset_builder\n"}
+,{"stream_name":"stdout","time":91.417507983,"data":"    dataset_module = dataset_module_factory(\n"}
+,{"stream_name":"stdout","time":91.417511398,"data":"        path,\n"}
+,{"stream_name":"stdout","time":91.417514923,"data":"    ...\u003c5 lines\u003e...\n"}
+,{"stream_name":"stdout","time":91.417519117,"data":"        cache_dir=cache_dir,\n"}
+,{"stream_name":"stdout","time":91.417522775,"data":"    )\n"}
+,{"stream_name":"stdout","time":91.417526558,"data":"  File \"/usr/local/lib/python3.13/dist-packages/datasets/load.py\", line 1207, in dataset_module_factory\n"}
+,{"stream_name":"stdout","time":91.41753065,"data":"    raise e1 from None\n"}
+,{"stream_name":"stdout","time":91.417534325,"data":"  File \"/usr/local/lib/python3.13/dist-packages/datasets/load.py\", line 1182, in dataset_module_factory\n"}
+,{"stream_name":"stdout","time":91.417538278,"data":"    ).get_module()\n"}
+,{"stream_name":"stdout","time":91.417541919,"data":"      ~~~~~~~~~~^^\n"}
+,{"stream_name":"stdout","time":91.417545637,"data":"  File \"/usr/local/lib/python3.13/dist-packages/datasets/load.py\", line 598, in get_module\n"}
+,{"stream_name":"stdout","time":91.41754923,"data":"    standalone_yaml_path = cached_path(\n"}
+,{"stream_name":"stdout","time":91.417552523,"data":"        hf_dataset_url(self.name, config.REPOYAML_FILENAME, revision=self.commit_hash),\n"}
+,{"stream_name":"stdout","time":91.417556062,"data":"        download_config=download_config,\n"}
+,{"stream_name":"stdout","time":91.417559263,"data":"    )\n"}
+,{"stream_name":"stdout","time":91.417562788,"data":"  File \"/usr/local/lib/python3.13/dist-packages/datasets/utils/file_utils.py\", line 180, in cached_path\n"}
+,{"stream_name":"stdout","time":91.417566463,"data":"    ).resolve_path(url_or_filename)\n"}
+,{"stream_name":"stdout","time":91.417569783,"data":"      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":91.417573106,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/hf_file_system.py\", line 305, in resolve_path\n"}
+,{"stream_name":"stdout","time":91.417576674,"data":"    parsed = parse_hf_uri(f\"{constants.HF_PROTOCOL}{path}\")\n"}
+,{"stream_name":"stdout","time":91.417580139,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_hf_uris.py\", line 319, in parse_hf_uri\n"}
+,{"stream_name":"stdout","time":91.417583623,"data":"    return _parse_repo_body(location, type_, raw=raw)\n"}
+,{"stream_name":"stdout","time":91.417587906,"data":"  File \"/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_hf_uris.py\", line 617, in _parse_repo_body\n"}
+,{"stream_name":"stdout","time":91.417596234,"data":"    raise HfUriError(uri=raw, msg=f\"Repository id must be 'namespace/name', got '{repo_id}'.\")\n"}
+,{"stream_name":"stdout","time":91.417606848,"data":"huggingface_hub.errors.HfUriError: Invalid HF URI 'hf://datasets/wikitext@b08601e04326c79dfdd32d625aee71d232d685c3/.huggingface.yaml'. Repository id must be 'namespace/name', got 'wikitext'.\n"}
+,{"stream_name":"stdout","time":92.916259732,"data":"EXIT_CODE=1\n"}
+,{"stream_name":"stderr","time":94.817846229,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":94.817873576,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":95.031839076,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":95.031862663,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":95.752044682,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":96.65801836,"data":"[NbConvertApp] Writing 360214 bytes to __results__.html\n"}
+]

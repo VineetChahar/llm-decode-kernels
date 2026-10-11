@@ -52,7 +52,7 @@ def build(name, max_ctx=MAX_CTX):
 # ------------------------------------------------------------------ accuracy
 def wikitext_windows(n=16, L=512):
     from datasets import load_dataset
-    ds = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
+    ds = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split="test")  # bare "wikitext" id rejected by new hub
     ids = tok("\n\n".join(ds["text"]), return_tensors="pt", add_special_tokens=False).input_ids[0]
     starts = torch.linspace(0, len(ids) - L, n).long().tolist()
     bos = torch.tensor([tok.bos_token_id])
@@ -280,6 +280,13 @@ if __name__ == "__main__":
     ap.add_argument("sections", nargs="*", default=["ppl", "agree", "speed", "profile"])
     a = ap.parse_args()
     res.put("env_e2e", env_info())
-    for s in a.sections:
+    failed = []
+    for s in a.sections:  # sections are independent: one failing must not cost the others
         print(f"\n===== {s} =====", flush=True)
-        {"ppl": bench_ppl, "agree": bench_agree, "speed": bench_speed, "profile": bench_profile}[s]()
+        try:
+            {"ppl": bench_ppl, "agree": bench_agree, "speed": bench_speed, "profile": bench_profile}[s]()
+        except Exception:
+            import traceback; traceback.print_exc(); failed.append(s)
+            gc.collect(); torch.cuda.empty_cache()
+    if failed:
+        sys.exit(f"e2e sections failed: {failed}")

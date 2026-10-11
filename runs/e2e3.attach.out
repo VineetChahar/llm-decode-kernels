@@ -1,0 +1,101 @@
+attaching to running kernel vineetkumar0210/llm-decode-e2e
+[   31s] KernelWorkerStatus.QUEUED
+[   63s] KernelWorkerStatus.QUEUED
+[   96s] KernelWorkerStatus.QUEUED
+[  128s] KernelWorkerStatus.QUEUED
+[  159s] KernelWorkerStatus.QUEUED
+[  191s] KernelWorkerStatus.QUEUED
+[  223s] KernelWorkerStatus.QUEUED
+[  256s] KernelWorkerStatus.QUEUED
+[  289s] KernelWorkerStatus.QUEUED
+[  322s] KernelWorkerStatus.QUEUED
+[  354s] KernelWorkerStatus.QUEUED
+[  386s] KernelWorkerStatus.QUEUED
+[  418s] KernelWorkerStatus.QUEUED
+[  450s] KernelWorkerStatus.QUEUED
+[  482s] KernelWorkerStatus.QUEUED
+[  514s] KernelWorkerStatus.QUEUED
+[  546s] KernelWorkerStatus.QUEUED
+[  577s] KernelWorkerStatus.QUEUED
+[  610s] KernelWorkerStatus.QUEUED
+[  641s] KernelWorkerStatus.QUEUED
+[  672s] KernelWorkerStatus.QUEUED
+[  705s] KernelWorkerStatus.QUEUED
+[  737s] KernelWorkerStatus.QUEUED
+[  769s] KernelWorkerStatus.QUEUED
+[  802s] KernelWorkerStatus.QUEUED
+[  835s] KernelWorkerStatus.QUEUED
+[  867s] KernelWorkerStatus.RUNNING
+[  899s] KernelWorkerStatus.RUNNING
+[  931s] KernelWorkerStatus.RUNNING
+[  962s] KernelWorkerStatus.ERROR
+r/ML project/llm-decode-kernels/runs/20261011T180612Z_e2e3/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T180612Z_e2e3/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T180612Z_e2e3/llm-decode-e2e.log 
+ 
+KERNEL FAILED (KernelWorkerStatus.ERROR); last 100 log lines:
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ PART=e2e bash scripts/run_all.sh
+439/439 passed
+loading HF model...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/201 [00:00<00:36,  5.55it/s]
+Loading weights:  20%|█▉        | 40/201 [00:00<00:01, 154.48it/s]
+Loading weights:  33%|███▎      | 67/201 [00:00<00:00, 183.89it/s]
+Loading weights:  47%|████▋     | 94/201 [00:00<00:00, 198.79it/s]
+Loading weights:  60%|██████    | 121/201 [00:00<00:00, 208.18it/s]
+Loading weights:  74%|███████▎  | 148/201 [00:00<00:00, 215.63it/s]
+Loading weights:  87%|████████▋ | 175/201 [00:00<00:00, 217.76it/s]
+Loading weights: 100%|██████████| 201/201 [00:00<00:00, 203.17it/s]
+
+===== ppl =====
+Traceback (most recent call last):
+  File "/kaggle/repo/bench/e2e.py", line 285, in <module>
+    {"ppl": bench_ppl, "agree": bench_agree, "speed": bench_speed, "profile": bench_profile}[s]()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/kaggle/repo/bench/e2e.py", line 68, in bench_ppl
+    wins, ntok = wikitext_windows()
+                 ~~~~~~~~~~~~~~~~^^
+  File "/kaggle/repo/bench/e2e.py", line 55, in wikitext_windows
+    ds = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
+  File "/usr/local/lib/python3.13/dist-packages/datasets/load.py", line 1688, in load_dataset
+    builder_instance = load_dataset_builder(
+        path=path,
+    ...<10 lines>...
+        **config_kwargs,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/datasets/load.py", line 1315, in load_dataset_builder
+    dataset_module = dataset_module_factory(
+        path,
+    ...<5 lines>...
+        cache_dir=cache_dir,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/datasets/load.py", line 1207, in dataset_module_factory
+    raise e1 from None
+  File "/usr/local/lib/python3.13/dist-packages/datasets/load.py", line 1182, in dataset_module_factory
+    ).get_module()
+      ~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/datasets/load.py", line 598, in get_module
+    standalone_yaml_path = cached_path(
+        hf_dataset_url(self.name, config.REPOYAML_FILENAME, revision=self.commit_hash),
+        download_config=download_config,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/datasets/utils/file_utils.py", line 180, in cached_path
+    ).resolve_path(url_or_filename)
+      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/hf_file_system.py", line 305, in resolve_path
+    parsed = parse_hf_uri(f"{constants.HF_PROTOCOL}{path}")
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_hf_uris.py", line 319, in parse_hf_uri
+    return _parse_repo_body(location, type_, raw=raw)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_hf_uris.py", line 617, in _parse_repo_body
+    raise HfUriError(uri=raw, msg=f"Repository id must be 'namespace/name', got '{repo_id}'.")
+huggingface_hub.errors.HfUriError: Invalid HF URI 'hf://datasets/wikitext@b08601e04326c79dfdd32d625aee71d232d685c3/.huggingface.yaml'. Repository id must be 'namespace/name', got 'wikitext'.
+EXIT_CODE=1
+
