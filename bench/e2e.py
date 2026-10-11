@@ -139,7 +139,7 @@ def time_decode(m, ctx, n_tok=64, warmup=5, use_graph=True):
         r = _time_decode_once(m, ctx, n_tok, warmup, use_graph); r["attempt"] = attempt
         if best is None or r["clocks_after"].get("sm_mhz", 0) > best["clocks_after"].get("sm_mhz", 0):
             best = r
-        if r["clocks_after"].get("sm_mhz", 0) >= MIN_SM_MHZ:
+        if r["clocks_after"].get("sm_mhz", 0) >= MIN_SM_MHZ or attempt == RETRIES - 1:
             break
         time.sleep(COOLDOWN_S)
     best["throttled"] = best["clocks_after"].get("sm_mhz", 0) < MIN_SM_MHZ
@@ -157,6 +157,8 @@ def _time_decode_once(m, ctx, n_tok, warmup, use_graph):
     ev = [(torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)) for _ in range(n_tok)]
     for s, e in ev:
         s.record(); m.run_step(use_graph); e.record()
+    torch.cuda._sleep(20_000_000)  # keep the GPU busy so NVML reports the loaded clock, not the idle one
+    ca = clocks()
     torch.cuda.synchronize()
     t = sorted(s.elapsed_time(e) * 1000 for s, e in ev)
     # wall clock too (includes CPU-side launch cost for eager runs)
@@ -167,7 +169,7 @@ def _time_decode_once(m, ctx, n_tok, warmup, use_graph):
     q1, q3 = t[len(t) // 4], t[(3 * len(t)) // 4]
     med = t[len(t) // 2]
     return {"ctx": ctx, "median_us": med, "iqr_us": q3 - q1, "p25_us": q1, "p75_us": q3, "wall_us": wall,
-            "tok_s": 1e6 / med, "tok_s_wall": 1e6 / wall, "clocks_before": cb, "clocks_after": clocks()}
+            "tok_s": 1e6 / med, "tok_s_wall": 1e6 / wall, "clocks_before": cb, "clocks_after": ca}
 
 
 def bench_speed():

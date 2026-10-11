@@ -1,0 +1,1311 @@
+{
+ "accuracy_kernels": [
+  {
+   "test": "gemv_shape1_x=1 stage(0, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(0, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(1, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(1, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  }
+ ],
+ "env": {
+  "gpu": "Tesla T4",
+  "sm": "7.5",
+  "sms": 40,
+  "mem_gb": 14.56219482421875,
+  "l2_mb": 4.0,
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "utc": "2026-10-11T10:28:03Z",
+  "clocks": {
+   "sm_mhz": 300,
+   "mem_mhz": 405,
+   "temp_c": 50,
+   "power_w": 12.098,
+   "reasons": [
+    "gpu_idle"
+   ]
+  }
+ },
+ "clock_probe": {
+  "lock_attempt": "The current user does not have permission to change clocks for GPU 00000000:00:04.0.\nTerminating early due to previous errors.",
+  "samples": [
+   {
+    "sm_mhz": 720,
+    "mem_mhz": 5000,
+    "temp_c": 51,
+    "power_w": 31.212,
+    "reasons": [],
+    "t_s": 0.04437851905822754,
+    "gbps": 270.8099233823905
+   },
+   {
+    "sm_mhz": 1590,
+    "mem_mhz": 5000,
+    "temp_c": 56,
+    "power_w": 55.078,
+    "reasons": [],
+    "t_s": 2.027308940887451,
+    "gbps": 275.5874976529837
+   },
+   {
+    "sm_mhz": 1590,
+    "mem_mhz": 5000,
+    "temp_c": 57,
+    "power_w": 49.082,
+    "reasons": [],
+    "t_s": 4.029536008834839,
+    "gbps": 275.5060351444875
+   },
+   {
+    "sm_mhz": 1590,
+    "mem_mhz": 5000,
+    "temp_c": 58,
+    "power_w": 68.344,
+    "reasons": [],
+    "t_s": 6.031238794326782,
+    "gbps": 277.12612306333654
+   },
+   {
+    "sm_mhz": 1590,
+    "mem_mhz": 5000,
+    "temp_c": 59,
+    "power_w": 69.275,
+    "reasons": [],
+    "t_s": 8.031145334243774,
+    "gbps": 276.5232065206884
+   },
+   {
+    "sm_mhz": 1590,
+    "mem_mhz": 5000,
+    "temp_c": 60,
+    "power_w": 68.983,
+    "reasons": [],
+    "t_s": 10.032717227935791,
+    "gbps": 275.0182864563068
+   },
+   {
+    "sm_mhz": 1575,
+    "mem_mhz": 5000,
+    "temp_c": 61,
+    "power_w": 69.859,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 12.02198338508606,
+    "gbps": 273.636737865966
+   },
+   {
+    "sm_mhz": 1590,
+    "mem_mhz": 5000,
+    "temp_c": 62,
+    "power_w": 70.053,
+    "reasons": [],
+    "t_s": 14.023316860198975,
+    "gbps": 275.73243515000445
+   },
+   {
+    "sm_mhz": 1575,
+    "mem_mhz": 5000,
+    "temp_c": 63,
+    "power_w": 70.345,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 16.01499056816101,
+    "gbps": 275.45175917152693
+   },
+   {
+    "sm_mhz": 1575,
+    "mem_mhz": 5000,
+    "temp_c": 64,
+    "power_w": 69.469,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 18.026691675186157,
+    "gbps": 276.27730274479256
+   },
+   {
+    "sm_mhz": 1560,
+    "mem_mhz": 5000,
+    "temp_c": 64,
+    "power_w": 68.886,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 20.018406629562378,
+    "gbps": 277.1169830753783
+   },
+   {
+    "sm_mhz": 1560,
+    "mem_mhz": 5000,
+    "temp_c": 65,
+    "power_w": 66.146,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 22.008530139923096,
+    "gbps": 275.36135233584207
+   },
+   {
+    "sm_mhz": 1560,
+    "mem_mhz": 5000,
+    "temp_c": 66,
+    "power_w": 63.458,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 24.018540859222412,
+    "gbps": 275.65088694582124
+   },
+   {
+    "sm_mhz": 1560,
+    "mem_mhz": 5000,
+    "temp_c": 67,
+    "power_w": 69.469,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 26.008273601531982,
+    "gbps": 276.57790560021766
+   },
+   {
+    "sm_mhz": 1560,
+    "mem_mhz": 5000,
+    "temp_c": 68,
+    "power_w": 69.761,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 28.017037868499756,
+    "gbps": 277.1535978135472
+   },
+   {
+    "sm_mhz": 1545,
+    "mem_mhz": 5000,
+    "temp_c": 68,
+    "power_w": 69.372,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 30.00665044784546,
+    "gbps": 275.92290769751185
+   },
+   {
+    "sm_mhz": 1545,
+    "mem_mhz": 5000,
+    "temp_c": 69,
+    "power_w": 69.664,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 32.01577591896057,
+    "gbps": 274.8831079793682
+   },
+   {
+    "sm_mhz": 1530,
+    "mem_mhz": 5000,
+    "temp_c": 69,
+    "power_w": 69.178,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 34.024970293045044,
+    "gbps": 276.5140892812528
+   },
+   {
+    "sm_mhz": 1530,
+    "mem_mhz": 5000,
+    "temp_c": 70,
+    "power_w": 69.469,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 36.01454019546509,
+    "gbps": 277.6949068588351
+   },
+   {
+    "sm_mhz": 1515,
+    "mem_mhz": 5000,
+    "temp_c": 70,
+    "power_w": 68.983,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 38.02351999282837,
+    "gbps": 276.5414428033637
+   },
+   {
+    "sm_mhz": 1515,
+    "mem_mhz": 5000,
+    "temp_c": 71,
+    "power_w": 69.275,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 40.013325214385986,
+    "gbps": 276.5232065206884
+   },
+   {
+    "sm_mhz": 1500,
+    "mem_mhz": 5000,
+    "temp_c": 72,
+    "power_w": 69.567,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 42.02239155769348,
+    "gbps": 275.24388521789353
+   },
+   {
+    "sm_mhz": 1500,
+    "mem_mhz": 5000,
+    "temp_c": 72,
+    "power_w": 69.178,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 44.012149810791016,
+    "gbps": 274.5682133049695
+   },
+   {
+    "sm_mhz": 1485,
+    "mem_mhz": 5000,
+    "temp_c": 73,
+    "power_w": 68.302,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 46.0210280418396,
+    "gbps": 277.04376557174794
+   },
+   {
+    "sm_mhz": 1485,
+    "mem_mhz": 5000,
+    "temp_c": 73,
+    "power_w": 68.594,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 48.01073122024536,
+    "gbps": 276.8883046387953
+   },
+   {
+    "sm_mhz": 1470,
+    "mem_mhz": 5000,
+    "temp_c": 74,
+    "power_w": 68.788,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 50.019662380218506,
+    "gbps": 275.9410479787051
+   },
+   {
+    "sm_mhz": 1455,
+    "mem_mhz": 5000,
+    "temp_c": 75,
+    "power_w": 67.858,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 52.00951623916626,
+    "gbps": 273.7796301987113
+   },
+   {
+    "sm_mhz": 1455,
+    "mem_mhz": 5000,
+    "temp_c": 75,
+    "power_w": 68.108,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 54.018937826156616,
+    "gbps": 276.3683290908187
+   },
+   {
+    "sm_mhz": 1455,
+    "mem_mhz": 5000,
+    "temp_c": 76,
+    "power_w": 68.399,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 56.00888776779175,
+    "gbps": 276.3228168983538
+   },
+   {
+    "sm_mhz": 1455,
+    "mem_mhz": 5000,
+    "temp_c": 76,
+    "power_w": 68.594,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 58.018325328826904,
+    "gbps": 275.9138299993332
+   },
+   {
+    "sm_mhz": 1440,
+    "mem_mhz": 5000,
+    "temp_c": 77,
+    "power_w": 68.247,
+    "reasons": [
+     "hw_slowdown"
+    ],
+    "t_s": 60.00904679298401,
+    "gbps": 275.09946073943803
+   }
+  ],
+  "after_30s_idle": {
+   "sm_mhz": 585,
+   "mem_mhz": 5000,
+   "temp_c": 70,
+   "power_w": 31.704,
+   "reasons": []
+  }
+ },
+ "bandwidth": {
+  "read": [
+   {
+    "mb": 256,
+    "blocks": 40,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 1167.3439741134644,
+    "gbps": 229.954034074543,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 40,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 977.7439832687378,
+    "gbps": 274.5457508238322,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 40,
+    "threads": 512,
+    "unroll": 1,
+    "median_us": 984.607994556427,
+    "gbps": 272.6318062458269,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 40,
+    "threads": 512,
+    "unroll": 4,
+    "median_us": 1000.656008720398,
+    "gbps": 268.25947544477884,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 40,
+    "threads": 1024,
+    "unroll": 1,
+    "median_us": 973.6480116844177,
+    "gbps": 275.7007181020221,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 40,
+    "threads": 1024,
+    "unroll": 4,
+    "median_us": 999.4079768657684,
+    "gbps": 268.59447014004957,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 80,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 987.9200160503387,
+    "gbps": 271.7178026953976,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 80,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 1000.7839798927307,
+    "gbps": 268.2251728577553,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 80,
+    "threads": 512,
+    "unroll": 1,
+    "median_us": 974.3040204048157,
+    "gbps": 275.5150860287605,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 80,
+    "threads": 512,
+    "unroll": 4,
+    "median_us": 1000.4640221595764,
+    "gbps": 268.3109537717928,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 80,
+    "threads": 1024,
+    "unroll": 1,
+    "median_us": 970.3520238399506,
+    "gbps": 276.63718877786937,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 80,
+    "threads": 1024,
+    "unroll": 4,
+    "median_us": 999.4239807128906,
+    "gbps": 268.5901691177398,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 160,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 975.2320051193237,
+    "gbps": 275.2529188858561,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 160,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 1001.2640357017517,
+    "gbps": 268.0965723610184,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 160,
+    "threads": 512,
+    "unroll": 1,
+    "median_us": 973.6480116844177,
+    "gbps": 275.7007181020221,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 160,
+    "threads": 512,
+    "unroll": 4,
+    "median_us": 1001.5519857406616,
+    "gbps": 268.0194935677635,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 320,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 972.0799922943115,
+    "gbps": 276.145438778589,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 256,
+    "blocks": 320,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 1001.0719895362854,
+    "gbps": 268.14800414538036,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 40,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 4643.791913986206,
+    "gbps": 231.22091684730674,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 40,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 3892.9920196533203,
+    "gbps": 275.81403161869804,
+    "sm_mhz": 1005,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 40,
+    "threads": 512,
+    "unroll": 1,
+    "median_us": 3961.8719816207886,
+    "gbps": 271.01880852816845,
+    "sm_mhz": 1020,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 40,
+    "threads": 512,
+    "unroll": 4,
+    "median_us": 3972.1759557724,
+    "gbps": 270.31577552339525,
+    "sm_mhz": 810,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 40,
+    "threads": 1024,
+    "unroll": 1,
+    "median_us": 3916.7680740356445,
+    "gbps": 274.1397508619063,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 40,
+    "threads": 1024,
+    "unroll": 4,
+    "median_us": 3967.3279523849487,
+    "gbps": 270.6460965382312,
+    "sm_mhz": 915,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 80,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 3968.991994857788,
+    "gbps": 270.5326252587902,
+    "sm_mhz": 1020,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 80,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 3966.879963874817,
+    "gbps": 270.6766611992911,
+    "sm_mhz": 645,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 80,
+    "threads": 512,
+    "unroll": 1,
+    "median_us": 3922.960042953491,
+    "gbps": 273.707050860403,
+    "sm_mhz": 1005,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 80,
+    "threads": 512,
+    "unroll": 4,
+    "median_us": 3970.9759950637817,
+    "gbps": 270.3974603056631,
+    "sm_mhz": 780,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 80,
+    "threads": 1024,
+    "unroll": 1,
+    "median_us": 3897.2479104995728,
+    "gbps": 275.5128358930498,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 80,
+    "threads": 1024,
+    "unroll": 4,
+    "median_us": 3964.0800952911377,
+    "gbps": 270.86784277529597,
+    "sm_mhz": 900,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 160,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 3935.711979866028,
+    "gbps": 272.820224013585,
+    "sm_mhz": 990,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 160,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 3964.416027069092,
+    "gbps": 270.8448903113283,
+    "sm_mhz": 765,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 160,
+    "threads": 512,
+    "unroll": 1,
+    "median_us": 3907.9679250717163,
+    "gbps": 274.75707185603255,
+    "sm_mhz": 585,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 160,
+    "threads": 512,
+    "unroll": 4,
+    "median_us": 3968.799948692322,
+    "gbps": 270.54571605550103,
+    "sm_mhz": 885,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 320,
+    "threads": 256,
+    "unroll": 1,
+    "median_us": 3911.504030227661,
+    "gbps": 274.50868405151687,
+    "sm_mhz": 960,
+    "mem_mhz": 5000
+   },
+   {
+    "mb": 1024,
+    "blocks": 320,
+    "threads": 256,
+    "unroll": 4,
+    "median_us": 3971.0559844970703,
+    "gbps": 270.3920136588022,
+    "sm_mhz": 930,
+    "mem_mhz": 5000
+   }
+  ],
+  "copy": [
+   {
+    "mb": 256,
+    "median_us": 2227.104067802429,
+    "gbps_rw": 241.0623373023388
+   },
+   {
+    "mb": 1024,
+    "median_us": 8884.28783416748,
+    "gbps_rw": 241.71702764301918
+   }
+  ],
+  "size_sweep": [
+   {
+    "kb": 256,
+    "median_us": 7.712000049650669,
+    "gbps": 33.991701025971125,
+    "blocks_per_sm": 2,
+    "iqr_us": 0.5039996467530727,
+    "p25_us": 7.552000228315592,
+    "p75_us": 8.055999875068665,
+    "sm_mhz": 585,
+    "temp_c": 76,
+    "power_w": 33.57,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 512,
+    "median_us": 8.415999822318554,
+    "gbps": 62.29657926199457,
+    "blocks_per_sm": 2,
+    "iqr_us": 0.6240000948309898,
+    "p25_us": 8.191999979317188,
+    "p75_us": 8.816000074148178,
+    "sm_mhz": 585,
+    "temp_c": 78,
+    "power_w": 34.749,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 1024,
+    "median_us": 10.239999741315842,
+    "gbps": 102.40000258684164,
+    "blocks_per_sm": 4,
+    "iqr_us": 0.31999964267015457,
+    "p25_us": 10.208000428974628,
+    "p75_us": 10.528000071644783,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 38.067,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 2048,
+    "median_us": 14.287999831140041,
+    "gbps": 146.77715738975257,
+    "blocks_per_sm": 4,
+    "iqr_us": 0.2720002084970474,
+    "p25_us": 14.031999744474888,
+    "p75_us": 14.303999952971935,
+    "sm_mhz": 585,
+    "temp_c": 76,
+    "power_w": 33.491,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 2816,
+    "median_us": 16.656000167131424,
+    "gbps": 173.1258388007464,
+    "blocks_per_sm": 4,
+    "iqr_us": 0.4479996860027313,
+    "p25_us": 16.383999958634377,
+    "p75_us": 16.831999644637108,
+    "sm_mhz": 585,
+    "temp_c": 78,
+    "power_w": 34.061,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 4096,
+    "median_us": 21.31200022995472,
+    "gbps": 196.80480268129725,
+    "blocks_per_sm": 8,
+    "iqr_us": 0.864000990986824,
+    "p25_us": 20.927999168634415,
+    "p75_us": 21.79200015962124,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 34.553,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 6144,
+    "median_us": 28.64000014960766,
+    "gbps": 219.6737418692432,
+    "blocks_per_sm": 4,
+    "iqr_us": 0.19199959933757782,
+    "p25_us": 28.48000079393387,
+    "p75_us": 28.672000393271446,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 33.865,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 8192,
+    "median_us": 35.85600107908249,
+    "gbps": 233.95269264685817,
+    "blocks_per_sm": 4,
+    "iqr_us": 1.0000001639127731,
+    "p25_us": 35.392001271247864,
+    "p75_us": 36.39200143516064,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 34.553,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 12288,
+    "median_us": 50.71999877691269,
+    "gbps": 248.08581039886843,
+    "blocks_per_sm": 8,
+    "iqr_us": 0.9759999811649323,
+    "p25_us": 49.89599995315075,
+    "p75_us": 50.87199993431568,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 34.651,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 16384,
+    "median_us": 65.24799764156342,
+    "gbps": 257.12997496359645,
+    "blocks_per_sm": 8,
+    "iqr_us": 0.43199770152568817,
+    "p25_us": 65.07200188934803,
+    "p75_us": 65.50399959087372,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 35.416,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 32768,
+    "median_us": 124.38400089740753,
+    "gbps": 269.7648552700587,
+    "blocks_per_sm": 8,
+    "iqr_us": 1.239994540810585,
+    "p25_us": 123.65600280463696,
+    "p75_us": 124.89599734544754,
+    "sm_mhz": 585,
+    "temp_c": 77,
+    "power_w": 34.946,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 65536,
+    "median_us": 243.71199309825897,
+    "gbps": 275.36135233584207,
+    "blocks_per_sm": 8,
+    "iqr_us": 0.49600377678871155,
+    "p25_us": 243.623998016119,
+    "p75_us": 244.12000179290771,
+    "sm_mhz": 585,
+    "temp_c": 76,
+    "power_w": 33.472,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   },
+   {
+    "kb": 262144,
+    "median_us": 971.6639816761017,
+    "gbps": 276.2636683691352,
+    "blocks_per_sm": 8,
+    "iqr_us": 2.248018980026245,
+    "p25_us": 970.4879820346832,
+    "p75_us": 972.7360010147095,
+    "sm_mhz": 585,
+    "temp_c": 78,
+    "power_w": 36.791,
+    "reasons": [],
+    "throttled": true,
+    "attempt": 0
+   }
+  ],
+  "achievable_read_gbps": 276.63718877786937,
+  "best_cfg": {
+   "mb": 256,
+   "blocks": 80,
+   "threads": 1024,
+   "unroll": 1,
+   "median_us": 970.3520238399506,
+   "gbps": 276.63718877786937,
+   "sm_mhz": 585,
+   "mem_mhz": 5000
+  },
+  "spec_gbps": 320.0
+ }
+}

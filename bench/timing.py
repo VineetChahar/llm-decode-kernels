@@ -18,8 +18,10 @@ _FLUSH = None
 
 
 MIN_SM_MHZ = 1400
-COOLDOWN_S = 15
-RETRIES = 3
+COOLDOWN_S = 10
+RETRIES = 2
+COOLDOWN_BUDGET_S = 900  # total cool-down per process; past it, measure once and flag `throttled`
+_cooled = 0.0
 
 
 def _flush():
@@ -47,7 +49,8 @@ def clocks():
 
 
 def time_fn(fn, warmup=5, iters=50, flush=True, gate=True):
-    """Clock-gated measurement: retried after a cool-down while the post-run SM clock < MIN_SM_MHZ."""
+    """Clock-gated measurement: retried after a cool-down while the in-loop SM clock < MIN_SM_MHZ."""
+    global _cooled
     best = None
     for attempt in range(RETRIES if gate else 1):
         r = _time_once(fn, warmup, iters, flush)
@@ -55,8 +58,9 @@ def time_fn(fn, warmup=5, iters=50, flush=True, gate=True):
         mhz = r["clocks_after"].get("sm_mhz", 0)
         if best is None or mhz > best["clocks_after"].get("sm_mhz", 0):
             best = r
-        if not gate or mhz >= MIN_SM_MHZ:
+        if not gate or mhz >= MIN_SM_MHZ or attempt == RETRIES - 1 or _cooled >= COOLDOWN_BUDGET_S:
             break
+        _cooled += COOLDOWN_S
         time.sleep(COOLDOWN_S)
     best["throttled"] = best["clocks_after"].get("sm_mhz", 0) < MIN_SM_MHZ
     return best
@@ -73,8 +77,11 @@ def _time_once(fn, warmup, iters, flush):
     for i in range(iters):
         if flush: _flush()
         starts[i].record(); fn(); ends[i].record()
-    torch.cuda.synchronize()
+    # Sample the clock while the GPU is still busy: a ~20 ms spin queued behind the timed loop. Reading after
+    # synchronize() sees the idle clock (585 MHz on T4) and made every gated measurement "throttled" (full1 bug).
+    torch.cuda._sleep(20_000_000)
     ca = clocks()
+    torch.cuda.synchronize()
     t = sorted(s.elapsed_time(e) * 1000.0 for s, e in zip(starts, ends))
     q = statistics.quantiles(t, n=4)
     return {"median_us": statistics.median(t), "p25_us": q[0], "p75_us": q[2], "iqr_us": q[2] - q[0],

@@ -49,3 +49,18 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
 |---|---|---|---|---|---|---|
 | fa=0 tok/s | 204.5 | 195.5 | 184.8 | 162.3 | 127.1 | 84.2 |
 | fa=1 tok/s | 219.3 | 216.4 | 210.9 | 199.9 | 183.3 | 159.6 |
+
+## full1 post-mortem — the clock gate measured the idle clock (2026-10-11)
+- Accuracy gate: **439/439 passed**, 0 FAIL (tests.log in runs/20261011T102747Z_full1).
+- The run then hit Kaggle's 6 h limit inside the autotuner (~24 min per shape x G instead of ~1 min).
+  Cause: `time_fn` read NVML clocks *after* `torch.cuda.synchronize()`; by then the T4 has already dropped to its
+  585 MHz idle clock, so every measurement looked throttled and paid 3 x 15 s of cool-down. The clock probe under
+  continuous load showed 1590 -> 1440 MHz over 60 s, i.e. the GPU was never actually at 585 MHz while busy.
+- Fix: queue a 20 ms `torch.cuda._sleep` spin behind the timed loop and sample NVML while it runs (the loaded clock);
+  same fix in e2e `time_decode`. Retries 3 -> 2, cool-down 15 -> 10 s, plus a 900 s per-process cool-down budget so
+  a bad gate can never again eat the run.
+- Decision: split the rerun across two concurrent sessions (`PART=kernels` / `PART=e2e`, each re-runs the accuracy
+  gate). The e2e session can't wait for the new autotune, so `configs/autotune.json` is seeded from full1's printed
+  winners (R=4, pf=0, warps 1-2 for every body shape; lm_head from kbench1). kbench2 re-tunes; any difference is
+  reported in RESULTS.md.
+- Observation worth keeping: prefetch (pf=1) never won a single autotune cell, and R=4 won every one in full1.

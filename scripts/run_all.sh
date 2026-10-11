@@ -8,5 +8,7 @@ rc=$?
 tail -1 "$OUT/tests.log"
 if [ $rc -ne 0 ]; then echo "ACCURACY GATE FAILED"; grep FAIL "$OUT/tests.log" | head -40; exit 1; fi
 set -e
-python bench/kernel_bench.py ${KERNEL_SECTIONS:-}
-python bench/e2e.py
+# PART=kernels | e2e splits the pipeline across two concurrent Kaggle sessions (each re-runs the gate)
+[ "${PART:-all}" != "e2e" ] && python bench/kernel_bench.py ${KERNEL_SECTIONS:-}
+[ "${PART:-all}" != "kernels" ] && python bench/e2e.py
+exit 0
