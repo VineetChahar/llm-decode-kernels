@@ -107,7 +107,7 @@ def bench_groups():
             R, W, pf = best[f"{N}x{K}_G{G}"]
             t = time_fn(lambda: K_.gemv_w4a16(2, R, W, pf, packed, sz, x, y, G))
             b = packed.numel() * 4 + sz.numel() * 2
-            rows.append({"G": G, "shape": name, "median_us": t["median_us"], "iqr_us": t["iqr_us"], "weight_bytes": b})
+            rows.append({"G": G, "shape": name, "weight_bytes": b, **_t(t)})
             tot += t["median_us"] * per_token[name]; tot_bytes += b * per_token[name]
         rows.append({"G": G, "shape": "per_token_sum", "median_us": tot, "weight_bytes": tot_bytes})
         print(f"G{G}: GEMV time per token (sum of kernels) {tot / 1e3:.3f} ms, {tot_bytes / 2**20:.1f} MiB")

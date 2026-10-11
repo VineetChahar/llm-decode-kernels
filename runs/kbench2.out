@@ -1,2 +1,126 @@
-Kernel push error: Maximum batch GPU session count of 2 reached. 
-push failed
+Kernel version 5 successfully pushed.  Please check progress at https://www.kaggle.com/code/vineetkumar0210/llm-decode-kernels 
+[   32s] KernelWorkerStatus.QUEUED
+[   63s] KernelWorkerStatus.QUEUED
+[   95s] KernelWorkerStatus.QUEUED
+[  128s] KernelWorkerStatus.QUEUED
+[  159s] KernelWorkerStatus.QUEUED
+[  192s] KernelWorkerStatus.QUEUED
+[  225s] KernelWorkerStatus.QUEUED
+[  257s] KernelWorkerStatus.QUEUED
+[  289s] KernelWorkerStatus.QUEUED
+[  320s] KernelWorkerStatus.QUEUED
+[  353s] KernelWorkerStatus.QUEUED
+[  385s] KernelWorkerStatus.QUEUED
+[  417s] KernelWorkerStatus.QUEUED
+[  449s] KernelWorkerStatus.QUEUED
+[  480s] KernelWorkerStatus.QUEUED
+[  514s] KernelWorkerStatus.QUEUED
+[  545s] KernelWorkerStatus.QUEUED
+[  576s] KernelWorkerStatus.QUEUED
+[  607s] KernelWorkerStatus.QUEUED
+[  640s] KernelWorkerStatus.QUEUED
+[  672s] KernelWorkerStatus.QUEUED
+[  704s] KernelWorkerStatus.QUEUED
+[  737s] KernelWorkerStatus.QUEUED
+[  769s] KernelWorkerStatus.QUEUED
+[  801s] KernelWorkerStatus.QUEUED
+[  834s] KernelWorkerStatus.QUEUED
+[  865s] KernelWorkerStatus.QUEUED
+[  896s] KernelWorkerStatus.QUEUED
+[  928s] KernelWorkerStatus.QUEUED
+[  961s] KernelWorkerStatus.QUEUED
+[  992s] KernelWorkerStatus.QUEUED
+[ 1024s] KernelWorkerStatus.QUEUED
+[ 1057s] KernelWorkerStatus.QUEUED
+[ 1089s] KernelWorkerStatus.QUEUED
+[ 1121s] KernelWorkerStatus.QUEUED
+[ 1153s] KernelWorkerStatus.QUEUED
+[ 1186s] KernelWorkerStatus.QUEUED
+[ 1217s] KernelWorkerStatus.QUEUED
+[ 1249s] KernelWorkerStatus.QUEUED
+[ 1281s] KernelWorkerStatus.QUEUED
+[ 1312s] KernelWorkerStatus.QUEUED
+[ 1344s] KernelWorkerStatus.QUEUED
+[ 1376s] KernelWorkerStatus.QUEUED
+[ 1408s] KernelWorkerStatus.QUEUED
+[ 1440s] KernelWorkerStatus.QUEUED
+[ 1473s] KernelWorkerStatus.QUEUED
+[ 1505s] KernelWorkerStatus.QUEUED
+[ 1537s] KernelWorkerStatus.QUEUED
+[ 1569s] KernelWorkerStatus.QUEUED
+[ 1600s] KernelWorkerStatus.QUEUED
+[ 1633s] KernelWorkerStatus.QUEUED
+[ 1665s] KernelWorkerStatus.QUEUED
+[ 1697s] KernelWorkerStatus.QUEUED
+[ 1729s] KernelWorkerStatus.QUEUED
+[ 1760s] KernelWorkerStatus.QUEUED
+[ 1792s] KernelWorkerStatus.QUEUED
+[ 1824s] KernelWorkerStatus.QUEUED
+[ 1855s] KernelWorkerStatus.QUEUED
+[ 1887s] KernelWorkerStatus.QUEUED
+[ 1918s] KernelWorkerStatus.QUEUED
+[ 1951s] KernelWorkerStatus.QUEUED
+[ 1983s] KernelWorkerStatus.QUEUED
+[ 2016s] KernelWorkerStatus.QUEUED
+[ 2049s] KernelWorkerStatus.QUEUED
+[ 2080s] KernelWorkerStatus.QUEUED
+[ 2111s] KernelWorkerStatus.QUEUED
+[ 2143s] KernelWorkerStatus.QUEUED
+[ 2175s] KernelWorkerStatus.QUEUED
+[ 2206s] KernelWorkerStatus.RUNNING
+[ 2238s] KernelWorkerStatus.RUNNING
+[ 2271s] KernelWorkerStatus.RUNNING
+[ 2304s] KernelWorkerStatus.RUNNING
+[ 2337s] KernelWorkerStatus.RUNNING
+[ 2369s] KernelWorkerStatus.RUNNING
+[ 2402s] KernelWorkerStatus.RUNNING
+[ 2433s] KernelWorkerStatus.RUNNING
+[ 2465s] KernelWorkerStatus.RUNNING
+[ 2496s] KernelWorkerStatus.RUNNING
+[ 2527s] KernelWorkerStatus.RUNNING
+[ 2559s] KernelWorkerStatus.RUNNING
+[ 2590s] KernelWorkerStatus.RUNNING
+[ 2622s] KernelWorkerStatus.RUNNING
+[ 2654s] KernelWorkerStatus.RUNNING
+[ 2686s] KernelWorkerStatus.RUNNING
+[ 2717s] KernelWorkerStatus.RUNNING
+[ 2748s] KernelWorkerStatus.RUNNING
+[ 2781s] KernelWorkerStatus.RUNNING
+[ 2813s] KernelWorkerStatus.RUNNING
+[ 2845s] KernelWorkerStatus.RUNNING
+[ 2878s] KernelWorkerStatus.RUNNING
+[ 2910s] KernelWorkerStatus.RUNNING
+[ 2941s] KernelWorkerStatus.RUNNING
+[ 2974s] KernelWorkerStatus.RUNNING
+[ 3007s] KernelWorkerStatus.RUNNING
+[ 3039s] KernelWorkerStatus.RUNNING
+[ 3072s] KernelWorkerStatus.RUNNING
+[ 3104s] KernelWorkerStatus.RUNNING
+[ 3135s] KernelWorkerStatus.RUNNING
+[ 3168s] KernelWorkerStatus.RUNNING
+[ 3199s] KernelWorkerStatus.RUNNING
+[ 3230s] KernelWorkerStatus.RUNNING
+[ 3262s] KernelWorkerStatus.RUNNING
+[ 3294s] KernelWorkerStatus.RUNNING
+[ 3325s] KernelWorkerStatus.COMPLETE
+llm-decode-kernels/runs/20261011T170804Z_kbench2/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T170804Z_kbench2/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T170804Z_kbench2/llm-decode-kernels.log 
+ 
+v1 ctx  4096: no-split   530.7us | best PS=  128 (32 splits)    50.1us    84 GB/s | SDPA  1037.8us | repeat+SDPA   451.5us
+v2 ctx  4096: no-split   254.3us | best PS=  256 (16 splits)    48.9us    86 GB/s | SDPA  1037.8us | repeat+SDPA   451.5us
+v1 ctx  8192: no-split  1046.2us | best PS=  256 (32 splits)    81.9us   102 GB/s | SDPA  2336.8us | repeat+SDPA  1013.8us
+v2 ctx  8192: no-split   503.5us | best PS=  128 (64 splits)    78.4us   107 GB/s | SDPA  2336.8us | repeat+SDPA  1013.8us
+v1 ctx 16384: no-split  2087.6us | best PS=  512 (32 splits)   147.0us   114 GB/s | SDPA  4784.0us | repeat+SDPA  2782.1us
+v2 ctx 16384: no-split  1008.7us | best PS=  128 (128 splits)   141.4us   119 GB/s | SDPA  4784.0us | repeat+SDPA  2782.1us
+
+===== ncu =====
+ncu attempt: BLOCKED (ERR_NVGPUCTRPERM) 
+ ==PROF== Connected to process 191 (/usr/bin/python3.13)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+probe done
+==PROF== Disconnected from process 191
+
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T170804Z_kbench2

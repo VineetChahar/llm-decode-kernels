@@ -1,0 +1,32 @@
+{
+ "policy": [
+  {
+   "max_ctx": 512,
+   "part_size": 64
+  },
+  {
+   "max_ctx": 1024,
+   "part_size": 64
+  },
+  {
+   "max_ctx": 2048,
+   "part_size": 128
+  },
+  {
+   "max_ctx": 4096,
+   "part_size": 256
+  },
+  {
+   "max_ctx": 8192,
+   "part_size": 128
+  },
+  {
+   "max_ctx": 16384,
+   "part_size": 128
+  },
+  {
+   "max_ctx": 1073741824,
+   "part_size": 128
+  }
+ ]
+}

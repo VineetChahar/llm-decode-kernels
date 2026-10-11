@@ -1,0 +1,132 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ PART=kernels bash scripts/run_all.sh
+439/439 passed
+
+===== clocks =====
+clock lock attempt: The current user does not have permission to change clocks for GPU 00000000:00:04.0.
+Terminating early due to previous errors.
+  t=  0.0s sm=825 mem=5000 60C 30.0W 272 GB/s []
+  t=  2.0s sm=1545 mem=5000 65C 70.2W 276 GB/s ['hw_slowdown']
+  t=  4.0s sm=1530 mem=5000 66C 69.2W 275 GB/s ['hw_slowdown']
+  t=  6.0s sm=1530 mem=5000 67C 69.6W 276 GB/s ['hw_slowdown']
+  t=  8.0s sm=1530 mem=5000 68C 69.3W 276 GB/s ['hw_slowdown']
+  t= 10.0s sm=1515 mem=5000 69C 69.6W 275 GB/s ['hw_slowdown']
+  t= 12.0s sm=1500 mem=5000 70C 69.3W 276 GB/s ['hw_slowdown']
+  t= 14.0s sm=1485 mem=5000 71C 69.7W 276 GB/s ['hw_slowdown']
+  t= 16.0s sm=1485 mem=5000 71C 69.4W 276 GB/s ['hw_slowdown']
+  t= 18.0s sm=1485 mem=5000 72C 68.3W 272 GB/s ['hw_slowdown']
+  t= 20.0s sm=1470 mem=5000 73C 68.6W 276 GB/s ['hw_slowdown']
+  t= 22.0s sm=1455 mem=5000 73C 68.5W 276 GB/s ['hw_slowdown']
+  t= 24.0s sm=1455 mem=5000 74C 68.8W 276 GB/s ['hw_slowdown']
+  t= 26.0s sm=1440 mem=5000 75C 68.3W 274 GB/s ['hw_slowdown']
+  t= 28.0s sm=1440 mem=5000 75C 68.8W 276 GB/s ['hw_slowdown']
+  t= 30.0s sm=1425 mem=5000 76C 68.2W 277 GB/s ['hw_slowdown']
+  t= 32.0s sm=1425 mem=5000 76C 68.0W 274 GB/s ['hw_slowdown']
+  t= 34.0s sm=1410 mem=5000 77C 68.3W 277 GB/s ['hw_slowdown']
+  t= 36.0s sm=1395 mem=5000 78C 68.5W 276 GB/s ['hw_slowdown']
+  t= 38.0s sm=1395 mem=5000 78C 68.2W 275 GB/s ['hw_slowdown']
+  t= 40.0s sm=1380 mem=5000 79C 67.8W 276 GB/s ['hw_slowdown']
+  t= 42.0s sm=1365 mem=5000 79C 67.3W 277 GB/s ['hw_slowdown']
+  t= 44.0s sm=1365 mem=5000 80C 67.6W 275 GB/s ['hw_slowdown']
+  t= 46.0s sm=1365 mem=5000 80C 66.9W 277 GB/s ['hw_slowdown']
+  t= 48.0s sm=1350 mem=5000 81C 67.5W 275 GB/s ['hw_slowdown']
+  t= 50.0s sm=1335 mem=5000 81C 67.5W 275 GB/s ['hw_slowdown']
+  t= 52.0s sm=1335 mem=5000 81C 60.9W 275 GB/s ['hw_slowdown']
+  t= 54.0s sm=1335 mem=5000 81C 67.5W 277 GB/s ['hw_slowdown']
+  t= 56.0s sm=1320 mem=5000 82C 67.0W 277 GB/s ['hw_slowdown']
+  t= 58.0s sm=1335 mem=5000 81C 67.5W 275 GB/s ['hw_slowdown']
+  t= 60.0s sm=1335 mem=5000 81C 67.4W 273 GB/s ['hw_slowdown']
+
+===== bw =====
+  read     256 KB:      5.5 us    48.0 GB/s
+  read     512 KB:      8.4 us    62.7 GB/s
+  read    1024 KB:     10.2 us   102.4 GB/s
+  read    2048 KB:     14.2 us   147.6 GB/s
+  read    2816 KB:     16.7 us   173.1 GB/s
+  read    4096 KB:     21.2 us   197.8 GB/s
+  read    6144 KB:     28.7 us   219.4 GB/s
+  read    8192 KB:     36.1 us   232.1 GB/s
+  read   12288 KB:     50.8 us   247.5 GB/s
+  read   16384 KB:     65.5 us   256.1 GB/s
+  read   32768 KB:    124.6 us   269.2 GB/s
+  read   65536 KB:    243.7 us   275.4 GB/s
+  read  262144 KB:    971.0 us   276.5 GB/s
+achievable read BW 277.3 GB/s (87% of 320 spec) cfg={'mb': 1024, 'blocks': 40, 'threads': 256, 'unroll': 4, 'median_us': 3872.304081916809, 'gbps': 277.2875789931489, 'sm_mhz': 1290, 'mem_mhz': 5000}
+D2D copy (read+write) 233.7 GB/s
+
+===== autotune =====
+qkv      G 64 best R=4 warps=8 pf=0 16.4us 181 GB/s
+qkv      G128 best R=2 warps=1 pf=0 15.1us 185 GB/s
+qkv      G256 best R=2 warps=1 pf=0 14.8us 184 GB/s
+o        G 64 best R=2 warps=1 pf=0 13.8us 171 GB/s
+o        G128 best R=2 warps=1 pf=0 13.1us 171 GB/s
+o        G256 best R=2 warps=1 pf=0 12.7us 171 GB/s
+gate_up  G 64 best R=2 warps=1 pf=0 53.3us 244 GB/s
+gate_up  G128 best R=2 warps=1 pf=0 50.4us 244 GB/s
+gate_up  G256 best R=2 warps=1 pf=0 49.2us 243 GB/s
+down     G 64 best R=2 warps=1 pf=0 30.7us 212 GB/s
+down     G128 best R=2 warps=1 pf=0 29.0us 212 GB/s
+down     G256 best R=2 warps=1 pf=0 28.7us 208 GB/s
+lm_head  G 64 best R=2 warps=1 pf=1 141.0us 262 GB/s
+lm_head  G128 best R=2 warps=1 pf=1 133.3us 262 GB/s
+lm_head  G256 best R=2 warps=1 pf=1 125.6us 270 GB/s
+
+===== gemv =====
+qkv      0 naive             28.8us  iqr   0.4    96.9 GB/s
+qkv      1 vectorized        17.0us  iqr   0.9   164.0 GB/s
+qkv      2 reg-blocked       18.6us  iqr   0.4   150.4 GB/s
+qkv      3 autotuned         15.1us  iqr   1.0   184.8 GB/s
+qkv      cuBLAS fp16         46.8us  iqr   1.1   224.1 GB/s
+o        0 naive             24.5us  iqr   0.3    91.4 GB/s
+o        1 vectorized        15.8us  iqr   1.1   141.5 GB/s
+o        2 reg-blocked       16.3us  iqr   0.4   137.6 GB/s
+o        3 autotuned         13.1us  iqr   1.0   170.9 GB/s
+o        cuBLAS fp16         38.8us  iqr   0.3   216.1 GB/s
+gate_up  0 naive            106.0us  iqr   1.2   115.8 GB/s
+gate_up  1 vectorized        57.0us  iqr   0.5   215.4 GB/s
+gate_up  2 reg-blocked       55.2us  iqr   0.6   222.6 GB/s
+gate_up  3 autotuned         50.3us  iqr   1.1   244.1 GB/s
+gate_up  cuBLAS fp16        184.3us  iqr   0.4   250.5 GB/s
+down     0 naive             57.3us  iqr   0.1   107.1 GB/s
+down     1 vectorized        32.2us  iqr   1.2   190.9 GB/s
+down     2 reg-blocked       32.6us  iqr   1.1   188.4 GB/s
+down     3 autotuned         29.1us  iqr   0.8   211.3 GB/s
+down     cuBLAS fp16         94.1us  iqr   0.6   245.2 GB/s
+lm_head  0 naive            773.2us  iqr   1.1    45.1 GB/s
+lm_head  1 vectorized       395.2us  iqr   0.1    88.3 GB/s
+lm_head  2 reg-blocked      168.2us  iqr   0.5   207.4 GB/s
+lm_head  3 autotuned        229.2us  iqr   0.6   152.2 GB/s
+lm_head  cuBLAS fp16        520.3us  iqr   0.6   252.0 GB/s
+
+===== groups =====
+G64: GEMV time per token (sum of kernels) 3.072 ms, 554.9 MiB
+G128: GEMV time per token (sum of kernels) 4.332 ms, 524.1 MiB
+G256: GEMV time per token (sum of kernels) 4.333 ms, 508.7 MiB
+
+===== attn =====
+v1 ctx   512: no-split   117.2us | best PS=   64 (8 splits)    39.9us    13 GB/s | SDPA   232.7us | repeat+SDPA    77.7us
+v2 ctx   512: no-split    43.9us | best PS=   64 (8 splits)    25.0us    21 GB/s | SDPA   232.7us | repeat+SDPA    77.7us
+v1 ctx  1024: no-split   147.3us | best PS=   64 (16 splits)    26.0us    40 GB/s | SDPA   276.6us | repeat+SDPA   127.5us
+v2 ctx  1024: no-split    69.7us | best PS=   64 (16 splits)    23.4us    45 GB/s | SDPA   276.6us | repeat+SDPA   127.5us
+v1 ctx  2048: no-split   268.3us | best PS=   64 (32 splits)    31.7us    66 GB/s | SDPA   526.2us | repeat+SDPA   235.3us
+v2 ctx  2048: no-split   130.3us | best PS=  128 (16 splits)    31.3us    67 GB/s | SDPA   526.2us | repeat+SDPA   235.3us
+v1 ctx  4096: no-split   530.7us | best PS=  128 (32 splits)    50.1us    84 GB/s | SDPA  1037.8us | repeat+SDPA   451.5us
+v2 ctx  4096: no-split   254.3us | best PS=  256 (16 splits)    48.9us    86 GB/s | SDPA  1037.8us | repeat+SDPA   451.5us
+v1 ctx  8192: no-split  1046.2us | best PS=  256 (32 splits)    81.9us   102 GB/s | SDPA  2336.8us | repeat+SDPA  1013.8us
+v2 ctx  8192: no-split   503.5us | best PS=  128 (64 splits)    78.4us   107 GB/s | SDPA  2336.8us | repeat+SDPA  1013.8us
+v1 ctx 16384: no-split  2087.6us | best PS=  512 (32 splits)   147.0us   114 GB/s | SDPA  4784.0us | repeat+SDPA  2782.1us
+v2 ctx 16384: no-split  1008.7us | best PS=  128 (128 splits)   141.4us   119 GB/s | SDPA  4784.0us | repeat+SDPA  2782.1us
+
+===== ncu =====
+ncu attempt: BLOCKED (ERR_NVGPUCTRPERM) 
+ ==PROF== Connected to process 191 (/usr/bin/python3.13)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+probe done
+==PROF== Disconnected from process 191
+
+EXIT_CODE=0
