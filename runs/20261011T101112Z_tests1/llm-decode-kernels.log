@@ -1,0 +1,366 @@
+[{"stream_name":"stderr","time":0.795128623,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.795171561,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.827946249,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.863528593,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.870890647,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.875962524,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.901351305,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.901369452,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.901734857,"data":"$ python -c \"from runtime import ext; ext.load(verbose=True)\" 2\u003e\u00261 | grep -E \"registers|error|Error|warning\" | head -60; python tests/test_kernels.py\n"}
+,{"stream_name":"stdout","time":41.475540311,"data":"ptxas info    : Used 19 registers, used 0 barriers, 420 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475577826,"data":"ptxas info    : Used 26 registers, used 0 barriers, 372 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475584363,"data":"ptxas info    : Used 26 registers, used 1 barriers, 32 bytes smem, 392 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475589102,"data":"ptxas info    : Used 128 registers, used 1 barriers, 12384 bytes smem, 444 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475593553,"data":"ptxas info    : Used 64 registers, used 1 barriers, 8 bytes cumulative stack size, 6192 bytes smem, 444 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475598018,"data":"ptxas info    : Used 54 registers, used 1 barriers, 3096 bytes smem, 444 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475602348,"data":"ptxas info    : Used 54 registers, used 1 barriers, 1548 bytes smem, 444 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475606622,"data":"ptxas info    : Used 43 registers, used 0 barriers, 400 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475610811,"data":"ptxas info    : Used 100 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475615747,"data":"ptxas info    : Used 120 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.47562047,"data":"ptxas info    : Used 64 registers, used 0 barriers, 8 bytes cumulative stack size, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475625698,"data":"ptxas info    : Used 80 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475642773,"data":"ptxas info    : Used 56 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475648375,"data":"ptxas info    : Used 62 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475652663,"data":"ptxas info    : Used 63 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475656881,"data":"ptxas info    : Used 63 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475661099,"data":"ptxas info    : Used 18 registers, used 0 barriers, 376 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475665376,"data":"ptxas info    : Used 36 registers, used 0 barriers, 376 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":41.475681832,"data":"ptxas info    : Used 40 registers, used 0 barriers, 396 bytes cmem[0]\n"}
+,{"stream_name":"stdout","time":48.847799158,"data":"PASS gemv_shape1_x=1 stage(0, 1, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.881307444,"data":"PASS gemv_onehot_nibbles stage(0, 1, 4, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.881662695,"data":"PASS gemv_shape1_x=1 stage(1, 1, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.899784705,"data":"PASS gemv_onehot_nibbles stage(1, 1, 4, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.900141906,"data":"PASS gemv_shape1_x=1 stage(2, 1, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.918839375,"data":"PASS gemv_onehot_nibbles stage(2, 1, 1, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.919177218,"data":"PASS gemv_shape1_x=1 stage(2, 1, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.937595003,"data":"PASS gemv_onehot_nibbles stage(2, 1, 1, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.937904416,"data":"PASS gemv_shape1_x=1 stage(2, 1, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.956506664,"data":"PASS gemv_onehot_nibbles stage(2, 1, 4, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.956811443,"data":"PASS gemv_shape1_x=1 stage(2, 1, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.975573796,"data":"PASS gemv_onehot_nibbles stage(2, 1, 4, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.975746195,"data":"PASS gemv_shape1_x=1 stage(2, 1, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":48.994170247,"data":"PASS gemv_onehot_nibbles stage(2, 1, 8, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":48.994459225,"data":"PASS gemv_shape1_x=1 stage(2, 1, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.013222392,"data":"PASS gemv_onehot_nibbles stage(2, 1, 8, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.013571449,"data":"PASS gemv_shape1_x=1 stage(2, 2, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.032615332,"data":"PASS gemv_onehot_nibbles stage(2, 2, 1, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.032961591,"data":"PASS gemv_shape1_x=1 stage(2, 2, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.051792411,"data":"PASS gemv_onehot_nibbles stage(2, 2, 1, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.052151107,"data":"PASS gemv_shape1_x=1 stage(2, 2, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.070265827,"data":"PASS gemv_onehot_nibbles stage(2, 2, 4, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.070560699,"data":"PASS gemv_shape1_x=1 stage(2, 2, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.088863441,"data":"PASS gemv_onehot_nibbles stage(2, 2, 4, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.089141296,"data":"PASS gemv_shape1_x=1 stage(2, 2, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.107398263,"data":"PASS gemv_onehot_nibbles stage(2, 2, 8, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.107748986,"data":"PASS gemv_shape1_x=1 stage(2, 2, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.12648344,"data":"PASS gemv_onehot_nibbles stage(2, 2, 8, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.126876274,"data":"PASS gemv_shape1_x=1 stage(2, 4, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.146966392,"data":"PASS gemv_onehot_nibbles stage(2, 4, 1, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.147311951,"data":"PASS gemv_shape1_x=1 stage(2, 4, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.165462165,"data":"PASS gemv_onehot_nibbles stage(2, 4, 1, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.165712736,"data":"PASS gemv_shape1_x=1 stage(2, 4, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.184017327,"data":"PASS gemv_onehot_nibbles stage(2, 4, 4, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.184334153,"data":"PASS gemv_shape1_x=1 stage(2, 4, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.203379399,"data":"PASS gemv_onehot_nibbles stage(2, 4, 4, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.203614379,"data":"PASS gemv_shape1_x=1 stage(2, 4, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.222735288,"data":"PASS gemv_onehot_nibbles stage(2, 4, 8, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.223008603,"data":"PASS gemv_shape1_x=1 stage(2, 4, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.241323944,"data":"PASS gemv_onehot_nibbles stage(2, 4, 8, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.241703896,"data":"PASS gemv_shape1_x=1 stage(2, 8, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.259883777,"data":"PASS gemv_onehot_nibbles stage(2, 8, 1, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.2601867,"data":"PASS gemv_shape1_x=1 stage(2, 8, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.279006212,"data":"PASS gemv_onehot_nibbles stage(2, 8, 1, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.279321783,"data":"PASS gemv_shape1_x=1 stage(2, 8, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.299080169,"data":"PASS gemv_onehot_nibbles stage(2, 8, 4, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.299346059,"data":"PASS gemv_shape1_x=1 stage(2, 8, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.31801022,"data":"PASS gemv_onehot_nibbles stage(2, 8, 4, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.318189418,"data":"PASS gemv_shape1_x=1 stage(2, 8, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.33711437,"data":"PASS gemv_onehot_nibbles stage(2, 8, 8, 0) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.337345925,"data":"PASS gemv_shape1_x=1 stage(2, 8, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":49.355344254,"data":"PASS gemv_onehot_nibbles stage(2, 8, 8, 1) wrong_columns=0\n"}
+,{"stream_name":"stdout","time":49.677569095,"data":"PASS gemv qkv 2560x2048 G64 stage(0, 1, 4, 0)                   max_abs=2.441e-04 max_rel=8.159e-05\n"}
+,{"stream_name":"stdout","time":49.677787989,"data":"PASS gemv qkv 2560x2048 G64 stage(1, 1, 4, 0)                   max_abs=1.953e-03 max_rel=6.527e-04\n"}
+,{"stream_name":"stdout","time":49.678062387,"data":"PASS gemv qkv 2560x2048 G64 stage(2, 4, 4, 1)                   max_abs=1.953e-03 max_rel=6.527e-04\n"}
+,{"stream_name":"stdout","time":49.678405929,"data":"PASS gemv qkv 2560x2048 G64 stage(2, 8, 2, 1)                   max_abs=1.953e-03 max_rel=6.527e-04\n"}
+,{"stream_name":"stdout","time":49.781861833,"data":"PASS gemv qkv 2560x2048 G128 stage(0, 1, 4, 0)                  max_abs=6.104e-05 max_rel=2.028e-05\n"}
+,{"stream_name":"stdout","time":49.782081851,"data":"PASS gemv qkv 2560x2048 G128 stage(1, 1, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.78233888,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 1, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.782666904,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 1, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.782958889,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 1, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.783256573,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 1, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.783532097,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 1, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.783878317,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 1, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.784137063,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 2, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.784427473,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 2, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.784721374,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 2, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.785016929,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 2, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.785301192,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 2, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.785570378,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 2, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.785881829,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 4, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.786174783999996,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 4, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.786461191,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 4, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.78679777,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 4, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.787091752,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 4, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.787376007,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 4, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.787663782,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 8, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.787975783,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 8, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.788238424,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 8, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.788524858,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 8, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.788829936,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 8, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.789179835,"data":"PASS gemv qkv 2560x2048 G128 stage(2, 8, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04\n"}
+,{"stream_name":"stdout","time":49.886023248,"data":"PASS gemv qkv 2560x2048 G256 stage(0, 1, 4, 0)                  max_abs=4.883e-04 max_rel=1.631e-04\n"}
+,{"stream_name":"stdout","time":49.886338141,"data":"PASS gemv qkv 2560x2048 G256 stage(1, 1, 4, 0)                  max_abs=1.953e-03 max_rel=6.523e-04\n"}
+,{"stream_name":"stdout","time":49.886671245,"data":"PASS gemv qkv 2560x2048 G256 stage(2, 4, 4, 1)                  max_abs=1.953e-03 max_rel=6.523e-04\n"}
+,{"stream_name":"stdout","time":49.887012096,"data":"PASS gemv qkv 2560x2048 G256 stage(2, 8, 2, 1)                  max_abs=1.953e-03 max_rel=6.523e-04\n"}
+,{"stream_name":"stdout","time":50.001913478,"data":"PASS gemv o 2048x2048 G64 stage(0, 1, 4, 0)                     max_abs=2.441e-04 max_rel=7.259e-05\n"}
+,{"stream_name":"stdout","time":50.00224236,"data":"PASS gemv o 2048x2048 G64 stage(1, 1, 4, 0)                     max_abs=1.953e-03 max_rel=5.807e-04\n"}
+,{"stream_name":"stdout","time":50.002557361,"data":"PASS gemv o 2048x2048 G64 stage(2, 4, 4, 1)                     max_abs=1.953e-03 max_rel=5.807e-04\n"}
+,{"stream_name":"stdout","time":50.002986434,"data":"PASS gemv o 2048x2048 G64 stage(2, 8, 2, 1)                     max_abs=1.953e-03 max_rel=5.807e-04\n"}
+,{"stream_name":"stdout","time":50.089567756,"data":"PASS gemv o 2048x2048 G128 stage(0, 1, 4, 0)                    max_abs=1.221e-04 max_rel=3.689e-05\n"}
+,{"stream_name":"stdout","time":50.089909948,"data":"PASS gemv o 2048x2048 G128 stage(1, 1, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.090191271,"data":"PASS gemv o 2048x2048 G128 stage(2, 1, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.090499975,"data":"PASS gemv o 2048x2048 G128 stage(2, 1, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.090852236,"data":"PASS gemv o 2048x2048 G128 stage(2, 1, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.091173528,"data":"PASS gemv o 2048x2048 G128 stage(2, 1, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.091466852,"data":"PASS gemv o 2048x2048 G128 stage(2, 1, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.091828614,"data":"PASS gemv o 2048x2048 G128 stage(2, 1, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.092130345,"data":"PASS gemv o 2048x2048 G128 stage(2, 2, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.092439942,"data":"PASS gemv o 2048x2048 G128 stage(2, 2, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.09276633,"data":"PASS gemv o 2048x2048 G128 stage(2, 2, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.093064229,"data":"PASS gemv o 2048x2048 G128 stage(2, 2, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.093344739,"data":"PASS gemv o 2048x2048 G128 stage(2, 2, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.093665353,"data":"PASS gemv o 2048x2048 G128 stage(2, 2, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.093990869,"data":"PASS gemv o 2048x2048 G128 stage(2, 4, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.094315561,"data":"PASS gemv o 2048x2048 G128 stage(2, 4, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.094675571,"data":"PASS gemv o 2048x2048 G128 stage(2, 4, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.094977554,"data":"PASS gemv o 2048x2048 G128 stage(2, 4, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.095283816,"data":"PASS gemv o 2048x2048 G128 stage(2, 4, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.095577515,"data":"PASS gemv o 2048x2048 G128 stage(2, 4, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.09590557,"data":"PASS gemv o 2048x2048 G128 stage(2, 8, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.096189884,"data":"PASS gemv o 2048x2048 G128 stage(2, 8, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.096481104,"data":"PASS gemv o 2048x2048 G128 stage(2, 8, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.096823099,"data":"PASS gemv o 2048x2048 G128 stage(2, 8, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.097111536,"data":"PASS gemv o 2048x2048 G128 stage(2, 8, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.09741369,"data":"PASS gemv o 2048x2048 G128 stage(2, 8, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04\n"}
+,{"stream_name":"stdout","time":50.190779873,"data":"PASS gemv o 2048x2048 G256 stage(0, 1, 4, 0)                    max_abs=3.052e-05 max_rel=8.496e-06\n"}
+,{"stream_name":"stdout","time":50.191067173,"data":"PASS gemv o 2048x2048 G256 stage(1, 1, 4, 0)                    max_abs=1.953e-03 max_rel=5.438e-04\n"}
+,{"stream_name":"stdout","time":50.191389664,"data":"PASS gemv o 2048x2048 G256 stage(2, 4, 4, 1)                    max_abs=1.953e-03 max_rel=5.438e-04\n"}
+,{"stream_name":"stdout","time":50.191741987,"data":"PASS gemv o 2048x2048 G256 stage(2, 8, 2, 1)                    max_abs=1.953e-03 max_rel=5.438e-04\n"}
+,{"stream_name":"stdout","time":51.046360945,"data":"PASS gemv gate_up 11264x2048 G64 stage(0, 1, 4, 0)              max_abs=2.441e-04 max_rel=6.433e-05\n"}
+,{"stream_name":"stdout","time":51.046563149,"data":"PASS gemv gate_up 11264x2048 G64 stage(1, 1, 4, 0)              max_abs=1.953e-03 max_rel=5.147e-04\n"}
+,{"stream_name":"stdout","time":51.046893981,"data":"PASS gemv gate_up 11264x2048 G64 stage(2, 4, 4, 1)              max_abs=1.953e-03 max_rel=5.147e-04\n"}
+,{"stream_name":"stdout","time":51.047211578,"data":"PASS gemv gate_up 11264x2048 G64 stage(2, 8, 2, 1)              max_abs=1.953e-03 max_rel=5.147e-04\n"}
+,{"stream_name":"stdout","time":51.629131187,"data":"PASS gemv gate_up 11264x2048 G128 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.744e-04\n"}
+,{"stream_name":"stdout","time":51.629317116,"data":"PASS gemv gate_up 11264x2048 G128 stage(1, 1, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.629664891,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 1, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.629986179,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 1, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.630301821,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 1, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.630667258,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 1, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.630986443,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 1, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.631312133,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 1, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.631620538,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 2, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.63195681,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 2, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.632260061,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 2, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.632579713,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 2, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.632934883,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 2, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.633245207,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 2, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.63352476,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 4, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.633880302,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 4, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.634163181,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 4, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.634448331,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 4, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.634765422,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 4, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.635082671,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 4, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.635510627,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 8, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.635717407,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 8, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.63603076,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 8, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.636325516,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 8, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.636657857,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 8, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":51.637031640000004,"data":"PASS gemv gate_up 11264x2048 G128 stage(2, 8, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04\n"}
+,{"stream_name":"stdout","time":52.233599563,"data":"PASS gemv gate_up 11264x2048 G256 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.674e-04\n"}
+,{"stream_name":"stdout","time":52.233861143,"data":"PASS gemv gate_up 11264x2048 G256 stage(1, 1, 4, 0)             max_abs=1.953e-03 max_rel=5.348e-04\n"}
+,{"stream_name":"stdout","time":52.233875384,"data":"PASS gemv gate_up 11264x2048 G256 stage(2, 4, 4, 1)             max_abs=1.953e-03 max_rel=5.348e-04\n"}
+,{"stream_name":"stdout","time":52.23579031,"data":"PASS gemv gate_up 11264x2048 G256 stage(2, 8, 2, 1)             max_abs=1.953e-03 max_rel=5.348e-04\n"}
+,{"stream_name":"stdout","time":52.668650897,"data":"PASS gemv down 2048x5632 G64 stage(0, 1, 4, 0)                  max_abs=1.526e-05 max_rel=2.556e-06\n"}
+,{"stream_name":"stdout","time":52.668679015,"data":"PASS gemv down 2048x5632 G64 stage(1, 1, 4, 0)                  max_abs=3.906e-03 max_rel=6.545e-04\n"}
+,{"stream_name":"stdout","time":52.668974441,"data":"PASS gemv down 2048x5632 G64 stage(2, 4, 4, 1)                  max_abs=3.906e-03 max_rel=6.545e-04\n"}
+,{"stream_name":"stdout","time":52.669269439,"data":"PASS gemv down 2048x5632 G64 stage(2, 8, 2, 1)                  max_abs=3.906e-03 max_rel=6.545e-04\n"}
+,{"stream_name":"stdout","time":52.944843128,"data":"PASS gemv down 2048x5632 G128 stage(0, 1, 4, 0)                 max_abs=1.907e-06 max_rel=3.063e-07\n"}
+,{"stream_name":"stdout","time":52.945112013,"data":"PASS gemv down 2048x5632 G128 stage(1, 1, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.945375371,"data":"PASS gemv down 2048x5632 G128 stage(2, 1, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.945825453,"data":"PASS gemv down 2048x5632 G128 stage(2, 1, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.94610678,"data":"PASS gemv down 2048x5632 G128 stage(2, 1, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.946428381,"data":"PASS gemv down 2048x5632 G128 stage(2, 1, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.946787535,"data":"PASS gemv down 2048x5632 G128 stage(2, 1, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.947059473,"data":"PASS gemv down 2048x5632 G128 stage(2, 1, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.94731125,"data":"PASS gemv down 2048x5632 G128 stage(2, 2, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.947584214,"data":"PASS gemv down 2048x5632 G128 stage(2, 2, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.947911842,"data":"PASS gemv down 2048x5632 G128 stage(2, 2, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.948255125,"data":"PASS gemv down 2048x5632 G128 stage(2, 2, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.948596941,"data":"PASS gemv down 2048x5632 G128 stage(2, 2, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.948919377,"data":"PASS gemv down 2048x5632 G128 stage(2, 2, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.949243349,"data":"PASS gemv down 2048x5632 G128 stage(2, 4, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.94959289,"data":"PASS gemv down 2048x5632 G128 stage(2, 4, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.949884589,"data":"PASS gemv down 2048x5632 G128 stage(2, 4, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.950206996,"data":"PASS gemv down 2048x5632 G128 stage(2, 4, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.950569002,"data":"PASS gemv down 2048x5632 G128 stage(2, 4, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.950887315,"data":"PASS gemv down 2048x5632 G128 stage(2, 4, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.951188926,"data":"PASS gemv down 2048x5632 G128 stage(2, 8, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.951519402,"data":"PASS gemv down 2048x5632 G128 stage(2, 8, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.951825281,"data":"PASS gemv down 2048x5632 G128 stage(2, 8, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.952181973,"data":"PASS gemv down 2048x5632 G128 stage(2, 8, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.952458633,"data":"PASS gemv down 2048x5632 G128 stage(2, 8, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":52.952759938,"data":"PASS gemv down 2048x5632 G128 stage(2, 8, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04\n"}
+,{"stream_name":"stdout","time":53.231459813,"data":"PASS gemv down 2048x5632 G256 stage(0, 1, 4, 0)                 max_abs=1.953e-03 max_rel=3.189e-04\n"}
+,{"stream_name":"stdout","time":53.231740351,"data":"PASS gemv down 2048x5632 G256 stage(1, 1, 4, 0)                 max_abs=3.906e-03 max_rel=6.378e-04\n"}
+,{"stream_name":"stdout","time":53.232097271,"data":"PASS gemv down 2048x5632 G256 stage(2, 4, 4, 1)                 max_abs=3.906e-03 max_rel=6.378e-04\n"}
+,{"stream_name":"stdout","time":53.232368806,"data":"PASS gemv down 2048x5632 G256 stage(2, 8, 2, 1)                 max_abs=3.906e-03 max_rel=6.378e-04\n"}
+,{"stream_name":"stdout","time":55.778289982,"data":"PASS gemv lm_head 32000x2048 G64 stage(0, 1, 4, 0)              max_abs=9.766e-04 max_rel=2.283e-04\n"}
+,{"stream_name":"stdout","time":55.778726938,"data":"PASS gemv lm_head 32000x2048 G64 stage(1, 1, 4, 0)              max_abs=2.197e-03 max_rel=5.137e-04\n"}
+,{"stream_name":"stdout","time":55.779061677,"data":"PASS gemv lm_head 32000x2048 G64 stage(2, 4, 4, 1)              max_abs=2.197e-03 max_rel=5.137e-04\n"}
+,{"stream_name":"stdout","time":55.779382321,"data":"PASS gemv lm_head 32000x2048 G64 stage(2, 8, 2, 1)              max_abs=2.197e-03 max_rel=5.137e-04\n"}
+,{"stream_name":"stdout","time":57.636560142,"data":"PASS gemv lm_head 32000x2048 G128 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.228e-04\n"}
+,{"stream_name":"stdout","time":57.636962351,"data":"PASS gemv lm_head 32000x2048 G128 stage(1, 1, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.637522337,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 1, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.638119275,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 1, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.638673233,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 1, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.639253622,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 1, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.639893646,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 1, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.640433495,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 1, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.640905652,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 2, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.641275644,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 2, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.641683754,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 2, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.642109511,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 2, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.642516636,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 2, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.642942666,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 2, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.643277584,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 4, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.643677481,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 4, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.644036178,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 4, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.644396317,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 4, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.644759865,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 4, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.64516186,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 4, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.645487523,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 8, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.645926117,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 8, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.646236999,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 8, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.646654096,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 8, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.646983168,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 8, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":57.647382933,"data":"PASS gemv lm_head 32000x2048 G128 stage(2, 8, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04\n"}
+,{"stream_name":"stdout","time":59.492800598,"data":"PASS gemv lm_head 32000x2048 G256 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.315e-04\n"}
+,{"stream_name":"stdout","time":59.493228004,"data":"PASS gemv lm_head 32000x2048 G256 stage(1, 1, 4, 0)             max_abs=2.441e-03 max_rel=5.787e-04\n"}
+,{"stream_name":"stdout","time":59.493593993,"data":"PASS gemv lm_head 32000x2048 G256 stage(2, 4, 4, 1)             max_abs=2.441e-03 max_rel=5.787e-04\n"}
+,{"stream_name":"stdout","time":59.493941355,"data":"PASS gemv lm_head 32000x2048 G256 stage(2, 8, 2, 1)             max_abs=2.441e-03 max_rel=5.787e-04\n"}
+,{"stream_name":"stdout","time":59.676903177,"data":"PASS attn ctx128 hq32 hkv4 P16 PS4096                           max_abs=1.526e-05 max_rel=2.480e-05\n"}
+,{"stream_name":"stdout","time":59.677221021,"data":"PASS attn ctx128 hq32 hkv4 P16 PS64                             max_abs=1.526e-05 max_rel=2.480e-05\n"}
+,{"stream_name":"stdout","time":59.677583122,"data":"PASS attn ctx128 hq32 hkv4 P16 PS32                             max_abs=1.526e-05 max_rel=2.480e-05\n"}
+,{"stream_name":"stdout","time":59.677954065,"data":"PASS attn ctx128 hq32 hkv4 P16 PS48                             max_abs=1.526e-05 max_rel=2.480e-05\n"}
+,{"stream_name":"stdout","time":59.678318811,"data":"PASS attn ctx128 hq32 hkv4 P16 PS16                             max_abs=1.907e-06 max_rel=3.100e-06\n"}
+,{"stream_name":"stdout","time":59.679528467,"data":"PASS attn ctx128 hq32 hkv4 P32 PS4096                           max_abs=7.629e-06 max_rel=1.564e-05\n"}
+,{"stream_name":"stdout","time":59.679943371,"data":"PASS attn ctx128 hq32 hkv4 P32 PS64                             max_abs=1.526e-05 max_rel=3.128e-05\n"}
+,{"stream_name":"stdout","time":59.680334203,"data":"PASS attn ctx128 hq32 hkv4 P32 PS32                             max_abs=5.960e-08 max_rel=1.222e-07\n"}
+,{"stream_name":"stdout","time":59.680727653,"data":"PASS attn ctx128 hq32 hkv4 P32 PS48                             max_abs=1.526e-05 max_rel=3.128e-05\n"}
+,{"stream_name":"stdout","time":59.681183014,"data":"PASS attn ctx128 hq32 hkv4 P32 PS16                             max_abs=7.629e-06 max_rel=1.564e-05\n"}
+,{"stream_name":"stdout","time":59.682492798,"data":"PASS attn ctx128 hq8 hkv8 P16 PS4096                            max_abs=3.815e-06 max_rel=9.889e-06\n"}
+,{"stream_name":"stdout","time":59.682925207,"data":"PASS attn ctx128 hq8 hkv8 P16 PS64                              max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.683286792,"data":"PASS attn ctx128 hq8 hkv8 P16 PS32                              max_abs=3.815e-06 max_rel=9.889e-06\n"}
+,{"stream_name":"stdout","time":59.683658432,"data":"PASS attn ctx128 hq8 hkv8 P16 PS48                              max_abs=3.815e-06 max_rel=9.889e-06\n"}
+,{"stream_name":"stdout","time":59.68413109,"data":"PASS attn ctx128 hq8 hkv8 P16 PS16                              max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.685361209,"data":"PASS attn ctx128 hq8 hkv8 P32 PS4096                            max_abs=6.104e-05 max_rel=1.242e-04\n"}
+,{"stream_name":"stdout","time":59.685751801,"data":"PASS attn ctx128 hq8 hkv8 P32 PS64                              max_abs=6.104e-05 max_rel=1.242e-04\n"}
+,{"stream_name":"stdout","time":59.68617624,"data":"PASS attn ctx128 hq8 hkv8 P32 PS32                              max_abs=6.104e-05 max_rel=1.242e-04\n"}
+,{"stream_name":"stdout","time":59.686548753,"data":"PASS attn ctx128 hq8 hkv8 P32 PS48                              max_abs=6.104e-05 max_rel=1.242e-04\n"}
+,{"stream_name":"stdout","time":59.686945299,"data":"PASS attn ctx128 hq8 hkv8 P32 PS16                              max_abs=6.104e-05 max_rel=1.242e-04\n"}
+,{"stream_name":"stdout","time":59.688119864,"data":"PASS attn ctx128 hq16 hkv4 P16 PS4096                           max_abs=4.768e-07 max_rel=8.031e-07\n"}
+,{"stream_name":"stdout","time":59.688487324,"data":"PASS attn ctx128 hq16 hkv4 P16 PS64                             max_abs=4.768e-07 max_rel=8.031e-07\n"}
+,{"stream_name":"stdout","time":59.688884406,"data":"PASS attn ctx128 hq16 hkv4 P16 PS32                             max_abs=4.768e-07 max_rel=8.031e-07\n"}
+,{"stream_name":"stdout","time":59.689270009,"data":"PASS attn ctx128 hq16 hkv4 P16 PS48                             max_abs=4.768e-07 max_rel=8.031e-07\n"}
+,{"stream_name":"stdout","time":59.689660504,"data":"PASS attn ctx128 hq16 hkv4 P16 PS16                             max_abs=4.768e-07 max_rel=8.031e-07\n"}
+,{"stream_name":"stdout","time":59.690685676,"data":"PASS attn ctx128 hq16 hkv4 P32 PS4096                           max_abs=1.221e-04 max_rel=2.201e-04\n"}
+,{"stream_name":"stdout","time":59.691066474,"data":"PASS attn ctx128 hq16 hkv4 P32 PS64                             max_abs=1.221e-04 max_rel=2.201e-04\n"}
+,{"stream_name":"stdout","time":59.691429484,"data":"PASS attn ctx128 hq16 hkv4 P32 PS32                             max_abs=1.526e-05 max_rel=2.751e-05\n"}
+,{"stream_name":"stdout","time":59.691837921,"data":"PASS attn ctx128 hq16 hkv4 P32 PS48                             max_abs=1.526e-05 max_rel=2.751e-05\n"}
+,{"stream_name":"stdout","time":59.692232986,"data":"PASS attn ctx128 hq16 hkv4 P32 PS16                             max_abs=1.526e-05 max_rel=2.751e-05\n"}
+,{"stream_name":"stdout","time":59.720460938,"data":"PASS attn ctx1 PS8192                                           max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.720743556,"data":"PASS attn ctx1 PS64                                             max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.721149186,"data":"PASS attn ctx1 PS256                                            max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.722275804,"data":"PASS attn ctx2 PS8192                                           max_abs=9.537e-07 max_rel=3.295e-07\n"}
+,{"stream_name":"stdout","time":59.72270612,"data":"PASS attn ctx2 PS64                                             max_abs=9.537e-07 max_rel=3.295e-07\n"}
+,{"stream_name":"stdout","time":59.723102564,"data":"PASS attn ctx2 PS256                                            max_abs=9.537e-07 max_rel=3.295e-07\n"}
+,{"stream_name":"stdout","time":59.724412177,"data":"PASS attn ctx17 PS8192                                          max_abs=1.221e-04 max_rel=1.054e-04\n"}
+,{"stream_name":"stdout","time":59.724843748,"data":"PASS attn ctx17 PS64                                            max_abs=1.221e-04 max_rel=1.054e-04\n"}
+,{"stream_name":"stdout","time":59.725276625,"data":"PASS attn ctx17 PS256                                           max_abs=1.221e-04 max_rel=1.054e-04\n"}
+,{"stream_name":"stdout","time":59.726568012,"data":"PASS attn ctx63 PS8192                                          max_abs=6.104e-05 max_rel=8.675e-05\n"}
+,{"stream_name":"stdout","time":59.726947262,"data":"PASS attn ctx63 PS64                                            max_abs=6.104e-05 max_rel=8.675e-05\n"}
+,{"stream_name":"stdout","time":59.727317338,"data":"PASS attn ctx63 PS256                                           max_abs=6.104e-05 max_rel=8.675e-05\n"}
+,{"stream_name":"stdout","time":59.728437548,"data":"PASS attn ctx65 PS8192                                          max_abs=2.441e-04 max_rel=3.224e-04\n"}
+,{"stream_name":"stdout","time":59.728852668,"data":"PASS attn ctx65 PS64                                            max_abs=2.441e-04 max_rel=3.224e-04\n"}
+,{"stream_name":"stdout","time":59.729257562,"data":"PASS attn ctx65 PS256                                           max_abs=2.441e-04 max_rel=3.224e-04\n"}
+,{"stream_name":"stdout","time":59.730461434,"data":"PASS attn ctx129 PS8192                                         max_abs=1.907e-06 max_rel=3.577e-06\n"}
+,{"stream_name":"stdout","time":59.730892233,"data":"PASS attn ctx129 PS64                                           max_abs=1.907e-06 max_rel=3.577e-06\n"}
+,{"stream_name":"stdout","time":59.731290728,"data":"PASS attn ctx129 PS256                                          max_abs=1.907e-06 max_rel=3.577e-06\n"}
+,{"stream_name":"stdout","time":59.733053432,"data":"PASS attn ctx1000 PS8192                                        max_abs=3.815e-06 max_rel=1.922e-05\n"}
+,{"stream_name":"stdout","time":59.733428172,"data":"PASS attn ctx1000 PS64                                          max_abs=3.052e-05 max_rel=1.538e-04\n"}
+,{"stream_name":"stdout","time":59.733876232,"data":"PASS attn ctx1000 PS256                                         max_abs=3.815e-06 max_rel=1.922e-05\n"}
+,{"stream_name":"stdout","time":59.735128296,"data":"PASS attn ctx512 peaky1.0 PS512                                 max_abs=1.907e-06 max_rel=6.123e-06\n"}
+,{"stream_name":"stdout","time":59.735518153,"data":"PASS attn ctx512 peaky1.0 PS1024                                max_abs=1.907e-06 max_rel=6.123e-06\n"}
+,{"stream_name":"stdout","time":59.735929088,"data":"PASS attn ctx512 peaky1.0 PS256                                 max_abs=1.907e-06 max_rel=6.123e-06\n"}
+,{"stream_name":"stdout","time":59.736998805,"data":"PASS attn ctx512 peaky6.0 PS512                                 max_abs=2.441e-04 max_rel=8.412e-05\n"}
+,{"stream_name":"stdout","time":59.737388968,"data":"PASS attn ctx512 peaky6.0 PS1024                                max_abs=2.441e-04 max_rel=8.412e-05\n"}
+,{"stream_name":"stdout","time":59.737743173,"data":"PASS attn ctx512 peaky6.0 PS256                                 max_abs=2.441e-04 max_rel=8.412e-05\n"}
+,{"stream_name":"stdout","time":59.739031919,"data":"PASS attn ctx1024 peaky1.0 PS1024                               max_abs=7.629e-06 max_rel=4.090e-05\n"}
+,{"stream_name":"stdout","time":59.739597563,"data":"PASS attn ctx1024 peaky1.0 PS1024                               max_abs=7.629e-06 max_rel=4.090e-05\n"}
+,{"stream_name":"stdout","time":59.740006052,"data":"PASS attn ctx1024 peaky1.0 PS256                                max_abs=7.629e-06 max_rel=4.090e-05\n"}
+,{"stream_name":"stdout","time":59.741351742,"data":"PASS attn ctx1024 peaky6.0 PS1024                               max_abs=4.883e-04 max_rel=1.729e-04\n"}
+,{"stream_name":"stdout","time":59.741879019,"data":"PASS attn ctx1024 peaky6.0 PS1024                               max_abs=4.883e-04 max_rel=1.729e-04\n"}
+,{"stream_name":"stdout","time":59.74225616,"data":"PASS attn ctx1024 peaky6.0 PS256                                max_abs=4.883e-04 max_rel=1.729e-04\n"}
+,{"stream_name":"stdout","time":59.74409038,"data":"PASS attn ctx2048 peaky1.0 PS2048                               max_abs=2.384e-07 max_rel=1.554e-06\n"}
+,{"stream_name":"stdout","time":59.74443562,"data":"PASS attn ctx2048 peaky1.0 PS1024                               max_abs=7.629e-06 max_rel=4.972e-05\n"}
+,{"stream_name":"stdout","time":59.744819814,"data":"PASS attn ctx2048 peaky1.0 PS256                                max_abs=1.907e-06 max_rel=1.243e-05\n"}
+,{"stream_name":"stdout","time":59.7465535,"data":"PASS attn ctx2048 peaky6.0 PS2048                               max_abs=1.221e-04 max_rel=3.427e-05\n"}
+,{"stream_name":"stdout","time":59.747058562,"data":"PASS attn ctx2048 peaky6.0 PS1024                               max_abs=1.221e-04 max_rel=3.427e-05\n"}
+,{"stream_name":"stdout","time":59.747428078,"data":"PASS attn ctx2048 peaky6.0 PS256                                max_abs=1.221e-04 max_rel=3.427e-05\n"}
+,{"stream_name":"stdout","time":59.750235523,"data":"PASS attn ctx4096 peaky1.0 PS4096                               max_abs=7.629e-06 max_rel=8.527e-05\n"}
+,{"stream_name":"stdout","time":59.750775059,"data":"PASS attn ctx4096 peaky1.0 PS1024                               max_abs=3.815e-06 max_rel=4.263e-05\n"}
+,{"stream_name":"stdout","time":59.75119341,"data":"PASS attn ctx4096 peaky1.0 PS256                                max_abs=3.815e-06 max_rel=4.263e-05\n"}
+,{"stream_name":"stdout","time":59.753881491,"data":"PASS attn ctx4096 peaky6.0 PS4096                               max_abs=1.221e-04 max_rel=3.884e-05\n"}
+,{"stream_name":"stdout","time":59.754415388,"data":"PASS attn ctx4096 peaky6.0 PS1024                               max_abs=1.221e-04 max_rel=3.884e-05\n"}
+,{"stream_name":"stdout","time":59.754829657,"data":"PASS attn ctx4096 peaky6.0 PS256                                max_abs=1.221e-04 max_rel=3.884e-05\n"}
+,{"stream_name":"stdout","time":59.759694352,"data":"PASS attn ctx8192 peaky1.0 PS8192                               max_abs=1.526e-05 max_rel=1.933e-04\n"}
+,{"stream_name":"stdout","time":59.760291334,"data":"PASS attn ctx8192 peaky1.0 PS1024                               max_abs=1.526e-05 max_rel=1.933e-04\n"}
+,{"stream_name":"stdout","time":59.760891743,"data":"PASS attn ctx8192 peaky1.0 PS256                                max_abs=1.526e-05 max_rel=1.933e-04\n"}
+,{"stream_name":"stdout","time":59.765843789,"data":"PASS attn ctx8192 peaky6.0 PS8192                               max_abs=1.221e-04 max_rel=4.272e-05\n"}
+,{"stream_name":"stdout","time":59.766446875,"data":"PASS attn ctx8192 peaky6.0 PS1024                               max_abs=1.221e-04 max_rel=4.272e-05\n"}
+,{"stream_name":"stdout","time":59.766926008,"data":"PASS attn ctx8192 peaky6.0 PS256                                max_abs=1.221e-04 max_rel=4.272e-05\n"}
+,{"stream_name":"stdout","time":59.776165423,"data":"PASS attn ctx16384 peaky1.0 PS16384                             max_abs=7.629e-06 max_rel=1.493e-04\n"}
+,{"stream_name":"stdout","time":59.77673428,"data":"PASS attn ctx16384 peaky1.0 PS1024                              max_abs=7.629e-06 max_rel=1.493e-04\n"}
+,{"stream_name":"stdout","time":59.777358548,"data":"PASS attn ctx16384 peaky1.0 PS256                               max_abs=7.629e-06 max_rel=1.493e-04\n"}
+,{"stream_name":"stdout","time":59.786563864,"data":"PASS attn ctx16384 peaky6.0 PS16384                             max_abs=4.883e-04 max_rel=1.520e-04\n"}
+,{"stream_name":"stdout","time":59.787223386,"data":"PASS attn ctx16384 peaky6.0 PS1024                              max_abs=4.883e-04 max_rel=1.520e-04\n"}
+,{"stream_name":"stdout","time":59.787904715,"data":"PASS attn ctx16384 peaky6.0 PS256                               max_abs=4.883e-04 max_rel=1.520e-04\n"}
+,{"stream_name":"stdout","time":59.893784726,"data":"PASS add_rmsnorm residual                                       max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.89395243,"data":"PASS add_rmsnorm out                                            max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.894468213,"data":"PASS rmsnorm (no residual)                                      max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.912873638,"data":"PASS swiglu                                                     max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.954526504,"data":"PASS rope q pos0                                                max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.95493749,"data":"PASS rope k-cache pos0                                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.955333075,"data":"PASS rope v-cache pos0                                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.956564697,"data":"PASS rope q pos1                                                max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.956933384,"data":"PASS rope k-cache pos1                                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.957337888,"data":"PASS rope v-cache pos1                                          max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.958458378,"data":"PASS rope q pos37                                               max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.958879541,"data":"PASS rope k-cache pos37                                         max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.959304334,"data":"PASS rope v-cache pos37                                         max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.960492555,"data":"PASS rope q pos2047                                             max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.960940361,"data":"PASS rope k-cache pos2047                                       max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.961448706,"data":"PASS rope v-cache pos2047                                       max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.962570084,"data":"PASS rope q pos4095                                             max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.962943449,"data":"PASS rope k-cache pos4095                                       max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.96333893,"data":"PASS rope v-cache pos4095                                       max_abs=0.000e+00 max_rel=0.000e+00\n"}
+,{"stream_name":"stdout","time":59.963508649,"data":"\n"}
+,{"stream_name":"stdout","time":59.963518486,"data":"328/328 passed\n"}
+,{"stream_name":"stdout","time":60.548320247,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":62.723805925,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":62.723829128,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":63.022785024,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":63.022815163,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":63.819691522,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":64.833804522,"data":"[NbConvertApp] Writing 307048 bytes to __results__.html\n"}
+]

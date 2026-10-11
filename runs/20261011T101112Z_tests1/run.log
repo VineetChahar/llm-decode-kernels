@@ -1,0 +1,357 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ python -c "from runtime import ext; ext.load(verbose=True)" 2>&1 | grep -E "registers|error|Error|warning" | head -60; python tests/test_kernels.py
+ptxas info    : Used 19 registers, used 0 barriers, 420 bytes cmem[0]
+ptxas info    : Used 26 registers, used 0 barriers, 372 bytes cmem[0]
+ptxas info    : Used 26 registers, used 1 barriers, 32 bytes smem, 392 bytes cmem[0]
+ptxas info    : Used 128 registers, used 1 barriers, 12384 bytes smem, 444 bytes cmem[0]
+ptxas info    : Used 64 registers, used 1 barriers, 8 bytes cumulative stack size, 6192 bytes smem, 444 bytes cmem[0]
+ptxas info    : Used 54 registers, used 1 barriers, 3096 bytes smem, 444 bytes cmem[0]
+ptxas info    : Used 54 registers, used 1 barriers, 1548 bytes smem, 444 bytes cmem[0]
+ptxas info    : Used 43 registers, used 0 barriers, 400 bytes cmem[0]
+ptxas info    : Used 100 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 120 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 64 registers, used 0 barriers, 8 bytes cumulative stack size, 396 bytes cmem[0]
+ptxas info    : Used 80 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 56 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 62 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 63 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 63 registers, used 0 barriers, 396 bytes cmem[0]
+ptxas info    : Used 18 registers, used 0 barriers, 376 bytes cmem[0]
+ptxas info    : Used 36 registers, used 0 barriers, 376 bytes cmem[0]
+ptxas info    : Used 40 registers, used 0 barriers, 396 bytes cmem[0]
+PASS gemv_shape1_x=1 stage(0, 1, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(0, 1, 4, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(1, 1, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(1, 1, 4, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 1, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 1, 1, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 1, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 1, 1, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 1, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 1, 4, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 1, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 1, 4, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 1, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 1, 8, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 1, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 1, 8, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 2, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 2, 1, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 2, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 2, 1, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 2, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 2, 4, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 2, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 2, 4, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 2, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 2, 8, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 2, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 2, 8, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 4, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 4, 1, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 4, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 4, 1, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 4, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 4, 4, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 4, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 4, 4, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 4, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 4, 8, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 4, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 4, 8, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 8, 1, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 8, 1, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 8, 1, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 8, 1, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 8, 4, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 8, 4, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 8, 4, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 8, 4, 1) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 8, 8, 0)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 8, 8, 0) wrong_columns=0
+PASS gemv_shape1_x=1 stage(2, 8, 8, 1)                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS gemv_onehot_nibbles stage(2, 8, 8, 1) wrong_columns=0
+PASS gemv qkv 2560x2048 G64 stage(0, 1, 4, 0)                   max_abs=2.441e-04 max_rel=8.159e-05
+PASS gemv qkv 2560x2048 G64 stage(1, 1, 4, 0)                   max_abs=1.953e-03 max_rel=6.527e-04
+PASS gemv qkv 2560x2048 G64 stage(2, 4, 4, 1)                   max_abs=1.953e-03 max_rel=6.527e-04
+PASS gemv qkv 2560x2048 G64 stage(2, 8, 2, 1)                   max_abs=1.953e-03 max_rel=6.527e-04
+PASS gemv qkv 2560x2048 G128 stage(0, 1, 4, 0)                  max_abs=6.104e-05 max_rel=2.028e-05
+PASS gemv qkv 2560x2048 G128 stage(1, 1, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 1, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 1, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 1, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 1, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 1, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 1, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 2, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 2, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 2, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 2, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 2, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 2, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 4, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 4, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 4, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 4, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 4, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 4, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 8, 1, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 8, 1, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 8, 4, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 8, 4, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 8, 8, 0)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G128 stage(2, 8, 8, 1)                  max_abs=1.953e-03 max_rel=6.489e-04
+PASS gemv qkv 2560x2048 G256 stage(0, 1, 4, 0)                  max_abs=4.883e-04 max_rel=1.631e-04
+PASS gemv qkv 2560x2048 G256 stage(1, 1, 4, 0)                  max_abs=1.953e-03 max_rel=6.523e-04
+PASS gemv qkv 2560x2048 G256 stage(2, 4, 4, 1)                  max_abs=1.953e-03 max_rel=6.523e-04
+PASS gemv qkv 2560x2048 G256 stage(2, 8, 2, 1)                  max_abs=1.953e-03 max_rel=6.523e-04
+PASS gemv o 2048x2048 G64 stage(0, 1, 4, 0)                     max_abs=2.441e-04 max_rel=7.259e-05
+PASS gemv o 2048x2048 G64 stage(1, 1, 4, 0)                     max_abs=1.953e-03 max_rel=5.807e-04
+PASS gemv o 2048x2048 G64 stage(2, 4, 4, 1)                     max_abs=1.953e-03 max_rel=5.807e-04
+PASS gemv o 2048x2048 G64 stage(2, 8, 2, 1)                     max_abs=1.953e-03 max_rel=5.807e-04
+PASS gemv o 2048x2048 G128 stage(0, 1, 4, 0)                    max_abs=1.221e-04 max_rel=3.689e-05
+PASS gemv o 2048x2048 G128 stage(1, 1, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 1, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 1, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 1, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 1, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 1, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 1, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 2, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 2, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 2, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 2, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 2, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 2, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 4, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 4, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 4, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 4, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 4, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 4, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 8, 1, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 8, 1, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 8, 4, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 8, 4, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 8, 8, 0)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G128 stage(2, 8, 8, 1)                    max_abs=1.953e-03 max_rel=5.903e-04
+PASS gemv o 2048x2048 G256 stage(0, 1, 4, 0)                    max_abs=3.052e-05 max_rel=8.496e-06
+PASS gemv o 2048x2048 G256 stage(1, 1, 4, 0)                    max_abs=1.953e-03 max_rel=5.438e-04
+PASS gemv o 2048x2048 G256 stage(2, 4, 4, 1)                    max_abs=1.953e-03 max_rel=5.438e-04
+PASS gemv o 2048x2048 G256 stage(2, 8, 2, 1)                    max_abs=1.953e-03 max_rel=5.438e-04
+PASS gemv gate_up 11264x2048 G64 stage(0, 1, 4, 0)              max_abs=2.441e-04 max_rel=6.433e-05
+PASS gemv gate_up 11264x2048 G64 stage(1, 1, 4, 0)              max_abs=1.953e-03 max_rel=5.147e-04
+PASS gemv gate_up 11264x2048 G64 stage(2, 4, 4, 1)              max_abs=1.953e-03 max_rel=5.147e-04
+PASS gemv gate_up 11264x2048 G64 stage(2, 8, 2, 1)              max_abs=1.953e-03 max_rel=5.147e-04
+PASS gemv gate_up 11264x2048 G128 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.744e-04
+PASS gemv gate_up 11264x2048 G128 stage(1, 1, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 1, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 1, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 1, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 1, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 1, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 1, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 2, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 2, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 2, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 2, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 2, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 2, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 4, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 4, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 4, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 4, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 4, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 4, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 8, 1, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 8, 1, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 8, 4, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 8, 4, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 8, 8, 0)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G128 stage(2, 8, 8, 1)             max_abs=1.953e-03 max_rel=5.488e-04
+PASS gemv gate_up 11264x2048 G256 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.674e-04
+PASS gemv gate_up 11264x2048 G256 stage(1, 1, 4, 0)             max_abs=1.953e-03 max_rel=5.348e-04
+PASS gemv gate_up 11264x2048 G256 stage(2, 4, 4, 1)             max_abs=1.953e-03 max_rel=5.348e-04
+PASS gemv gate_up 11264x2048 G256 stage(2, 8, 2, 1)             max_abs=1.953e-03 max_rel=5.348e-04
+PASS gemv down 2048x5632 G64 stage(0, 1, 4, 0)                  max_abs=1.526e-05 max_rel=2.556e-06
+PASS gemv down 2048x5632 G64 stage(1, 1, 4, 0)                  max_abs=3.906e-03 max_rel=6.545e-04
+PASS gemv down 2048x5632 G64 stage(2, 4, 4, 1)                  max_abs=3.906e-03 max_rel=6.545e-04
+PASS gemv down 2048x5632 G64 stage(2, 8, 2, 1)                  max_abs=3.906e-03 max_rel=6.545e-04
+PASS gemv down 2048x5632 G128 stage(0, 1, 4, 0)                 max_abs=1.907e-06 max_rel=3.063e-07
+PASS gemv down 2048x5632 G128 stage(1, 1, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 1, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 1, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 1, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 1, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 1, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 1, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 2, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 2, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 2, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 2, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 2, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 2, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 4, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 4, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 4, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 4, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 4, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 4, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 8, 1, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 8, 1, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 8, 4, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 8, 4, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 8, 8, 0)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G128 stage(2, 8, 8, 1)                 max_abs=3.906e-03 max_rel=6.274e-04
+PASS gemv down 2048x5632 G256 stage(0, 1, 4, 0)                 max_abs=1.953e-03 max_rel=3.189e-04
+PASS gemv down 2048x5632 G256 stage(1, 1, 4, 0)                 max_abs=3.906e-03 max_rel=6.378e-04
+PASS gemv down 2048x5632 G256 stage(2, 4, 4, 1)                 max_abs=3.906e-03 max_rel=6.378e-04
+PASS gemv down 2048x5632 G256 stage(2, 8, 2, 1)                 max_abs=3.906e-03 max_rel=6.378e-04
+PASS gemv lm_head 32000x2048 G64 stage(0, 1, 4, 0)              max_abs=9.766e-04 max_rel=2.283e-04
+PASS gemv lm_head 32000x2048 G64 stage(1, 1, 4, 0)              max_abs=2.197e-03 max_rel=5.137e-04
+PASS gemv lm_head 32000x2048 G64 stage(2, 4, 4, 1)              max_abs=2.197e-03 max_rel=5.137e-04
+PASS gemv lm_head 32000x2048 G64 stage(2, 8, 2, 1)              max_abs=2.197e-03 max_rel=5.137e-04
+PASS gemv lm_head 32000x2048 G128 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.228e-04
+PASS gemv lm_head 32000x2048 G128 stage(1, 1, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 1, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 1, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 1, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 1, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 1, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 1, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 2, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 2, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 2, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 2, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 2, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 2, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 4, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 4, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 4, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 4, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 4, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 4, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 8, 1, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 8, 1, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 8, 4, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 8, 4, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 8, 8, 0)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G128 stage(2, 8, 8, 1)             max_abs=2.441e-03 max_rel=5.570e-04
+PASS gemv lm_head 32000x2048 G256 stage(0, 1, 4, 0)             max_abs=9.766e-04 max_rel=2.315e-04
+PASS gemv lm_head 32000x2048 G256 stage(1, 1, 4, 0)             max_abs=2.441e-03 max_rel=5.787e-04
+PASS gemv lm_head 32000x2048 G256 stage(2, 4, 4, 1)             max_abs=2.441e-03 max_rel=5.787e-04
+PASS gemv lm_head 32000x2048 G256 stage(2, 8, 2, 1)             max_abs=2.441e-03 max_rel=5.787e-04
+PASS attn ctx128 hq32 hkv4 P16 PS4096                           max_abs=1.526e-05 max_rel=2.480e-05
+PASS attn ctx128 hq32 hkv4 P16 PS64                             max_abs=1.526e-05 max_rel=2.480e-05
+PASS attn ctx128 hq32 hkv4 P16 PS32                             max_abs=1.526e-05 max_rel=2.480e-05
+PASS attn ctx128 hq32 hkv4 P16 PS48                             max_abs=1.526e-05 max_rel=2.480e-05
+PASS attn ctx128 hq32 hkv4 P16 PS16                             max_abs=1.907e-06 max_rel=3.100e-06
+PASS attn ctx128 hq32 hkv4 P32 PS4096                           max_abs=7.629e-06 max_rel=1.564e-05
+PASS attn ctx128 hq32 hkv4 P32 PS64                             max_abs=1.526e-05 max_rel=3.128e-05
+PASS attn ctx128 hq32 hkv4 P32 PS32                             max_abs=5.960e-08 max_rel=1.222e-07
+PASS attn ctx128 hq32 hkv4 P32 PS48                             max_abs=1.526e-05 max_rel=3.128e-05
+PASS attn ctx128 hq32 hkv4 P32 PS16                             max_abs=7.629e-06 max_rel=1.564e-05
+PASS attn ctx128 hq8 hkv8 P16 PS4096                            max_abs=3.815e-06 max_rel=9.889e-06
+PASS attn ctx128 hq8 hkv8 P16 PS64                              max_abs=0.000e+00 max_rel=0.000e+00
+PASS attn ctx128 hq8 hkv8 P16 PS32                              max_abs=3.815e-06 max_rel=9.889e-06
+PASS attn ctx128 hq8 hkv8 P16 PS48                              max_abs=3.815e-06 max_rel=9.889e-06
+PASS attn ctx128 hq8 hkv8 P16 PS16                              max_abs=0.000e+00 max_rel=0.000e+00
+PASS attn ctx128 hq8 hkv8 P32 PS4096                            max_abs=6.104e-05 max_rel=1.242e-04
+PASS attn ctx128 hq8 hkv8 P32 PS64                              max_abs=6.104e-05 max_rel=1.242e-04
+PASS attn ctx128 hq8 hkv8 P32 PS32                              max_abs=6.104e-05 max_rel=1.242e-04
+PASS attn ctx128 hq8 hkv8 P32 PS48                              max_abs=6.104e-05 max_rel=1.242e-04
+PASS attn ctx128 hq8 hkv8 P32 PS16                              max_abs=6.104e-05 max_rel=1.242e-04
+PASS attn ctx128 hq16 hkv4 P16 PS4096                           max_abs=4.768e-07 max_rel=8.031e-07
+PASS attn ctx128 hq16 hkv4 P16 PS64                             max_abs=4.768e-07 max_rel=8.031e-07
+PASS attn ctx128 hq16 hkv4 P16 PS32                             max_abs=4.768e-07 max_rel=8.031e-07
+PASS attn ctx128 hq16 hkv4 P16 PS48                             max_abs=4.768e-07 max_rel=8.031e-07
+PASS attn ctx128 hq16 hkv4 P16 PS16                             max_abs=4.768e-07 max_rel=8.031e-07
+PASS attn ctx128 hq16 hkv4 P32 PS4096                           max_abs=1.221e-04 max_rel=2.201e-04
+PASS attn ctx128 hq16 hkv4 P32 PS64                             max_abs=1.221e-04 max_rel=2.201e-04
+PASS attn ctx128 hq16 hkv4 P32 PS32                             max_abs=1.526e-05 max_rel=2.751e-05
+PASS attn ctx128 hq16 hkv4 P32 PS48                             max_abs=1.526e-05 max_rel=2.751e-05
+PASS attn ctx128 hq16 hkv4 P32 PS16                             max_abs=1.526e-05 max_rel=2.751e-05
+PASS attn ctx1 PS8192                                           max_abs=0.000e+00 max_rel=0.000e+00
+PASS attn ctx1 PS64                                             max_abs=0.000e+00 max_rel=0.000e+00
+PASS attn ctx1 PS256                                            max_abs=0.000e+00 max_rel=0.000e+00
+PASS attn ctx2 PS8192                                           max_abs=9.537e-07 max_rel=3.295e-07
+PASS attn ctx2 PS64                                             max_abs=9.537e-07 max_rel=3.295e-07
+PASS attn ctx2 PS256                                            max_abs=9.537e-07 max_rel=3.295e-07
+PASS attn ctx17 PS8192                                          max_abs=1.221e-04 max_rel=1.054e-04
+PASS attn ctx17 PS64                                            max_abs=1.221e-04 max_rel=1.054e-04
+PASS attn ctx17 PS256                                           max_abs=1.221e-04 max_rel=1.054e-04
+PASS attn ctx63 PS8192                                          max_abs=6.104e-05 max_rel=8.675e-05
+PASS attn ctx63 PS64                                            max_abs=6.104e-05 max_rel=8.675e-05
+PASS attn ctx63 PS256                                           max_abs=6.104e-05 max_rel=8.675e-05
+PASS attn ctx65 PS8192                                          max_abs=2.441e-04 max_rel=3.224e-04
+PASS attn ctx65 PS64                                            max_abs=2.441e-04 max_rel=3.224e-04
+PASS attn ctx65 PS256                                           max_abs=2.441e-04 max_rel=3.224e-04
+PASS attn ctx129 PS8192                                         max_abs=1.907e-06 max_rel=3.577e-06
+PASS attn ctx129 PS64                                           max_abs=1.907e-06 max_rel=3.577e-06
+PASS attn ctx129 PS256                                          max_abs=1.907e-06 max_rel=3.577e-06
+PASS attn ctx1000 PS8192                                        max_abs=3.815e-06 max_rel=1.922e-05
+PASS attn ctx1000 PS64                                          max_abs=3.052e-05 max_rel=1.538e-04
+PASS attn ctx1000 PS256                                         max_abs=3.815e-06 max_rel=1.922e-05
+PASS attn ctx512 peaky1.0 PS512                                 max_abs=1.907e-06 max_rel=6.123e-06
+PASS attn ctx512 peaky1.0 PS1024                                max_abs=1.907e-06 max_rel=6.123e-06
+PASS attn ctx512 peaky1.0 PS256                                 max_abs=1.907e-06 max_rel=6.123e-06
+PASS attn ctx512 peaky6.0 PS512                                 max_abs=2.441e-04 max_rel=8.412e-05
+PASS attn ctx512 peaky6.0 PS1024                                max_abs=2.441e-04 max_rel=8.412e-05
+PASS attn ctx512 peaky6.0 PS256                                 max_abs=2.441e-04 max_rel=8.412e-05
+PASS attn ctx1024 peaky1.0 PS1024                               max_abs=7.629e-06 max_rel=4.090e-05
+PASS attn ctx1024 peaky1.0 PS1024                               max_abs=7.629e-06 max_rel=4.090e-05
+PASS attn ctx1024 peaky1.0 PS256                                max_abs=7.629e-06 max_rel=4.090e-05
+PASS attn ctx1024 peaky6.0 PS1024                               max_abs=4.883e-04 max_rel=1.729e-04
+PASS attn ctx1024 peaky6.0 PS1024                               max_abs=4.883e-04 max_rel=1.729e-04
+PASS attn ctx1024 peaky6.0 PS256                                max_abs=4.883e-04 max_rel=1.729e-04
+PASS attn ctx2048 peaky1.0 PS2048                               max_abs=2.384e-07 max_rel=1.554e-06
+PASS attn ctx2048 peaky1.0 PS1024                               max_abs=7.629e-06 max_rel=4.972e-05
+PASS attn ctx2048 peaky1.0 PS256                                max_abs=1.907e-06 max_rel=1.243e-05
+PASS attn ctx2048 peaky6.0 PS2048                               max_abs=1.221e-04 max_rel=3.427e-05
+PASS attn ctx2048 peaky6.0 PS1024                               max_abs=1.221e-04 max_rel=3.427e-05
+PASS attn ctx2048 peaky6.0 PS256                                max_abs=1.221e-04 max_rel=3.427e-05
+PASS attn ctx4096 peaky1.0 PS4096                               max_abs=7.629e-06 max_rel=8.527e-05
+PASS attn ctx4096 peaky1.0 PS1024                               max_abs=3.815e-06 max_rel=4.263e-05
+PASS attn ctx4096 peaky1.0 PS256                                max_abs=3.815e-06 max_rel=4.263e-05
+PASS attn ctx4096 peaky6.0 PS4096                               max_abs=1.221e-04 max_rel=3.884e-05
+PASS attn ctx4096 peaky6.0 PS1024                               max_abs=1.221e-04 max_rel=3.884e-05
+PASS attn ctx4096 peaky6.0 PS256                                max_abs=1.221e-04 max_rel=3.884e-05
+PASS attn ctx8192 peaky1.0 PS8192                               max_abs=1.526e-05 max_rel=1.933e-04
+PASS attn ctx8192 peaky1.0 PS1024                               max_abs=1.526e-05 max_rel=1.933e-04
+PASS attn ctx8192 peaky1.0 PS256                                max_abs=1.526e-05 max_rel=1.933e-04
+PASS attn ctx8192 peaky6.0 PS8192                               max_abs=1.221e-04 max_rel=4.272e-05
+PASS attn ctx8192 peaky6.0 PS1024                               max_abs=1.221e-04 max_rel=4.272e-05
+PASS attn ctx8192 peaky6.0 PS256                                max_abs=1.221e-04 max_rel=4.272e-05
+PASS attn ctx16384 peaky1.0 PS16384                             max_abs=7.629e-06 max_rel=1.493e-04
+PASS attn ctx16384 peaky1.0 PS1024                              max_abs=7.629e-06 max_rel=1.493e-04
+PASS attn ctx16384 peaky1.0 PS256                               max_abs=7.629e-06 max_rel=1.493e-04
+PASS attn ctx16384 peaky6.0 PS16384                             max_abs=4.883e-04 max_rel=1.520e-04
+PASS attn ctx16384 peaky6.0 PS1024                              max_abs=4.883e-04 max_rel=1.520e-04
+PASS attn ctx16384 peaky6.0 PS256                               max_abs=4.883e-04 max_rel=1.520e-04
+PASS add_rmsnorm residual                                       max_abs=0.000e+00 max_rel=0.000e+00
+PASS add_rmsnorm out                                            max_abs=0.000e+00 max_rel=0.000e+00
+PASS rmsnorm (no residual)                                      max_abs=0.000e+00 max_rel=0.000e+00
+PASS swiglu                                                     max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope q pos0                                                max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope k-cache pos0                                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope v-cache pos0                                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope q pos1                                                max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope k-cache pos1                                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope v-cache pos1                                          max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope q pos37                                               max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope k-cache pos37                                         max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope v-cache pos37                                         max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope q pos2047                                             max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope k-cache pos2047                                       max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope v-cache pos2047                                       max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope q pos4095                                             max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope k-cache pos4095                                       max_abs=0.000e+00 max_rel=0.000e+00
+PASS rope v-cache pos4095                                       max_abs=0.000e+00 max_rel=0.000e+00
+
+328/328 passed
+EXIT_CODE=0

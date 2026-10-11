@@ -1,0 +1,29 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ CUDA_VISIBLE_DEVICES= nvidia-smi -L; which ncu nsys nvcc; ls /usr/local/cuda/bin | grep -E "ncu|nsys"; ls /opt/nvidia 2>/dev/null; python -c "import torch,transformers,sys;print(sys.version, torch.__version__, torch.version.cuda, transformers.__version__, torch.cuda.device_count(), torch.cuda.get_device_name(0))"; pip list 2>/dev/null | grep -iE "datasets|nvidia-ml|pynvml|ninja|accelerate"; free -g; nproc; df -h /kaggle/working | tail -1
+GPU 0: Tesla T4 (UUID: GPU-b86ea65a-9570-62f5-7ca1-b2d640b801e9)
+GPU 1: Tesla T4 (UUID: GPU-a55e7c50-90be-34ec-ecb8-688cf0602bca)
+/usr/local/cuda/bin/ncu
+/usr/local/cuda/bin/nvcc
+ncu
+ncu-ui
+entrypoint.d
+nsight-compute
+nvidia_entrypoint.sh
+3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0] 2.11.0+cu128 12.8 5.16.1 1 Tesla T4
+accelerate                            1.14.0
+datasets                              4.8.5
+ninja                                 1.13.2
+nvidia-ml-py                          13.610.43
+tensorflow-datasets                   4.9.10
+vega-datasets                         0.9.0
+               total        used        free      shared  buff/cache   available
+Mem:              31           1          24           0           5          30
+Swap:              0           0           0
+4
+/dev/loop2       20G  116K   20G   1% /kaggle/working
+EXIT_CODE=0

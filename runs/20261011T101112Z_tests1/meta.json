@@ -1,0 +1,1 @@
+{"ref": "vineetkumar0210/llm-decode-kernels", "cmd": "python -c \"from runtime import ext; ext.load(verbose=True)\" 2>&1 | grep -E \"registers|error|Error|warning\" | head -60; python tests/test_kernels.py", "accel": "NvidiaTeslaT4", "utc": "20261011T101112Z"}

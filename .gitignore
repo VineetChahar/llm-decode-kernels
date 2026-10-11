@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+hf_cache/
+runs/*/*.safetensors
+.DS_Store

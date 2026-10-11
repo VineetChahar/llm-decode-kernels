@@ -1,0 +1,38 @@
+[{"stream_name":"stderr","time":0.920192061,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.920217601,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.943526946,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.973745045,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.980481023,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.985598128,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":1.008795552,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":1.008826385,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":1.009222474,"data":"$ CUDA_VISIBLE_DEVICES= nvidia-smi -L; which ncu nsys nvcc; ls /usr/local/cuda/bin | grep -E \"ncu|nsys\"; ls /opt/nvidia 2\u003e/dev/null; python -c \"import torch,transformers,sys;print(sys.version, torch.__version__, torch.version.cuda, transformers.__version__, torch.cuda.device_count(), torch.cuda.get_device_name(0))\"; pip list 2\u003e/dev/null | grep -iE \"datasets|nvidia-ml|pynvml|ninja|accelerate\"; free -g; nproc; df -h /kaggle/working | tail -1\n"}
+,{"stream_name":"stdout","time":1.0405484,"data":"GPU 0: Tesla T4 (UUID: GPU-b86ea65a-9570-62f5-7ca1-b2d640b801e9)\n"}
+,{"stream_name":"stdout","time":1.040565658,"data":"GPU 1: Tesla T4 (UUID: GPU-a55e7c50-90be-34ec-ecb8-688cf0602bca)\n"}
+,{"stream_name":"stdout","time":1.04877628,"data":"/usr/local/cuda/bin/ncu\n"}
+,{"stream_name":"stdout","time":1.054384034,"data":"/usr/local/cuda/bin/nvcc\n"}
+,{"stream_name":"stdout","time":1.0625521039999999,"data":"ncu\n"}
+,{"stream_name":"stdout","time":1.0625685009999999,"data":"ncu-ui\n"}
+,{"stream_name":"stdout","time":1.065896214,"data":"entrypoint.d\n"}
+,{"stream_name":"stdout","time":1.065926244,"data":"nsight-compute\n"}
+,{"stream_name":"stdout","time":1.06593049,"data":"nvidia_entrypoint.sh\n"}
+,{"stream_name":"stdout","time":21.331647858,"data":"3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0] 2.11.0+cu128 12.8 5.16.1 1 Tesla T4\n"}
+,{"stream_name":"stdout","time":26.724548878,"data":"accelerate                            1.14.0\n"}
+,{"stream_name":"stdout","time":26.724572812,"data":"datasets                              4.8.5\n"}
+,{"stream_name":"stdout","time":26.724576818,"data":"ninja                                 1.13.2\n"}
+,{"stream_name":"stdout","time":26.724580344,"data":"nvidia-ml-py                          13.610.43\n"}
+,{"stream_name":"stdout","time":26.724584056,"data":"tensorflow-datasets                   4.9.10\n"}
+,{"stream_name":"stdout","time":26.724587405,"data":"vega-datasets                         0.9.0\n"}
+,{"stream_name":"stdout","time":26.753048689,"data":"               total        used        free      shared  buff/cache   available\n"}
+,{"stream_name":"stdout","time":26.753066675,"data":"Mem:              31           1          24           0           5          30\n"}
+,{"stream_name":"stdout","time":26.753070461,"data":"Swap:              0           0           0\n"}
+,{"stream_name":"stdout","time":26.757320165,"data":"4\n"}
+,{"stream_name":"stdout","time":26.760658092,"data":"/dev/loop2       20G  116K   20G   1% /kaggle/working\n"}
+,{"stream_name":"stdout","time":26.761091722,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":28.745775318,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":28.745804074,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":29.001703136,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":29.001729444,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":29.762747234,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":30.788290245,"data":"[NbConvertApp] Writing 284037 bytes to __results__.html\n"}
+]
