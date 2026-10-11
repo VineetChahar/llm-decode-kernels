@@ -237,7 +237,7 @@ clean for all three (1575–1590 MHz). For absolute v1/v2 numbers at full clock 
 
 **Fusion ablation** (fused residual-add + RMSNorm, fused SiLU·mul vs the same runtime with HF-style torch ops; profiled
 graph-replay step span, `e2efinal`): 225 vs 716 kernels per token, **3.30 vs 4.99 ms at 512 (−34 %), 5.11 vs 6.65 ms at
-16K (−23 %)**. The unfused path spends ~1.5 ms per token in elementwise and reduction kernels and 0.5 ms idle between
+16K (−23 %)**; in the timed loop's wall clock (the plot) −30 % at 512 and −19.5 % at 16K. The unfused path spends ~1.5 ms per token in elementwise and reduction kernels and 0.5 ms idle between
 its 716 launches.
 
 **CUDA graphs vs eager** (wall clock per token for both, same job): the fused runtime is within noise (**3.42 ms graph vs

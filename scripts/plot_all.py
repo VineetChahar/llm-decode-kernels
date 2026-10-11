@@ -184,27 +184,30 @@ def plot_fusion(r):
     ctxs = [x["ctx"] for x in sp["rt_int4_g128"]]
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4))
     w = 0.38
-    fu = [x["median_us"] / 1e3 for x in sp["rt_int4_g128"]]
-    un = [next(y["median_us"] for y in sp["rt_int4_g128_unfused"] if y["ctx"] == c) / 1e3 for c in ctxs]
+    # wall clock in both panels: the event-timed median of a throttled loop can sit far from its wall time (e2efinal
+    # unfused@512: 6.79 ms median vs 4.87 ms wall), and eager can only be compared to graph wall-to-wall
+    wall = lambda x: x.get("wall_us", x["median_us"]) / 1e3
+    fu = [wall(x) for x in sp["rt_int4_g128"]]
+    un = [wall(next(y for y in sp["rt_int4_g128_unfused"] if y["ctx"] == c)) for c in ctxs]
     xs = np.arange(len(ctxs))
     a1.bar(xs - w / 2, un, w * 0.95, color=C[1], label="unfused (HF-style torch ops)")
     a1.bar(xs + w / 2, fu, w * 0.95, color=C[0], label="fused add+RMSNorm, SwiGLU")
     for i in range(len(ctxs)):
         a1.annotate(f"-{100 * (1 - fu[i] / un[i]):.1f}%", (xs[i] + w / 2, fu[i]), xytext=(0, 3), textcoords="offset points", ha="center", fontsize=8)
     a1.set_xticks(xs); a1.set_xticklabels([ctx_label(c) for c in ctxs]); a1.set_xlabel("context")
-    a1.set_ylabel("ms / token (CUDA graph)"); a1.set_title("Fusion ablation (W4A16, same prompts/model)"); a1.legend(fontsize=8, loc="upper left")
+    a1.set_ylabel("ms / token (CUDA graph, wall clock)"); a1.set_title("Fusion ablation (W4A16, same prompts/model)"); a1.legend(fontsize=8, loc="upper left")
     labels, vals, cols = [], [], []
     for name, lab in (("rt_int4_g128_unfused", "unfused"), ("rt_int4_g128", "fused")):
         for x in sp[name]:
             if x["ctx"] == 512 and "eager" in x:
-                labels += [f"{lab}\neager (wall)", f"{lab}\nCUDA graph"]
-                vals += [x["eager"]["wall_us"] / 1e3, x["median_us"] / 1e3]
+                labels += [f"{lab}\neager", f"{lab}\nCUDA graph"]
+                vals += [x["eager"]["wall_us"] / 1e3, wall(x)]
                 cols += [C[1], C[0]]
     a2.bar(range(len(vals)), vals, 0.6, color=cols)
     for i, v in enumerate(vals):
         a2.annotate(f"{v:.2f}", (i, v), xytext=(0, 3), textcoords="offset points", ha="center", fontsize=8)
     a2.set_xticks(range(len(vals))); a2.set_xticklabels(labels, fontsize=8)
-    a2.set_ylabel("ms / token (ctx 512)"); a2.set_title("Launch overhead: eager Python vs CUDA graph")
+    a2.set_ylabel("ms / token, wall clock (ctx 512)"); a2.set_title("Launch overhead: eager Python vs CUDA graph")
     save(fig, "fusion_ablation.png")
 
 
