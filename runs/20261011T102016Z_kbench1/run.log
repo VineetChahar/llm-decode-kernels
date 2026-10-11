@@ -1,0 +1,78 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ python tests/test_kernels.py > /kaggle/working/tests.log 2>&1 && tail -1 /kaggle/working/tests.log && python bench/kernel_bench.py
+328/328 passed
+
+===== bw =====
+achievable read BW 278.5 GB/s (87% of 320 spec) cfg={'mb': 256, 'blocks': 320, 'threads': 256, 'unroll': 1, 'median_us': 964.0159904956818, 'gbps': 278.45539767652065, 'sm_mhz': 1590, 'mem_mhz': 5000}
+D2D copy (read+write) 232.0 GB/s
+
+===== autotune =====
+qkv      G 64 best R=1 warps=1 pf=0 18.4us 161 GB/s
+qkv      G128 best R=1 warps=2 pf=0 17.7us 157 GB/s
+qkv      G256 best R=1 warps=2 pf=0 17.2us 158 GB/s
+o        G 64 best R=1 warps=1 pf=0 16.2us 147 GB/s
+o        G128 best R=1 warps=4 pf=0 15.7us 143 GB/s
+o        G256 best R=1 warps=2 pf=0 15.2us 143 GB/s
+gate_up  G 64 best R=1 warps=2 pf=0 57.2us 227 GB/s
+gate_up  G128 best R=2 warps=1 pf=0 54.8us 224 GB/s
+gate_up  G256 best R=2 warps=1 pf=0 52.8us 226 GB/s
+down     G 64 best R=2 warps=1 pf=0 36.0us 181 GB/s
+down     G128 best R=2 warps=1 pf=0 32.9us 187 GB/s
+down     G256 best R=2 warps=1 pf=0 32.3us 184 GB/s
+lm_head  G 64 best R=2 warps=1 pf=0 166.2us 222 GB/s
+lm_head  G128 best R=4 warps=1 pf=0 151.7us 230 GB/s
+lm_head  G256 best R=4 warps=1 pf=0 139.3us 243 GB/s
+
+===== gemv =====
+qkv      0 naive             42.7us  iqr   0.7    65.5 GB/s
+qkv      1 vectorized        24.6us  iqr   0.1   113.7 GB/s
+qkv      2 reg-blocked       24.6us  iqr   0.5   113.6 GB/s
+qkv      3 autotuned         24.6us  iqr   0.1   113.7 GB/s
+qkv      cuBLAS fp16         53.3us  iqr   1.2   197.0 GB/s
+o        0 naive             36.0us  iqr   0.9    62.2 GB/s
+o        1 vectorized        22.2us  iqr   0.8   100.7 GB/s
+o        2 reg-blocked       21.9us  iqr   1.0   102.2 GB/s
+o        3 autotuned         22.3us  iqr   0.7   100.5 GB/s
+o        cuBLAS fp16         44.7us  iqr   1.1   187.8 GB/s
+gate_up  0 naive            157.3us  iqr   0.6    78.1 GB/s
+gate_up  1 vectorized        84.1us  iqr   0.4   146.0 GB/s
+gate_up  2 reg-blocked       66.8us  iqr   1.6   183.8 GB/s
+gate_up  3 autotuned         55.5us  iqr   0.4   221.4 GB/s
+gate_up  cuBLAS fp16        196.1us  iqr   1.9   235.4 GB/s
+down     0 naive            125.0us  iqr   0.4    49.1 GB/s
+down     1 vectorized        68.4us  iqr   1.0    89.9 GB/s
+down     2 reg-blocked       45.4us  iqr   1.5   135.4 GB/s
+down     3 autotuned         44.1us  iqr   1.4   139.3 GB/s
+down     cuBLAS fp16        108.1us  iqr   1.6   213.6 GB/s
+lm_head  0 naive            773.2us  iqr   1.0    45.1 GB/s
+lm_head  1 vectorized       405.3us  iqr   0.5    86.1 GB/s
+lm_head  2 reg-blocked      180.3us  iqr   1.7   193.5 GB/s
+lm_head  3 autotuned        159.9us  iqr   1.0   218.2 GB/s
+lm_head  cuBLAS fp16        649.2us  iqr   0.9   202.0 GB/s
+
+===== groups =====
+G64: GEMV time per token (sum of kernels) 4.562 ms, 554.9 MiB
+G128: GEMV time per token (sum of kernels) 4.791 ms, 524.1 MiB
+G256: GEMV time per token (sum of kernels) 4.826 ms, 508.7 MiB
+
+===== attn =====
+ctx   512: no-split   150.3us | best PS=   64 (8 splits)    37.5us    14 GB/s | SDPA   233.7us | repeat+SDPA   154.5us
+ctx  1024: no-split   289.9us | best PS=   64 (16 splits)    49.2us    21 GB/s | SDPA   375.5us | repeat+SDPA   287.7us
+ctx  2048: no-split   460.7us | best PS=  128 (16 splits)    62.4us    34 GB/s | SDPA   555.0us | repeat+SDPA   446.1us
+ctx  4096: no-split   575.7us | best PS=  128 (32 splits)    73.5us    57 GB/s | SDPA  1045.4us | repeat+SDPA   538.5us
+ctx  8192: no-split   968.4us | best PS=  256 (32 splits)    81.9us   102 GB/s | SDPA  2342.5us | repeat+SDPA   907.8us
+ctx 16384: no-split  1914.9us | best PS=  512 (32 splits)   143.4us   117 GB/s | SDPA  4810.0us | repeat+SDPA  2459.5us
+
+===== ncu =====
+ncu attempt: BLOCKED (ERR_NVGPUCTRPERM) 
+ ==PROF== Connected to process 189 (/usr/bin/python3.13)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+probe done
+==PROF== Disconnected from process 189
+
+EXIT_CODE=0

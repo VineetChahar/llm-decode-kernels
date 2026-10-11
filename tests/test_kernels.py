@@ -95,14 +95,14 @@ def make_cache(ctx, n_kv, page, D=64, peaky=1.0):
     return kc, vc, bt
 
 
-def run_attn(q, kc, vc, bt, ctx, PS):
+def run_attn(q, kc, vc, bt, ctx, PS, version=2):
     n_q = q.numel() // 64
     max_splits = max(1, (ctx + PS - 1) // PS)
     o_part = torch.empty(n_q, max_splits, 64, device=dev)
     m_part = torch.empty(n_q, max_splits, device=dev); l_part = torch.empty_like(m_part)
     out = torch.empty(n_q, 64, dtype=torch.half, device=dev)
     pos = torch.tensor([ctx - 1], dtype=torch.int32, device=dev)
-    K_.paged_attention(q, kc, vc, bt, pos, PS, o_part, m_part, l_part, out)
+    K_.paged_attention(q, kc, vc, bt, pos, PS, o_part, m_part, l_part, out, version)
     return out
 
 
@@ -115,22 +115,25 @@ def test_attention():
             k, v = R.gather_kv(kc, vc, bt, 128, page)
             ref = R.attention_contiguous_ref(q, k, v)
             for PS in (4096, 64, 32, 48, 16):
-                record(f"attn ctx128 hq{n_q} hkv{n_kv} P{page} PS{PS}", run_attn(q, kc, vc, bt, 128, PS), ref, 2e-3)
+                for ver in (1, 2):
+                    record(f"attn ctx128 hq{n_q} hkv{n_kv} P{page} PS{PS} v{ver}", run_attn(q, kc, vc, bt, 128, PS, ver), ref, 2e-3)
     # odd context lengths (partial last page and partial last chunk)
     for ctx in (1, 2, 17, 63, 65, 129, 1000):
         kc, vc, bt = make_cache(ctx, 4, 16)
         q = torch.randn(32, 64, device=dev).half()
         ref = R.paged_attention_ref(q, kc, vc, bt, ctx, 16)
         for PS in (8192, 64, 256):
-            record(f"attn ctx{ctx} PS{PS}", run_attn(q, kc, vc, bt, ctx, PS), ref, 2e-3)
+            for ver in (1, 2):
+                record(f"attn ctx{ctx} PS{PS} v{ver}", run_attn(q, kc, vc, bt, ctx, PS, ver), ref, 2e-3)
     # real contexts, flat and peaky (sharp softmax stresses the max/rescale path)
     for ctx in (512, 1024, 2048, 4096, 8192, 16384):
         for peaky in (1.0, 6.0):
             kc, vc, bt = make_cache(ctx, 4, 16, peaky=peaky)
             q = torch.randn(32, 64, device=dev).half()
             ref = R.paged_attention_ref(q, kc, vc, bt, ctx, 16)
-            for PS in (ctx, 1024, 256):
-                record(f"attn ctx{ctx} peaky{peaky} PS{PS}", run_attn(q, kc, vc, bt, ctx, PS), ref, 2e-3)
+            for PS in (ctx, 1024, 256, 64):
+                for ver in (1, 2):
+                    record(f"attn ctx{ctx} peaky{peaky} PS{PS} v{ver}", run_attn(q, kc, vc, bt, ctx, PS, ver), ref, 2e-3)
 
 
 def test_fused():

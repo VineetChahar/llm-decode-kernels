@@ -38,6 +38,7 @@ class DecodeConfig:
     max_ctx: int = 2048
     page: int = 16
     part_size: int = 0          # attention partition (split) size; 0 -> policy from configs/attn_policy.json
+    attn_version: int = 2       # 1: serial-load partial + serial combine; 2: chunk-prefetch partial + parallel combine
     gemv_stage: tuple = None    # (stage, R, warps, pf) to force one config everywhere; None -> autotune table
     autotune_path: str = str(ROOT / "configs" / "autotune.json")
     attn_policy_path: str = str(ROOT / "configs" / "attn_policy.json")
@@ -56,7 +57,7 @@ class Linear:
         self.quant = quant
         dev = cfg.device
         if quant:
-            ql = QuantLinear(w.cpu(), cfg.group, keep_ref=keep_ref)
+            ql = QuantLinear(w.to(dev), cfg.group, keep_ref=keep_ref)
             self.packed, self.sz = ql.packed.to(dev), ql.sz.to(dev)
             self.w_ref = ql.w_ref.to(dev) if keep_ref else None
             self.nbytes = ql.nbytes()
@@ -110,13 +111,7 @@ class Model:
         self.bt = (torch.randperm(self.n_pages) if cfg.shuffle_pages else torch.arange(self.n_pages)).int().to(dev)
         self.cos, self.sin = (t.to(dev) for t in R.rope_tables(cfg.max_ctx + 1, self.D, c.rope_theta if hasattr(c, "rope_theta") else 10000.0))
 
-        ps = cfg.part_size or self._policy_part_size(cfg.max_ctx)
-        self.part_size = ps
-        self.max_splits = max(1, math.ceil(cfg.max_ctx / ps))
-        f32 = dict(dtype=torch.float32, device=dev)
-        self.o_part = torch.empty(self.n_q, self.max_splits, self.D, **f32)
-        self.m_part = torch.empty(self.n_q, self.max_splits, **f32)
-        self.l_part = torch.empty(self.n_q, self.max_splits, **f32)
+        self.set_attention_partition(cfg.max_ctx)
 
         # device-resident decode state + static activation buffers
         h16 = dict(dtype=torch.half, device=dev)
@@ -131,6 +126,25 @@ class Model:
         self.graph = None
 
     # ------------------------------------------------------------------ helpers
+    def set_attention_partition(self, ctx_cap, part_size=None):
+        """Pick the split size for contexts up to ctx_cap (policy table from the attention sweep) and size the
+        split buffers; the attention grid is fixed at ceil(ctx_cap / part_size) splits (surplus ones exit)."""
+        ps = part_size or self.cfg.part_size or self._policy_part_size(ctx_cap)
+        self.part_size = ps
+        self.max_splits = max(1, math.ceil(ctx_cap / ps))
+        f32 = dict(dtype=torch.float32, device=self.cfg.device)
+        self.o_part = torch.empty(self.n_q, self.max_splits, self.D, **f32)
+        self.m_part = torch.empty(self.n_q, self.max_splits, **f32)
+        self.l_part = torch.empty(self.n_q, self.max_splits, **f32)
+        self.graph = None
+
+    def prepare(self, ctx_cap, use_graph=True, part_size=None):
+        """Configure attention for contexts <= ctx_cap and (re)capture the decode graph."""
+        assert ctx_cap <= self.cfg.max_ctx
+        self.set_attention_partition(ctx_cap, part_size)
+        if use_graph:
+            self.capture()
+
     def _policy_part_size(self, max_ctx):
         p = Path(self.cfg.attn_policy_path)
         if p.exists():
@@ -178,7 +192,7 @@ class Model:
         else:
             self.K.rope_append(self.qkv, self.cos, self.sin, self.pos, self.bt, kc, vc, self.n_q, self.n_kv)
             self.K.paged_attention(self.qkv[: self.n_q * self.D], kc, vc, self.bt, self.pos, self.part_size,
-                                   self.o_part, self.m_part, self.l_part, self.attn)
+                                   self.o_part, self.m_part, self.l_part, self.attn, self.cfg.attn_version)
 
     # ------------------------------------------------------------------ decode step
     def step(self):
@@ -204,6 +218,9 @@ class Model:
         """Capture step() into a CUDA graph (warm up on a side stream first, as torch requires)."""
         assert not self.ref
         saved_tok, saved_pos = self.tok.clone(), self.pos.clone()
+        # warmup steps write K/V at positions >= pos; harmless: attention never reads past the current position,
+        # and every real step overwrites its own slot before reading it.
+        self.pos.zero_()  # warm up at position 0: grid/split buffers are sized for ctx_cap, not for a stale pos
         s = torch.cuda.Stream(); s.wait_stream(torch.cuda.current_stream())
         with torch.cuda.stream(s):
             for _ in range(2):

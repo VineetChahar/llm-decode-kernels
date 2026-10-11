@@ -1,0 +1,1 @@
+{"ref": "vineetkumar0210/llm-decode-kernels", "cmd": "python tests/test_kernels.py > /kaggle/working/tests.log 2>&1 && tail -1 /kaggle/working/tests.log && python bench/kernel_bench.py", "accel": "NvidiaTeslaT4", "utc": "20261011T102016Z"}

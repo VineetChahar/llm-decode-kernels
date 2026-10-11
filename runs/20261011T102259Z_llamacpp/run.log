@@ -1,0 +1,25 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ bash scripts/llamacpp_bench.sh
+Cloning into 'llama.cpp'...
+23b0202a189c44a54625aadcb37a946dd1d6278d
+CMAKE_BUILD_TYPE=Release
+CMake Error at ggml/src/ggml-cuda/CMakeLists.txt:181 (target_link_libraries):
+  Target "ggml-cuda" links to:
+
+    CUDA::cuda_driver
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+EXIT_CODE=1

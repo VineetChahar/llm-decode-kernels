@@ -1,0 +1,34 @@
+[{"stream_name":"stderr","time":0.676310459,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.676343754,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.710012142,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.769102066,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.778639522,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.786108033,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.839266588,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.839291661,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.839297406,"data":"$ bash scripts/llamacpp_bench.sh\n"}
+,{"stream_name":"stdout","time":0.876432623,"data":"Cloning into 'llama.cpp'...\n"}
+,{"stream_name":"stdout","time":4.463104263,"data":"23b0202a189c44a54625aadcb37a946dd1d6278d\n"}
+,{"stream_name":"stdout","time":5.816087525,"data":"CMAKE_BUILD_TYPE=Release\n"}
+,{"stream_name":"stdout","time":11.157525188,"data":"CMake Error at ggml/src/ggml-cuda/CMakeLists.txt:181 (target_link_libraries):\n"}
+,{"stream_name":"stdout","time":11.157544321,"data":"  Target \"ggml-cuda\" links to:\n"}
+,{"stream_name":"stdout","time":11.157549489,"data":"\n"}
+,{"stream_name":"stdout","time":11.157553373,"data":"    CUDA::cuda_driver\n"}
+,{"stream_name":"stdout","time":11.157557344,"data":"\n"}
+,{"stream_name":"stdout","time":11.157561398,"data":"  but the target was not found.  Possible reasons include:\n"}
+,{"stream_name":"stdout","time":11.157565255,"data":"\n"}
+,{"stream_name":"stdout","time":11.157568799,"data":"    * There is a typo in the target name.\n"}
+,{"stream_name":"stdout","time":11.157572582,"data":"    * A find_package call is missing for an IMPORTED target.\n"}
+,{"stream_name":"stdout","time":11.157576421,"data":"    * An ALIAS target is missing.\n"}
+,{"stream_name":"stdout","time":11.15758011,"data":"\n"}
+,{"stream_name":"stdout","time":11.157583702,"data":"\n"}
+,{"stream_name":"stdout","time":11.157587213,"data":"\n"}
+,{"stream_name":"stdout","time":11.183159771,"data":"CMake Generate step failed.  Build files cannot be regenerated correctly.\n"}
+,{"stream_name":"stdout","time":11.202316839,"data":"EXIT_CODE=1\n"}
+,{"stream_name":"stderr","time":13.378391221,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":13.378416873,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":13.69312804,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":13.693152857,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":15.171564224,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":16.137749401,"data":"[NbConvertApp] Writing 325104 bytes to __results__.html\n"}
+]

@@ -7,7 +7,7 @@
 void gemv_w4a16_launch(int stage, int R, int warps, int pf, const void* Wp, const void* SZ, const void* x, void* y,
                        int N, int K, int log2G, cudaStream_t st);
 void bw_read_launch(const void* p, size_t bytes, void* sink, int blocks, int threads, int unroll, cudaStream_t st);
-void paged_attention_launch(const void* q, const void* kc, const void* vc, const int* bt, const int* pos, int n_q,
+void paged_attention_launch(int version, const void* q, const void* kc, const void* vc, const int* bt, const int* pos, int n_q,
                             int n_kv, int log2P, int PS, int max_splits, float* o_part, float* m_part,
                             float* l_part, void* out, cudaStream_t st);
 void add_rmsnorm_launch(void* x, const void* delta, const void* w, void* out, int H, float eps, cudaStream_t st);
@@ -44,7 +44,7 @@ void bw_read(torch::Tensor buf, torch::Tensor sink, int64_t blocks, int64_t thre
 
 void paged_attention(torch::Tensor q, torch::Tensor kc, torch::Tensor vc, torch::Tensor bt, torch::Tensor pos,
                      int64_t part_size, torch::Tensor o_part, torch::Tensor m_part, torch::Tensor l_part,
-                     torch::Tensor out) {
+                     torch::Tensor out, int64_t version) {
   CHECK_CUDA(q); CHECK_CUDA(kc); CHECK_CUDA(vc); CHECK_CUDA(bt); CHECK_CUDA(pos); CHECK_CUDA(out);
   TORCH_CHECK(kc.dim() == 4 && kc.size(3) == 64, "cache must be [pages, n_kv, P, 64]");
   CHECK_ALIGN16(kc); CHECK_ALIGN16(vc);
@@ -54,7 +54,7 @@ void paged_attention(torch::Tensor q, torch::Tensor kc, torch::Tensor vc, torch:
   TORCH_CHECK(n_q % n_kv == 0 && (hpg == 1 || hpg == 2 || hpg == 4 || hpg == 8), "heads-per-group must be 1/2/4/8");
   const int max_splits = o_part.size(1);
   TORCH_CHECK(o_part.size(0) == n_q && m_part.size(1) == max_splits && l_part.size(1) == max_splits);
-  paged_attention_launch(q.data_ptr(), kc.data_ptr(), vc.data_ptr(), bt.data_ptr<int>(), pos.data_ptr<int>(), n_q,
+  paged_attention_launch(version, q.data_ptr(), kc.data_ptr(), vc.data_ptr(), bt.data_ptr<int>(), pos.data_ptr<int>(), n_q,
                          n_kv, ilog2_exact(P, "page size"), part_size, max_splits, o_part.data_ptr<float>(),
                          m_part.data_ptr<float>(), l_part.data_ptr<float>(), out.data_ptr(), cur());
 }
@@ -88,7 +88,9 @@ void rope_append(torch::Tensor qkv, torch::Tensor cos_t, torch::Tensor sin_t, to
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
   m.def("gemv_w4a16", &gemv_w4a16);
   m.def("bw_read", &bw_read);
-  m.def("paged_attention", &paged_attention);
+  m.def("paged_attention", &paged_attention, py::arg("q"), py::arg("kc"), py::arg("vc"), py::arg("bt"), py::arg("pos"),
+        py::arg("part_size"), py::arg("o_part"), py::arg("m_part"), py::arg("l_part"), py::arg("out"),
+        py::arg("version") = 2);
   m.def("add_rmsnorm", &add_rmsnorm, py::arg("x"), py::arg("delta"), py::arg("w"), py::arg("out"), py::arg("eps"));
   m.def("swiglu", &swiglu);
   m.def("rope_append", &rope_append);
