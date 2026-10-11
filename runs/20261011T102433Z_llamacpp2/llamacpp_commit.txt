@@ -1,0 +1,2 @@
+23b0202a189c44a54625aadcb37a946dd1d6278d
+-rw-r--r-- 1 root root 668788096 Oct 11 10:49 /tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf

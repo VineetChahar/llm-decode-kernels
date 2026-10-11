@@ -55,9 +55,24 @@ def sh(args):
     return subprocess.run([KAGGLE] + args, capture_output=True, text=True)
 
 
+def push(ref, a):
+    with tempfile.TemporaryDirectory() as td:
+        td = Path(td)
+        (td / "main.py").write_text(DRIVER.replace("__PAYLOAD__", pack()).replace("__CMD__", repr(a.cmd)))
+        (td / "kernel-metadata.json").write_text(json.dumps({
+            "id": ref, "title": a.slug, "code_file": "main.py", "language": "python",
+            "kernel_type": "script", "is_private": True, "enable_gpu": True,
+            "enable_internet": True, "dataset_sources": [], "competition_sources": [], "kernel_sources": []}))
+        r = sh(["kernels", "push", "-p", str(td), "-t", str(a.timeout), "--accelerator", a.accel])
+        print(r.stdout.strip(), r.stderr.strip())
+        if r.returncode != 0 or "error" in (r.stdout + r.stderr).lower():
+            sys.exit("push failed")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--cmd", required=True)
+    ap.add_argument("--cmd", default="")
+    ap.add_argument("--attach", action="store_true", help="don't push; poll + pull the kernel's current run")
     ap.add_argument("--accel", default="NvidiaTeslaT4")
     ap.add_argument("--timeout", type=int, default=6 * 3600)
     ap.add_argument("--slug", default="llm-decode-kernels")
@@ -71,17 +86,12 @@ def main():
     out = ROOT / "runs" / (stamp + (f"_{a.tag}" if a.tag else ""))
     out.mkdir(parents=True, exist_ok=True)
 
-    with tempfile.TemporaryDirectory() as td:
-        td = Path(td)
-        (td / "main.py").write_text(DRIVER.replace("__PAYLOAD__", pack()).replace("__CMD__", repr(a.cmd)))
-        (td / "kernel-metadata.json").write_text(json.dumps({
-            "id": ref, "title": a.slug, "code_file": "main.py", "language": "python",
-            "kernel_type": "script", "is_private": True, "enable_gpu": True,
-            "enable_internet": True, "dataset_sources": [], "competition_sources": [], "kernel_sources": []}))
-        r = sh(["kernels", "push", "-p", str(td), "-t", str(a.timeout), "--accelerator", a.accel])
-        print(r.stdout.strip(), r.stderr.strip())
-        if r.returncode != 0 or "error" in (r.stdout + r.stderr).lower():
-            sys.exit("push failed")
+    if a.attach:
+        print("attaching to running kernel", ref)
+    elif not a.cmd:
+        sys.exit("--cmd required unless --attach")
+    else:
+        push(ref, a)
     (out / "meta.json").write_text(json.dumps({"ref": ref, "cmd": a.cmd, "accel": a.accel, "utc": stamp}))
 
     t0 = time.time(); status = ""

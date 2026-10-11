@@ -3,3 +3,71 @@ Kernel version 2 successfully pushed.  Please check progress at https://www.kagg
 [   62s] KernelWorkerStatus.RUNNING
 [   94s] KernelWorkerStatus.RUNNING
 [  127s] KernelWorkerStatus.RUNNING
+[  160s] KernelWorkerStatus.RUNNING
+[  192s] KernelWorkerStatus.RUNNING
+[  223s] KernelWorkerStatus.RUNNING
+[  254s] KernelWorkerStatus.RUNNING
+[  285s] KernelWorkerStatus.RUNNING
+[  317s] KernelWorkerStatus.RUNNING
+[  348s] KernelWorkerStatus.RUNNING
+[  380s] KernelWorkerStatus.RUNNING
+[  412s] KernelWorkerStatus.RUNNING
+[  443s] KernelWorkerStatus.RUNNING
+[  475s] KernelWorkerStatus.RUNNING
+[  506s] KernelWorkerStatus.RUNNING
+[  537s] KernelWorkerStatus.RUNNING
+[  568s] KernelWorkerStatus.RUNNING
+[  600s] KernelWorkerStatus.RUNNING
+[  631s] KernelWorkerStatus.RUNNING
+[  662s] KernelWorkerStatus.RUNNING
+[  694s] KernelWorkerStatus.RUNNING
+[  725s] KernelWorkerStatus.RUNNING
+[  756s] KernelWorkerStatus.RUNNING
+[  789s] KernelWorkerStatus.RUNNING
+[  820s] KernelWorkerStatus.RUNNING
+[  852s] KernelWorkerStatus.RUNNING
+[  883s] KernelWorkerStatus.RUNNING
+[  916s] KernelWorkerStatus.RUNNING
+[  949s] KernelWorkerStatus.RUNNING
+[  981s] KernelWorkerStatus.RUNNING
+[ 1012s] KernelWorkerStatus.RUNNING
+[ 1043s] KernelWorkerStatus.RUNNING
+[ 1074s] KernelWorkerStatus.RUNNING
+[ 1106s] KernelWorkerStatus.RUNNING
+[ 1138s] KernelWorkerStatus.RUNNING
+[ 1169s] KernelWorkerStatus.RUNNING
+[ 1201s] KernelWorkerStatus.RUNNING
+[ 1233s] KernelWorkerStatus.RUNNING
+[ 1266s] KernelWorkerStatus.RUNNING
+[ 1297s] KernelWorkerStatus.RUNNING
+[ 1329s] KernelWorkerStatus.RUNNING
+[ 1360s] KernelWorkerStatus.RUNNING
+[ 1392s] KernelWorkerStatus.RUNNING
+[ 1423s] KernelWorkerStatus.RUNNING
+[ 1454s] KernelWorkerStatus.RUNNING
+[ 1485s] KernelWorkerStatus.RUNNING
+[ 1516s] KernelWorkerStatus.RUNNING
+[ 1548s] KernelWorkerStatus.RUNNING
+[ 1580s] KernelWorkerStatus.RUNNING
+[ 1612s] KernelWorkerStatus.COMPLETE
+s/runs/20261011T102433Z_llamacpp2/llamacpp_commit.txt
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T102433Z_llamacpp2/run.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T102433Z_llamacpp2/llm-decode-llamacpp.log 
+ 
+    "fit_min_ctx": 0,
+    "n_prompt": 0,
+    "n_gen": 128,
+    "n_depth": 16384,
+    "test_time": "2026-10-11T10:51:06Z",
+    "avg_ns": 801854064,
+    "stddev_ns": 1360390,
+    "avg_ts": 159.630412,
+    "stddev_ts": 0.270542,
+    "samples_ns": [ 803922204, 800587695, 800733537, 802340374, 801686511 ],
+    "samples_ts": [ 159.219, 159.883, 159.853, 159.533, 159.663 ]
+  }
+]
+-rw-r--r-- 1 root root 668788096 Oct 11 10:49 /tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T102433Z_llamacpp2
