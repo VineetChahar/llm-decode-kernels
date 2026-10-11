@@ -1,0 +1,132 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ KERNEL_SECTIONS='attn gemv' E2E_SECTIONS='speed profile' bash scripts/run_all.sh
+538/538 passed
+
+===== attn =====
+v1 ctx   512: no-split   167.1us | best PS=   64 (8 splits)    34.3us    15 GB/s | SDPA   253.5us | repeat+SDPA   154.2us
+v2 ctx   512: no-split    93.2us | best PS=   64 (8 splits)    33.7us    16 GB/s | SDPA   253.5us | repeat+SDPA   154.2us
+v3 ctx   512: no-split    65.3us | best PS=   64 (8 splits)    29.7us    18 GB/s | SDPA   253.5us | repeat+SDPA   154.2us
+v1 ctx  1024: no-split   316.0us | best PS=   64 (16 splits)    50.2us    21 GB/s | SDPA   370.2us | repeat+SDPA   281.5us
+v2 ctx  1024: no-split   171.4us | best PS=   64 (16 splits)    46.5us    23 GB/s | SDPA   370.2us | repeat+SDPA   281.5us
+v3 ctx  1024: no-split   112.4us | best PS=  128 (8 splits)    35.6us    29 GB/s | SDPA   370.2us | repeat+SDPA   281.5us
+v1 ctx  2048: no-split   618.5us | best PS=   64 (32 splits)    71.7us    29 GB/s | SDPA   670.8us | repeat+SDPA   536.5us
+v2 ctx  2048: no-split   329.5us | best PS=  128 (16 splits)    68.6us    31 GB/s | SDPA   670.8us | repeat+SDPA   536.5us
+v3 ctx  2048: no-split   208.8us | best PS=  128 (16 splits)    49.2us    43 GB/s | SDPA   670.8us | repeat+SDPA   536.5us
+v1 ctx  4096: no-split  1223.5us | best PS=  128 (32 splits)   112.6us    37 GB/s | SDPA  1200.2us | repeat+SDPA  1044.5us
+v2 ctx  4096: no-split   645.1us | best PS=  256 (16 splits)   112.6us    37 GB/s | SDPA  1200.2us | repeat+SDPA  1044.5us
+v3 ctx  4096: no-split   401.4us | best PS=  256 (16 splits)    71.2us    59 GB/s | SDPA  1200.2us | repeat+SDPA  1044.5us
+v1 ctx  8192: no-split  1718.0us | best PS=  256 (32 splits)   192.9us    43 GB/s | SDPA  2348.1us | repeat+SDPA   940.8us
+v2 ctx  8192: no-split  1280.4us | best PS=   64 (128 splits)   172.0us    49 GB/s | SDPA  2348.1us | repeat+SDPA   940.8us
+v3 ctx  8192: no-split   330.9us | best PS=  512 (16 splits)    75.3us   111 GB/s | SDPA  2348.1us | repeat+SDPA   940.8us
+v1 ctx 16384: no-split  2090.9us | best PS=  512 (32 splits)   144.1us   116 GB/s | SDPA  4792.4us | repeat+SDPA  2576.7us
+v2 ctx 16384: no-split  1007.7us | best PS=  256 (64 splits)   135.3us   124 GB/s | SDPA  4792.4us | repeat+SDPA  2576.7us
+v3 ctx 16384: no-split   606.5us | best PS= 1024 (16 splits)    84.0us   200 GB/s | SDPA  4792.4us | repeat+SDPA  2576.7us
+attention policy: version 3, [{'max_ctx': 512, 'part_size': 64}, {'max_ctx': 1024, 'part_size': 128}, {'max_ctx': 2048, 'part_size': 128}, {'max_ctx': 4096, 'part_size': 256}, {'max_ctx': 8192, 'part_size': 512}, {'max_ctx': 16384, 'part_size': 1024}, {'max_ctx': 1073741824, 'part_size': 1024}]
+
+===== gemv =====
+qkv      0 naive             28.7us  iqr   0.1    97.4 GB/s
+qkv      1 vectorized        16.9us  iqr   1.2   165.2 GB/s
+qkv      2 reg-blocked       18.5us  iqr   0.6   151.1 GB/s
+qkv      3 autotuned         14.9us  iqr   1.0   187.4 GB/s
+qkv      cuBLAS fp16         46.8us  iqr   0.8   224.3 GB/s
+o        0 naive             24.4us  iqr   0.4    91.5 GB/s
+o        1 vectorized        15.7us  iqr   1.1   142.0 GB/s
+o        2 reg-blocked       16.3us  iqr   0.3   137.6 GB/s
+o        3 autotuned         12.9us  iqr   1.2   173.4 GB/s
+o        cuBLAS fp16         38.7us  iqr   0.6   217.1 GB/s
+gate_up  0 naive            105.7us  iqr   1.4   116.2 GB/s
+gate_up  1 vectorized        57.7us  iqr   1.1   212.9 GB/s
+gate_up  2 reg-blocked       55.2us  iqr   0.5   222.3 GB/s
+gate_up  3 autotuned         50.0us  iqr   1.0   245.5 GB/s
+gate_up  cuBLAS fp16        184.3us  iqr   0.2   250.5 GB/s
+down     0 naive             57.3us  iqr   0.2   107.1 GB/s
+down     1 vectorized        31.9us  iqr   1.1   192.8 GB/s
+down     2 reg-blocked       32.2us  iqr   1.2   190.7 GB/s
+down     3 autotuned         28.9us  iqr   0.6   212.4 GB/s
+down     cuBLAS fp16         93.8us  iqr   1.1   246.2 GB/s
+lm_head  0 naive            701.9us  iqr   0.9    49.7 GB/s
+lm_head  1 vectorized       359.6us  iqr   1.0    97.0 GB/s
+lm_head  2 reg-blocked      146.3us  iqr   1.7   238.5 GB/s
+lm_head  3 autotuned        152.7us  iqr   3.0   228.5 GB/s
+lm_head  cuBLAS fp16        516.8us  iqr   1.0   253.8 GB/s
+loading HF model...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 15/201 [00:00<00:01, 118.39it/s]
+Loading weights:  20%|██        | 41/201 [00:00<00:00, 190.19it/s]
+Loading weights:  33%|███▎      | 67/201 [00:00<00:00, 203.90it/s]
+Loading weights:  47%|████▋     | 94/201 [00:00<00:00, 202.68it/s]
+Loading weights:  60%|██████    | 121/201 [00:00<00:00, 205.72it/s]
+Loading weights:  74%|███████▎  | 148/201 [00:00<00:00, 208.11it/s]
+Loading weights:  87%|████████▋ | 175/201 [00:00<00:00, 212.49it/s]
+Loading weights: 100%|██████████| 201/201 [00:00<00:00, 211.85it/s]
+
+===== speed =====
+rt_int4_g128             ctx   512: graph  5.470 ms ( 182.8 tok/s, iqr 1831.3us) sm=1065MHz THROTTLED | eager  3.649 ms gpu-timed,  3.599 ms wall
+rt_int4_g128             ctx  1024: graph  5.553 ms ( 180.1 tok/s, iqr 1800.3us) sm=585MHz THROTTLED
+rt_int4_g128             ctx  2048: graph  3.952 ms ( 253.1 tok/s, iqr 1980.4us) sm=1050MHz THROTTLED
+rt_int4_g128             ctx  4096: graph  4.264 ms ( 234.5 tok/s, iqr 2271.9us) sm=1095MHz THROTTLED | eager  4.276 ms gpu-timed,  4.230 ms wall
+rt_int4_g128             ctx  8192: graph  4.995 ms ( 200.2 tok/s, iqr 2878.1us) sm=1095MHz THROTTLED
+rt_int4_g128             ctx 16384: graph  6.132 ms ( 163.1 tok/s, iqr 3305.7us) sm=1035MHz THROTTLED | eager  6.150 ms gpu-timed,  6.085 ms wall
+rt_fp16                  ctx   512: graph  9.598 ms ( 104.2 tok/s, iqr 300.4us) sm=900MHz THROTTLED | eager  9.639 ms gpu-timed,  9.566 ms wall
+rt_fp16                  ctx  1024: graph  9.643 ms ( 103.7 tok/s, iqr 136.8us) sm=900MHz THROTTLED
+rt_fp16                  ctx  2048: graph  9.837 ms ( 101.7 tok/s, iqr 122.0us) sm=915MHz THROTTLED
+rt_fp16                  ctx  4096: graph 10.261 ms (  97.5 tok/s, iqr 422.8us) sm=930MHz THROTTLED | eager 10.281 ms gpu-timed, 10.258 ms wall
+rt_fp16                  ctx  8192: graph 11.023 ms (  90.7 tok/s, iqr  37.7us) sm=945MHz THROTTLED
+rt_fp16                  ctx 16384: graph 12.138 ms (  82.4 tok/s, iqr 214.4us) sm=930MHz THROTTLED | eager 12.159 ms gpu-timed, 12.130 ms wall
+rt_int4_g128_unfused     ctx   512: graph  6.779 ms ( 147.5 tok/s, iqr 1942.0us) sm=1320MHz THROTTLED | eager 10.476 ms gpu-timed, 10.409 ms wall
+rt_int4_g128_unfused     ctx  1024: graph  5.627 ms ( 177.7 tok/s, iqr 215.1us) sm=1305MHz THROTTLED
+rt_int4_g128_unfused     ctx  2048: graph  5.244 ms ( 190.7 tok/s, iqr 3395.6us) sm=1290MHz THROTTLED
+rt_int4_g128_unfused     ctx  4096: graph  5.551 ms ( 180.2 tok/s, iqr 3776.3us) sm=1290MHz THROTTLED | eager 10.566 ms gpu-timed, 10.475 ms wall
+rt_int4_g128_unfused     ctx  8192: graph  7.778 ms ( 128.6 tok/s, iqr 1740.7us) sm=1275MHz THROTTLED
+rt_int4_g128_unfused     ctx 16384: graph  7.252 ms ( 137.9 tok/s, iqr 2080.9us) sm=1215MHz THROTTLED | eager 10.458 ms gpu-timed, 10.450 ms wall
+rt_int4_g128_int4head    ctx   512: graph  3.990 ms ( 250.6 tok/s, iqr 1130.3us) sm=795MHz THROTTLED
+rt_int4_g128_int4head    ctx  1024: graph  3.373 ms ( 296.5 tok/s, iqr 1824.9us) sm=1050MHz THROTTLED
+rt_int4_g128_int4head    ctx  2048: graph  3.578 ms ( 279.5 tok/s, iqr 1958.3us) sm=1050MHz THROTTLED
+rt_int4_g128_int4head    ctx  4096: graph  5.869 ms ( 170.4 tok/s, iqr 2060.4us) sm=615MHz THROTTLED
+rt_int4_g128_int4head    ctx  8192: graph  4.637 ms ( 215.6 tok/s, iqr 2890.7us) sm=1155MHz THROTTLED
+rt_int4_g128_int4head    ctx 16384: graph  5.920 ms ( 168.9 tok/s, iqr 423.7us) sm=945MHz THROTTLED
+rt_int4_g64              ctx   512: graph  3.920 ms ( 255.1 tok/s, iqr 1620.3us) sm=1005MHz THROTTLED
+rt_int4_g64              ctx  1024: graph  5.520 ms ( 181.1 tok/s, iqr 1582.2us) sm=585MHz THROTTLED
+rt_int4_g64              ctx  2048: graph  5.838 ms ( 171.3 tok/s, iqr 1719.9us) sm=960MHz THROTTLED
+rt_int4_g64              ctx  4096: graph  4.453 ms ( 224.6 tok/s, iqr 2084.2us) sm=1050MHz THROTTLED
+rt_int4_g64              ctx  8192: graph  5.112 ms ( 195.6 tok/s, iqr 2109.2us) sm=1095MHz THROTTLED
+rt_int4_g64              ctx 16384: graph  6.241 ms ( 160.2 tok/s, iqr 3128.7us) sm=1050MHz THROTTLED
+rt_int4_g256             ctx   512: graph  3.706 ms ( 269.9 tok/s, iqr 1830.9us) sm=1020MHz THROTTLED
+rt_int4_g256             ctx  1024: graph  4.174 ms ( 239.6 tok/s, iqr 1394.0us) sm=855MHz THROTTLED
+rt_int4_g256             ctx  2048: graph  3.905 ms ( 256.1 tok/s, iqr 1978.7us) sm=1050MHz THROTTLED
+rt_int4_g256             ctx  4096: graph  4.236 ms ( 236.1 tok/s, iqr 2311.3us) sm=1080MHz THROTTLED
+rt_int4_g256             ctx  8192: graph  4.943 ms ( 202.3 tok/s, iqr 2962.9us) sm=1110MHz THROTTLED
+rt_int4_g256             ctx 16384: graph  6.283 ms ( 159.2 tok/s, iqr 2054.1us) sm=1020MHz THROTTLED
+rt_fp16_unfused          ctx   512: graph 11.068 ms (  90.3 tok/s, iqr 115.9us) sm=1110MHz THROTTLED
+rt_fp16_unfused          ctx  4096: graph 11.690 ms (  85.5 tok/s, iqr  66.4us) sm=1095MHz THROTTLED
+rt_int4_stage0           ctx   512: graph  7.994 ms ( 125.1 tok/s, iqr 182.0us) sm=1080MHz THROTTLED
+rt_int4_stage1           ctx   512: graph  4.604 ms ( 217.2 tok/s, iqr 3362.6us) sm=1155MHz THROTTLED
+rt_int4_stage2           ctx   512: graph  5.228 ms ( 191.3 tok/s, iqr 1130.8us) sm=585MHz THROTTLED
+hf_fp16 ctx   512:  26.83 ms/token (  37.3 tok/s)
+hf_fp16 ctx  1024:  27.07 ms/token (  36.9 tok/s)
+hf_fp16 ctx  2048:  26.94 ms/token (  37.1 tok/s)
+hf_fp16 ctx  4096:  34.86 ms/token (  28.7 tok/s)
+
+===== profile =====
+/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+rt_int4_g128|ctx512|graph                kernels/token  225.0  busy   3230.6us  span   3311.3us  idle    80.7us  W4A16 GEMV=2190, cuBLAS GEMM/GEMV=511, attention partial=214, add+RMSNorm (fused)=129, attention combine=66, SwiGLU (fused)=52, RoPE+KV append=47, argmax=13, embedding gather=5, torch elementwise (unfused ops)=2
+rt_int4_g128|ctx512|eager                kernels/token  225.0  busy   3085.8us  span   3286.3us  idle   200.5us  W4A16 GEMV=2128, cuBLAS GEMM/GEMV=510, attention partial=198, add+RMSNorm (fused)=104, attention combine=55, SwiGLU (fused)=40, RoPE+KV append=35, argmax=12, embedding gather=2, torch elementwise (unfused ops)=1
+rt_int4_g128|ctx16384|graph              kernels/token  225.0  busy   5074.8us  span   5181.8us  idle   107.1us  W4A16 GEMV=2235, attention partial=1964, cuBLAS GEMM/GEMV=512, add+RMSNorm (fused)=142, attention combine=85, RoPE+KV append=58, SwiGLU (fused)=57, argmax=15, embedding gather=4, torch elementwise (unfused ops)=2
+rt_int4_g128|ctx16384|eager              kernels/token  225.0  busy   4923.2us  span   5130.1us  idle   206.9us  W4A16 GEMV=2180, attention partial=1920, cuBLAS GEMM/GEMV=512, add+RMSNorm (fused)=118, attention combine=84, RoPE+KV append=46, SwiGLU (fused)=45, argmax=14, embedding gather=3, torch elementwise (unfused ops)=1
+rt_int4_g128_unfused|ctx512|graph        kernels/token  716.0  busy   4444.9us  span   4903.6us  idle   458.6us  W4A16 GEMV=2207, torch elementwise (unfused ops)=1178, cuBLAS GEMM/GEMV=512, attention partial=218, torch reduce/argmax=197, attention combine=67, RoPE+KV append=50, argmax=14, embedding gather=4
+rt_int4_g128_unfused|ctx512|eager        kernels/token  716.0  busy   4007.9us  span  19182.0us  idle 15174.1us  W4A16 GEMV=2136, torch elementwise (unfused ops)=892, cuBLAS GEMM/GEMV=511, attention partial=205, torch reduce/argmax=159, attention combine=54, RoPE+KV append=36, argmax=12, embedding gather=2
+rt_int4_g128_unfused|ctx16384|graph      kernels/token  716.0  busy   6408.5us  span   6949.9us  idle   541.3us  W4A16 GEMV=2236, attention partial=1966, torch elementwise (unfused ops)=1288, cuBLAS GEMM/GEMV=512, torch reduce/argmax=241, attention combine=87, RoPE+KV append=59, argmax=15, embedding gather=4
+rt_int4_g128_unfused|ctx16384|eager      kernels/token  716.0  busy   5602.6us  span  19395.1us  idle 13792.4us  W4A16 GEMV=2141, attention partial=1731, torch elementwise (unfused ops)=899, cuBLAS GEMM/GEMV=510, torch reduce/argmax=187, attention combine=78, RoPE+KV append=42, argmax=12, embedding gather=2
+rt_fp16|ctx512|graph                     kernels/token  225.0  busy  10122.3us  span  10265.8us  idle   143.5us  cuBLAS GEMM/GEMV=9162, attention partial=403, add+RMSNorm (fused)=227, attention combine=122, SwiGLU (fused)=94, RoPE+KV append=80, argmax=25, embedding gather=6, torch elementwise (unfused ops)=3
+rt_fp16|ctx512|eager                     kernels/token  225.0  busy   9259.0us  span   9546.1us  idle   287.1us  cuBLAS GEMM/GEMV=8550, attention partial=313, add+RMSNorm (fused)=162, attention combine=88, SwiGLU (fused)=65, RoPE+KV append=56, argmax=19, embedding gather=4, torch elementwise (unfused ops)=2
+rt_fp16|ctx16384|graph                   kernels/token  225.0  busy  11794.3us  span  11935.5us  idle   141.1us  cuBLAS GEMM/GEMV=8627, attention partial=2691, add+RMSNorm (fused)=186, attention combine=114, SwiGLU (fused)=75, RoPE+KV append=74, argmax=20, embedding gather=5, torch elementwise (unfused ops)=3
+rt_fp16|ctx16384|eager                   kernels/token  225.0  busy  11741.3us  span  12022.8us  idle   281.5us  cuBLAS GEMM/GEMV=8559, attention partial=2747, add+RMSNorm (fused)=165, attention combine=116, SwiGLU (fused)=66, RoPE+KV append=63, argmax=20, embedding gather=4, torch elementwise (unfused ops)=2
+EXIT_CODE=0

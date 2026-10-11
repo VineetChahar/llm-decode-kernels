@@ -25,3 +25,163 @@ Kernel version 7 successfully pushed.  Please check progress at https://www.kagg
 [  784s] KernelWorkerStatus.RUNNING
 [  817s] KernelWorkerStatus.RUNNING
 [  851s] KernelWorkerStatus.RUNNING
+[  882s] KernelWorkerStatus.RUNNING
+[  918s] KernelWorkerStatus.RUNNING
+[  951s] KernelWorkerStatus.RUNNING
+[  983s] KernelWorkerStatus.RUNNING
+[ 1015s] KernelWorkerStatus.RUNNING
+[ 1047s] KernelWorkerStatus.RUNNING
+[ 1079s] KernelWorkerStatus.RUNNING
+[ 1111s] KernelWorkerStatus.RUNNING
+[ 1144s] KernelWorkerStatus.RUNNING
+[ 1177s] KernelWorkerStatus.RUNNING
+[ 1209s] KernelWorkerStatus.RUNNING
+[ 1241s] KernelWorkerStatus.RUNNING
+[ 1274s] KernelWorkerStatus.RUNNING
+[ 1306s] KernelWorkerStatus.RUNNING
+[ 1339s] KernelWorkerStatus.RUNNING
+[ 1371s] KernelWorkerStatus.RUNNING
+[ 1404s] KernelWorkerStatus.RUNNING
+[ 1436s] KernelWorkerStatus.RUNNING
+[ 1469s] KernelWorkerStatus.RUNNING
+[ 1502s] KernelWorkerStatus.RUNNING
+[ 1534s] KernelWorkerStatus.RUNNING
+[ 1566s] KernelWorkerStatus.RUNNING
+[ 1598s] KernelWorkerStatus.RUNNING
+[ 1630s] KernelWorkerStatus.RUNNING
+[ 1661s] KernelWorkerStatus.RUNNING
+[ 1694s] KernelWorkerStatus.RUNNING
+[ 1727s] KernelWorkerStatus.RUNNING
+[ 1761s] KernelWorkerStatus.RUNNING
+[ 1793s] KernelWorkerStatus.RUNNING
+[ 1826s] KernelWorkerStatus.RUNNING
+[ 1859s] KernelWorkerStatus.RUNNING
+[ 1891s] KernelWorkerStatus.RUNNING
+[ 1924s] KernelWorkerStatus.RUNNING
+[ 1955s] KernelWorkerStatus.RUNNING
+[ 1988s] KernelWorkerStatus.RUNNING
+[ 2020s] KernelWorkerStatus.RUNNING
+[ 2053s] KernelWorkerStatus.RUNNING
+[ 2086s] KernelWorkerStatus.RUNNING
+[ 2118s] KernelWorkerStatus.RUNNING
+[ 2151s] KernelWorkerStatus.RUNNING
+[ 2184s] KernelWorkerStatus.RUNNING
+[ 2216s] KernelWorkerStatus.RUNNING
+[ 2249s] KernelWorkerStatus.RUNNING
+[ 2281s] KernelWorkerStatus.RUNNING
+[ 2314s] KernelWorkerStatus.RUNNING
+[ 2345s] KernelWorkerStatus.RUNNING
+[ 2378s] KernelWorkerStatus.RUNNING
+[ 2410s] KernelWorkerStatus.RUNNING
+[ 2442s] KernelWorkerStatus.RUNNING
+[ 2474s] KernelWorkerStatus.RUNNING
+[ 2506s] KernelWorkerStatus.RUNNING
+[ 2539s] KernelWorkerStatus.RUNNING
+[ 2572s] KernelWorkerStatus.RUNNING
+[ 2604s] KernelWorkerStatus.RUNNING
+[ 2636s] KernelWorkerStatus.RUNNING
+[ 2668s] KernelWorkerStatus.RUNNING
+[ 2700s] KernelWorkerStatus.RUNNING
+[ 2733s] KernelWorkerStatus.RUNNING
+[ 2766s] KernelWorkerStatus.RUNNING
+[ 2799s] KernelWorkerStatus.RUNNING
+[ 2832s] KernelWorkerStatus.RUNNING
+[ 2864s] KernelWorkerStatus.RUNNING
+[ 2896s] KernelWorkerStatus.RUNNING
+[ 2929s] KernelWorkerStatus.RUNNING
+[ 2962s] KernelWorkerStatus.RUNNING
+[ 2993s] KernelWorkerStatus.RUNNING
+[ 3025s] KernelWorkerStatus.RUNNING
+[ 3057s] KernelWorkerStatus.RUNNING
+[ 3090s] KernelWorkerStatus.RUNNING
+[ 3123s] KernelWorkerStatus.RUNNING
+[ 3155s] KernelWorkerStatus.RUNNING
+[ 3188s] KernelWorkerStatus.RUNNING
+[ 3221s] KernelWorkerStatus.RUNNING
+[ 3252s] KernelWorkerStatus.RUNNING
+[ 3285s] KernelWorkerStatus.RUNNING
+[ 3317s] KernelWorkerStatus.RUNNING
+[ 3350s] KernelWorkerStatus.RUNNING
+[ 3381s] KernelWorkerStatus.RUNNING
+[ 3413s] KernelWorkerStatus.RUNNING
+[ 3447s] KernelWorkerStatus.RUNNING
+[ 3478s] KernelWorkerStatus.RUNNING
+[ 3511s] KernelWorkerStatus.RUNNING
+[ 3544s] KernelWorkerStatus.RUNNING
+[ 3578s] KernelWorkerStatus.RUNNING
+[ 3610s] KernelWorkerStatus.RUNNING
+[ 3644s] KernelWorkerStatus.RUNNING
+[ 3676s] KernelWorkerStatus.RUNNING
+[ 3709s] KernelWorkerStatus.RUNNING
+[ 3741s] KernelWorkerStatus.RUNNING
+[ 3774s] KernelWorkerStatus.RUNNING
+[ 3805s] KernelWorkerStatus.RUNNING
+[ 3837s] KernelWorkerStatus.RUNNING
+[ 3869s] KernelWorkerStatus.RUNNING
+[ 3902s] KernelWorkerStatus.RUNNING
+[ 3934s] KernelWorkerStatus.RUNNING
+[ 3966s] KernelWorkerStatus.RUNNING
+[ 3998s] KernelWorkerStatus.RUNNING
+[ 4030s] KernelWorkerStatus.RUNNING
+[ 4061s] KernelWorkerStatus.RUNNING
+[ 4094s] KernelWorkerStatus.RUNNING
+[ 4127s] KernelWorkerStatus.RUNNING
+[ 4160s] KernelWorkerStatus.RUNNING
+[ 4193s] KernelWorkerStatus.RUNNING
+[ 4226s] KernelWorkerStatus.RUNNING
+[ 4258s] KernelWorkerStatus.RUNNING
+[ 4290s] KernelWorkerStatus.RUNNING
+[ 4322s] KernelWorkerStatus.RUNNING
+[ 4354s] KernelWorkerStatus.RUNNING
+[ 4386s] KernelWorkerStatus.RUNNING
+[ 4419s] KernelWorkerStatus.RUNNING
+[ 4451s] KernelWorkerStatus.RUNNING
+[ 4483s] KernelWorkerStatus.RUNNING
+[ 4516s] KernelWorkerStatus.RUNNING
+[ 4548s] KernelWorkerStatus.RUNNING
+[ 4579s] KernelWorkerStatus.RUNNING
+[ 4611s] KernelWorkerStatus.RUNNING
+[ 4643s] KernelWorkerStatus.RUNNING
+[ 4675s] KernelWorkerStatus.RUNNING
+[ 4709s] KernelWorkerStatus.RUNNING
+[ 4740s] KernelWorkerStatus.RUNNING
+[ 4773s] KernelWorkerStatus.RUNNING
+[ 4804s] KernelWorkerStatus.RUNNING
+[ 4838s] KernelWorkerStatus.RUNNING
+[ 4869s] KernelWorkerStatus.RUNNING
+[ 4901s] KernelWorkerStatus.RUNNING
+[ 4934s] KernelWorkerStatus.RUNNING
+[ 4966s] KernelWorkerStatus.RUNNING
+[ 4999s] KernelWorkerStatus.RUNNING
+[ 5031s] KernelWorkerStatus.RUNNING
+[ 5062s] KernelWorkerStatus.RUNNING
+[ 5094s] KernelWorkerStatus.RUNNING
+[ 5126s] KernelWorkerStatus.RUNNING
+[ 5158s] KernelWorkerStatus.RUNNING
+[ 5190s] KernelWorkerStatus.RUNNING
+[ 5222s] KernelWorkerStatus.RUNNING
+[ 5254s] KernelWorkerStatus.RUNNING
+[ 5286s] KernelWorkerStatus.RUNNING
+[ 5319s] KernelWorkerStatus.RUNNING
+[ 5352s] KernelWorkerStatus.COMPLETE
+oject/llm-decode-kernels/runs/20261011T212701Z_final/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T212701Z_final/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T212701Z_final/llm-decode-kernels.log 
+ 
+/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+rt_int4_g128|ctx512|graph                kernels/token  225.0  busy   3230.6us  span   3311.3us  idle    80.7us  W4A16 GEMV=2190, cuBLAS GEMM/GEMV=511, attention partial=214, add+RMSNorm (fused)=129, attention combine=66, SwiGLU (fused)=52, RoPE+KV append=47, argmax=13, embedding gather=5, torch elementwise (unfused ops)=2
+rt_int4_g128|ctx512|eager                kernels/token  225.0  busy   3085.8us  span   3286.3us  idle   200.5us  W4A16 GEMV=2128, cuBLAS GEMM/GEMV=510, attention partial=198, add+RMSNorm (fused)=104, attention combine=55, SwiGLU (fused)=40, RoPE+KV append=35, argmax=12, embedding gather=2, torch elementwise (unfused ops)=1
+rt_int4_g128|ctx16384|graph              kernels/token  225.0  busy   5074.8us  span   5181.8us  idle   107.1us  W4A16 GEMV=2235, attention partial=1964, cuBLAS GEMM/GEMV=512, add+RMSNorm (fused)=142, attention combine=85, RoPE+KV append=58, SwiGLU (fused)=57, argmax=15, embedding gather=4, torch elementwise (unfused ops)=2
+rt_int4_g128|ctx16384|eager              kernels/token  225.0  busy   4923.2us  span   5130.1us  idle   206.9us  W4A16 GEMV=2180, attention partial=1920, cuBLAS GEMM/GEMV=512, add+RMSNorm (fused)=118, attention combine=84, RoPE+KV append=46, SwiGLU (fused)=45, argmax=14, embedding gather=3, torch elementwise (unfused ops)=1
+rt_int4_g128_unfused|ctx512|graph        kernels/token  716.0  busy   4444.9us  span   4903.6us  idle   458.6us  W4A16 GEMV=2207, torch elementwise (unfused ops)=1178, cuBLAS GEMM/GEMV=512, attention partial=218, torch reduce/argmax=197, attention combine=67, RoPE+KV append=50, argmax=14, embedding gather=4
+rt_int4_g128_unfused|ctx512|eager        kernels/token  716.0  busy   4007.9us  span  19182.0us  idle 15174.1us  W4A16 GEMV=2136, torch elementwise (unfused ops)=892, cuBLAS GEMM/GEMV=511, attention partial=205, torch reduce/argmax=159, attention combine=54, RoPE+KV append=36, argmax=12, embedding gather=2
+rt_int4_g128_unfused|ctx16384|graph      kernels/token  716.0  busy   6408.5us  span   6949.9us  idle   541.3us  W4A16 GEMV=2236, attention partial=1966, torch elementwise (unfused ops)=1288, cuBLAS GEMM/GEMV=512, torch reduce/argmax=241, attention combine=87, RoPE+KV append=59, argmax=15, embedding gather=4
+rt_int4_g128_unfused|ctx16384|eager      kernels/token  716.0  busy   5602.6us  span  19395.1us  idle 13792.4us  W4A16 GEMV=2141, attention partial=1731, torch elementwise (unfused ops)=899, cuBLAS GEMM/GEMV=510, torch reduce/argmax=187, attention combine=78, RoPE+KV append=42, argmax=12, embedding gather=2
+rt_fp16|ctx512|graph                     kernels/token  225.0  busy  10122.3us  span  10265.8us  idle   143.5us  cuBLAS GEMM/GEMV=9162, attention partial=403, add+RMSNorm (fused)=227, attention combine=122, SwiGLU (fused)=94, RoPE+KV append=80, argmax=25, embedding gather=6, torch elementwise (unfused ops)=3
+rt_fp16|ctx512|eager                     kernels/token  225.0  busy   9259.0us  span   9546.1us  idle   287.1us  cuBLAS GEMM/GEMV=8550, attention partial=313, add+RMSNorm (fused)=162, attention combine=88, SwiGLU (fused)=65, RoPE+KV append=56, argmax=19, embedding gather=4, torch elementwise (unfused ops)=2
+rt_fp16|ctx16384|graph                   kernels/token  225.0  busy  11794.3us  span  11935.5us  idle   141.1us  cuBLAS GEMM/GEMV=8627, attention partial=2691, add+RMSNorm (fused)=186, attention combine=114, SwiGLU (fused)=75, RoPE+KV append=74, argmax=20, embedding gather=5, torch elementwise (unfused ops)=3
+rt_fp16|ctx16384|eager                   kernels/token  225.0  busy  11741.3us  span  12022.8us  idle   281.5us  cuBLAS GEMM/GEMV=8559, attention partial=2747, add+RMSNorm (fused)=165, attention combine=116, SwiGLU (fused)=66, RoPE+KV append=63, argmax=20, embedding gather=4, torch elementwise (unfused ops)=2
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T212701Z_final
