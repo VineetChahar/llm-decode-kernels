@@ -2,34 +2,38 @@
 
 Batch-1 greedy decode, CUDA-graph replay, everything below measured on Kaggle T4s (sm_75, 320 GB/s spec,
 **277 GB/s achievable** by our own read microbenchmark). Every speed number has its accuracy number next to it;
-every speed number was produced only after the accuracy gate (`tests/test_kernels.py`, **439/439 passed** in
-each of the four GPU runs used here) exited 0.
+every speed number was produced only after the accuracy gate (`tests/test_kernels.py`) exited 0 in the same job —
+**667/667** with the final suite (§3).
 
-Sources (all merged into `results.json` by `scripts/plot_all.py`):
-`runs/20261011T170804Z_kbench2` (kernel benchmarks, autotuner), `runs/20261011T193218Z_e2e4` (perplexity,
-agreement, end-to-end speed, profiles), `runs/20261011T102433Z_llamacpp2` (llama.cpp), and
-`runs/20261011T191452Z_kbench3` (a node stuck at 585 MHz — used only as a clock-sensitivity control).
+Sources (merged into `results.json` by `scripts/plot_all.py`, later runs override earlier keys):
+`runs/20261011T170804Z_kbench2` (bandwidth, clock probe, autotuner, group sweep, clean v1/v2 attention points),
+`runs/20261011T212701Z_final` (attention v1/v2/v3 sweep and policy, GEMV ladder rerun),
+`runs/20261011T193218Z_e2e4` (perplexity, greedy agreement), `runs/20261011T225704Z_e2efinal` (end-to-end speed and
+profiles with attention v3 and the fixed split-size lookup), `runs/20261011T102433Z_llamacpp2` and
+`runs/20261011T205851Z_llamappl` (llama.cpp speed and perplexity), `runs/20261011T191452Z_kbench3` (a node stuck at
+585 MHz — clock-sensitivity control only) and `runs/20261011T225838Z_lmhead` (LM-head ladder rerun, §4).
 
 > **Clock caveat, up front.** Kaggle does not allow clock locking (`nvidia-smi -lgc`: permission denied), and the
-> T4 throttles under sustained load. Kernel microbenchmarks (short, with idle gaps) ran at **1470–1590 MHz**.
-> The end-to-end decode loops ran on a node in NVML `hw_slowdown` at **900–1065 MHz SM clock** (fp16 runtime:
-> 480–885 MHz) even after the clock gate's cool-down retries; every such row is flagged `throttled` in
-> `results.json`. The numbers are what this platform delivers, not best-case T4 numbers.
+> T4 throttles under sustained load. Kernel microbenchmarks (short, with idle gaps) ran at **1470–1590 MHz** where
+> stated. The end-to-end decode loops ran in NVML `hw_slowdown` at **1080–1170 MHz** (W4A16 G128), 930–990 MHz (fp16
+> runtime) and 585–1035 MHz (INT4-head config), after a cool-down to < 60 °C before each point. Every such row is
+> flagged `throttled` in `results.json`. These are what this platform delivers, not best-case T4 numbers.
 
 ## 1. Headline
 
-| ctx | **W4A16 + INT4 head** | W4A16 (fp16 head) | fp16 (our runtime, cuBLAS) | HF transformers fp16 | llama.cpp Q4_K_M (FA on) |
+| ctx | **W4A16 (G128, fp16 head)** | W4A16 + INT4 head | fp16 (our runtime, cuBLAS) | HF transformers fp16 | llama.cpp Q4_K_M (FA on) |
 |---:|---:|---:|---:|---:|---:|
-| 512 | **279.8** | 248.5 | 72.6 | 35.7 | 219.3 |
-| 1K | **271.5** | 251.9 | 82.8 | 33.6 | 216.4 |
-| 2K | **254.0** | 233.3 | 89.6 | 34.3 | 210.9 |
-| 4K | **222.6** | 207.1 | 86.5 | 28.4 | 199.9 |
-| 8K | 182.2 | 169.2 | 80.4 | OOM | **183.3** |
-| 16K | 134.5 | 126.6 | 70.5 | OOM | **159.6** |
+| 512 | **287.1** | 200.5 † (wall 309.2) | 106.6 | 35.8 | 219.3 |
+| 1K | 279.1 | **295.2** | 104.6 | 34.3 | 216.4 |
+| 2K | **264.1** | 229.0 † (wall 283.5) | 102.0 | 35.9 | 210.9 |
+| 4K | 246.5 | **253.5** | 99.0 | 28.4 | 199.9 |
+| 8K | 215.2 | **223.4** | 92.5 | OOM | 183.3 |
+| 16K | 172.0 | **174.0** | 82.7 | OOM | 159.6 |
 
-decode tokens/s, batch 1. HF = `model(next_token, past_key_values=…)` loop, wall-clock; it runs out of memory in the
-8K/16K prefill on the 15 GB T4. llama.cpp = `llama-bench -n 128 -d <ctx>`, a different Kaggle node and its clocks are
-not recorded by llama-bench.
+decode tokens/s, batch 1 (median of CUDA-event-timed graph replays). † SM clock sampled at 585 / 780 MHz for that
+point; the wall-clock rate of the same loop is given beside it (hollow markers in the plot). HF =
+`model(next_token, past_key_values=…)` loop, wall-clock; it runs out of memory in the 8K/16K prefill on the 15 GB T4.
+llama.cpp = `llama-bench -n 128 -d <ctx>`, a different Kaggle node, and llama-bench does not record clocks.
 
 **With accuracy next to it** (WikiText-2 test, 16 windows × 512 tokens = 8,176 scored tokens, BOS-prefixed;
 greedy agreement vs HF fp16 on 16 fixed prompts × 64 new tokens):
@@ -38,10 +42,18 @@ greedy agreement vs HF fp16 on 16 fixed prompts × 64 new tokens):
 |---|---:|---:|---:|---:|---:|---:|
 | HF transformers fp16 | 9.722 | — | — | — | — | 2.07 GB |
 | our runtime fp16 | 9.721 | −0.004 % | 15/16 | 60.6 / 64 | 0.9990 | 2.07 GB |
-| W4A16 G64 | 10.173 | +4.6 % | 2/16 | 13.0 | 0.9111 | 0.65 GB |
+| W4A16 G64 | 10.173 | +4.6 % | 2/16 | 13.0 | 0.9111 | 0.68 GB |
 | **W4A16 G128** | 10.461 | +7.6 % | 1/16 | 14.3 | 0.9102 | 0.65 GB |
 | W4A16 G256 | 10.607 | +9.1 % | 0/16 | 6.1 | 0.8896 | 0.63 GB |
 | W4A16 G128 + INT4 LM head | 10.515 | +8.2 % | 1/16 | 11.8 | 0.9082 | 0.55 GB |
+
+| llama.cpp (`llama-perplexity -c 512`, full WikiText-2 test, own protocol) | perplexity | Δ vs its Q8_0 |
+|---|---:|---:|
+| Q8_0 | 19.975 ± 0.167 | — |
+| Q4_K_M | 20.292 | **+1.6 %** |
+
+(llama-perplexity scores only the second half of each 512-token chunk and adds no BOS, so its absolute values are not
+comparable to ours; the relative cost of 4-bit quantization is.)
 
 Reading it honestly:
 
@@ -51,12 +63,14 @@ Reading it honestly:
   +7.6 % perplexity at G128; greedy text matches HF exactly only 1 time in 16 (it diverges after ~14 tokens on average
   and then stays fluent — the teacher-forced top-1 agreement is 91 %). This is the price of RTN on a 1.1 B model,
   not a kernel bug: the kernels reproduce the fp16 reference dequant-and-GEMV to ≤ 6.5e-4 relative error (§3).
-* **vs llama.cpp:** we are 28 % faster at 512 tokens and ahead up to 4K; tied at 8K; **16 % slower at 16K**. The reason
-  is attention (§5): llama.cpp's flash-attention decode kernel holds up better at long context. llama.cpp's Q4_K_M
-  uses a different (better) quantizer, so its quality is not equal to our RTN INT4 — we did not measure its perplexity.
-* **vs HF fp16:** 7.8× at 512 tokens. vs our own fp16 cuBLAS runtime (same kernels for everything except the
-  weight GEMVs): 1.8–3.4× in the timed loops, which ran the fp16 config at even lower clocks (480–885 MHz); the
-  profiled graph steps at 512 tokens are 10.56 ms vs 3.33 ms = **3.2×**, close to the 3.2× ratio of bytes per token.
+* **vs llama.cpp: faster at every context, worse quality.** +31 % at 512 tokens, +25 % at 2K, +17 % at 8K, +8 % at
+  16K. Attention v3 (§5) is what closed the long-context gap: with v2 we were 16 % *slower* than llama.cpp at 16K.
+  But llama.cpp's Q4_K_M quantizer loses only **1.6 %** perplexity to 8-bit where our RTN G128 loses **7.6 %** to fp16:
+  their speed comes with much better quality. The fair summary is "faster kernels, worse quantizer"; a GPTQ/AWQ
+  quantizer would change only the packed weights, not a kernel. (Different Kaggle node, clocks unrecorded.)
+* **vs HF fp16:** 8.0× at 512 tokens. vs our own fp16 cuBLAS runtime (same kernels for everything except the weight
+  GEMVs): 2.7× in the timed loop, which ran the fp16 config ~180 MHz lower; the profiled graph steps at 512 tokens are
+  10.54 ms vs 3.30 ms = **3.2×**, the same as the ratio of bytes per token (2.08 GB vs 0.66 GB).
 
 TinyLlama is trained to 2,048 positions. Beyond 2K the KV cache is filled with random values and only **speed** is
 meaningful there (quality claims stop at 2K).
@@ -74,34 +88,35 @@ Two models, **neither fitted to the end-to-end numbers** (`bench/analyze.py`):
 
 | ctx | bytes / token | measured | Model A | Model B | A explains | **B explains** |
 |---:|---:|---:|---:|---:|---:|---:|
-| 512 | 659 MB | 4.03 ms | 2.38 ms | 3.71 ms | 59 % | **92 %** |
-| 1K | 671 MB | 3.97 ms | 2.42 ms | 3.75 ms | 61 % | **94 %** |
-| 2K | 694 MB | 4.29 ms | 2.50 ms | 3.83 ms | 58 % | **89 %** |
-| 4K | 740 MB | 4.83 ms | 2.67 ms | 4.00 ms | 55 % | **83 %** |
-| 8K | 832 MB | 5.91 ms | 3.00 ms | 4.33 ms | 51 % | **73 %** |
-| 16K | 1017 MB | 7.90 ms | 3.67 ms | 4.99 ms | 46 % | **63 %** |
+| 512 | 659 MB | 3.48 ms | 2.38 ms | 3.71 ms | 68 % | **106 %** |
+| 1K | 671 MB | 3.58 ms | 2.42 ms | 3.75 ms | 67 % | **105 %** |
+| 2K | 694 MB | 3.79 ms | 2.50 ms | 3.83 ms | 66 % | **101 %** |
+| 4K | 740 MB | 4.06 ms | 2.67 ms | 4.00 ms | 66 % | **99 %** |
+| 8K | 832 MB | 4.65 ms | 3.00 ms | 4.33 ms | 65 % | **93 %** |
+| 16K | 1017 MB | 5.81 ms | 3.67 ms | 4.99 ms | 63 % | **86 %** |
 
-**Bytes alone explain ~60 % at short context.** Adding a fixed per-kernel cost explains **~90 % up to 2K**. The model
-fails at long context, and the profiler says exactly where (graph replay, `torch.profiler`, same config):
+**Bytes alone explain about two thirds.** Adding a fixed per-kernel cost explains the measured time **within ±7 % up
+to 8K**, and 86 % at 16K. The profiler says where the remaining time goes (graph replay, `torch.profiler`, same config):
 
 | µs per token | ctx 512 measured | bytes / BW | ctx 16K measured | bytes / BW |
 |---|---:|---:|---:|---:|
-| W4A16 GEMVs (88 launches) | 2,189 | 1,850 | 2,280 | 1,850 |
-| fp16 LM head (cuBLAS) | 512 | 471 | 515 | 471 |
-| attention partial + combine (44) | 301 | 41 | **3,625** | **1,326** |
-| norm, SwiGLU, RoPE+append, argmax, embed (93) | 245 | ≈0 | 292 | ≈0 |
-| GPU idle between kernels | 81 | — | 111 | — |
-| **step span (profiled)** | **3,327** | | **6,825** | |
+| W4A16 GEMVs (88 launches) | 2,193 | 1,859 | 2,225 | 1,859 |
+| fp16 LM head (cuBLAS) | 511 | 473 | 513 | 473 |
+| attention partial + combine (44) | 262 | 42 | **2,002** | **1,333** |
+| norm, SwiGLU, RoPE+append, argmax, embed (93) | 248 | ≈0 | 272 | ≈0 |
+| GPU idle between kernels | 82 | — | 103 | — |
+| **step span (profiled)** | **3,296** | | **5,115** | |
 
-* **What the 10 % at short context is:** GEMVs run at 85 % of achievable bandwidth (small GEMVs pay a launch-to-first-byte
-  cost — a 2.8 MB read reaches only ~180 GB/s in the size sweep), plus ~90 latency-bound tiny kernels
-  (attention at 512 tokens moves 2 MB in 301 µs). Model B's `t0` captures this only on average: against the
-  profiled step it actually *over*-predicts (3.71 vs 3.33 ms); against the event-timed loop it under-predicts, because
-  that loop ran at a lower, noisier clock (IQR 1.76 ms at ctx 512 — `hw_slowdown`).
-* **What the 37 % at 16K is:** attention. It moves 369 MB per token at 16K and takes 3.6 ms → **102 GB/s in the graph,
-  37 % of achievable bandwidth**. That excess (2.3 ms) is 79 % of Model B's 2.9 ms miss; the remaining ~1.1 ms is the
-  profiled-vs-timed clock difference. A Model B that used *measured* attention bandwidth would be descriptive, not
-  predictive, so we report the miss instead. Why attention is slow: §5.
+* **Short context — Model B over-predicts** (3.71 ms vs 3.48 ms timed, 3.30 ms profiled). The time above bytes/BW is
+  GEMVs at 85 % of achievable bandwidth (small GEMVs pay a launch-to-first-byte cost — a 2.8 MB read reaches only
+  ~180 GB/s in the size sweep), plus ~90 latency-bound tiny kernels (attention at 512 tokens moves 11.5 MB of KV cache in
+  262 µs). `t0` = 5.6 µs is measured on isolated launches and includes overhead that graph replay hides, so 225 × t0
+  slightly overstates it.
+* **16K — the miss is attention.** Model B is 0.82 ms short of the timed step. Attention takes 2.00 ms for 369 MB →
+  **184 GB/s in the graph, 66 % of achievable** (v2 managed 102 GB/s); its excess over bytes/BW is 0.67 ms, **81 % of
+  the miss**. The remaining ~0.15 ms is the timed loop's lower clock (against the profiled 5.11 ms step, Model B is
+  within 2.4 %). A Model B that used *measured* attention bandwidth would be descriptive, not predictive, so we report
+  the miss instead. Why attention is still below the GEMVs' bandwidth: §5.
 
 ## 3. Kernel accuracy (the gate)
 
@@ -148,7 +163,8 @@ reason, while the short body-shape loops in the same jobs ran at 1590 MHz. The ~
 iterations are the longest sustained loads in the ladder; the T4 drops its clock under them regardless of temperature.
 So the LM-head stage-0–2 timings and its cuBLAS time are low-clock numbers, and only the autotuned time (133 µs, taken
 from the grid's short loops) is comparable to the body rows.
-End-to-end at ctx 512 the ladder is 114.5 → 198.3 → 241.6 → 248.5 tok/s (stages 0 → 3).
+End-to-end at ctx 512 the ladder is 118.8 → 205.0 → 246.7 → 287.1 tok/s (stages 0 → 3, `e2efinal`; the stage-3 point
+ran at 1170 MHz, stages 0–2 at 990–1050 MHz, so the last step is partly clock).
 
 * **Vectorization is the big step** (1.55–1.86× on the body shapes at 1590 MHz): 32-bit → 128-bit loads, and it needs the alignment work — packed rows
   are K/8 int32 = 16-byte multiples for every shape here, `x` is 16-byte aligned (checked in the bindings: `CHECK_ALIGN16`).
@@ -171,51 +187,68 @@ End-to-end at ctx 512 the ladder is 114.5 → 198.3 → 241.6 → 248.5 tok/s (s
 ## 5. Paged decode attention (split-K / flash-decoding)
 
 KV cache `[layer, K/V, page, kv_head, 16 tokens, 64]` fp16, pages handed out by a **randomly permuted** block table (so
-"paged" is actually exercised). One CTA per (kv head, split) handles all 8 query heads of the GQA group, online softmax
-over 64-token chunks, unnormalized partials + (m, l) written per split, then a combine kernel. The context length is read
-from a device-side `pos`, so one captured CUDA graph is valid at every step. Partition size per context comes from
-`configs/attn_policy.json` (written by the sweep, loaded at startup).
+"paged" is actually exercised). One CTA per (kv head, split) handles all 8 query heads of the GQA group with an online
+softmax, writes unnormalized partials + (m, l) per split, then a combine kernel merges the splits. The context length is
+read from a device-side `pos`, so one captured CUDA graph is valid at every step. Version and partition size per
+context come from `configs/attn_policy.json` (written by the sweep, loaded at startup). Three versions:
 
-| ctx | v1 best split | **v2 best split** | v2 no split | HF repeat_kv + SDPA (contiguous) | SDPA `enable_gqa` | v2 achieved BW |
-|---:|---:|---:|---:|---:|---:|---:|
-| 512 | 39.9 µs | **25.0** | 43.9 | 77.7 | 232.7 | 21 GB/s |
-| 1K | 26.0 | **23.4** | 69.7 | 127.5 | 276.6 | 45 |
-| 2K | 31.7 | **31.3** | 130.3 | 235.3 | 526.2 | 67 |
-| 4K | 50.1 | **48.9** | 254.3 | 451.5 | 1037.8 | 86 |
-| 8K | 81.9 | **78.4** | 503.5 | 1013.8 | 2336.8 | 107 |
-| 16K | 147.0 | **141.4** | 1008.7 | 2782.1 | 4784.0 | 119 |
+* **v1** — the straightforward kernel: 64-token chunks, scores → shared memory → softmax → V, barriers between.
+* **v2** — v1 plus manual prefetch: K/V loads for all slots of a chunk issued at its start (no `cp.async` on Turing).
+* **v3** — barrier-free main loop: each of the CTA's 4 warps owns its own 16-token chunks with its own online-softmax
+  state, prefetches the next chunk's K/V into registers while computing the current one, and the warps' (m, l, acc)
+  are merged once at the end. Selected by the sweep (geometric mean over contexts) and used for all end-to-end numbers.
 
-per layer (32 q heads, 4 kv heads, d=64), SM 1470–1590 MHz except ctx 512 (930 MHz, flagged).
+Same-node comparison (`final`; per layer, 32 q heads, 4 kv heads, d=64; best partition size per version):
 
-* **Split-K crossover:** there is none in the "no split ever wins" sense — with only 4 KV heads, a no-split launch is
-  4 CTAs on a 40-SM GPU, so splitting wins at every context ≥ 512 (1.8× at 512, 7.1× at 16K). The crossover that does
-  exist is in *partition size*: the best partition grows 64 → 256 tokens from 512 → 4K (fewer, longer splits amortize
-  the combine) and falls back to 128 at 8K–16K (where 64–128 splits are needed to fill the machine).
-* **v2 vs v1** (K/V loads for all slots issued at the start of each chunk — manual prefetch in place of `cp.async`): 2×
-  –2.7× faster without splitting, 1.6× at 512 with splitting, ≈ equal from 2K up where enough CTAs hide the latency.
-* **vs PyTorch:** 3.1× (512) to 19.7× (16K) faster than HF's own path (repeat_kv + SDPA on a contiguous cache), while
+| ctx | v1 best | v2 best | **v3 best** | v3 / v2 speedup | v3 no split | HF repeat_kv + SDPA (contiguous) | SM MHz (v3 best) |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 512 | 34.3 µs | 33.7 | **29.7** | 1.14× | 65.3 | 154.2 | 585 |
+| 1K | 50.2 | 46.5 | **35.6** | 1.31× | 112.4 | 281.5 | 585 |
+| 2K | 71.7 | 68.6 | **49.2** | 1.40× | 208.8 | 536.5 | 585 |
+| 4K | 112.6 | 112.6 | **71.2** | 1.58× | 401.4 | 1044.5 | 585 |
+| 8K | 192.9 | 172.0 | **75.3** | 2.28× | 330.9 | 940.8 | 1020 |
+| 16K | 144.1 | 135.3 | **84.0** | 1.61× | 606.5 | 2576.7 | 1590 |
+
+This node sat at 585 MHz for most of the sweep (88 of 117 points flagged), so read the table **across a row**: within
+a row the versions ran at the same clock, except 8K where v2's best point sampled 690 MHz and v3's 1020. The 16K row is
+clean for all three (1575–1590 MHz). For absolute v1/v2 numbers at full clock see kbench2 (v2 best split 25.0 / 23.4 /
+31.3 / 48.9 / 78.4 / 141.4 µs from 512 to 16K at 1470–1590 MHz; its 512 point and v1's 1K point were throttled).
+
+* **v3 vs v2: 1.14× at 512 growing to 1.6–2.3× from 4K up.** At 16K and full clock v3 reaches **200 GB/s per layer
+  (72 % of achievable)** against v2's 124 GB/s. v2's three `__syncthreads` per chunk made the 4 warps load, compute and
+  wait in lockstep, so a CTA's DRAM requests came in bursts; v3's warps drift independently and keep requests in flight.
+  In the end-to-end graph this cut attention at 16K from 3.6 ms to 2.0 ms per token (§2) and took the 16K throughput
+  from 126.6 to 172.0 tok/s — not all of that is v3: the old e2e4 run also used the buggy split-size lookup (NOTEBOOK)
+  and ran ~45 MHz lower.
+* **Split-K is always on:** with only 4 KV heads a no-split launch is 4 CTAs on a 40-SM GPU, so splitting wins at every
+  context (2.2× at 512, 7.2× at 16K for v3). The crossover is in *partition size*: v3's best partition grows with
+  context, 64 tokens at 512 → 128 (1K–2K) → 256 (4K) → 512 (8K) → 1024 (16K), longer than v2's (64–256) because each
+  v3 CTA already runs 4 independent streams, so fewer, longer splits amortize the combine without starving the SMs.
+* **vs PyTorch:** 5.2× (512) to 30.7× (16K) faster than HF's own path (repeat_kv + SDPA on a contiguous cache), while
   reading a paged cache.
-* **Why it tops out at ~120 GB/s (43 % of achievable):** each chunk is load K → 8-lane dot products + shuffles →
-  `__syncthreads` → online-softmax update → `__syncthreads` → V accumulate; three barriers per 64-token chunk serialize
-  load and compute inside a CTA, and with 4 KV heads there are few CTAs per SM to overlap them. Turing has no `cp.async`
-  to make a real multi-stage pipeline cheap, and `ncu` was blocked (below), so the stall reasons are inferred, not
-  measured. This is the kernel to fix next: it is the entire long-context gap to llama.cpp.
+* **What is left:** at 16K attention still runs at ~66 % of achievable bandwidth in the graph (184 GB/s) versus 85 % for
+  the GEMVs, and short contexts are latency-bound (0.5 MB of KV per layer at 512 tokens in ~30 µs). The remaining overhead is the
+  per-warp merge, the combine kernel and the score→probability math on the critical path; `ncu` was blocked (§8), so
+  stall reasons are inferred, not measured.
 
 ![attention](plots/attention_sweep.png)
 
 ## 6. Fusion, CUDA graphs, group size, INT4 LM head
 
-**Fusion ablation** (fused residual-add + RMSNorm, fused SiLU·mul vs the same runtime with HF-style torch ops):
-225 vs 716 kernels per token; **−21 % time per token at 512, −11.5 % at 16K** (graph replay). The unfused path spends
-1.2 ms in elementwise kernels and 0.2 ms in reductions per token (profile).
+**Fusion ablation** (fused residual-add + RMSNorm, fused SiLU·mul vs the same runtime with HF-style torch ops; profiled
+graph-replay step span, `e2efinal`): 225 vs 716 kernels per token, **3.30 vs 4.99 ms at 512 (−34 %), 5.11 vs 6.65 ms at
+16K (−23 %)**. The unfused path spends ~1.5 ms per token in elementwise and reduction kernels and 0.5 ms idle between
+its 716 launches.
 
-**CUDA graphs:** for the fused runtime (225 kernels) eager and graph are within noise (3.81 ms wall eager vs 4.02 ms
-graph at 512 — the CPU issues 225 launches faster than the GPU drains them). For 716 kernels the CPU cannot keep up:
-eager is **10.4 ms vs 5.1 ms** graph. Graphs matter in proportion to kernel count; fusion and graphs are complementary.
+**CUDA graphs vs eager** (wall clock per token for both, same job): the fused runtime is within noise (**3.42 ms graph vs
+3.45 ms eager** at 512, 5.75 vs 5.77 ms at 16K) — the CPU issues 225 launches faster than the GPU drains them. With 716
+kernels the CPU cannot keep up: **4.87 ms graph vs 10.67 ms eager** at 512 (2.2×), 7.15 vs 11.30 ms at 16K (the profile
+shows 15 ms of GPU idle per eager step). Graphs matter in proportion to kernel count; fusion and graphs are complementary.
 
 **Group size** — one configuration in every column: INT4 transformer body at group size G, **fp16 LM head** (the head
 is 125 MiB and identical in every row, so it is left out of the byte and GEMV columns). GEMV speed is the per-token sum
-from the autotuner grid at ~1500 MHz; e2e is the throttled decode loop (e2e4):
+from the autotuner grid at ~1500 MHz; e2e is the throttled decode loop in e2e4, where the three configs ran at similar
+clocks (900–930 MHz) — in e2efinal their clocks differ by up to 210 MHz, which would swamp a 3 % effect:
 
 | G | body weight MiB / token | body GEMV µs / token | e2e ms / token @512 | perplexity |
 |---:|---:|---:|---:|---:|
@@ -228,9 +261,13 @@ back 0.15 perplexity. **If quality matters, G64 is the better operating point**;
 is the brief's spec.
 
 **INT4 LM head** — the data-driven call from the profile: the fp16 LM head is 131 MB, **20 % of all bytes per token
-and 512 µs (15 %) of the step** at 512 context. Quantizing it (G128, our GEMV) gives **+12.6 % tok/s at 512, +6 % at
-16K**, for +0.05 perplexity (10.46 → 10.51) and top-1 agreement 0.910 → 0.908. Worth it. (Embedding stays fp16: it is
-one 4 KB row gather per token, 4 µs in the profile — not worth a kernel, per the brief's "only if profiling says so".)
+and 511 µs (15 %) of the step** at 512 context. Quantizing it (G128, our GEMV, ≈ 133 µs) gives **+12.6 % tok/s at 512
+and +6 % at 16K** in e2e4, where both configs ran at matched clocks (930 MHz at 512). In e2efinal the INT4-head config
+ran ~100 MHz *lower* than the fp16-head one and still came out +1–6 % from 1K to 16K (its 512 and 2K points sampled
+585/780 MHz — flagged †, §1). Cost: +0.05 perplexity (10.46 → 10.51), top-1 agreement 0.910 → 0.908. Worth it, so it is
+the runtime default (`lm_head="auto"`: INT4 whenever the body is INT4); the benchmark configs pin the head explicitly.
+(Embedding stays fp16: it is one 4 KB row gather per token, 4 µs in the profile — not worth a kernel, per the brief's
+"only if profiling says so".)
 
 ![fusion](plots/fusion_ablation.png) ![groups](plots/group_size_tradeoff.png) ![profile](plots/profile_breakdown.png)
 
@@ -240,14 +277,16 @@ Arithmetic intensity: W4A16 GEMV ≈ 3.8 FLOP/byte, fp16 GEMV ≈ 1, decode atte
 The T4 ridge is **59 FLOP/byte against the `__half2` CUDA-core peak** (2,560 lanes × 2 × 2 FLOP × 1.59 GHz ≈ 16.3 TFLOP/s
 over 277 GB/s) and ≈ 235 against the 65 TFLOP/s tensor-core peak — none of these kernels uses tensor cores, so 59 is
 the relevant one. **Every decode kernel is 7–59× left of it** (attention 7×, W4A16 GEMV 15×, fp16 GEMV 59×): decode is
-a bandwidth problem, and the only compute concern is the dequant issue rate at
-throttled clocks (§4). The achieved points sit at 62–95 % of measured bandwidth for GEMV and 21–43 % for attention.
+a bandwidth problem, and the only compute concern is the dequant issue rate at throttled clocks (§4). The achieved
+points sit at 62–95 % of measured bandwidth for the GEMVs; attention v3 reaches 72 % at 16K (full clock), while its
+short-context points are latency-bound and were measured on the 585 MHz node (§5).
 
 ![roofline](plots/roofline.png) ![bandwidth](plots/bandwidth_and_clocks.png)
 
 ## 8. Platform notes and limitations (stated, not hidden)
 
-* **Turing (sm_75):** no `cp.async` → manual register double-buffering (GEMV prefetch, attention v2 slot prefetch);
+* **Turing (sm_75):** no `cp.async` → manual register double-buffering (GEMV prefetch, attention v2 slot prefetch, attention v3
+  per-warp next-chunk prefetch);
   no bf16 → fp16 everywhere with `__half2` math and fp32 accumulation across chunks; no `ldmatrix`-based W4 tensor-core
   path was attempted.
 * **Prefill** is not a separate kernel: prompt tokens are teacher-forced through the decode step (one graph replay per
@@ -259,9 +298,19 @@ throttled clocks (§4). The achieved points sit at 62–95 % of measured bandwid
   busy*, retries after cool-downs, and flags every throttled measurement (the first version sampled after
   `synchronize()` and read the 585 MHz idle clock — NOTEBOOK).
 * **Quantization** is plain RTN; GPTQ/AWQ would cut most of the perplexity gap without changing a kernel.
-* **llama.cpp** was measured on a different Kaggle node (`llama-bench` doesn't record clocks), with its own quantizer.
+* **llama.cpp** was measured on a different Kaggle node (`llama-bench` doesn't record clocks), with its own quantizer;
+  its perplexity uses its own protocol, so only the relative 4-bit cost is compared (§1).
+* **LM-head GEMV ladder** could not be measured at full clock in three attempts (§4); its stage-0–2 and cuBLAS rows
+  are low-clock numbers.
 
 ## 9. Reproduce
 
 `README.md`: one command (`scripts/kaggle_run.py --cmd "bash scripts/run_all.sh"`), then `scripts/plot_all.py` over the
-run's `results.json`. All numbers above are in `results.json`; all figures regenerate from it.
+run's `results.json`. All numbers above are in `results.json`; all figures regenerate from it. The merged file in this
+repo was produced with
+
+```bash
+.venv/bin/python scripts/plot_all.py runs/20261011T170804Z_kbench2/results.json runs/20261011T193218Z_e2e4/results.json \
+  runs/20261011T191452Z_kbench3/clock_experiment.json runs/20261011T212701Z_final/results.json runs/20261011T225704Z_e2efinal/results.json \
+  --llamacpp runs/20261011T102433Z_llamacpp2/llamacpp.json --llamacpp-ppl runs/20261011T205851Z_llamappl/llamacpp_ppl.json
+```

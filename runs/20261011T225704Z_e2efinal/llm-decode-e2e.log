@@ -1,0 +1,93 @@
+[{"stream_name":"stderr","time":0.720150689,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.720194283,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.750232719,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.788248808,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.794975202,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.800361873,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.822585438,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.82260565,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.822902145,"data":"$ PART=e2e E2E_SECTIONS='speed profile' bash scripts/run_all.sh\n"}
+,{"stream_name":"stdout","time":53.631115898,"data":"667/667 passed\n"}
+,{"stream_name":"stdout","time":77.093420272,"data":"loading HF model...\n"}
+,{"stream_name":"stdout","time":77.252949632,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":94.558158679,"data":"\n"}
+,{"stream_name":"stdout","time":94.669591457,"data":"Loading weights:   0%|          | 0/201 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":94.768090542,"data":"Loading weights:   0%|          | 1/201 [00:00\u003c00:21,  9.23it/s]\n"}
+,{"stream_name":"stdout","time":94.894410009,"data":"Loading weights:  20%|█▉        | 40/201 [00:00\u003c00:00, 223.86it/s]\n"}
+,{"stream_name":"stdout","time":95.031571907,"data":"Loading weights:  33%|███▎      | 67/201 [00:00\u003c00:00, 218.83it/s]\n"}
+,{"stream_name":"stdout","time":95.158693813,"data":"Loading weights:  47%|████▋     | 94/201 [00:00\u003c00:00, 210.17it/s]\n"}
+,{"stream_name":"stdout","time":95.29327959,"data":"Loading weights:  60%|██████    | 121/201 [00:00\u003c00:00, 210.09it/s]\n"}
+,{"stream_name":"stdout","time":95.423197229,"data":"Loading weights:  74%|███████▎  | 148/201 [00:00\u003c00:00, 206.70it/s]\n"}
+,{"stream_name":"stdout","time":95.514528662,"data":"Loading weights:  87%|████████▋ | 175/201 [00:00\u003c00:00, 207.14it/s]\n"}
+,{"stream_name":"stdout","time":95.514557771,"data":"Loading weights: 100%|██████████| 201/201 [00:00\u003c00:00, 210.18it/s]\n"}
+,{"stream_name":"stdout","time":96.614970218,"data":"\n"}
+,{"stream_name":"stdout","time":96.614994681,"data":"===== speed =====\n"}
+,{"stream_name":"stdout","time":120.356521406,"data":"rt_int4_g128             ctx   512: graph  3.484 ms ( 287.1 tok/s, iqr  78.3us) sm=1170MHz THROTTLED | eager  3.469 ms gpu-timed,  3.450 ms wall\n"}
+,{"stream_name":"stdout","time":131.452886294,"data":"rt_int4_g128             ctx  1024: graph  3.583 ms ( 279.1 tok/s, iqr  42.4us) sm=1140MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":142.64033745,"data":"rt_int4_g128             ctx  2048: graph  3.787 ms ( 264.1 tok/s, iqr  38.2us) sm=1140MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":165.19378562,"data":"rt_int4_g128             ctx  4096: graph  4.057 ms ( 246.5 tok/s, iqr  48.6us) sm=1125MHz THROTTLED | eager  4.065 ms gpu-timed,  4.027 ms wall\n"}
+,{"stream_name":"stdout","time":176.580634279,"data":"rt_int4_g128             ctx  8192: graph  4.646 ms ( 215.2 tok/s, iqr 102.4us) sm=1110MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":203.129208395,"data":"rt_int4_g128             ctx 16384: graph  5.813 ms ( 172.0 tok/s, iqr  99.5us) sm=1080MHz THROTTLED | eager  5.843 ms gpu-timed,  5.773 ms wall\n"}
+,{"stream_name":"stdout","time":237.778246876,"data":"rt_fp16                  ctx   512: graph  9.379 ms ( 106.6 tok/s, iqr 346.0us) sm=990MHz THROTTLED | eager  9.394 ms gpu-timed,  9.369 ms wall\n"}
+,{"stream_name":"stdout","time":341.247867732,"data":"rt_fp16                  ctx  1024: graph  9.560 ms ( 104.6 tok/s, iqr 106.6us) sm=975MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":444.799893323,"data":"rt_fp16                  ctx  2048: graph  9.800 ms ( 102.0 tok/s, iqr 151.7us) sm=930MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":561.237455211,"data":"rt_fp16                  ctx  4096: graph 10.098 ms (  99.0 tok/s, iqr  74.8us) sm=930MHz THROTTLED | eager 10.168 ms gpu-timed, 10.131 ms wall\n"}
+,{"stream_name":"stdout","time":665.059262442,"data":"rt_fp16                  ctx  8192: graph 10.813 ms (  92.5 tok/s, iqr 123.7us) sm=930MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":782.634797558,"data":"rt_fp16                  ctx 16384: graph 12.097 ms (  82.7 tok/s, iqr 144.8us) sm=930MHz THROTTLED | eager 12.142 ms gpu-timed, 12.090 ms wall\n"}
+,{"stream_name":"stdout","time":887.49595792,"data":"rt_int4_g128_unfused     ctx   512: graph  6.794 ms ( 147.2 tok/s, iqr 1938.0us) sm=1320MHz THROTTLED | eager 10.813 ms gpu-timed, 10.665 ms wall\n"}
+,{"stream_name":"stdout","time":989.856891442,"data":"rt_int4_g128_unfused     ctx  1024: graph  4.964 ms ( 201.5 tok/s, iqr 3336.1us) sm=1335MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1081.525335217,"data":"rt_int4_g128_unfused     ctx  2048: graph  5.211 ms ( 191.9 tok/s, iqr 3406.2us) sm=1305MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1174.753830896,"data":"rt_int4_g128_unfused     ctx  4096: graph  5.509 ms ( 181.5 tok/s, iqr 3651.6us) sm=1290MHz THROTTLED | eager 11.037 ms gpu-timed, 11.250 ms wall\n"}
+,{"stream_name":"stdout","time":1266.474284163,"data":"rt_int4_g128_unfused     ctx  8192: graph  6.054 ms ( 165.2 tok/s, iqr 4084.3us) sm=1260MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1359.884117505,"data":"rt_int4_g128_unfused     ctx 16384: graph  7.209 ms ( 138.7 tok/s, iqr 2052.4us) sm=1215MHz THROTTLED | eager 10.947 ms gpu-timed, 11.300 ms wall\n"}
+,{"stream_name":"stdout","time":1452.227785755,"data":"rt_int4_g128_int4head    ctx   512: graph  4.989 ms ( 200.5 tok/s, iqr 1666.3us) sm=585MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1543.542069185,"data":"rt_int4_g128_int4head    ctx  1024: graph  3.387 ms ( 295.2 tok/s, iqr 1805.0us) sm=1035MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1634.875140861,"data":"rt_int4_g128_int4head    ctx  2048: graph  4.368 ms ( 229.0 tok/s, iqr  67.3us) sm=780MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1653.667856128,"data":"rt_int4_g128_int4head    ctx  4096: graph  3.944 ms ( 253.5 tok/s, iqr 2114.7us) sm=1020MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1654.294026906,"data":"rt_int4_g128_int4head    ctx  8192: graph  4.477 ms ( 223.4 tok/s, iqr  73.4us) sm=1020MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1655.09009741,"data":"rt_int4_g128_int4head    ctx 16384: graph  5.747 ms ( 174.0 tok/s, iqr 167.1us) sm=1020MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1656.610993075,"data":"rt_int4_g64              ctx   512: graph  3.868 ms ( 258.6 tok/s, iqr  43.0us) sm=1005MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1657.172507216,"data":"rt_int4_g64              ctx  1024: graph  3.936 ms ( 254.0 tok/s, iqr  69.2us) sm=1020MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1657.757378414,"data":"rt_int4_g64              ctx  2048: graph  4.131 ms ( 242.1 tok/s, iqr  39.2us) sm=1035MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1658.384209198,"data":"rt_int4_g64              ctx  4096: graph  4.450 ms ( 224.7 tok/s, iqr 106.8us) sm=990MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1659.090076413,"data":"rt_int4_g64              ctx  8192: graph  5.042 ms ( 198.3 tok/s, iqr  75.8us) sm=1005MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1659.960236492,"data":"rt_int4_g64              ctx 16384: graph  6.343 ms ( 157.7 tok/s, iqr 118.9us) sm=975MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1661.423631929,"data":"rt_int4_g256             ctx   512: graph  3.744 ms ( 267.1 tok/s, iqr 244.8us) sm=960MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1661.963499449,"data":"rt_int4_g256             ctx  1024: graph  3.828 ms ( 261.2 tok/s, iqr 113.5us) sm=990MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1662.531186776,"data":"rt_int4_g256             ctx  2048: graph  3.976 ms ( 251.5 tok/s, iqr  92.5us) sm=1005MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1663.142370585,"data":"rt_int4_g256             ctx  4096: graph  4.366 ms ( 229.1 tok/s, iqr 128.6us) sm=990MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1663.837331113,"data":"rt_int4_g256             ctx  8192: graph  5.001 ms ( 200.0 tok/s, iqr 143.7us) sm=975MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1664.699718855,"data":"rt_int4_g256             ctx 16384: graph  6.234 ms ( 160.4 tok/s, iqr  24.2us) sm=975MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1666.525373474,"data":"rt_fp16_unfused          ctx   512: graph 11.225 ms (  89.1 tok/s, iqr  21.6us) sm=1020MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1668.183266117,"data":"rt_fp16_unfused          ctx  4096: graph 11.925 ms (  83.9 tok/s, iqr  59.4us) sm=1035MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1670.289271127,"data":"rt_int4_stage0           ctx   512: graph  8.414 ms ( 118.8 tok/s, iqr 189.3us) sm=990MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1671.898974224,"data":"rt_int4_stage1           ctx   512: graph  4.878 ms ( 205.0 tok/s, iqr 157.0us) sm=1050MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1673.408871279,"data":"rt_int4_stage2           ctx   512: graph  4.054 ms ( 246.7 tok/s, iqr  50.6us) sm=1035MHz THROTTLED\n"}
+,{"stream_name":"stdout","time":1674.714596454,"data":"hf_fp16 ctx   512:  27.97 ms/token (  35.8 tok/s)\n"}
+,{"stream_name":"stdout","time":1676.254533364,"data":"hf_fp16 ctx  1024:  29.19 ms/token (  34.3 tok/s)\n"}
+,{"stream_name":"stdout","time":1678.397565657,"data":"hf_fp16 ctx  2048:  27.84 ms/token (  35.9 tok/s)\n"}
+,{"stream_name":"stdout","time":1683.438797969,"data":"hf_fp16 ctx  4096:  35.23 ms/token (  28.4 tok/s)\n"}
+,{"stream_name":"stdout","time":1684.757250259,"data":"\n"}
+,{"stream_name":"stdout","time":1684.757290059,"data":"===== profile =====\n"}
+,{"stream_name":"stdout","time":1685.690087109,"data":"/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.\n"}
+,{"stream_name":"stdout","time":1685.690112531,"data":"  _warn_once(\n"}
+,{"stream_name":"stdout","time":1685.803962546,"data":"rt_int4_g128|ctx512|graph                kernels/token  225.0  busy   3214.3us  span   3295.9us  idle    81.6us  W4A16 GEMV=2193, cuBLAS GEMM/GEMV=511, attention partial=190, add+RMSNorm (fused)=130, attention combine=73, SwiGLU (fused)=52, RoPE+KV append=47, argmax=13, embedding gather=4, torch elementwise (unfused ops)=2\n"}
+,{"stream_name":"stdout","time":1685.957200132,"data":"rt_int4_g128|ctx512|eager                kernels/token  225.0  busy   3070.1us  span   3325.0us  idle   254.9us  W4A16 GEMV=2129, cuBLAS GEMM/GEMV=510, attention partial=175, add+RMSNorm (fused)=104, attention combine=61, SwiGLU (fused)=40, RoPE+KV append=35, argmax=13, embedding gather=3, torch elementwise (unfused ops)=1\n"}
+,{"stream_name":"stdout","time":1686.045111972,"data":"rt_int4_g128|ctx16384|graph              kernels/token  225.0  busy   5011.2us  span   5114.5us  idle   103.3us  W4A16 GEMV=2225, attention partial=1918, cuBLAS GEMM/GEMV=513, add+RMSNorm (fused)=139, attention combine=84, RoPE+KV append=57, SwiGLU (fused)=55, argmax=15, embedding gather=4, torch elementwise (unfused ops)=2\n"}
+,{"stream_name":"stdout","time":1686.207420333,"data":"rt_int4_g128|ctx16384|eager              kernels/token  225.0  busy   4996.3us  span   5207.4us  idle   211.1us  W4A16 GEMV=2191, attention partial=1974, cuBLAS GEMM/GEMV=512, add+RMSNorm (fused)=121, attention combine=87, RoPE+KV append=47, SwiGLU (fused)=47, argmax=14, embedding gather=3, torch elementwise (unfused ops)=1\n"}
+,{"stream_name":"stdout","time":1687.41659994,"data":"rt_int4_g128_unfused|ctx512|graph        kernels/token  716.0  busy   4504.8us  span   4992.6us  idle   487.8us  W4A16 GEMV=2221, torch elementwise (unfused ops)=1220, cuBLAS GEMM/GEMV=512, torch reduce/argmax=206, attention partial=200, attention combine=77, RoPE+KV append=50, argmax=14, embedding gather=4\n"}
+,{"stream_name":"stdout","time":1688.242532872,"data":"rt_int4_g128_unfused|ctx512|eager        kernels/token  716.0  busy   3980.2us  span  19406.7us  idle 15426.4us  W4A16 GEMV=2132, torch elementwise (unfused ops)=890, cuBLAS GEMM/GEMV=510, attention partial=181, torch reduce/argmax=158, attention combine=60, RoPE+KV append=35, argmax=12, embedding gather=3\n"}
+,{"stream_name":"stdout","time":1688.507757966,"data":"rt_int4_g128_unfused|ctx16384|graph      kernels/token  716.0  busy   6147.1us  span   6654.1us  idle   507.0us  W4A16 GEMV=2206, attention partial=1825, torch elementwise (unfused ops)=1218, cuBLAS GEMM/GEMV=511, torch reduce/argmax=230, attention combine=82, RoPE+KV append=57, argmax=14, embedding gather=4\n"}
+,{"stream_name":"stdout","time":1689.623633077,"data":"rt_int4_g128_unfused|ctx16384|eager      kernels/token  716.0  busy   5595.6us  span  19845.5us  idle 14249.9us  W4A16 GEMV=2139, attention partial=1732, torch elementwise (unfused ops)=894, cuBLAS GEMM/GEMV=510, torch reduce/argmax=187, attention combine=78, RoPE+KV append=42, argmax=12, embedding gather=2\n"}
+,{"stream_name":"stdout","time":1690.085969831,"data":"rt_fp16|ctx512|graph                     kernels/token  225.0  busy  10389.6us  span  10537.2us  idle   147.6us  cuBLAS GEMM/GEMV=9440, attention partial=350, add+RMSNorm (fused)=241, attention combine=140, SwiGLU (fused)=99, RoPE+KV append=84, argmax=27, embedding gather=6, torch elementwise (unfused ops)=3\n"}
+,{"stream_name":"stdout","time":1690.366997745,"data":"rt_fp16|ctx512|eager                     kernels/token  225.0  busy   9248.2us  span   9546.8us  idle   298.6us  cuBLAS GEMM/GEMV=8569, attention partial=265, add+RMSNorm (fused)=166, attention combine=99, SwiGLU (fused)=67, RoPE+KV append=57, argmax=20, embedding gather=4, torch elementwise (unfused ops)=2\n"}
+,{"stream_name":"stdout","time":1690.52280772,"data":"rt_fp16|ctx16384|graph                   kernels/token  225.0  busy  12171.3us  span  12324.9us  idle   153.6us  cuBLAS GEMM/GEMV=8711, attention partial=2942, add+RMSNorm (fused)=203, attention combine=124, SwiGLU (fused)=83, RoPE+KV append=80, argmax=22, embedding gather=5, torch elementwise (unfused ops)=3\n"}
+,{"stream_name":"stdout","time":1690.821176336,"data":"rt_fp16|ctx16384|eager                   kernels/token  225.0  busy  11829.9us  span  12124.1us  idle   294.2us  cuBLAS GEMM/GEMV=8582, attention partial=2802, add+RMSNorm (fused)=169, attention combine=119, SwiGLU (fused)=67, RoPE+KV append=64, argmax=20, embedding gather=4, torch elementwise (unfused ops)=2\n"}
+,{"stream_name":"stdout","time":1692.715375514,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":1694.863465264,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1694.863492118,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1695.126936307,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1695.126976024,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1695.91758722,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1696.97593468,"data":"[NbConvertApp] Writing 364963 bytes to __results__.html\n"}
+]

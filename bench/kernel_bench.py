@@ -5,6 +5,7 @@ sections:
   bw        achievable DRAM read bandwidth (own microbenchmark, swept launch configs) + D2D copy
   autotune  scripts/autotune.py sweep (R x warps x prefetch, per shape, per group size)
   gemv      stage ladder naive -> vectorized -> reg-blocked -> autotuned vs cuBLAS fp16, every model shape
+  gemv_lm   the same ladder for the LM head only, cool-down before each row (separate job; key gemv_lm_head)
   groups    GEMV time per group size (64/128/256) at autotuned configs, summed per token
   attn      paged attention: ctx 512..16K x partition size; best-partition policy; HF-style SDPA baseline
   ncu       one attempt at hardware counters (expected to be blocked on Kaggle)

@@ -49,6 +49,10 @@ def plot_pred_vs_measured(r, llama):
     if "rt_int4_g128_int4head" in r["speed"]["runtime"]:
         ih = r["speed"]["runtime"]["rt_int4_g128_int4head"]
         ax.plot([x["ctx"] for x in ih], [1e6 / x["median_us"] for x in ih], "o-", color=C[3], label="measured W4A16 + INT4 LM head")
+        low = [x for x in ih if x["clocks_after"].get("sm_mhz", 0) < 900]  # e2efinal: two points sampled at 585/780 MHz
+        if low:
+            ax.scatter([x["ctx"] for x in low], [1e6 / x["median_us"] for x in low], s=70, facecolor=SURF, edgecolor=C[3],
+                       linewidth=1.5, zorder=5, label="(hollow: SM clock < 900 MHz)")
     if "rt_fp16" in r["speed"]["runtime"]:
         pf = A.predictions(r, "rt_fp16")["rows"]
         ax.plot(ctx, [x["pred_A_tok_s"] for x in pf], "--", color=C[1], label="fp16 Model A")

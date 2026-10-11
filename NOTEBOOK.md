@@ -128,3 +128,11 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
   LM-head-only ladder with cool() before each row still sampled 585-825 MHz at 40-44 C (no NVML reason). Third node in
   a row where only the long LM-head loops throttle. Decision: stop re-running it; report as a platform finding, keep the
   autotune-grid 133 us for stage 3 and mark the LM-head speedup vs cuBLAS as not comparable.
+- e2efinal (runs/20261011T225704Z_e2efinal): gate 667/667; attention v3 + fixed split lookup + cool-down before each point.
+  W4A16 G128: 287 / 279 / 264 / 247 / 215 / 172 tok/s (512 -> 16K) at 1080-1170 MHz, ahead of llama.cpp at every
+  context (+31 % -> +8 %); was 16 % behind at 16K with v2. Model B now explains 106 / 105 / 101 / 99 / 93 / 86 %; at 16K
+  attention is 2.0 ms per token (184 GB/s, was 3.6 ms / 102 GB/s), 81 % of the remaining 0.82 ms miss. Graph vs eager
+  wall-to-wall: fused 3.42 vs 3.45 ms, unfused 4.87 vs 10.67 ms. INT4-head config's 512/2K points sampled 585/780 MHz:
+  reported with their wall-clock rates and hollow markers, not re-run.
+- Merge for the final results.json: kbench2, e2e4, kbench3 clock experiment, final, e2efinal (+ llama.cpp files).
+  lmhead is left out: its LM-head rows are lower-clock than final's, so substituting them would make the plot worse.
