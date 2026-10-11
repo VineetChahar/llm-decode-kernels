@@ -1,0 +1,55 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ PART=kernels KERNEL_SECTIONS='gemv groups attn' bash scripts/run_all.sh
+439/439 passed
+
+===== gemv =====
+qkv      0 naive             63.3us  iqr   0.4    44.1 GB/s
+qkv      1 vectorized        40.0us  iqr   1.1    69.9 GB/s
+qkv      2 reg-blocked       27.9us  iqr   1.1   100.3 GB/s
+qkv      3 autotuned         26.5us  iqr   0.3   105.3 GB/s
+qkv      cuBLAS fp16         63.8us  iqr   0.8   164.4 GB/s
+o        0 naive             58.9us  iqr   1.0    38.0 GB/s
+o        1 vectorized        34.8us  iqr   0.7    64.2 GB/s
+o        2 reg-blocked       25.3us  iqr   1.1    88.5 GB/s
+o        3 autotuned         23.4us  iqr   1.0    95.5 GB/s
+o        cuBLAS fp16         53.0us  iqr   1.1   158.4 GB/s
+gate_up  0 naive            280.3us  iqr   0.8    43.8 GB/s
+gate_up  1 vectorized       148.8us  iqr   1.0    82.5 GB/s
+gate_up  2 reg-blocked       73.7us  iqr   0.4   166.6 GB/s
+gate_up  3 autotuned         87.2us  iqr   1.0   140.9 GB/s
+gate_up  cuBLAS fp16        237.0us  iqr   1.3   194.8 GB/s
+down     0 naive            145.7us  iqr   0.6    42.2 GB/s
+down     1 vectorized        78.7us  iqr   1.2    78.1 GB/s
+down     2 reg-blocked       47.1us  iqr   0.4   130.5 GB/s
+down     3 autotuned         49.1us  iqr   0.4   125.1 GB/s
+down     cuBLAS fp16        103.9us  iqr   1.3   222.3 GB/s
+lm_head  0 naive            773.2us  iqr   1.1    45.1 GB/s
+lm_head  1 vectorized       405.1us  iqr   0.8    86.1 GB/s
+lm_head  2 reg-blocked      170.0us  iqr   1.1   205.2 GB/s
+lm_head  3 autotuned        234.6us  iqr   1.1   148.7 GB/s
+lm_head  cuBLAS fp16        646.5us  iqr   1.6   202.8 GB/s
+
+===== groups =====
+G64: GEMV time per token (sum of kernels) 4.252 ms, 554.9 MiB
+G128: GEMV time per token (sum of kernels) 4.322 ms, 524.1 MiB
+G256: GEMV time per token (sum of kernels) 4.317 ms, 508.7 MiB
+
+===== attn =====
+v1 ctx   512: no-split   166.8us | best PS=   64 (8 splits)    39.8us    13 GB/s | SDPA   233.1us | repeat+SDPA   152.9us
+v2 ctx   512: no-split    92.8us | best PS=   64 (8 splits)    33.8us    15 GB/s | SDPA   233.1us | repeat+SDPA   152.9us
+v1 ctx  1024: no-split   321.6us | best PS=   64 (16 splits)    51.2us    20 GB/s | SDPA   374.3us | repeat+SDPA   286.5us
+v2 ctx  1024: no-split   174.8us | best PS=   64 (16 splits)    47.1us    22 GB/s | SDPA   374.3us | repeat+SDPA   286.5us
+v1 ctx  2048: no-split   630.8us | best PS=   64 (32 splits)    72.7us    29 GB/s | SDPA   669.4us | repeat+SDPA   545.3us
+v2 ctx  2048: no-split   336.9us | best PS=  128 (16 splits)    69.6us    30 GB/s | SDPA   669.4us | repeat+SDPA   545.3us
+v1 ctx  4096: no-split   996.6us | best PS=  128 (32 splits)   114.7us    37 GB/s | SDPA  1214.3us | repeat+SDPA  1065.1us
+v2 ctx  4096: no-split   659.6us | best PS=  256 (16 splits)   114.7us    37 GB/s | SDPA  1214.3us | repeat+SDPA  1065.1us
+v1 ctx  8192: no-split  1049.2us | best PS=  512 (16 splits)   104.4us    80 GB/s | SDPA  2341.1us | repeat+SDPA   889.8us
+v2 ctx  8192: no-split   506.1us | best PS=  128 (64 splits)    79.4us   106 GB/s | SDPA  2341.1us | repeat+SDPA   889.8us
+v1 ctx 16384: no-split  2090.4us | best PS=  512 (32 splits)   143.4us   117 GB/s | SDPA  4792.3us | repeat+SDPA  2581.4us
+v2 ctx 16384: no-split  1004.6us | best PS=  256 (64 splits)   135.5us   124 GB/s | SDPA  4792.3us | repeat+SDPA  2581.4us
+EXIT_CODE=0

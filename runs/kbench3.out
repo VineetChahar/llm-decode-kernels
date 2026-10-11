@@ -1,2 +1,53 @@
-Kernel push error: Maximum batch GPU session count of 2 reached. 
-push failed
+Kernel version 6 successfully pushed.  Please check progress at https://www.kaggle.com/code/vineetkumar0210/llm-decode-kernels 
+[   32s] KernelWorkerStatus.RUNNING
+[   64s] KernelWorkerStatus.RUNNING
+[   96s] KernelWorkerStatus.RUNNING
+[  128s] KernelWorkerStatus.RUNNING
+[  160s] KernelWorkerStatus.RUNNING
+[  192s] KernelWorkerStatus.RUNNING
+[  225s] KernelWorkerStatus.RUNNING
+[  257s] KernelWorkerStatus.RUNNING
+[  290s] KernelWorkerStatus.RUNNING
+[  322s] KernelWorkerStatus.RUNNING
+[  355s] KernelWorkerStatus.RUNNING
+[  388s] KernelWorkerStatus.RUNNING
+[  420s] KernelWorkerStatus.RUNNING
+[  453s] KernelWorkerStatus.RUNNING
+[  486s] KernelWorkerStatus.RUNNING
+[  517s] KernelWorkerStatus.RUNNING
+[  550s] KernelWorkerStatus.RUNNING
+[  583s] KernelWorkerStatus.RUNNING
+[  616s] KernelWorkerStatus.RUNNING
+[  648s] KernelWorkerStatus.RUNNING
+[  680s] KernelWorkerStatus.RUNNING
+[  712s] KernelWorkerStatus.RUNNING
+[  745s] KernelWorkerStatus.RUNNING
+[  776s] KernelWorkerStatus.RUNNING
+[  809s] KernelWorkerStatus.RUNNING
+[  840s] KernelWorkerStatus.RUNNING
+[  871s] KernelWorkerStatus.RUNNING
+[  904s] KernelWorkerStatus.RUNNING
+[  937s] KernelWorkerStatus.RUNNING
+[  968s] KernelWorkerStatus.RUNNING
+[ 1000s] KernelWorkerStatus.COMPLETE
+llm-decode-kernels/runs/20261011T191452Z_kbench3/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T191452Z_kbench3/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T191452Z_kbench3/llm-decode-kernels.log 
+ 
+
+===== attn =====
+v1 ctx   512: no-split   166.8us | best PS=   64 (8 splits)    39.8us    13 GB/s | SDPA   233.1us | repeat+SDPA   152.9us
+v2 ctx   512: no-split    92.8us | best PS=   64 (8 splits)    33.8us    15 GB/s | SDPA   233.1us | repeat+SDPA   152.9us
+v1 ctx  1024: no-split   321.6us | best PS=   64 (16 splits)    51.2us    20 GB/s | SDPA   374.3us | repeat+SDPA   286.5us
+v2 ctx  1024: no-split   174.8us | best PS=   64 (16 splits)    47.1us    22 GB/s | SDPA   374.3us | repeat+SDPA   286.5us
+v1 ctx  2048: no-split   630.8us | best PS=   64 (32 splits)    72.7us    29 GB/s | SDPA   669.4us | repeat+SDPA   545.3us
+v2 ctx  2048: no-split   336.9us | best PS=  128 (16 splits)    69.6us    30 GB/s | SDPA   669.4us | repeat+SDPA   545.3us
+v1 ctx  4096: no-split   996.6us | best PS=  128 (32 splits)   114.7us    37 GB/s | SDPA  1214.3us | repeat+SDPA  1065.1us
+v2 ctx  4096: no-split   659.6us | best PS=  256 (16 splits)   114.7us    37 GB/s | SDPA  1214.3us | repeat+SDPA  1065.1us
+v1 ctx  8192: no-split  1049.2us | best PS=  512 (16 splits)   104.4us    80 GB/s | SDPA  2341.1us | repeat+SDPA   889.8us
+v2 ctx  8192: no-split   506.1us | best PS=  128 (64 splits)    79.4us   106 GB/s | SDPA  2341.1us | repeat+SDPA   889.8us
+v1 ctx 16384: no-split  2090.4us | best PS=  512 (32 splits)   143.4us   117 GB/s | SDPA  4792.3us | repeat+SDPA  2581.4us
+v2 ctx 16384: no-split  1004.6us | best PS=  256 (64 splits)   135.5us   124 GB/s | SDPA  4792.3us | repeat+SDPA  2581.4us
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T191452Z_kbench3

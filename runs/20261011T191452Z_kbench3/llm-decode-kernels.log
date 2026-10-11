@@ -1,0 +1,64 @@
+[{"stream_name":"stderr","time":0.778568222,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.778640496,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.808393252,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.845255447,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.852531728,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.857805314,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.883834368,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.883849228,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.884269373,"data":"$ PART=kernels KERNEL_SECTIONS='gemv groups attn' bash scripts/run_all.sh\n"}
+,{"stream_name":"stdout","time":53.26481541,"data":"439/439 passed\n"}
+,{"stream_name":"stdout","time":55.29236205,"data":"\n"}
+,{"stream_name":"stdout","time":55.29238769,"data":"===== gemv =====\n"}
+,{"stream_name":"stdout","time":106.560451063,"data":"qkv      0 naive             63.3us  iqr   0.4    44.1 GB/s\n"}
+,{"stream_name":"stdout","time":106.560484456,"data":"qkv      1 vectorized        40.0us  iqr   1.1    69.9 GB/s\n"}
+,{"stream_name":"stdout","time":106.560489748,"data":"qkv      2 reg-blocked       27.9us  iqr   1.1   100.3 GB/s\n"}
+,{"stream_name":"stdout","time":106.560493991,"data":"qkv      3 autotuned         26.5us  iqr   0.3   105.3 GB/s\n"}
+,{"stream_name":"stdout","time":106.560498171,"data":"qkv      cuBLAS fp16         63.8us  iqr   0.8   164.4 GB/s\n"}
+,{"stream_name":"stdout","time":157.301423273,"data":"o        0 naive             58.9us  iqr   1.0    38.0 GB/s\n"}
+,{"stream_name":"stdout","time":157.301462038,"data":"o        1 vectorized        34.8us  iqr   0.7    64.2 GB/s\n"}
+,{"stream_name":"stdout","time":157.301467718,"data":"o        2 reg-blocked       25.3us  iqr   1.1    88.5 GB/s\n"}
+,{"stream_name":"stdout","time":157.301472096,"data":"o        3 autotuned         23.4us  iqr   1.0    95.5 GB/s\n"}
+,{"stream_name":"stdout","time":157.301476986,"data":"o        cuBLAS fp16         53.0us  iqr   1.1   158.4 GB/s\n"}
+,{"stream_name":"stdout","time":208.699147852,"data":"gate_up  0 naive            280.3us  iqr   0.8    43.8 GB/s\n"}
+,{"stream_name":"stdout","time":208.699196261,"data":"gate_up  1 vectorized       148.8us  iqr   1.0    82.5 GB/s\n"}
+,{"stream_name":"stdout","time":208.699202306,"data":"gate_up  2 reg-blocked       73.7us  iqr   0.4   166.6 GB/s\n"}
+,{"stream_name":"stdout","time":208.699225052,"data":"gate_up  3 autotuned         87.2us  iqr   1.0   140.9 GB/s\n"}
+,{"stream_name":"stdout","time":208.699229588,"data":"gate_up  cuBLAS fp16        237.0us  iqr   1.3   194.8 GB/s\n"}
+,{"stream_name":"stdout","time":259.696957343,"data":"down     0 naive            145.7us  iqr   0.6    42.2 GB/s\n"}
+,{"stream_name":"stdout","time":259.696996406,"data":"down     1 vectorized        78.7us  iqr   1.2    78.1 GB/s\n"}
+,{"stream_name":"stdout","time":259.697001281,"data":"down     2 reg-blocked       47.1us  iqr   0.4   130.5 GB/s\n"}
+,{"stream_name":"stdout","time":259.697004371,"data":"down     3 autotuned         49.1us  iqr   0.4   125.1 GB/s\n"}
+,{"stream_name":"stdout","time":259.697019445,"data":"down     cuBLAS fp16        103.9us  iqr   1.3   222.3 GB/s\n"}
+,{"stream_name":"stdout","time":312.690985982,"data":"lm_head  0 naive            773.2us  iqr   1.1    45.1 GB/s\n"}
+,{"stream_name":"stdout","time":312.69103512,"data":"lm_head  1 vectorized       405.1us  iqr   0.8    86.1 GB/s\n"}
+,{"stream_name":"stdout","time":312.69103906,"data":"lm_head  2 reg-blocked      170.0us  iqr   1.1   205.2 GB/s\n"}
+,{"stream_name":"stdout","time":312.69104203,"data":"lm_head  3 autotuned        234.6us  iqr   1.1   148.7 GB/s\n"}
+,{"stream_name":"stdout","time":312.69104502,"data":"lm_head  cuBLAS fp16        646.5us  iqr   1.6   202.8 GB/s\n"}
+,{"stream_name":"stdout","time":312.695804287,"data":"\n"}
+,{"stream_name":"stdout","time":312.695820595,"data":"===== groups =====\n"}
+,{"stream_name":"stdout","time":366.611309756,"data":"G64: GEMV time per token (sum of kernels) 4.252 ms, 554.9 MiB\n"}
+,{"stream_name":"stdout","time":420.482830611,"data":"G128: GEMV time per token (sum of kernels) 4.322 ms, 524.1 MiB\n"}
+,{"stream_name":"stdout","time":474.41066371,"data":"G256: GEMV time per token (sum of kernels) 4.317 ms, 508.7 MiB\n"}
+,{"stream_name":"stdout","time":474.41634854,"data":"\n"}
+,{"stream_name":"stdout","time":474.41636776,"data":"===== attn =====\n"}
+,{"stream_name":"stdout","time":575.95281098,"data":"v1 ctx   512: no-split   166.8us | best PS=   64 (8 splits)    39.8us    13 GB/s | SDPA   233.1us | repeat+SDPA   152.9us\n"}
+,{"stream_name":"stdout","time":575.952846908,"data":"v2 ctx   512: no-split    92.8us | best PS=   64 (8 splits)    33.8us    15 GB/s | SDPA   233.1us | repeat+SDPA   152.9us\n"}
+,{"stream_name":"stdout","time":697.674589109,"data":"v1 ctx  1024: no-split   321.6us | best PS=   64 (16 splits)    51.2us    20 GB/s | SDPA   374.3us | repeat+SDPA   286.5us\n"}
+,{"stream_name":"stdout","time":697.674661629,"data":"v2 ctx  1024: no-split   174.8us | best PS=   64 (16 splits)    47.1us    22 GB/s | SDPA   374.3us | repeat+SDPA   286.5us\n"}
+,{"stream_name":"stdout","time":839.844158882,"data":"v1 ctx  2048: no-split   630.8us | best PS=   64 (32 splits)    72.7us    29 GB/s | SDPA   669.4us | repeat+SDPA   545.3us\n"}
+,{"stream_name":"stdout","time":839.844236552,"data":"v2 ctx  2048: no-split   336.9us | best PS=  128 (16 splits)    69.6us    30 GB/s | SDPA   669.4us | repeat+SDPA   545.3us\n"}
+,{"stream_name":"stdout","time":982.342173953,"data":"v1 ctx  4096: no-split   996.6us | best PS=  128 (32 splits)   114.7us    37 GB/s | SDPA  1214.3us | repeat+SDPA  1065.1us\n"}
+,{"stream_name":"stdout","time":982.34224054,"data":"v2 ctx  4096: no-split   659.6us | best PS=  256 (16 splits)   114.7us    37 GB/s | SDPA  1214.3us | repeat+SDPA  1065.1us\n"}
+,{"stream_name":"stdout","time":983.513794018,"data":"v1 ctx  8192: no-split  1049.2us | best PS=  512 (16 splits)   104.4us    80 GB/s | SDPA  2341.1us | repeat+SDPA   889.8us\n"}
+,{"stream_name":"stdout","time":983.513827265,"data":"v2 ctx  8192: no-split   506.1us | best PS=  128 (64 splits)    79.4us   106 GB/s | SDPA  2341.1us | repeat+SDPA   889.8us\n"}
+,{"stream_name":"stdout","time":984.962550802,"data":"v1 ctx 16384: no-split  2090.4us | best PS=  512 (32 splits)   143.4us   117 GB/s | SDPA  4792.3us | repeat+SDPA  2581.4us\n"}
+,{"stream_name":"stdout","time":984.962578625,"data":"v2 ctx 16384: no-split  1004.6us | best PS=  256 (64 splits)   135.5us   124 GB/s | SDPA  4792.3us | repeat+SDPA  2581.4us\n"}
+,{"stream_name":"stdout","time":985.523750535,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":987.797501528,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":987.797534865,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":988.131873652,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":988.131916797,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":988.977872496,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":990.064796132,"data":"[NbConvertApp] Writing 360713 bytes to __results__.html\n"}
+]

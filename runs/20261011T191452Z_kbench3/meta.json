@@ -1,0 +1,1 @@
+{"ref": "vineetkumar0210/llm-decode-kernels", "cmd": "PART=kernels KERNEL_SECTIONS='gemv groups attn' bash scripts/run_all.sh", "accel": "NvidiaTeslaT4", "utc": "20261011T191452Z"}

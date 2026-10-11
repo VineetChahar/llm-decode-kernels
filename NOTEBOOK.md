@@ -64,3 +64,16 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
   winners (R=4, pf=0, warps 1-2 for every body shape; lm_head from kbench1). kbench2 re-tunes; any difference is
   reported in RESULTS.md.
 - Observation worth keeping: prefetch (pf=1) never won a single autotune cell, and R=4 won every one in full1.
+
+## kbench2 / kbench3 — which numbers are trusted (2026-10-11)
+- kbench2 (runs/20261011T170804Z_kbench2): gate 439/439. Fixed clock gate works; autotune grid 434/480 cells >= 1400 MHz.
+  The 900 s cool-down budget was spent inside the 720-point grid, so the stage ladder's lm_head rows (5/25) and the
+  group sweep ran throttled; 12/78 attention points throttled. All flagged.
+- kbench3 (runs/20261011T191452Z_kbench3), rerun of gemv/groups/attn: gate 439/439, but this instance sat at **585 MHz for
+  the entire run at 61 C with no NVML throttle reason** (a capped node, not thermal). Every timing ~1.7-2x slower; 100% flagged.
+  Not used for headline numbers. Kept as a natural experiment: same kernels, SM clock 585 vs ~1500 MHz.
+- Decision: no more kernel reruns (each costs a contended GPU slot, and the node lottery can repeat). Trusted sources:
+  GEMV ladder = kbench2 (lm_head tuned time from the autotune grid at ~1500 MHz); group-size GEMV speed = per-token sums
+  from the autotune grid; attention = kbench2 unthrottled points; bandwidth/clock probe = kbench2.
+- Clock-sensitivity finding: at 585 MHz the W4A16 GEMVs slow 1.6-1.9x while the 277 GB/s read microbenchmark held its
+  bandwidth down to ~1330 MHz in the probe — the dequant ALU work makes the INT4 GEMV issue-bound at low SM clock.
