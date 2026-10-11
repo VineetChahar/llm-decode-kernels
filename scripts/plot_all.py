@@ -272,16 +272,30 @@ def plot_profile(r):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("results")
+    ap.add_argument("results", nargs="+", help="results.json files; later files override earlier keys")
     ap.add_argument("--llamacpp", default=None)
+    ap.add_argument("--merged", default=str(ROOT / "results.json"), help="write the merged results here")
     a = ap.parse_args()
     OUT.mkdir(exist_ok=True)
-    r = json.load(open(a.results))
+    r = {}
+    for p in a.results:
+        r.update(json.load(open(p)))
     llama = json.load(open(a.llamacpp)) if a.llamacpp else None
-    pr = plot_pred_vs_measured(r, llama)
-    plot_roofline(r); plot_gemv_stages(r); plot_autotune(r); plot_groups(r); plot_fusion(r)
-    plot_attention(r); plot_bw_clock(r); plot_profile(r)
-    json.dump(pr, open(OUT / "predictions.json", "w"), indent=1)
+    if llama is not None:
+        r["llamacpp"] = llama
+    json.dump(r, open(a.merged, "w"), indent=1)
+    plots = [("pred_vs_measured", lambda: plot_pred_vs_measured(r, llama)), ("roofline", lambda: plot_roofline(r)),
+             ("gemv_stages", lambda: plot_gemv_stages(r)), ("autotune", lambda: plot_autotune(r)),
+             ("groups", lambda: plot_groups(r)), ("fusion", lambda: plot_fusion(r)),
+             ("attention", lambda: plot_attention(r)), ("bw_clock", lambda: plot_bw_clock(r)),
+             ("profile", lambda: plot_profile(r))]
+    for name, fn in plots:
+        try:
+            out = fn()
+            if name == "pred_vs_measured":
+                json.dump(out, open(OUT / "predictions.json", "w"), indent=1)
+        except KeyError as e:
+            print(f"skip {name}: missing {e}")
 
 
 if __name__ == "__main__":
