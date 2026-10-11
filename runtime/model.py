@@ -127,6 +127,7 @@ class Model:
         self.act = torch.empty(self.I, **h16); self.down = torch.empty(self.H, **h16)
         self.logits = torch.empty(self.V, **h16)
         self.graph = None
+        self.host_pos = 0
 
     # ------------------------------------------------------------------ helpers
     def set_attention_partition(self, ctx_cap, part_size=None):
@@ -135,6 +136,7 @@ class Model:
         ps = part_size or self.cfg.part_size or self._policy_part_size(ctx_cap)
         self.part_size = ps
         self.max_splits = max(1, math.ceil(ctx_cap / ps))
+        self.ctx_cap = self.max_splits * ps  # attention silently ignores tokens past this: run_step enforces it
         f32 = dict(dtype=torch.float32, device=self.cfg.device)
         self.o_part = torch.empty(self.n_q, self.max_splits, self.D, **f32)
         self.m_part = torch.empty(self.n_q, self.max_splits, **f32)
@@ -152,11 +154,15 @@ class Model:
         p = Path(self.cfg.attn_policy_path)
         return json.load(open(p)) if p.exists() else {}
 
-    def _policy_part_size(self, max_ctx):
-        for ent in self._policy().get("policy", []):  # sorted by max_ctx ascending
-            if max_ctx <= ent["max_ctx"]:
-                return ent["part_size"]
-        return 512
+    def _policy_part_size(self, ctx_cap):
+        """Entry measured at the largest context <= ctx_cap (entries are keyed by the context they were tuned at;
+        the old "first entry >= cap" rule picked the next bucket up whenever the cap had headroom, e.g. cap 1104
+        for ctx 1024 got the 2K split size)."""
+        ents = [e for e in self._policy().get("policy", []) if e["max_ctx"] < (1 << 30)]
+        if not ents:
+            return 512
+        below = [e for e in ents if e["max_ctx"] <= ctx_cap]
+        return (below[-1] if below else ents[0])["part_size"]
 
     def gemv_cfg(self, lin):
         if self.cfg.gemv_stage is not None:
@@ -238,6 +244,9 @@ class Model:
         torch.cuda.synchronize()
 
     def run_step(self, use_graph=True):
+        self.host_pos += 1
+        if self.host_pos > self.ctx_cap:
+            raise RuntimeError(f"context {self.host_pos} exceeds the prepared attention cap {self.ctx_cap}; call prepare()")
         if use_graph and self.graph is not None:
             self.graph.replay()
         else:
@@ -246,6 +255,7 @@ class Model:
     # ------------------------------------------------------------------ high-level
     def reset(self, pos=0):
         self.pos.fill_(pos)
+        self.host_pos = pos
 
     def teacher_force(self, tokens, use_graph=True, collect_logits=False):
         """Feed tokens[i] at positions pos..; returns logits [len, V] (fp16) if requested."""

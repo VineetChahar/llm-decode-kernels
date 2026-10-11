@@ -95,9 +95,11 @@ def make_cache(ctx, n_kv, page, D=64, peaky=1.0):
     return kc, vc, bt
 
 
-def run_attn(q, kc, vc, bt, ctx, PS, version=2):
+def run_attn(q, kc, vc, bt, ctx, PS, version=2, spare=0):
+    """spare > 0 sizes the split buffers for more splits than ctx needs, as the runtime does (buffers are sized for
+    the prepared cap): surplus split blocks must exit and combine must ignore the unused slots."""
     n_q = q.numel() // 64
-    max_splits = max(1, (ctx + PS - 1) // PS)
+    max_splits = max(1, (ctx + PS - 1) // PS) + spare
     o_part = torch.empty(n_q, max_splits, 64, device=dev)
     m_part = torch.empty(n_q, max_splits, device=dev); l_part = torch.empty_like(m_part)
     out = torch.empty(n_q, 64, dtype=torch.half, device=dev)
@@ -108,7 +110,7 @@ def run_attn(q, kc, vc, bt, ctx, PS, version=2):
 
 def test_attention():
     # ctx=128 vs contiguous reference first
-    for n_q, n_kv in ((32, 4), (8, 8), (16, 4)):
+    for n_q, n_kv in ((32, 4), (8, 8), (16, 4), (8, 4)):  # HPG 8, 1, 4, 2
         for page in (16, 32):
             kc, vc, bt = make_cache(128, n_kv, page)
             q = torch.randn(n_q, 64, device=dev).half()
@@ -131,9 +133,18 @@ def test_attention():
             kc, vc, bt = make_cache(ctx, 4, 16, peaky=peaky)
             q = torch.randn(32, 64, device=dev).half()
             ref = R.paged_attention_ref(q, kc, vc, bt, ctx, 16)
-            for PS in (ctx, 1024, 256, 64):
+            for PS in (ctx, 1024, 256, 128, 64):
                 for ver in (1, 2, 3):
                     record(f"attn ctx{ctx} peaky{peaky} PS{PS} v{ver}", run_attn(q, kc, vc, bt, ctx, PS, ver), ref, 2e-3)
+    # runtime conditions: buffers sized for a larger cap (surplus splits exit), incl. the single-live-split path
+    # where the partial kernel writes `out` itself and combine must exit; PS values from configs/attn_policy.json
+    for ctx in (1, 40, 64, 100, 700, 2048, 5000):
+        kc, vc, bt = make_cache(ctx, 4, 16, peaky=6.0)
+        q = torch.randn(32, 64, device=dev).half()
+        ref = R.paged_attention_ref(q, kc, vc, bt, ctx, 16)
+        for PS in (64, 128, 256):
+            for ver in (1, 2, 3):
+                record(f"attn runtime ctx{ctx} PS{PS} spare8 v{ver}", run_attn(q, kc, vc, bt, ctx, PS, ver, spare=8), ref, 2e-3)
 
 
 def test_fused():

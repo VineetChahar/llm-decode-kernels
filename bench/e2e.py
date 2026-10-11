@@ -17,6 +17,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from runtime.model import Model, DecodeConfig
 from bench.timing import Results, env_info, clocks, cool
+import bench.timing as T
 from bench.prompts import PROMPTS
 
 MID = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
@@ -139,8 +140,10 @@ def time_decode(m, ctx, n_tok=64, warmup=5, use_graph=True):
         r = _time_decode_once(m, ctx, n_tok, warmup, use_graph); r["attempt"] = attempt
         if best is None or r["clocks_after"].get("sm_mhz", 0) > best["clocks_after"].get("sm_mhz", 0):
             best = r
-        if r["clocks_after"].get("sm_mhz", 0) >= MIN_SM_MHZ or attempt == RETRIES - 1:
+        if (r["clocks_after"].get("sm_mhz", 0) >= MIN_SM_MHZ or attempt == RETRIES - 1
+                or T._cooled >= T.COOLDOWN_BUDGET_S):
             break
+        T._cooled += COOLDOWN_S
         time.sleep(COOLDOWN_S)
     best["throttled"] = best["clocks_after"].get("sm_mhz", 0) < MIN_SM_MHZ
     return best

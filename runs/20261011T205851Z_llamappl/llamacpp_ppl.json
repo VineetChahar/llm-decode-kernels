@@ -1,0 +1,12 @@
+{
+ "Q8_0": {
+  "ppl": 19.9749,
+  "stderr": 0.16652
+ },
+ "Q4_K_M": {
+  "ppl": 20.2916,
+  "stderr": 0.16587
+ },
+ "rel_delta_pct_Q4KM_vs_Q8": 1.5854897896860454,
+ "protocol": "llama-perplexity -c 512, full WikiText-2 test (\"\".join of HF raw lines)"
+}

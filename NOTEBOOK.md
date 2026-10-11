@@ -12,7 +12,7 @@ Running log of decisions, measurements, failures. Newest entries at the bottom o
 - **Scale/zero stored as an interleaved half2 [N, K/G]** → one 4-byte load per group per row.
 - **Prefill stays outside the custom kernels**: prompts are fed through the *decode* path token-by-token (graph-replayed). Simple, exercises exactly the kernels under test; prefill speed is not a goal.
 - **CUDA graphs for the decode step**: kernels read `pos` from a device int, so one captured graph serves every token; grid sizes are fixed at the run's max context (surplus attention splits exit early).
-- **L2 flush (16 MB memset) before every timed GEMV/attention iteration**: T4 L2 is 4 MB and a 2.6 MB QKV weight would otherwise be L2-resident across iterations, inflating bandwidth. In the real model consecutive layers never reuse weights.
+- **L2 flush (16 MB read; originally a memset — see measurement bug #2) before every timed GEMV/attention iteration**: T4 L2 is 4 MB and a 2.6 MB QKV weight would otherwise be L2-resident across iterations, inflating bandwidth. In the real model consecutive layers never reuse weights.
 - **Long-context speed runs fill the KV cache with random values** rather than prefilling 16K real tokens: timing is data-independent, and TinyLlama is trained to 2048 positions, so quality beyond 2K isn't meaningful anyway (speed-only past 2K, stated in RESULTS).
 - **Block table is a random permutation of pages** in every test and benchmark, so paging is exercised, not a contiguous buffer in disguise.
 

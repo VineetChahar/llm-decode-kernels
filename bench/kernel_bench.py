@@ -149,13 +149,18 @@ def bench_attn():
             print(f"v{ver} ctx {ctx:5d}: no-split {ns['median_us']:7.1f}us | best PS={b['part_size']:5d} ({b['splits']} splits) "
                   f"{b['median_us']:7.1f}us {b['gbps']:5.0f} GB/s | SDPA {base[-1]['median_us']:7.1f}us | repeat+SDPA {base[-2]['median_us']:7.1f}us")
         del kc, vc, k, v
-    # the runtime uses one kernel version: the one with the lowest summed best-split time over all contexts
+    # the runtime uses one kernel version: lowest geometric-mean best-split time over contexts (a plain sum would be
+    # decided by 16K alone). Throttled rows are excluded from every choice when an unthrottled row exists.
     ctxs = sorted({r["ctx"] for r in rows})
-    best_t = lambda v, c: min(r["median_us"] for r in rows if r["ctx"] == c and r["version"] == v)
-    vbest = min({r["version"] for r in rows}, key=lambda v: sum(best_t(v, c) for c in ctxs))
+    def cands(v, c):
+        cr = [r for r in rows if r["ctx"] == c and r["version"] == v]
+        ok = [r for r in cr if not r.get("throttled")]
+        return ok or cr
+    best_t = lambda v, c: min(r["median_us"] for r in cands(v, c))
+    vbest = min({r["version"] for r in rows}, key=lambda v: sum(math.log(best_t(v, c)) for c in ctxs))
     policy = []
     for ctx in ctxs:
-        b = min((r for r in rows if r["ctx"] == ctx and r["version"] == vbest), key=lambda r: r["median_us"])
+        b = min(cands(vbest, ctx), key=lambda r: r["median_us"])
         policy.append({"max_ctx": ctx, "part_size": b["part_size"]})
     policy.append({"max_ctx": 1 << 30, "part_size": policy[-1]["part_size"]})
     print(f"attention policy: version {vbest}, {policy}")

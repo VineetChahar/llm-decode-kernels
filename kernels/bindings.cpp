@@ -52,6 +52,8 @@ void paged_attention(torch::Tensor q, torch::Tensor kc, torch::Tensor vc, torch:
   const int n_q = q.numel() / 64, n_kv = kc.size(1), P = kc.size(2);
   const int hpg = n_q / n_kv;
   TORCH_CHECK(n_q % n_kv == 0 && (hpg == 1 || hpg == 2 || hpg == 4 || hpg == 8), "heads-per-group must be 1/2/4/8");
+  TORCH_CHECK(part_size > 0, "part_size must be > 0");
+  TORCH_CHECK(version >= 1 && version <= 3, "attention version must be 1, 2 or 3");
   const int max_splits = o_part.size(1);
   TORCH_CHECK(o_part.size(0) == n_q && m_part.size(1) == max_splits && l_part.size(1) == max_splits);
   paged_attention_launch(version, q.data_ptr(), kc.data_ptr(), vc.data_ptr(), bt.data_ptr<int>(), pos.data_ptr<int>(), n_q,

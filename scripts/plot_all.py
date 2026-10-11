@@ -282,6 +282,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("results", nargs="+", help="results.json files; later files override earlier keys")
     ap.add_argument("--llamacpp", default=None)
+    ap.add_argument("--llamacpp-ppl", default=None, help="llamacpp_ppl.json from scripts/llamacpp_ppl.sh")
     ap.add_argument("--merged", default=str(ROOT / "results.json"), help="write the merged results here")
     a = ap.parse_args()
     OUT.mkdir(exist_ok=True)
@@ -291,6 +292,8 @@ def main():
     llama = json.load(open(a.llamacpp)) if a.llamacpp else None
     if llama is not None:
         r["llamacpp"] = llama
+    if a.llamacpp_ppl:
+        r["llamacpp_perplexity"] = json.load(open(a.llamacpp_ppl))
     json.dump(r, open(a.merged, "w"), indent=1)
     plots = [("pred_vs_measured", lambda: plot_pred_vs_measured(r, llama)), ("roofline", lambda: plot_roofline(r)),
              ("gemv_stages", lambda: plot_gemv_stages(r)), ("autotune", lambda: plot_autotune(r)),

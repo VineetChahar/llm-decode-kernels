@@ -1,0 +1,29 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ bash scripts/llamacpp_ppl.sh
+Cloning into 'llama.cpp'...
+f2cc7282ce0042641df55e0e563b75e824e2b647
+CMAKE_BUILD_TYPE=Release
+[100%] Building CXX object tools/perplexity/CMakeFiles/llama-perplexity.dir/main.cpp.o
+[100%] Linking CXX executable ../../bin/llama-perplexity
+[100%] Built target llama-perplexity
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+/tmp/tinyllama-1.1b-chat-v1.0.Q8_0.gguf
+
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 52529.15 examples/s]
+
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 36718/36718 [00:00<00:00, 716382.39 examples/s]
+
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 602689.76 examples/s]
+1.13.554.303 I Final estimate: PPL = 19.9749 +/- 0.16652
+1.16.432.123 I Final estimate: PPL = 20.2916 +/- 0.16587
+{'Q8_0': {'ppl': 19.9749, 'stderr': 0.16652}, 'Q4_K_M': {'ppl': 20.2916, 'stderr': 0.16587}, 'rel_delta_pct_Q4KM_vs_Q8': 1.5854897896860454, 'protocol': 'llama-perplexity -c 512, full WikiText-2 test ("".join of HF raw lines)'}
+EXIT_CODE=0

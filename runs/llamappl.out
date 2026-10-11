@@ -24,3 +24,48 @@ Kernel version 3 successfully pushed.  Please check progress at https://www.kagg
 [  827s] KernelWorkerStatus.RUNNING
 [  863s] KernelWorkerStatus.RUNNING
 [  896s] KernelWorkerStatus.RUNNING
+[  929s] KernelWorkerStatus.RUNNING
+[  963s] KernelWorkerStatus.RUNNING
+[ 1004s] KernelWorkerStatus.RUNNING
+[ 1039s] KernelWorkerStatus.RUNNING
+[ 1071s] KernelWorkerStatus.RUNNING
+[ 1106s] KernelWorkerStatus.RUNNING
+[ 1139s] KernelWorkerStatus.RUNNING
+[ 1173s] KernelWorkerStatus.RUNNING
+[ 1206s] KernelWorkerStatus.RUNNING
+[ 1238s] KernelWorkerStatus.RUNNING
+[ 1271s] KernelWorkerStatus.RUNNING
+[ 1304s] KernelWorkerStatus.RUNNING
+[ 1336s] KernelWorkerStatus.RUNNING
+[ 1367s] KernelWorkerStatus.RUNNING
+[ 1399s] KernelWorkerStatus.RUNNING
+[ 1431s] KernelWorkerStatus.RUNNING
+[ 1465s] KernelWorkerStatus.RUNNING
+[ 1496s] KernelWorkerStatus.RUNNING
+[ 1529s] KernelWorkerStatus.RUNNING
+[ 1562s] KernelWorkerStatus.RUNNING
+[ 1594s] KernelWorkerStatus.RUNNING
+[ 1627s] KernelWorkerStatus.RUNNING
+[ 1660s] KernelWorkerStatus.RUNNING
+[ 1692s] KernelWorkerStatus.COMPLETE
+ode-kernels/runs/20261011T205851Z_llamappl/ppl_Q8_0.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T205851Z_llamappl/run.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T205851Z_llamappl/llm-decode-llamacpp.log 
+ 
+/tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+/tmp/tinyllama-1.1b-chat-v1.0.Q8_0.gguf
+
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 52529.15 examples/s]
+
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 36718/36718 [00:00<00:00, 716382.39 examples/s]
+
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 602689.76 examples/s]
+1.13.554.303 I Final estimate: PPL = 19.9749 +/- 0.16652
+1.16.432.123 I Final estimate: PPL = 20.2916 +/- 0.16587
+{'Q8_0': {'ppl': 19.9749, 'stderr': 0.16652}, 'Q4_K_M': {'ppl': 20.2916, 'stderr': 0.16587}, 'rel_delta_pct_Q4KM_vs_Q8': 1.5854897896860454, 'protocol': 'llama-perplexity -c 512, full WikiText-2 test ("".join of HF raw lines)'}
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T205851Z_llamappl

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Pack the repo, push it as a private Kaggle GPU script kernel, poll, pull outputs into runs/<UTC>/.
 
-usage: kaggle_run.py --cmd "python bench/run_all.py --only tests" [--accel NvidiaTeslaT4] [--slug llm-decode-kernels]
+usage: kaggle_run.py --cmd "bash scripts/run_all.sh" [--accel NvidiaTeslaT4] [--slug llm-decode-kernels]
 
 * polls `kaggle kernels status` every 30 s
 * pulls everything the run wrote to /kaggle/working (RESULTS_DIR) into runs/<UTC timestamp>/

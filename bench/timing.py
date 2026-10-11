@@ -21,6 +21,7 @@ MIN_SM_MHZ = 1400
 COOLDOWN_S = 10
 RETRIES = 2
 COOLDOWN_BUDGET_S = 900  # total cool-down per process; past it, measure once and flag `throttled`
+COOL_BUDGET_S = 1500     # cap for cool() + retries together, so a node idling above target can't stall a run
 _cooled = 0.0
 
 
@@ -51,10 +52,14 @@ def clocks():
 def cool(target_c=60, max_s=90):
     """Idle until the GPU is below target_c (or max_s passes). A hot T4 enters hw_slowdown and a 10 s pause does
     not recover it (e2e4: 73 C, 930 MHz after retries). Returns the seconds waited."""
+    global _cooled
     t0 = time.time()
-    while time.time() - t0 < max_s and clocks().get("temp_c", 0) >= target_c:
+    while (time.time() - t0 < max_s and _cooled + (time.time() - t0) < COOL_BUDGET_S
+           and clocks().get("temp_c", 0) >= target_c):
         time.sleep(3)
-    return time.time() - t0
+    waited = time.time() - t0
+    _cooled += waited
+    return waited
 
 
 def time_fn(fn, warmup=5, iters=50, flush=True, gate=True):

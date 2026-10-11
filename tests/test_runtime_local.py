@@ -15,7 +15,7 @@ with torch.no_grad():
     ref = hf(ids[None]).logits[0].float()
 sd = {k: v.half() for k, v in hf.state_dict().items()}
 for wfmt in ("fp16", "int4"):
-    m = Model(sd, hf.config, DecodeConfig(weights=wfmt, backend="ref", device="cpu", max_ctx=64))
+    m = Model(sd, hf.config, DecodeConfig(weights=wfmt, lm_head="fp16", backend="ref", device="cpu", max_ctx=64))
     m.reset(0)
     out = m.teacher_force(ids, use_graph=False, collect_logits=True).float()
     agree = (out.argmax(-1) == ref.argmax(-1)).float().mean().item()

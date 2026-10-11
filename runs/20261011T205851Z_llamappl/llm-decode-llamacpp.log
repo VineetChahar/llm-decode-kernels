@@ -1,0 +1,38 @@
+[{"stream_name":"stderr","time":0.826681103,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.826726334,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.858012881,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.894170616,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.900688045,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.905933102,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.945370259,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.945423705,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.945428316,"data":"$ bash scripts/llamacpp_ppl.sh\n"}
+,{"stream_name":"stdout","time":0.992196778,"data":"Cloning into 'llama.cpp'...\n"}
+,{"stream_name":"stdout","time":4.405734034,"data":"f2cc7282ce0042641df55e0e563b75e824e2b647\n"}
+,{"stream_name":"stdout","time":5.7969651110000004,"data":"CMAKE_BUILD_TYPE=Release\n"}
+,{"stream_name":"stdout","time":1477.236220492,"data":"[100%] Building CXX object tools/perplexity/CMakeFiles/llama-perplexity.dir/main.cpp.o\n"}
+,{"stream_name":"stdout","time":1477.236303801,"data":"[100%] Linking CXX executable ../../bin/llama-perplexity\n"}
+,{"stream_name":"stdout","time":1477.236320239,"data":"[100%] Built target llama-perplexity\n"}
+,{"stream_name":"stdout","time":1483.576383607,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":1486.354336584,"data":"/tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf\n"}
+,{"stream_name":"stdout","time":1493.128035112,"data":"/tmp/tinyllama-1.1b-chat-v1.0.Q8_0.gguf\n"}
+,{"stream_name":"stdout","time":1498.9029259,"data":"\n"}
+,{"stream_name":"stdout","time":1498.98605888,"data":"Generating test split:   0%|          | 0/4358 [00:00\u003c?, ? examples/s]\n"}
+,{"stream_name":"stdout","time":1498.986078266,"data":"Generating test split: 100%|██████████| 4358/4358 [00:00\u003c00:00, 52529.15 examples/s]\n"}
+,{"stream_name":"stdout","time":1498.986443587,"data":"\n"}
+,{"stream_name":"stdout","time":1499.037856584,"data":"Generating train split:   0%|          | 0/36718 [00:00\u003c?, ? examples/s]\n"}
+,{"stream_name":"stdout","time":1499.037881753,"data":"Generating train split: 100%|██████████| 36718/36718 [00:00\u003c00:00, 716382.39 examples/s]\n"}
+,{"stream_name":"stdout","time":1499.038231026,"data":"\n"}
+,{"stream_name":"stdout","time":1499.0445792,"data":"Generating validation split:   0%|          | 0/3760 [00:00\u003c?, ? examples/s]\n"}
+,{"stream_name":"stdout","time":1499.044595878,"data":"Generating validation split: 100%|██████████| 3760/3760 [00:00\u003c00:00, 602689.76 examples/s]\n"}
+,{"stream_name":"stdout","time":1576.533561534,"data":"1.13.554.303 I Final estimate: PPL = 19.9749 +/- 0.16652\n"}
+,{"stream_name":"stdout","time":1653.232929428,"data":"1.16.432.123 I Final estimate: PPL = 20.2916 +/- 0.16587\n"}
+,{"stream_name":"stdout","time":1653.360947056,"data":"{'Q8_0': {'ppl': 19.9749, 'stderr': 0.16652}, 'Q4_K_M': {'ppl': 20.2916, 'stderr': 0.16587}, 'rel_delta_pct_Q4KM_vs_Q8': 1.5854897896860454, 'protocol': 'llama-perplexity -c 512, full WikiText-2 test (\"\".join of HF raw lines)'}\n"}
+,{"stream_name":"stdout","time":1653.371154708,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":1655.36305218,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1655.363080084,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1655.62871428,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1655.628740779,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1656.390382286,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1657.378575794,"data":"[NbConvertApp] Writing 361670 bytes to __results__.html\n"}
+]
