@@ -207,6 +207,160 @@ paged_attn_partial(const half* __restrict__ q, const half* __restrict__ kc, cons
   }
 }
 
+// v3: barrier-free main loop. v2 spends three __syncthreads per 64-token chunk (scores -> smem softmax -> V),
+// so the four warps load, compute and wait in lockstep and a block's DRAM requests come in bursts. v3 gives each
+// warp its own 16-token chunks (= one page at P=16; warp w takes chunks t0 + 16*(w + 4k)) and its own online-
+// softmax state: m is warp-uniform per head (chunk max via xor-8/16 shuffles), l and o are per-lane partials
+// over the lane's token group g (every c-lane of a group holds the same p, so l stays consistent). Scores never
+// touch shared memory. Warps are merged once at the end with the same rescale rule the combine kernel uses:
+//     M = max_w m_w;  L = sum_w l_w e^(m_w - M);  O = sum_w o_w e^(m_w - M)
+// so warps drift freely and their K/V loads overlap other warps' math. Next chunk's K/V are prefetched into
+// registers before the current chunk's math (manual double-buffering; Turing has no cp.async).
+template <int HPG>
+__global__ void __launch_bounds__(NT)
+paged_attn_partial_v3(const half* __restrict__ q, const half* __restrict__ kc, const half* __restrict__ vc,
+                      const int* __restrict__ bt, const int* __restrict__ pos_ptr, int n_kv, int log2P, int PS,
+                      float scale, float* __restrict__ o_part, float* __restrict__ m_part,
+                      float* __restrict__ l_part, half* __restrict__ out, int max_splits) {
+  constexpr int NW = NT / 32, WCH = 16, SL = WCH / 4;  // 16 tokens per warp chunk = 4 slots of 4 tokens
+  __shared__ float q_s[HPG][D];
+  __shared__ float red[NW][HPG][D];
+  __shared__ float wm[NW][HPG], wl[NW][HPG];
+
+  const int kvh = blockIdx.x, split = blockIdx.y;
+  const int ctx = *pos_ptr + 1;
+  const int nsplit = min((ctx + PS - 1) / PS, max_splits);
+  if (split >= nsplit) return;
+  const int t0 = split * PS, t1 = min(ctx, t0 + PS);
+  const int tid = threadIdx.x, warp = tid >> 5, lane = tid & 31, g = lane >> 3, c = lane & 7;
+  const int P = 1 << log2P;
+
+  for (int i = tid; i < HPG * D; i += NT) q_s[i / D][i % D] = __half2float(q[kvh * HPG * D + i]) * scale;
+  __syncthreads();
+
+  float acc[HPG][8], m[HPG], l[HPG];
+#pragma unroll
+  for (int h = 0; h < HPG; ++h) {
+    m[h] = -CUDART_INF_F; l[h] = 0.f;
+#pragma unroll
+    for (int e = 0; e < 8; ++e) acc[h][e] = 0.f;
+  }
+
+  auto row = [&](const half* cache, int t) {
+    const size_t base = ((((size_t)__ldg(bt + (t >> log2P)) * n_kv + kvh) << log2P) + (t & (P - 1))) * D;
+    return __ldg(reinterpret_cast<const uint4*>(cache + base) + c);
+  };
+  auto load = [&](int cs, uint4* kr, uint4* vr) {
+#pragma unroll
+    for (int j = 0; j < SL; ++j) {
+      const int t = cs + 4 * j + g;
+      if (t < t1) { kr[j] = row(kc, t); vr[j] = row(vc, t); }
+      else { kr[j] = make_uint4(0, 0, 0, 0); vr[j] = kr[j]; }
+    }
+  };
+
+  int cs = t0 + WCH * warp;
+  uint4 kr[SL], vr[SL];
+  if (cs < t1) load(cs, kr, vr);
+  for (; cs < t1; cs += WCH * NW) {
+    // prefetch the next chunk while this one is computed
+    uint4 kn[SL], vn[SL];
+    const int cn = cs + WCH * NW;
+    if (cn < t1) load(cn, kn, vn);
+    else {
+#pragma unroll
+      for (int j = 0; j < SL; ++j) { kn[j] = make_uint4(0, 0, 0, 0); vn[j] = kn[j]; }
+    }
+
+    float s[SL][HPG];
+#pragma unroll
+    for (int j = 0; j < SL; ++j) {
+      float kf[8];
+      unpack8(kr[j], kf);
+      const bool valid = cs + 4 * j + g < t1;
+#pragma unroll
+      for (int h = 0; h < HPG; ++h) {
+        float a = 0.f;
+#pragma unroll
+        for (int e = 0; e < 8; ++e) a = fmaf(kf[e], q_s[h][c * 8 + e], a);
+        a += __shfl_xor_sync(0xffffffffu, a, 1);
+        a += __shfl_xor_sync(0xffffffffu, a, 2);
+        a += __shfl_xor_sync(0xffffffffu, a, 4);
+        s[j][h] = valid ? a : -CUDART_INF_F;
+      }
+    }
+#pragma unroll
+    for (int h = 0; h < HPG; ++h) {
+      float cm = s[0][h];
+#pragma unroll
+      for (int j = 1; j < SL; ++j) cm = fmaxf(cm, s[j][h]);
+      cm = fmaxf(cm, __shfl_xor_sync(0xffffffffu, cm, 8));
+      cm = fmaxf(cm, __shfl_xor_sync(0xffffffffu, cm, 16));  // finite: token cs (g=0, j=0) is always live
+      const float mn = fmaxf(m[h], cm);
+      const float al = __expf(m[h] - mn);  // first chunk: exp(-inf) = 0
+      m[h] = mn;
+      l[h] *= al;
+#pragma unroll
+      for (int e = 0; e < 8; ++e) acc[h][e] *= al;
+    }
+#pragma unroll
+    for (int j = 0; j < SL; ++j) {
+      float vf[8];
+      unpack8(vr[j], vf);
+#pragma unroll
+      for (int h = 0; h < HPG; ++h) {
+        const float p = __expf(s[j][h] - m[h]);  // masked: 0
+        l[h] += p;
+#pragma unroll
+        for (int e = 0; e < 8; ++e) acc[h][e] = fmaf(p, vf[e], acc[h][e]);
+      }
+    }
+#pragma unroll
+    for (int j = 0; j < SL; ++j) { kr[j] = kn[j]; vr[j] = vn[j]; }
+  }
+
+  // ---- warp partials: reduce over the 4 token groups, then merge warps with the max-rescale rule
+#pragma unroll
+  for (int h = 0; h < HPG; ++h) {
+    l[h] += __shfl_xor_sync(0xffffffffu, l[h], 8);
+    l[h] += __shfl_xor_sync(0xffffffffu, l[h], 16);
+#pragma unroll
+    for (int e = 0; e < 8; ++e) {
+      acc[h][e] += __shfl_xor_sync(0xffffffffu, acc[h][e], 8);
+      acc[h][e] += __shfl_xor_sync(0xffffffffu, acc[h][e], 16);
+    }
+  }
+  if (g == 0) {
+#pragma unroll
+    for (int h = 0; h < HPG; ++h)
+#pragma unroll
+      for (int e = 0; e < 8; ++e) red[warp][h][c * 8 + e] = acc[h][e];
+  }
+  if (lane == 0) {
+#pragma unroll
+    for (int h = 0; h < HPG; ++h) { wm[warp][h] = m[h]; wl[warp][h] = l[h]; }
+  }
+  __syncthreads();
+  for (int i = tid; i < HPG * D; i += NT) {
+    const int h = i / D, d = i % D, head = kvh * HPG + h;
+    float M = -CUDART_INF_F;
+#pragma unroll
+    for (int w = 0; w < NW; ++w) M = fmaxf(M, wm[w][h]);
+    float o = 0.f, L = 0.f;
+#pragma unroll
+    for (int w = 0; w < NW; ++w) {
+      const float a = __expf(wm[w][h] - M);  // idle warp: m = -inf -> 0
+      o = fmaf(a, red[w][h][d], o);
+      L = fmaf(a, wl[w][h], L);
+    }
+    if (nsplit == 1) out[head * D + d] = __float2half(o / L);
+    else {
+      o_part[((size_t)head * max_splits + split) * D + d] = o;
+      if (d == 0) { m_part[head * max_splits + split] = M; l_part[head * max_splits + split] = L; }
+    }
+  }
+}
+
 __global__ void paged_attn_combine(const float* __restrict__ o_part, const float* __restrict__ m_part,
                                    const float* __restrict__ l_part, const int* __restrict__ pos_ptr, int PS,
                                    int max_splits, half* __restrict__ out) {
@@ -280,7 +434,11 @@ void paged_attention_launch(int version, const void* q, const void* kc, const vo
   dim3 grid(n_kv, max_splits);
 #define HCASE(H)                                                                                                  \
   case H:                                                                                                         \
-    if (version >= 2)                                                                                             \
+    if (version >= 3)                                                                                             \
+      paged_attn_partial_v3<H><<<grid, NT, 0, st>>>((const half*)q, (const half*)kc, (const half*)vc, bt, pos,     \
+                                                    n_kv, log2P, PS, scale, o_part, m_part, l_part, (half*)out,    \
+                                                    max_splits);                                                  \
+    else if (version >= 2)                                                                                        \
       paged_attn_partial<H, true><<<grid, NT, 0, st>>>((const half*)q, (const half*)kc, (const half*)vc, bt, pos,  \
                                                        n_kv, log2P, PS, scale, o_part, m_part, l_part, (half*)out, \
                                                        max_splits);                                               \

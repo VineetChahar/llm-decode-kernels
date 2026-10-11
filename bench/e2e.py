@@ -16,7 +16,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from runtime.model import Model, DecodeConfig
-from bench.timing import Results, env_info, clocks
+from bench.timing import Results, env_info, clocks, cool
 from bench.prompts import PROMPTS
 
 MID = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
@@ -31,16 +31,16 @@ hf = AutoModelForCausalLM.from_pretrained(MID, dtype=torch.float16).to(dev).eval
 SD = {k: v for k, v in hf.state_dict().items()}
 
 CONFIGS = {
-    "rt_int4_g128":          dict(weights="int4", group=128),
-    "rt_int4_g64":           dict(weights="int4", group=64),
-    "rt_int4_g256":          dict(weights="int4", group=256),
+    "rt_int4_g128":          dict(weights="int4", group=128, lm_head="fp16"),
+    "rt_int4_g64":           dict(weights="int4", group=64, lm_head="fp16"),
+    "rt_int4_g256":          dict(weights="int4", group=256, lm_head="fp16"),
     "rt_int4_g128_int4head": dict(weights="int4", group=128, lm_head="int4"),
-    "rt_int4_g128_unfused":  dict(weights="int4", group=128, fused=False),
+    "rt_int4_g128_unfused":  dict(weights="int4", group=128, lm_head="fp16", fused=False),
     "rt_fp16":               dict(weights="fp16"),
     "rt_fp16_unfused":       dict(weights="fp16", fused=False),
-    "rt_int4_stage1":        dict(weights="int4", group=128, gemv_stage=(1, 1, 4, 0)),
-    "rt_int4_stage2":        dict(weights="int4", group=128, gemv_stage=(2, 4, 4, 1)),
-    "rt_int4_stage0":        dict(weights="int4", group=128, gemv_stage=(0, 1, 4, 0)),
+    "rt_int4_stage1":        dict(weights="int4", group=128, gemv_stage=(1, 1, 4, 0), lm_head="fp16"),
+    "rt_int4_stage2":        dict(weights="int4", group=128, gemv_stage=(2, 4, 4, 1), lm_head="fp16"),
+    "rt_int4_stage0":        dict(weights="int4", group=128, gemv_stage=(0, 1, 4, 0), lm_head="fp16"),
 }
 
 
@@ -185,7 +185,9 @@ def bench_speed():
         rows = []
         for ctx in ctxs:
             m.prepare(ctx + 80)
+            waited = cool()
             r = time_decode(m, ctx); r["part_size"] = m.part_size; r["max_splits"] = m.max_splits
+            r["cooled_s"] = waited; r["attn_version"] = m.attn_version
             rows.append(r)
             line = (f"{name:24s} ctx {ctx:5d}: graph {r['median_us'] / 1e3:6.3f} ms ({r['tok_s']:6.1f} tok/s, iqr {r['iqr_us']:5.1f}us)"
                     f" sm={r['clocks_after'].get('sm_mhz')}MHz{' THROTTLED' if r['throttled'] else ''}")

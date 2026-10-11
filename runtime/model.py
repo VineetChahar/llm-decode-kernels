@@ -12,7 +12,7 @@ prefill speed is out of scope; it stays simple and exercises exactly the kernels
 Knobs (DecodeConfig):
     weights   "int4" (W4A16 GEMV) | "fp16" (cuBLAS via torch.mm, i.e. the HF GEMM call)
     group     quantization group size (64/128/256)
-    lm_head   "fp16" | "int4"
+    lm_head   "auto" (INT4 iff weights are INT4) | "fp16" | "int4"
     fused     fused add+RMSNorm and SwiGLU kernels vs the HF-style torch op sequences
     backend   "cuda" (custom kernels) | "ref" (torch reference ops; runs on CPU for local validation)
     gemv_cfg  {"NxK_G": [R, warps, pf]} from configs/autotune.json, or a fixed (stage, R, warps, pf)
@@ -32,13 +32,14 @@ ROOT = Path(__file__).resolve().parents[1]
 class DecodeConfig:
     weights: str = "int4"
     group: int = 128
-    lm_head: str = "fp16"
+    lm_head: str = "auto"       # "auto": INT4 when weights are INT4 (+12.6 % tok/s for +0.05 ppl, RESULTS.md §6)
     fused: bool = True
     backend: str = "cuda"
     max_ctx: int = 2048
     page: int = 16
     part_size: int = 0          # attention partition (split) size; 0 -> policy from configs/attn_policy.json
-    attn_version: int = 2       # 1: serial-load partial + serial combine; 2: chunk-prefetch partial + parallel combine
+    attn_version: int = 0       # 0: the version chosen by the attention sweep (configs/attn_policy.json, fallback 2)
+                                # 1: serial loads; 2: chunk prefetch + 3 barriers/chunk; 3: per-warp softmax, no barriers
     gemv_stage: tuple = None    # (stage, R, warps, pf) to force one config everywhere; None -> autotune table
     autotune_path: str = str(ROOT / "configs" / "autotune.json")
     attn_policy_path: str = str(ROOT / "configs" / "attn_policy.json")
@@ -98,7 +99,8 @@ class Model:
                 "gu": Linear(wgu, cfg, quant, keep_ref), "down": Linear(g(p + "mlp.down_proj.weight"), cfg, quant, keep_ref)})
         self.norm_f = g("model.norm.weight").to(dev)
         lm = sd.get("lm_head.weight", sd["model.embed_tokens.weight"]).half()
-        self.lm_head = Linear(lm, cfg, cfg.lm_head == "int4", keep_ref)
+        head_int4 = cfg.lm_head == "int4" or (cfg.lm_head == "auto" and quant)
+        self.lm_head = Linear(lm, cfg, head_int4, keep_ref)
 
         # gemv config table
         self.gemv_table = {}
@@ -111,6 +113,7 @@ class Model:
         self.bt = (torch.randperm(self.n_pages) if cfg.shuffle_pages else torch.arange(self.n_pages)).int().to(dev)
         self.cos, self.sin = (t.to(dev) for t in R.rope_tables(cfg.max_ctx + 1, self.D, c.rope_theta if hasattr(c, "rope_theta") else 10000.0))
 
+        self.attn_version = cfg.attn_version or self._policy().get("version", 2)
         self.set_attention_partition(cfg.max_ctx)
 
         # device-resident decode state + static activation buffers
@@ -145,12 +148,14 @@ class Model:
         if use_graph:
             self.capture()
 
-    def _policy_part_size(self, max_ctx):
+    def _policy(self):
         p = Path(self.cfg.attn_policy_path)
-        if p.exists():
-            for ent in json.load(open(p))["policy"]:  # sorted by max_ctx ascending
-                if max_ctx <= ent["max_ctx"]:
-                    return ent["part_size"]
+        return json.load(open(p)) if p.exists() else {}
+
+    def _policy_part_size(self, max_ctx):
+        for ent in self._policy().get("policy", []):  # sorted by max_ctx ascending
+            if max_ctx <= ent["max_ctx"]:
+                return ent["part_size"]
         return 512
 
     def gemv_cfg(self, lin):
@@ -192,7 +197,7 @@ class Model:
         else:
             self.K.rope_append(self.qkv, self.cos, self.sin, self.pos, self.bt, kc, vc, self.n_q, self.n_kv)
             self.K.paged_attention(self.qkv[: self.n_q * self.D], kc, vc, self.bt, self.pos, self.part_size,
-                                   self.o_part, self.m_part, self.l_part, self.attn, self.cfg.attn_version)
+                                   self.o_part, self.m_part, self.l_part, self.attn, self.attn_version)
 
     # ------------------------------------------------------------------ decode step
     def step(self):

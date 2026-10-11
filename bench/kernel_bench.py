@@ -125,7 +125,7 @@ def bench_attn():
         pos = torch.tensor([ctx - 1], dtype=torch.int32, device="cuda")
         out = torch.empty(n_q, D, dtype=torch.half, device="cuda")
         kv_bytes = 2 * ctx * n_kv * D * 2
-        for ver in (1, 2):
+        for ver in (1, 2, 3):
             for PS in sorted({ctx, 8192, 4096, 2048, 1024, 512, 256, 128, 64}):
                 if PS > ctx: continue
                 ms = math.ceil(ctx / PS)
@@ -143,21 +143,28 @@ def bench_attn():
         base.append({"ctx": ctx, "impl": "HF repeat_kv+SDPA (contiguous)", **_t(t), "gbps": kv_bytes / t["median_us"] / 1e3})
         t = time_fn(lambda: torch.nn.functional.scaled_dot_product_attention(qh, k, v, enable_gqa=True), iters=50)
         base.append({"ctx": ctx, "impl": "SDPA enable_gqa (contiguous)", **_t(t), "gbps": kv_bytes / t["median_us"] / 1e3})
-        for ver in (1, 2):
+        for ver in (1, 2, 3):
             cr = [r for r in rows if r["ctx"] == ctx and r["version"] == ver]
             b = min(cr, key=lambda r: r["median_us"]); ns = [r for r in cr if r["splits"] == 1][0]
             print(f"v{ver} ctx {ctx:5d}: no-split {ns['median_us']:7.1f}us | best PS={b['part_size']:5d} ({b['splits']} splits) "
                   f"{b['median_us']:7.1f}us {b['gbps']:5.0f} GB/s | SDPA {base[-1]['median_us']:7.1f}us | repeat+SDPA {base[-2]['median_us']:7.1f}us")
         del kc, vc, k, v
+    # the runtime uses one kernel version: the one with the lowest summed best-split time over all contexts
+    ctxs = sorted({r["ctx"] for r in rows})
+    best_t = lambda v, c: min(r["median_us"] for r in rows if r["ctx"] == c and r["version"] == v)
+    vbest = min({r["version"] for r in rows}, key=lambda v: sum(best_t(v, c) for c in ctxs))
     policy = []
-    for ctx in sorted({r["ctx"] for r in rows}):
-        b = min((r for r in rows if r["ctx"] == ctx and r["version"] == 2), key=lambda r: r["median_us"])
+    for ctx in ctxs:
+        b = min((r for r in rows if r["ctx"] == ctx and r["version"] == vbest), key=lambda r: r["median_us"])
         policy.append({"max_ctx": ctx, "part_size": b["part_size"]})
     policy.append({"max_ctx": 1 << 30, "part_size": policy[-1]["part_size"]})
-    json.dump({"policy": policy}, open(ROOT / "configs" / "attn_policy.json", "w"), indent=1)
+    print(f"attention policy: version {vbest}, {policy}")
+    doc = {"version": vbest, "policy": policy}
+    json.dump(doc, open(ROOT / "configs" / "attn_policy.json", "w"), indent=1)
     if os.environ.get("RESULTS_DIR"):
-        json.dump({"policy": policy}, open(os.path.join(os.environ["RESULTS_DIR"], "attn_policy.json"), "w"), indent=1)
+        json.dump(doc, open(os.path.join(os.environ["RESULTS_DIR"], "attn_policy.json"), "w"), indent=1)
     res.put("attention_sweep", rows); res.put("attention_baselines", base); res.put("attention_policy", policy)
+    res.put("attention_version", vbest)
 
 
 def clock_probe(seconds=60):

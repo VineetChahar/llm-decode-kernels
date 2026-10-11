@@ -76,7 +76,7 @@ def roofline_points(r):
                     "ai": fl / g["bytes"], "gflops": fl / g["median_us"] / 1e3, "gbps": g["bytes"] / g["median_us"] / 1e3})
     pol = {p["max_ctx"]: p["part_size"] for p in r.get("attention_policy", [])}
     for a in r["attention_sweep"]:
-        if a.get("version", 2) != 2 or pol.get(a["ctx"]) != a["part_size"]:
+        if a.get("version", 2) != r.get("attention_version", 2) or pol.get(a["ctx"]) != a["part_size"]:
             continue
         kvb = 2 * a["ctx"] * NKV * D * 2
         fl = 2 * 2 * NQ * a["ctx"] * D

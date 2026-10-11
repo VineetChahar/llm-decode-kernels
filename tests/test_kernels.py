@@ -115,7 +115,7 @@ def test_attention():
             k, v = R.gather_kv(kc, vc, bt, 128, page)
             ref = R.attention_contiguous_ref(q, k, v)
             for PS in (4096, 64, 32, 48, 16):
-                for ver in (1, 2):
+                for ver in (1, 2, 3):
                     record(f"attn ctx128 hq{n_q} hkv{n_kv} P{page} PS{PS} v{ver}", run_attn(q, kc, vc, bt, 128, PS, ver), ref, 2e-3)
     # odd context lengths (partial last page and partial last chunk)
     for ctx in (1, 2, 17, 63, 65, 129, 1000):
@@ -123,7 +123,7 @@ def test_attention():
         q = torch.randn(32, 64, device=dev).half()
         ref = R.paged_attention_ref(q, kc, vc, bt, ctx, 16)
         for PS in (8192, 64, 256):
-            for ver in (1, 2):
+            for ver in (1, 2, 3):
                 record(f"attn ctx{ctx} PS{PS} v{ver}", run_attn(q, kc, vc, bt, ctx, PS, ver), ref, 2e-3)
     # real contexts, flat and peaky (sharp softmax stresses the max/rescale path)
     for ctx in (512, 1024, 2048, 4096, 8192, 16384):
@@ -132,7 +132,7 @@ def test_attention():
             q = torch.randn(32, 64, device=dev).half()
             ref = R.paged_attention_ref(q, kc, vc, bt, ctx, 16)
             for PS in (ctx, 1024, 256, 64):
-                for ver in (1, 2):
+                for ver in (1, 2, 3):
                     record(f"attn ctx{ctx} peaky{peaky} PS{PS} v{ver}", run_attn(q, kc, vc, bt, ctx, PS, ver), ref, 2e-3)
 
 

@@ -95,7 +95,7 @@ def plot_roofline(r):
     for kind, key, col, mk in groups:
         sel = [p for p in pts if p["kind"] == kind and key in p["name"] or (kind == "attn" and p["kind"] == "attn" and key == "attn")]
         sel = [p for p in sel if p["kind"] == kind]
-        lab = {"W4A16": "W4A16 GEMV (autotuned)", "fp16": "fp16 GEMV (cuBLAS)", "attn": "paged attention v2"}[key]
+        lab = {"W4A16": "W4A16 GEMV (autotuned)", "fp16": "fp16 GEMV (cuBLAS)", "attn": f"paged attention v{r.get('attention_version', 2)}"}[key]
         ax.scatter([p["ai"] for p in sel], [p["gflops"] for p in sel], color=col, marker=mk, s=40, label=lab,
                    edgecolor=SURF, linewidth=1.5, zorder=3)
     ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlim(0.1, 1000); ax.set_ylim(10, 1e5)
@@ -207,17 +207,20 @@ def plot_fusion(r):
 # ------------------------------------------------------------------ attention sweep
 def plot_attention(r):
     rows = r["attention_sweep"]
+    V = r.get("attention_version", 2)
     ctxs = sorted({x["ctx"] for x in rows})
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4))
     for i, c in enumerate(ctxs):
-        sel = sorted([x for x in rows if x["ctx"] == c and x.get("version", 2) == 2], key=lambda x: x["part_size"])
+        sel = sorted([x for x in rows if x["ctx"] == c and x.get("version", 2) == V], key=lambda x: x["part_size"])
         a1.plot([x["part_size"] for x in sel], [x["median_us"] for x in sel], "o-", color=SEQ[min(i + 1, len(SEQ) - 1)], label=ctx_label(c))
     a1.set_xscale("log", base=2); a1.set_yscale("log"); a1.set_xlabel("partition size (tokens per split); rightmost = no split")
-    a1.set_ylabel("µs per layer"); a1.set_title("Split-K partition sweep (v2)"); a1.legend(title="context", fontsize=8, ncol=2)
+    a1.set_ylabel("µs per layer"); a1.set_title(f"Split-K partition sweep (v{V})"); a1.legend(title="context", fontsize=8, ncol=2)
     base = r.get("attention_baselines", [])
     series = [("v1 best split", lambda c: min(x["median_us"] for x in rows if x["ctx"] == c and x.get("version") == 1), C[3]),
-              ("v2 best split", lambda c: min(x["median_us"] for x in rows if x["ctx"] == c and x.get("version", 2) == 2), C[0]),
-              ("v2 no split", lambda c: next(x["median_us"] for x in rows if x["ctx"] == c and x.get("version", 2) == 2 and x["splits"] == 1), C[6]),
+              ("v2 best split", lambda c: min(x["median_us"] for x in rows if x["ctx"] == c and x.get("version", 2) == 2), C[2]),
+              *([("v3 best split", lambda c: min(x["median_us"] for x in rows if x["ctx"] == c and x.get("version") == 3), C[0])]
+                if any(x.get("version") == 3 for x in rows) else []),
+              (f"v{V} no split", lambda c: next(x["median_us"] for x in rows if x["ctx"] == c and x.get("version", 2) == V and x["splits"] == 1), C[6]),
               ("HF repeat_kv+SDPA", lambda c: next(x["median_us"] for x in base if x["ctx"] == c and x["impl"].startswith("HF")), C[1])]
     for lab, f, col in series:
         a2.plot(ctxs, [f(c) for c in ctxs], "o-", color=col, label=lab)

@@ -48,6 +48,15 @@ def clocks():
         return {"error": str(e)}
 
 
+def cool(target_c=60, max_s=90):
+    """Idle until the GPU is below target_c (or max_s passes). A hot T4 enters hw_slowdown and a 10 s pause does
+    not recover it (e2e4: 73 C, 930 MHz after retries). Returns the seconds waited."""
+    t0 = time.time()
+    while time.time() - t0 < max_s and clocks().get("temp_c", 0) >= target_c:
+        time.sleep(3)
+    return time.time() - t0
+
+
 def time_fn(fn, warmup=5, iters=50, flush=True, gate=True):
     """Clock-gated measurement: retried after a cool-down while the in-loop SM clock < MIN_SM_MHZ."""
     global _cooled
