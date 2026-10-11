@@ -13,7 +13,7 @@ import argparse, json, math, os, subprocess, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import torch
 from runtime import ext
-from bench.timing import time_fn, Results, env_info
+from bench.timing import time_fn, Results, env_info, cool
 from scripts.autotune import SHAPES, make, tune
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -62,10 +62,14 @@ def bench_bw():
     return out
 
 
-def bench_gemv():
+def bench_gemv(only=None, key="gemv_stages"):
+    """only: restrict to these shapes. `gemv_lm` re-measures just the LM head in a fresh job with a cool-down
+    before every row: run after the other sections, its rows landed at 585-1110 MHz in kbench2 and final."""
     best = json.load(open(ROOT / "configs" / "autotune.json"))["best"]
     rows = []
     for name, (N, K) in SHAPES.items():
+        if only and name not in only:
+            continue
         G = 128
         packed, sz = make(N, K, G)
         x = torch.randn(K, device="cuda").half(); y = torch.empty(N, dtype=torch.half, device="cuda")
@@ -76,16 +80,18 @@ def bench_gemv():
         stages = [("0 naive", (0, 1, 4, 0)), ("1 vectorized", (1, 1, 4, 0)), ("2 reg-blocked", (2, 4, 4, 1)),
                   ("3 autotuned", (2, R, W, pf))]
         for label, cfg in stages:
+            if only: cool()
             t = time_fn(lambda: K_.gemv_w4a16(*cfg, packed, sz, x, y, G))
             rows.append({"shape": name, "N": N, "K": K, "impl": label, "cfg": cfg, "bytes": q_bytes, **_t(t),
                          "gbps": q_bytes / t["median_us"] / 1e3})
         xo = x.view(1, -1); yo = y.view(1, -1)
+        if only: cool()
         t = time_fn(lambda: torch.mm(xo, w16.t(), out=yo))
         rows.append({"shape": name, "N": N, "K": K, "impl": "cuBLAS fp16", "cfg": None, "bytes": f_bytes, **_t(t),
                      "gbps": f_bytes / t["median_us"] / 1e3})
         for r in rows[-5:]:
             print(f"{name:8s} {r['impl']:15s} {r['median_us']:8.1f}us  iqr {r['iqr_us']:5.1f}  {r['gbps']:6.1f} GB/s")
-    res.put("gemv_stages", rows)
+    res.put(key, rows)
 
 
 def _t(t):
@@ -224,5 +230,5 @@ if __name__ == "__main__":
         if s == "autotune":
             res.put("autotune", tune())
         else:
-            {"bw": bench_bw, "gemv": bench_gemv, "groups": bench_groups, "attn": bench_attn, "ncu": try_ncu,
+            {"bw": bench_bw, "gemv": bench_gemv, "gemv_lm": lambda: bench_gemv({"lm_head"}, "gemv_lm_head"), "groups": bench_groups, "attn": bench_attn, "ncu": try_ncu,
              "clocks": clock_probe}[s]()

@@ -92,3 +92,35 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
 - HF fp16 OOMs at 8K/16K (eager prefill). Recorded as OOM, not dropped.
 - INT4 LM head: +12.6 % tok/s at 512 for +0.05 ppl -> recommended. G64: closes 39 % of the ppl gap for +6 % GEMV time.
 - WMMA prefill: cut (budget), as the brief allows. llama.cpp kept (already measured).
+
+## Fix pass: attention v3, review fixes, llama.cpp perplexity (2026-10-12)
+- llama.cpp perplexity (runs/20261011T205851Z_llamappl, `scripts/llamacpp_ppl.sh`): Q8_0 19.975, Q4_K_M 20.292 ->
+  **+1.6 %** from 8-bit to Q4_K_M, vs our RTN G128 **+7.6 %** from fp16. Absolute values are not comparable to ours
+  (llama-perplexity -c 512 scores the second half of each chunk, no BOS); the relative cost is. Their quantizer is better.
+- Attention v3 (`paged_attn_partial_v3<HPG>`): v2 had three `__syncthreads` per 64-token chunk shared by the whole CTA.
+  v3 gives each warp its own 16-token chunks with its own online-softmax state (no barrier in the main loop), prefetches
+  the next chunk's K/V into registers while computing the current one, and merges the warps' (m, l, acc) once at the end.
+  Decision: keep v1/v2 in the binary and let the sweep pick by geometric-mean best-split time (version stored in
+  attn_policy.json). Reason: the choice is then measured, not asserted, and the old kernels stay as baselines.
+- final run (runs/20261011T212701Z_final): gate 538/538 (v3 in every attention case). The node again sat at 585-720 MHz
+  for most of the attention sweep (88/117 points flagged), so the comparison is same-node, same-clock relative:
+  v3 vs v2 best split = 1.14x (512), 1.31x, 1.40x, 1.58x, 2.28x (8K), 1.61x (16K, both at 1590 MHz: 84 vs 135 us).
+  Sweep selected v3; configs/attn_policy.json updated (partition 64 -> 1024 tokens from 512 -> 16K: v3 has 4 warps per
+  CTA working independently, so it wants longer splits than v2). GEMV body ladder reproduced kbench2 within 1 %.
+- Review findings fixed:
+  * Policy lookup bug: the runtime picked the first policy entry with max_ctx >= ctx_cap; ctx_cap has headroom
+    (e.g. 1104 for ctx 1024), so every e2e point used the next bucket's split size. Now: entry tuned at the largest
+    context <= cap. e2e4's speed numbers used the wrong split sizes (one bucket up) — superseded by e2efinal.
+  * Runtime defaults now match the recommendation: lm_head="auto" (INT4 when weights are INT4), attention version from
+    the policy file. e2e configs pin lm_head explicitly so each row means one thing.
+  * Context-cap guard: run_step raises if the host-tracked position exceeds max_splits * part_size (silent wrong
+    attention before). Bindings reject part_size <= 0 and unknown versions.
+  * Tests added for the runtime's actual launch conditions: spare split buffers (more splits allocated than used),
+    PS=128 at real contexts, HPG=2.
+  * e2e speed points start with cool() (idle until < 60 C, bounded) — e2e4 ran in hw_slowdown at 900-1065 MHz.
+  * LM-head rows of the GEMV ladder were throttled in both kbench2 and final because they run last, after the
+    cool-down budget is spent: added `kernel_bench.py gemv_lm` (LM head only, cool-down before each row), run as its
+    own job; plot_all substitutes its rows.
+  * RESULTS corrections: roofline ridge (59 is the half2 ridge, not tensor-core), Model B residual arithmetic,
+    attention bytes at 512 (11.5 MB), vectorization range, test context range (1-16K), group-size table mixed configs,
+    graph-vs-eager compared wall to wall, removed an unverified "CPU test shows the same flips" claim.

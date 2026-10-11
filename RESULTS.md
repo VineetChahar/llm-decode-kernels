@@ -46,13 +46,11 @@ greedy agreement vs HF fp16 on 16 fixed prompts × 64 new tokens):
 Reading it honestly:
 
 * **Our fp16 path is numerically HF.** Same perplexity to 4 decimals; 15/16 greedy continuations identical for all 64
-  tokens; the 16th diverges at token 9 (fp16 accumulation-order differences flip a close argmax — the same kind of
-  near-tie flip the CPU reference test shows).
+  tokens; the 16th diverges at token 9 (fp16 accumulation-order differences flip a close argmax).
 * **The INT4 quality cost is real and is not hidden.** Plain round-to-nearest asymmetric INT4 (no GPTQ/AWQ) costs
   +7.6 % perplexity at G128; greedy text matches HF exactly only 1 time in 16 (it diverges after ~14 tokens on average
   and then stays fluent — the teacher-forced top-1 agreement is 91 %). This is the price of RTN on a 1.1 B model,
-  not a kernel bug: the kernels reproduce the fp16 reference dequant-and-GEMV to ≤ 6.5e-4 relative error (§3) and
-  the CPU reference backend (`tests/test_runtime_local.py`) shows the same flips with no CUDA in the loop.
+  not a kernel bug: the kernels reproduce the fp16 reference dequant-and-GEMV to ≤ 6.5e-4 relative error (§3).
 * **vs llama.cpp:** we are 28 % faster at 512 tokens and ahead up to 4K; tied at 8K; **16 % slower at 16K**. The reason
   is attention (§5): llama.cpp's flash-attention decode kernel holds up better at long context. llama.cpp's Q4_K_M
   uses a different (better) quantizer, so its quality is not equal to our RTN INT4 — we did not measure its perplexity.
@@ -205,13 +203,15 @@ per layer (32 q heads, 4 kv heads, d=64), SM 1470–1590 MHz except ctx 512 (930
 graph at 512 — the CPU issues 225 launches faster than the GPU drains them). For 716 kernels the CPU cannot keep up:
 eager is **10.4 ms vs 5.1 ms** graph. Graphs matter in proportion to kernel count; fusion and graphs are complementary.
 
-**Group size** (speed from the autotuner grid at ~1500 MHz; e2e from the throttled decode loop):
+**Group size** — one configuration in every column: INT4 transformer body at group size G, **fp16 LM head** (the head
+is 125 MiB and identical in every row, so it is left out of the byte and GEMV columns). GEMV speed is the per-token sum
+from the autotuner grid at ~1500 MHz; e2e is the throttled decode loop (e2e4):
 
-| G | weight MiB / token | GEMV µs / token (body) | e2e ms / token @512 | perplexity |
+| G | body weight MiB / token | body GEMV µs / token | e2e ms / token @512 | perplexity |
 |---:|---:|---:|---:|---:|
-| 64 | 555 | 2,512 (+6 %) | 4.13 | **10.17** |
-| 128 | 524 | 2,367 | 4.03 | 10.46 |
-| 256 | 509 | 2,317 (−2 %) | 4.03 | 10.61 |
+| 64 | 520 | 2,512 (+6 %) | 4.13 | **10.17** |
+| 128 | 491 | 2,367 | 4.03 | 10.46 |
+| 256 | 476 | 2,317 (−2 %) | 4.03 | 10.61 |
 
 G64 closes 39 % of the INT4-vs-fp16 perplexity gap for +6 % GEMV time (≈ +3 % end-to-end); G256 saves 2 % and gives
 back 0.15 perplexity. **If quality matters, G64 is the better operating point**; G128 stays the default only because it
@@ -227,8 +227,10 @@ one 4 KB row gather per token, 4 µs in the profile — not worth a kernel, per 
 ## 7. Roofline
 
 Arithmetic intensity: W4A16 GEMV ≈ 3.8 FLOP/byte, fp16 GEMV ≈ 1, decode attention ≈ 8 (8 q heads share each KV byte).
-The T4 ridge is 59 FLOP/byte against the tensor-core peak (16 against the `__half2` peak). **Every decode kernel is
-10–60× left of the ridge**: decode is a bandwidth problem, and the only compute concern is the dequant issue rate at
+The T4 ridge is **59 FLOP/byte against the `__half2` CUDA-core peak** (2,560 lanes × 2 × 2 FLOP × 1.59 GHz ≈ 16.3 TFLOP/s
+over 277 GB/s) and ≈ 235 against the 65 TFLOP/s tensor-core peak — none of these kernels uses tensor cores, so 59 is
+the relevant one. **Every decode kernel is 7–59× left of it** (attention 7×, W4A16 GEMV 15×, fp16 GEMV 59×): decode is
+a bandwidth problem, and the only compute concern is the dequant issue rate at
 throttled clocks (§4). The achieved points sit at 62–95 % of measured bandwidth for GEMV and 21–43 % for attention.
 
 ![roofline](plots/roofline.png) ![bandwidth](plots/bandwidth_and_clocks.png)

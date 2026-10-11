@@ -289,6 +289,8 @@ def main():
     r = {}
     for p in a.results:
         r.update(json.load(open(p)))
+    if "gemv_lm_head" in r and "gemv_stages" in r:  # dedicated LM-head rerun (`kernel_bench.py gemv_lm`) replaces those rows
+        r["gemv_stages"] = [x for x in r["gemv_stages"] if x["shape"] != "lm_head"] + r["gemv_lm_head"]
     llama = json.load(open(a.llamacpp)) if a.llamacpp else None
     if llama is not None:
         r["llamacpp"] = llama
