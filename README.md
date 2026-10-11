@@ -13,10 +13,16 @@ Answer and numbers: **[RESULTS.md](RESULTS.md)**. Design log, dead ends and meas
 Needs a Kaggle account with API token in `~/.kaggle/` (free; T4 x2 GPU quota). Nothing else is pushed anywhere.
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install kaggle matplotlib numpy torch transformers
-.venv/bin/python scripts/kaggle_run.py --tag full --cmd "bash scripts/run_all.sh"   # ~1.5 h on a T4
+python3 -m venv .venv && .venv/bin/pip install kaggle matplotlib numpy torch transformers datasets
+.venv/bin/python scripts/kaggle_run.py --tag full --cmd "bash scripts/run_all.sh"   # ~1.5 h on one T4
 .venv/bin/python scripts/plot_all.py runs/<stamp>_full/results.json --llamacpp runs/<stamp>_llamacpp/llamacpp.json
 ```
+
+Faster: split across Kaggle's two concurrent GPU sessions (each re-runs the accuracy gate first):
+`--tag k --cmd "PART=kernels bash scripts/run_all.sh"` and `--slug llm-decode-e2e --tag e --cmd "PART=e2e bash scripts/run_all.sh"`,
+then `plot_all.py runs/<k>/results.json runs/<e>/results.json --llamacpp …` (later files override earlier keys; the
+merged file is written to `results.json`). The e2e part loads `configs/autotune.json` / `attn_policy.json`, so run the
+kernel part first if you want freshly tuned configs.
 
 `scripts/run_all.sh` runs the **accuracy gate first** (`tests/test_kernels.py`: exits non-zero on any
 numerical failure, before any speed number exists), then `bench/kernel_bench.py` (bandwidth microbenchmark,

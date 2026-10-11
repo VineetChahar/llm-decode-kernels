@@ -42,10 +42,13 @@ def plot_pred_vs_measured(r, llama):
     pr = A.predictions(r, "rt_int4_g128")
     rows = pr["rows"]
     ctx = [x["ctx"] for x in rows]
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(12, 4.6), gridspec_kw={"width_ratios": [1.5, 1]})
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(12, 5.4), gridspec_kw={"width_ratios": [1.5, 1]})
     ax.plot(ctx, [x["pred_A_tok_s"] for x in rows], "--", color=C[0], label="Model A: bytes / peak BW")
     ax.plot(ctx, [x["pred_B_tok_s"] for x in rows], ":", color=C[0], label="Model B: + per-kernel fixed cost")
     ax.plot(ctx, [x["measured_tok_s"] for x in rows], "o-", color=C[0], label="measured W4A16 (CUDA graph)")
+    if "rt_int4_g128_int4head" in r["speed"]["runtime"]:
+        ih = r["speed"]["runtime"]["rt_int4_g128_int4head"]
+        ax.plot([x["ctx"] for x in ih], [1e6 / x["median_us"] for x in ih], "o-", color=C[3], label="measured W4A16 + INT4 LM head")
     if "rt_fp16" in r["speed"]["runtime"]:
         pf = A.predictions(r, "rt_fp16")["rows"]
         ax.plot(ctx, [x["pred_A_tok_s"] for x in pf], "--", color=C[1], label="fp16 Model A")
@@ -59,13 +62,15 @@ def plot_pred_vs_measured(r, llama):
     ax.set_xscale("log", base=2); ax.set_xticks(ctx); ax.set_xticklabels([ctx_label(c) for c in ctx])
     ax.set_xlabel("context length (tokens)"); ax.set_ylabel("decode tokens / s (batch 1)")
     ax.set_title("Predicted vs measured decode throughput, TinyLlama-1.1B on T4")
-    ax.set_ylim(0, None); ax.legend(fontsize=8, loc="upper right")
+    ax.set_ylim(0, None); ax.legend(fontsize=7.5, loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=3)
     ax2.plot(ctx, [100 * x["explained_A"] for x in rows], "o--", color=C[0], label="Model A")
     ax2.plot(ctx, [100 * x["explained_B"] for x in rows], "o:", color=C[2], label="Model B")
     ax2.axhline(100, color=INK2, lw=1)
     for x in rows:
         ax2.annotate(f"{100 * x['explained_A']:.0f}%", (x["ctx"], 100 * x["explained_A"]), textcoords="offset points",
                      xytext=(0, -14), ha="center", fontsize=8, color=INK2)
+        ax2.annotate(f"{100 * x['explained_B']:.0f}%", (x["ctx"], 100 * x["explained_B"]), textcoords="offset points",
+                     xytext=(0, 7), ha="center", fontsize=8, color=INK2)
     ax2.set_xscale("log", base=2); ax2.set_xticks(ctx); ax2.set_xticklabels([ctx_label(c) for c in ctx])
     ax2.set_ylim(0, 120); ax2.set_xlabel("context length"); ax2.set_ylabel("predicted time / measured time (%)")
     ax2.set_title("Share of measured time explained (W4A16)"); ax2.legend(fontsize=8, loc="lower right")

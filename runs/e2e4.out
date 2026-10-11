@@ -1,2 +1,55 @@
 Kernel version 2 successfully pushed.  Please check progress at https://www.kaggle.com/code/vineetkumar0210/llm-decode-e2e 
 [   32s] KernelWorkerStatus.RUNNING
+[   64s] KernelWorkerStatus.RUNNING
+[   96s] KernelWorkerStatus.RUNNING
+[  129s] KernelWorkerStatus.RUNNING
+[  161s] KernelWorkerStatus.RUNNING
+[  194s] KernelWorkerStatus.RUNNING
+[  226s] KernelWorkerStatus.RUNNING
+[  258s] KernelWorkerStatus.RUNNING
+[  290s] KernelWorkerStatus.RUNNING
+[  322s] KernelWorkerStatus.RUNNING
+[  353s] KernelWorkerStatus.RUNNING
+[  385s] KernelWorkerStatus.RUNNING
+[  417s] KernelWorkerStatus.RUNNING
+[  448s] KernelWorkerStatus.RUNNING
+[  481s] KernelWorkerStatus.RUNNING
+[  513s] KernelWorkerStatus.RUNNING
+[  545s] KernelWorkerStatus.RUNNING
+[  578s] KernelWorkerStatus.RUNNING
+[  610s] KernelWorkerStatus.RUNNING
+[  641s] KernelWorkerStatus.RUNNING
+[  673s] KernelWorkerStatus.RUNNING
+[  706s] KernelWorkerStatus.RUNNING
+[  738s] KernelWorkerStatus.RUNNING
+[  770s] KernelWorkerStatus.RUNNING
+[  802s] KernelWorkerStatus.RUNNING
+[  833s] KernelWorkerStatus.RUNNING
+[  864s] KernelWorkerStatus.RUNNING
+[  897s] KernelWorkerStatus.RUNNING
+[  929s] KernelWorkerStatus.RUNNING
+[  962s] KernelWorkerStatus.RUNNING
+[  993s] KernelWorkerStatus.RUNNING
+[ 1026s] KernelWorkerStatus.RUNNING
+[ 1059s] KernelWorkerStatus.COMPLETE
+r/ML project/llm-decode-kernels/runs/20261011T193218Z_e2e4/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T193218Z_e2e4/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T193218Z_e2e4/llm-decode-e2e.log 
+ 
+/usr/local/lib/python3.13/dist-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+rt_int4_g128|ctx512|graph                kernels/token  225.0  busy   3246.5us  span   3327.1us  idle    80.6us  W4A16 GEMV=2189, cuBLAS GEMM/GEMV=512, attention partial=228, add+RMSNorm (fused)=127, attention combine=73, SwiGLU (fused)=52, RoPE+KV append=47, argmax=13, embedding gather=4, torch elementwise (unfused ops)=2
+rt_int4_g128|ctx512|eager                kernels/token  225.0  busy   3137.5us  span   3354.9us  idle   217.4us  W4A16 GEMV=2139, cuBLAS GEMM/GEMV=511, attention partial=220, add+RMSNorm (fused)=107, attention combine=64, SwiGLU (fused)=42, RoPE+KV append=37, argmax=13, embedding gather=3, torch elementwise (unfused ops)=1
+rt_int4_g128|ctx16384|graph              kernels/token  225.0  busy   6713.7us  span   6824.7us  idle   110.9us  attention partial=3435, W4A16 GEMV=2280, cuBLAS GEMM/GEMV=515, attention combine=190, add+RMSNorm (fused)=152, SwiGLU (fused)=60, RoPE+KV append=60, argmax=16, embedding gather=4, torch elementwise (unfused ops)=2
+rt_int4_g128|ctx16384|eager              kernels/token  225.0  busy   7016.4us  span   7249.4us  idle   233.0us  attention partial=3740, W4A16 GEMV=2294, cuBLAS GEMM/GEMV=515, attention combine=201, add+RMSNorm (fused)=139, SwiGLU (fused)=54, RoPE+KV append=52, argmax=17, embedding gather=3, torch elementwise (unfused ops)=2
+rt_int4_g128_unfused|ctx512|graph        kernels/token  716.0  busy   4549.0us  span   5034.0us  idle   485.1us  W4A16 GEMV=2223, torch elementwise (unfused ops)=1222, cuBLAS GEMM/GEMV=512, attention partial=239, torch reduce/argmax=208, attention combine=77, RoPE+KV append=50, argmax=14, embedding gather=4
+rt_int4_g128_unfused|ctx512|eager        kernels/token  716.0  busy   4030.5us  span  19900.9us  idle 15870.4us  W4A16 GEMV=2134, torch elementwise (unfused ops)=894, cuBLAS GEMM/GEMV=510, attention partial=218, torch reduce/argmax=164, attention combine=60, RoPE+KV append=36, argmax=12, embedding gather=2
+rt_int4_g128_unfused|ctx16384|graph      kernels/token  716.0  busy   7937.4us  span   8494.4us  idle   557.0us  attention partial=3297, W4A16 GEMV=2264, torch elementwise (unfused ops)=1339, cuBLAS GEMM/GEMV=516, torch reduce/argmax=255, attention combine=185, RoPE+KV append=60, argmax=16, embedding gather=4
+rt_int4_g128_unfused|ctx16384|eager      kernels/token  716.0  busy   6922.2us  span  19174.2us  idle 12252.1us  attention partial=2892, W4A16 GEMV=2161, torch elementwise (unfused ops)=933, cuBLAS GEMM/GEMV=512, torch reduce/argmax=196, attention combine=171, RoPE+KV append=42, argmax=13, embedding gather=3
+rt_fp16|ctx512|graph                     kernels/token  225.0  busy  10415.3us  span  10564.0us  idle   148.7us  cuBLAS GEMM/GEMV=9382, attention partial=436, add+RMSNorm (fused)=239, attention combine=139, SwiGLU (fused)=99, RoPE+KV append=84, argmax=28, embedding gather=6, torch elementwise (unfused ops)=3
+rt_fp16|ctx512|eager                     kernels/token  225.0  busy   9388.3us  span   9680.7us  idle   292.4us  cuBLAS GEMM/GEMV=8627, attention partial=332, add+RMSNorm (fused)=170, attention combine=102, SwiGLU (fused)=69, RoPE+KV append=59, argmax=22, embedding gather=4, torch elementwise (unfused ops)=2
+rt_fp16|ctx16384|graph                   kernels/token  225.0  busy  14224.9us  span  14376.9us  idle   152.0us  cuBLAS GEMM/GEMV=8746, attention partial=4840, attention combine=240, add+RMSNorm (fused)=206, SwiGLU (fused)=84, RoPE+KV append=79, argmax=22, embedding gather=5, torch elementwise (unfused ops)=3
+rt_fp16|ctx16384|eager                   kernels/token  225.0  busy  14032.3us  span  14333.4us  idle   301.1us  cuBLAS GEMM/GEMV=8657, attention partial=4794, attention combine=238, add+RMSNorm (fused)=179, SwiGLU (fused)=72, RoPE+KV append=65, argmax=22, embedding gather=4, torch elementwise (unfused ops)=2
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T193218Z_e2e4

@@ -77,3 +77,18 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
   from the autotune grid; attention = kbench2 unthrottled points; bandwidth/clock probe = kbench2.
 - Clock-sensitivity finding: at 585 MHz the W4A16 GEMVs slow 1.6-1.9x while the 277 GB/s read microbenchmark held its
   bandwidth down to ~1330 MHz in the probe — the dequant ALU work makes the INT4 GEMV issue-bound at low SM clock.
+
+## e2e4 + write-up (2026-10-11/12)
+- e2e3 crashed at `load_dataset("wikitext")` — new huggingface_hub rejects un-namespaced ids -> `Salesforce/wikitext`.
+  Made e2e sections independent (one failing section no longer costs the rest).
+- e2e4 (runs/20261011T193218Z_e2e4): gate 439/439; all four sections ran. Quality is clock-independent and clean.
+  Speed rows all ran at 900-1065 MHz with NVML `hw_slowdown` (fp16 config 480-885 MHz), even after gate retries.
+- Decision: report e2e speed as measured with the clock next to it, no more reruns. Reason: kernel microbenchmarks with
+  idle gaps reach ~1500 MHz but sustained decode loops on Kaggle T4s hit hw_slowdown; another rerun is a node lottery
+  that also competes with two other projects for the account's two GPU slots.
+- Model B (not fitted) explains 92 % at 512 -> 63 % at 16K. Profile attributes 79 % of the 16K miss to attention running
+  at 102 GB/s in-graph; the rest is profiled-vs-timed clock difference. At 512 Model B over-predicts the profiled step
+  (t0 from isolated kernels includes overhead graph replay hides) and under-predicts the throttled timed loop.
+- HF fp16 OOMs at 8K/16K (eager prefill). Recorded as OOM, not dropped.
+- INT4 LM head: +12.6 % tok/s at 512 for +0.05 ppl -> recommended. G64: closes 39 % of the ppl gap for +6 % GEMV time.
+- WMMA prefill: cut (budget), as the brief allows. llama.cpp kept (already measured).
