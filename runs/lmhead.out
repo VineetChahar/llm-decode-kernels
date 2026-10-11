@@ -1,2 +1,26 @@
 Kernel version 8 successfully pushed.  Please check progress at https://www.kaggle.com/code/vineetkumar0210/llm-decode-kernels 
 [   32s] KernelWorkerStatus.RUNNING
+[   64s] KernelWorkerStatus.RUNNING
+[   97s] KernelWorkerStatus.RUNNING
+[  128s] KernelWorkerStatus.COMPLETE
+ct/llm-decode-kernels/runs/20261011T225838Z_lmhead/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T225838Z_lmhead/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T225838Z_lmhead/llm-decode-kernels.log 
+ 
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ PART=kernels KERNEL_SECTIONS=gemv_lm bash scripts/run_all.sh
+667/667 passed
+
+===== gemv_lm =====
+lm_head  0 naive            570.6us  iqr   0.9    61.1 GB/s
+lm_head  1 vectorized       405.0us  iqr   1.1    86.1 GB/s
+lm_head  2 reg-blocked      170.0us  iqr   1.1   205.1 GB/s
+lm_head  3 autotuned        234.0us  iqr   1.2   149.1 GB/s
+lm_head  cuBLAS fp16        568.2us  iqr   1.6   230.8 GB/s
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261011T225838Z_lmhead

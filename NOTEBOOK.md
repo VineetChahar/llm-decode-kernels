@@ -124,3 +124,7 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
   * RESULTS corrections: roofline ridge (59 is the half2 ridge, not tensor-core), Model B residual arithmetic,
     attention bytes at 512 (11.5 MB), vectorization range, test context range (1-16K), group-size table mixed configs,
     graph-vs-eager compared wall to wall, removed an unverified "CPU test shows the same flips" claim.
+- lmhead job (runs/20261011T225838Z_lmhead): gate 667/667 (full new suite incl. runtime-condition cases). The
+  LM-head-only ladder with cool() before each row still sampled 585-825 MHz at 40-44 C (no NVML reason). Third node in
+  a row where only the long LM-head loops throttle. Decision: stop re-running it; report as a platform finding, keep the
+  autotune-grid 133 us for stage 3 and mark the LM-head speedup vs cuBLAS as not comparable.

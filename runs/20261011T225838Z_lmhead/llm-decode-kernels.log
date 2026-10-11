@@ -1,0 +1,25 @@
+[{"stream_name":"stderr","time":1.090169295,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":1.090224573,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":1.128253359,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":1.159682234,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":1.166421983,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":1.171418342,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":1.202712286,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":1.202732242,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":1.203089693,"data":"$ PART=kernels KERNEL_SECTIONS=gemv_lm bash scripts/run_all.sh\n"}
+,{"stream_name":"stdout","time":56.754483547,"data":"667/667 passed\n"}
+,{"stream_name":"stdout","time":58.917036976,"data":"\n"}
+,{"stream_name":"stdout","time":58.917059965,"data":"===== gemv_lm =====\n"}
+,{"stream_name":"stdout","time":112.654444896,"data":"lm_head  0 naive            570.6us  iqr   0.9    61.1 GB/s\n"}
+,{"stream_name":"stdout","time":112.654487993,"data":"lm_head  1 vectorized       405.0us  iqr   1.1    86.1 GB/s\n"}
+,{"stream_name":"stdout","time":112.654495465,"data":"lm_head  2 reg-blocked      170.0us  iqr   1.1   205.1 GB/s\n"}
+,{"stream_name":"stdout","time":112.654500833,"data":"lm_head  3 autotuned        234.0us  iqr   1.2   149.1 GB/s\n"}
+,{"stream_name":"stdout","time":112.65450547,"data":"lm_head  cuBLAS fp16        568.2us  iqr   1.6   230.8 GB/s\n"}
+,{"stream_name":"stdout","time":113.248535019,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":115.534142812,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":115.534171684,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":115.853792918,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":115.853819782,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":116.689447723,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":117.849338415,"data":"[NbConvertApp] Writing 365294 bytes to __results__.html\n"}
+]

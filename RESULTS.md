@@ -105,15 +105,18 @@ fails at long context, and the profiler says exactly where (graph replay, `torch
 
 ## 3. Kernel accuracy (the gate)
 
-`tests/test_kernels.py`, run first in every GPU job; any failure exits non-zero before a speed number exists.
+`tests/test_kernels.py`, run first in every GPU job; any failure exits non-zero before a speed number exists. Final
+suite: **667/667** (`runs/20261011T225838Z_lmhead`, and again in `e2efinal`); earlier runs passed the then-current
+suite (439/439 before attention v3, 538/538 with v3 before the runtime-condition cases were added).
 
 | kernel group | tests | max abs err | max rel err | tolerance (rel) |
 |---|---:|---:|---:|---:|
 | GEMV shape-1 sanity (4-row hand-checked, one-hot over all 128 columns, every stage/config) | 52 | **0** | **0** | exact |
 | GEMV real shapes × G ∈ {64,128,256} × all stages/configs | 170 | 3.9e-3 | 6.5e-4 | 5e-3 |
-| paged attention shape-1: ctx 128 vs contiguous reference (head configs, page 16/32, split sizes, v1/v2) | 60 | 1.2e-4 | 2.2e-4 | 2e-3 |
-| paged attention 63 – 16K, uniform and peaky scores, split sizes, v1/v2 | 138 | 4.9e-4 | 3.2e-4 | 2e-3 |
-| fused add + RMSNorm, SwiGLU, RoPE + paged KV append | 19 | 0 | 0 | 2e-3 |
+| paged attention shape-1: ctx 128 vs contiguous reference (head configs q/kv heads 32/4, 16/4, 8/4, 8/8, page 16/32, split sizes, v1/v2/v3) | 120 | 1.2e-4 | 2.2e-4 | 2e-3 |
+| paged attention ctx 1 – 16K (1, 2, 17, 63, 65, 129, 512, 1000, 1024 … 16384), uniform and peaky scores, split sizes 64–8192, v1/v2/v3 | 243 | 9.8e-4 | 3.6e-4 | 2e-3 |
+| paged attention under runtime launch conditions: ctx {1, 40, 64, 100, 700, 2048, 5000} × split {64, 128, 256}, 8 spare split buffers, v1/v2/v3 | 63 | 9.8e-4 | 2.9e-4 | 2e-3 |
+| fused add + RMSNorm, SwiGLU, RoPE + paged KV append | 19 | 9.8e-4 | 2.7e-4 | 2e-3 |
 
 The references are the fp16 PyTorch ops in `reference/ref_ops.py` (HF rounding order). The GEMV reference dequantizes
 with the same fp16 scale/zero, so the error is accumulation order only; the shape-1 cases are exact.
@@ -135,12 +138,19 @@ SM 1590 MHz (`kbench2`):
 | o 2048×2048 | 24.5 | 15.8 | 16.3 | **13.1** | 38.8 | 3.0× | 62 % |
 | gate_up 11264×2048 | 106.0 | 57.0 | 55.2 | **50.3** | 184.3 | 3.7× | 88 % |
 | down 2048×5632 | 57.3 | 32.2 | 32.6 | **29.1** | 94.1 | 3.2× | 76 % |
-| lm_head 32000×2048 | 773 † | 395 † | 168 † | **133.3** ‡ | 520 † | 3.9× | 95 % |
+| lm_head 32000×2048 | 773 † | 395 † | 168 † | **133.3** ‡ | 520 † | n/c (clocks differ) | 95 % |
 
 † measured throttled (585–960 MHz) in that run. ‡ from the autotuner grid at ~1500 MHz (same config).
+The body rows reproduce within 1 % in a second run (`final`, all at 1575–1590 MHz). The LM-head rows did not
+come out clean in **three** attempts — kbench2, `final`, and a dedicated LM-head-only job (`lmhead`) that cooled to
+40 °C before every row: each time the SM clock sampled during the LM-head loop was 585–1110 MHz with no NVML throttle
+reason, while the short body-shape loops in the same jobs ran at 1590 MHz. The ~0.4–0.8 ms LM-head kernels × 50
+iterations are the longest sustained loads in the ladder; the T4 drops its clock under them regardless of temperature.
+So the LM-head stage-0–2 timings and its cuBLAS time are low-clock numbers, and only the autotuned time (133 µs, taken
+from the grid's short loops) is comparable to the body rows.
 End-to-end at ctx 512 the ladder is 114.5 → 198.3 → 241.6 → 248.5 tok/s (stages 0 → 3).
 
-* **Vectorization is the big step** (1.7–1.9×): 32-bit → 128-bit loads, and it needs the alignment work — packed rows
+* **Vectorization is the big step** (1.55–1.86× on the body shapes at 1590 MHz): 32-bit → 128-bit loads, and it needs the alignment work — packed rows
   are K/8 int32 = 16-byte multiples for every shape here, `x` is 16-byte aligned (checked in the bindings: `CHECK_ALIGN16`).
 * **Register blocking matters only where `x` traffic is a real fraction of the bytes**: for the body shapes the 4 KB
   activation stays cache-resident and R=1→2 is worth 10–14 %; for the LM head (32,000 rows) the best R=1 cell is
