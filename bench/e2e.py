@@ -10,6 +10,8 @@ sections (in order; accuracy always runs before speed):
              fusion ablation (fused vs unfused) and launch ablation (CUDA graph vs eager)
   profile    torch.profiler per-kernel-category breakdown of one decode step (eager and graph replay),
              kernel count, GPU idle (inter-kernel gap) inside the graph
+  quant      better quantizers in the same kernel format (G128): RTN, RTN + MSE range clipping, GPTQ (calibrated on
+             WikiText-2 train), GPTQ + clipping, GPTQ + GPTQ INT4 LM head -> perplexity, agreement, speed check
 """
 import argparse, gc, json, math, os, sys, time, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
@@ -42,12 +44,32 @@ CONFIGS = {
     "rt_int4_stage1":        dict(weights="int4", group=128, gemv_stage=(1, 1, 4, 0), lm_head="fp16"),
     "rt_int4_stage2":        dict(weights="int4", group=128, gemv_stage=(2, 4, 4, 1), lm_head="fp16"),
     "rt_int4_stage0":        dict(weights="int4", group=128, gemv_stage=(0, 1, 4, 0), lm_head="fp16"),
+    "rt_int4_g128_clip":     dict(weights="int4", group=128, lm_head="fp16", quant="clip"),
+    "rt_int4_g128_gptq":     dict(weights="int4", group=128, lm_head="fp16", quant="pre", qp="gptq"),
+    "rt_int4_g128_gptq_clip": dict(weights="int4", group=128, lm_head="fp16", quant="pre", qp="gptq_clip"),
+    "rt_int4_g128_gptq_int4head": dict(weights="int4", group=128, lm_head="int4", quant="pre", qp="gptq"),
 }
+QP, QP_INFO = {}, {}
+
+
+def qparams(kind):
+    """GPTQ weights, calibrated once per kind and cached for the process (CPU tensors, ~0.6 GB)."""
+    if kind not in QP:
+        from runtime.gptq import calibrate
+        t0 = time.time()
+        QP[kind] = calibrate(hf, tok, group=128, clip=kind.endswith("clip"), log=lambda m: print(m, flush=True))
+        QP_INFO[kind] = {"calib_s": time.time() - t0, "calib_windows": 128, "calib_len": 512,
+                         "calib_data": "WikiText-2 train (seed 0)", "clip": kind.endswith("clip")}
+    return QP[kind]
 
 
 def build(name, max_ctx=MAX_CTX):
     gc.collect(); torch.cuda.empty_cache()
-    return Model(SD, hf.config, DecodeConfig(max_ctx=max_ctx, **CONFIGS[name]))
+    cfg = dict(CONFIGS[name])
+    kind = cfg.pop("qp", None)
+    if kind:
+        cfg["qparams"] = qparams(kind)
+    return Model(SD, hf.config, DecodeConfig(max_ctx=max_ctx, **cfg))
 
 
 # ------------------------------------------------------------------ accuracy
@@ -65,6 +87,18 @@ def nll_from_logits(logits, w):
     return -lp[:-1].gather(1, w[1:, None].to(lp.device)).sum().item(), len(w) - 1
 
 
+def ppl_of(name, wins):
+    m = build(name, max_ctx=640); m.prepare(640)
+    tot, n = 0.0, 0
+    for w in wins:
+        m.reset(0)
+        a, b = nll_from_logits(m.teacher_force(w, collect_logits=True), w); tot += a; n += b
+    r = {"ppl": math.exp(tot / n), "tokens": n, "weight_bytes": m.weight_bytes()}
+    print(f"ppl {name} = {r['ppl']:.4f}", flush=True)
+    del m
+    return r
+
+
 def bench_ppl():
     wins, ntok = wikitext_windows()
     out = {"windows": len(wins), "window_len": len(wins[0]), "dataset_tokens": ntok, "results": {}}
@@ -75,15 +109,7 @@ def bench_ppl():
     out["results"]["hf_fp16"] = {"ppl": math.exp(tot / n), "tokens": n}
     print(f"ppl hf_fp16 = {math.exp(tot / n):.4f}", flush=True)
     for name in ("rt_fp16", "rt_int4_g64", "rt_int4_g128", "rt_int4_g256", "rt_int4_g128_int4head"):
-        m = build(name, max_ctx=640); m.prepare(640)
-        tot, n = 0.0, 0
-        for w in wins:
-            m.reset(0)
-            a, b = nll_from_logits(m.teacher_force(w, collect_logits=True), w); tot += a; n += b
-        out["results"][name] = {"ppl": math.exp(tot / n), "tokens": n,
-                                "weight_bytes": m.weight_bytes()}
-        print(f"ppl {name} = {math.exp(tot / n):.4f}", flush=True)
-        del m
+        out["results"][name] = ppl_of(name, wins)
     base = out["results"]["hf_fp16"]["ppl"]
     for k, v in out["results"].items():
         v["delta_vs_hf"] = v["ppl"] - base
@@ -102,11 +128,12 @@ def hf_greedy(ids, n_new):
     return torch.tensor(out)
 
 
-def bench_agree(n_new=64):
+def bench_agree(n_new=64, names=("rt_fp16", "rt_int4_g128", "rt_int4_g64", "rt_int4_g256", "rt_int4_g128_int4head"),
+                key="agreement"):
     enc = [tok(p, return_tensors="pt").input_ids[0] for p in PROMPTS]
     ref = [hf_greedy(ids, n_new) for ids in enc]
     out = {"n_prompts": len(PROMPTS), "n_new": n_new, "results": {}}
-    for name in ("rt_fp16", "rt_int4_g128", "rt_int4_g64", "rt_int4_g256", "rt_int4_g128_int4head"):
+    for name in names:
         m = build(name, max_ctx=256); m.prepare(256)
         exact, first_div, tf_agree, tf_n, samples = 0, [], 0, 0, []
         for i, ids in enumerate(enc):
@@ -128,7 +155,7 @@ def bench_agree(n_new=64):
         print(f"agree {name}: exact {exact}/{len(enc)}, mean first-div {sum(first_div) / len(first_div):.1f}, "
               f"teacher-forced top1 {tf_agree / tf_n:.4f}", flush=True)
         del m
-    res.put("agreement", out)
+    res.put(key, out)
 
 
 # ------------------------------------------------------------------ speed
@@ -280,6 +307,45 @@ def bench_profile():
     res.put("profile", out)
 
 
+
+QUANT_CONFIGS = ("rt_int4_g128", "rt_int4_g128_clip", "rt_int4_g128_gptq", "rt_int4_g128_gptq_clip",
+                 "rt_int4_g128_gptq_int4head", "rt_int4_g128_int4head")
+
+
+def bench_quant():
+    """Same packed format and kernels, different ways of choosing the INT4 values: accuracy first, then a speed check
+    (the GEMV reads identical bytes, so speed must not change — measured, not assumed)."""
+    wins, ntok = wikitext_windows()
+    out = {"windows": len(wins), "window_len": len(wins[0]), "results": {}}
+    with torch.no_grad():
+        tot, n = 0.0, 0
+        for w in wins:
+            a, b = nll_from_logits(hf(w[None].to(dev)).logits[0], w); tot += a; n += b
+    base = math.exp(tot / n)
+    out["results"]["hf_fp16"] = {"ppl": base, "tokens": n}
+    for name in QUANT_CONFIGS:
+        r = ppl_of(name, wins)
+        r["rel_delta_pct"] = 100 * (r["ppl"] / base - 1)
+        out["results"][name] = r
+        out["calibration"] = QP_INFO
+        res.put("quant_ppl", out)
+    bench_agree(names=QUANT_CONFIGS, key="quant_agreement")
+    sp = {}
+    for name in ("rt_int4_g128", "rt_int4_g128_gptq"):
+        m = build(name)
+        m.kv.normal_()
+        sp[name] = []
+        for ctx in (512, 4096):
+            m.prepare(ctx + 80)
+            cool()
+            r = time_decode(m, ctx)
+            sp[name].append({"ctx": ctx, "median_us": r["median_us"], "wall_us": r["wall_us"], "tok_s": r["tok_s"],
+                             "sm_mhz": r["clocks_after"].get("sm_mhz")})
+            print(f"speed {name} ctx {ctx}: {r['tok_s']:.1f} tok/s @ {r['clocks_after'].get('sm_mhz')} MHz", flush=True)
+        del m
+    res.put("quant_speed", sp)
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("sections", nargs="*", default=["ppl", "agree", "speed", "profile"])
@@ -289,7 +355,8 @@ if __name__ == "__main__":
     for s in a.sections:  # sections are independent: one failing must not cost the others
         print(f"\n===== {s} =====", flush=True)
         try:
-            {"ppl": bench_ppl, "agree": bench_agree, "speed": bench_speed, "profile": bench_profile}[s]()
+            {"ppl": bench_ppl, "agree": bench_agree, "speed": bench_speed, "profile": bench_profile,
+             "quant": bench_quant}[s]()
         except Exception:
             import traceback; traceback.print_exc(); failed.append(s)
             gc.collect(); torch.cuda.empty_cache()

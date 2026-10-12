@@ -32,6 +32,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class DecodeConfig:
     weights: str = "int4"
     group: int = 128
+    quant: str = "rtn"          # "rtn" | "clip" (RTN with per-group MSE range clipping) | "pre" (use `qparams`, e.g. GPTQ)
+    qparams: dict = field(default=None, repr=False)  # "layers.{i}.{qkv,o,gu,down}" / "lm_head" -> (q, scale, zero)
     lm_head: str = "auto"       # "auto": INT4 when weights are INT4 (+12.6 % tok/s for +0.05 ppl, RESULTS.md §6)
     fused: bool = True
     backend: str = "cuda"
@@ -53,12 +55,14 @@ DEFAULT_GEMV = (2, 4, 4, 1)  # hand-picked stage-2 config used when no autotune 
 class Linear:
     """One projection in whichever format the config asks for."""
 
-    def __init__(self, w, cfg: DecodeConfig, quant: bool, keep_ref: bool):
+    def __init__(self, w, cfg: DecodeConfig, quant: bool, keep_ref: bool, key: str = None):
         self.N, self.K = w.shape
         self.quant = quant
         dev = cfg.device
         if quant:
-            ql = QuantLinear(w.to(dev), cfg.group, keep_ref=keep_ref)
+            pre = cfg.qparams.get(key) if cfg.quant == "pre" else None
+            assert cfg.quant != "pre" or pre is not None, f"no precomputed weights for {key}"
+            ql = QuantLinear(w.to(dev), cfg.group, keep_ref=keep_ref, clip=cfg.quant == "clip", qsz=pre)
             self.packed, self.sz = ql.packed.to(dev), ql.sz.to(dev)
             self.w_ref = ql.w_ref.to(dev) if keep_ref else None
             self.nbytes = ql.nbytes()
@@ -95,12 +99,14 @@ class Model:
             wgu = torch.cat([g(p + "mlp.gate_proj.weight"), g(p + "mlp.up_proj.weight")], 0)
             self.layers.append({
                 "ln1": g(p + "input_layernorm.weight").to(dev), "ln2": g(p + "post_attention_layernorm.weight").to(dev),
-                "qkv": Linear(wqkv, cfg, quant, keep_ref), "o": Linear(g(p + "self_attn.o_proj.weight"), cfg, quant, keep_ref),
-                "gu": Linear(wgu, cfg, quant, keep_ref), "down": Linear(g(p + "mlp.down_proj.weight"), cfg, quant, keep_ref)})
+                "qkv": Linear(wqkv, cfg, quant, keep_ref, f"layers.{i}.qkv"),
+                "o": Linear(g(p + "self_attn.o_proj.weight"), cfg, quant, keep_ref, f"layers.{i}.o"),
+                "gu": Linear(wgu, cfg, quant, keep_ref, f"layers.{i}.gu"),
+                "down": Linear(g(p + "mlp.down_proj.weight"), cfg, quant, keep_ref, f"layers.{i}.down")})
         self.norm_f = g("model.norm.weight").to(dev)
         lm = sd.get("lm_head.weight", sd["model.embed_tokens.weight"]).half()
         head_int4 = cfg.lm_head == "int4" or (cfg.lm_head == "auto" and quant)
-        self.lm_head = Linear(lm, cfg, head_int4, keep_ref)
+        self.lm_head = Linear(lm, cfg, head_int4, keep_ref, "lm_head")
 
         # gemv config table
         self.gemv_table = {}

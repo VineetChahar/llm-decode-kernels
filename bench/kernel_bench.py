@@ -5,7 +5,7 @@ sections:
   bw        achievable DRAM read bandwidth (own microbenchmark, swept launch configs) + D2D copy
   autotune  scripts/autotune.py sweep (R x warps x prefetch, per shape, per group size)
   gemv      stage ladder naive -> vectorized -> reg-blocked -> autotuned vs cuBLAS fp16, every model shape
-  gemv_lm   the same ladder for the LM head only, cool-down before each row (separate job; key gemv_lm_head)
+  gemv_lm   the same ladder for the LM head only, burst timing (only full-clock bursts kept; key gemv_lm_head)
   groups    GEMV time per group size (64/128/256) at autotuned configs, summed per token
   attn      paged attention: ctx 512..16K x partition size; best-partition policy; HF-style SDPA baseline
   ncu       one attempt at hardware counters (expected to be blocked on Kaggle)
@@ -14,7 +14,7 @@ import argparse, json, math, os, subprocess, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import torch
 from runtime import ext
-from bench.timing import time_fn, Results, env_info, cool
+from bench.timing import time_fn, time_bursts, Results, env_info
 from scripts.autotune import SHAPES, make, tune
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -64,8 +64,10 @@ def bench_bw():
 
 
 def bench_gemv(only=None, key="gemv_stages"):
-    """only: restrict to these shapes. `gemv_lm` re-measures just the LM head in a fresh job with a cool-down
-    before every row: run after the other sections, its rows landed at 585-1110 MHz in kbench2 and final."""
+    """only: restrict to these shapes. `gemv_lm` re-measures just the LM head with burst timing (time_bursts: short
+    bursts with idle gaps, only full-clock bursts kept): with 50-iteration loops its rows sampled 585-1110 MHz in
+    kbench2, final and a cooled dedicated job."""
+    timer = (lambda f: time_bursts(f)) if only else time_fn
     best = json.load(open(ROOT / "configs" / "autotune.json"))["best"]
     rows = []
     for name, (N, K) in SHAPES.items():
@@ -81,13 +83,11 @@ def bench_gemv(only=None, key="gemv_stages"):
         stages = [("0 naive", (0, 1, 4, 0)), ("1 vectorized", (1, 1, 4, 0)), ("2 reg-blocked", (2, 4, 4, 1)),
                   ("3 autotuned", (2, R, W, pf))]
         for label, cfg in stages:
-            if only: cool()
-            t = time_fn(lambda: K_.gemv_w4a16(*cfg, packed, sz, x, y, G))
+            t = timer(lambda: K_.gemv_w4a16(*cfg, packed, sz, x, y, G))
             rows.append({"shape": name, "N": N, "K": K, "impl": label, "cfg": cfg, "bytes": q_bytes, **_t(t),
                          "gbps": q_bytes / t["median_us"] / 1e3})
         xo = x.view(1, -1); yo = y.view(1, -1)
-        if only: cool()
-        t = time_fn(lambda: torch.mm(xo, w16.t(), out=yo))
+        t = timer(lambda: torch.mm(xo, w16.t(), out=yo))
         rows.append({"shape": name, "N": N, "K": K, "impl": "cuBLAS fp16", "cfg": None, "bytes": f_bytes, **_t(t),
                      "gbps": f_bytes / t["median_us"] / 1e3})
         for r in rows[-5:]:
@@ -99,7 +99,8 @@ def _t(t):
     ca = t["clocks_after"]
     return {"median_us": t["median_us"], "iqr_us": t["iqr_us"], "p25_us": t["p25_us"], "p75_us": t["p75_us"],
             "sm_mhz": ca.get("sm_mhz"), "temp_c": ca.get("temp_c"), "power_w": ca.get("power_w"),
-            "reasons": ca.get("reasons"), "throttled": t.get("throttled"), "attempt": t.get("attempt")}
+            "reasons": ca.get("reasons"), "throttled": t.get("throttled"), "attempt": t.get("attempt"),
+            **({"burst_mhz": t["burst_mhz"], "n": t["n"]} if "burst_mhz" in t else {})}
 
 
 def bench_groups():
