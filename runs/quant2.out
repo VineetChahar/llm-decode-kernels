@@ -1,0 +1,70 @@
+Kernel version 10 successfully pushed.  Please check progress at https://www.kaggle.com/code/vineetkumar0210/llm-decode-kernels 
+[   33s] KernelWorkerStatus.RUNNING
+[   64s] KernelWorkerStatus.RUNNING
+[   95s] KernelWorkerStatus.RUNNING
+[  127s] KernelWorkerStatus.RUNNING
+[  158s] KernelWorkerStatus.RUNNING
+[  190s] KernelWorkerStatus.RUNNING
+[  221s] KernelWorkerStatus.RUNNING
+[  254s] KernelWorkerStatus.RUNNING
+[  285s] KernelWorkerStatus.RUNNING
+[  316s] KernelWorkerStatus.RUNNING
+[  348s] KernelWorkerStatus.RUNNING
+[  380s] KernelWorkerStatus.RUNNING
+[  413s] KernelWorkerStatus.RUNNING
+[  445s] KernelWorkerStatus.RUNNING
+[  477s] KernelWorkerStatus.RUNNING
+[  509s] KernelWorkerStatus.RUNNING
+[  542s] KernelWorkerStatus.RUNNING
+[  574s] KernelWorkerStatus.RUNNING
+[  606s] KernelWorkerStatus.RUNNING
+[  637s] KernelWorkerStatus.RUNNING
+[  669s] KernelWorkerStatus.RUNNING
+[  700s] KernelWorkerStatus.RUNNING
+[  733s] KernelWorkerStatus.RUNNING
+[  764s] KernelWorkerStatus.RUNNING
+[  796s] KernelWorkerStatus.RUNNING
+[  828s] KernelWorkerStatus.RUNNING
+[  859s] KernelWorkerStatus.RUNNING
+[  890s] KernelWorkerStatus.RUNNING
+[  922s] KernelWorkerStatus.RUNNING
+[  953s] KernelWorkerStatus.RUNNING
+[  985s] KernelWorkerStatus.RUNNING
+[ 1018s] KernelWorkerStatus.RUNNING
+[ 1050s] KernelWorkerStatus.RUNNING
+[ 1081s] KernelWorkerStatus.RUNNING
+[ 1113s] KernelWorkerStatus.RUNNING
+[ 1145s] KernelWorkerStatus.RUNNING
+[ 1178s] KernelWorkerStatus.RUNNING
+[ 1210s] KernelWorkerStatus.RUNNING
+[ 1242s] KernelWorkerStatus.RUNNING
+[ 1275s] KernelWorkerStatus.RUNNING
+[ 1307s] KernelWorkerStatus.RUNNING
+[ 1339s] KernelWorkerStatus.RUNNING
+[ 1371s] KernelWorkerStatus.RUNNING
+[ 1403s] KernelWorkerStatus.RUNNING
+[ 1434s] KernelWorkerStatus.RUNNING
+[ 1466s] KernelWorkerStatus.RUNNING
+[ 1497s] KernelWorkerStatus.RUNNING
+[ 1529s] KernelWorkerStatus.COMPLETE
+ct/llm-decode-kernels/runs/20261012T060832Z_quant2/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261012T060832Z_quant2/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261012T060832Z_quant2/llm-decode-kernels.log 
+ 
+agree rt_int4_g128_clip: exact 1/16, mean first-div 9.8, teacher-forced top1 0.8916
+agree rt_int4_g128_gptq: exact 1/16, mean first-div 12.3, teacher-forced top1 0.9326
+agree rt_int4_g128_gptq_clip: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9102
+agree rt_int4_g128_gptq_int4head: exact 1/16, mean first-div 11.4, teacher-forced top1 0.9180
+agree rt_int4_g128_gptq_clip_int4head: exact 1/16, mean first-div 11.9, teacher-forced top1 0.9033
+agree rt_int4_g128_int4head: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9072
+speed rt_int4_g128 ctx 512: 185.5 tok/s @ 1035 MHz
+speed rt_int4_g128 ctx 4096: 204.4 tok/s @ 945 MHz
+speed rt_int4_g128_gptq_clip ctx 512: 185.5 tok/s @ 585 MHz
+speed rt_int4_g128_gptq_clip ctx 4096: 220.7 tok/s @ 945 MHz
+speed rt_int4_g128 ctx 512: 185.5 tok/s @ 585 MHz
+speed rt_int4_g128 ctx 4096: 224.0 tok/s @ 960 MHz
+speed rt_int4_g128_gptq_clip ctx 512: 185.6 tok/s @ 585 MHz
+speed rt_int4_g128_gptq_clip ctx 4096: 220.5 tok/s @ 930 MHz
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261012T060832Z_quant2

@@ -11,7 +11,9 @@ Sources (merged into `results.json` by `scripts/plot_all.py`, later runs overrid
 `runs/20261011T193218Z_e2e4` (perplexity, greedy agreement), `runs/20261011T225704Z_e2efinal` (end-to-end speed and
 profiles with attention v3 and the fixed split-size lookup), `runs/20261011T102433Z_llamacpp2` and
 `runs/20261011T205851Z_llamappl` (llama.cpp speed and perplexity), `runs/20261011T191452Z_kbench3` (a node stuck at
-585 MHz — clock-sensitivity control only) and `runs/20261011T225838Z_lmhead` (LM-head ladder rerun, §4).
+585 MHz — clock-sensitivity control only), `runs/20261012T060832Z_quant2` (quantizer comparison incl. GPTQ, interleaved
+LM-head ladder; `…054806Z_quant` is its identical-perplexity repeat) and `runs/20261011T225838Z_lmhead` (a failed
+LM-head clock attempt, §4).
 
 > **Clock caveat, up front.** Kaggle does not allow clock locking (`nvidia-smi -lgc`: permission denied), and the
 > T4 throttles under sustained load. Kernel microbenchmarks (short, with idle gaps) ran at **1470–1590 MHz** where
@@ -46,6 +48,13 @@ greedy agreement vs HF fp16 on 16 fixed prompts × 64 new tokens):
 | **W4A16 G128** | 10.461 | +7.6 % | 1/16 | 14.3 | 0.9102 | 0.65 GB |
 | W4A16 G256 | 10.607 | +9.1 % | 0/16 | 6.1 | 0.8896 | 0.63 GB |
 | W4A16 G128 + INT4 LM head | 10.515 | +8.2 % | 1/16 | 11.8 | 0.9082 | 0.55 GB |
+| W4A16 G128, RTN + MSE range clipping | 10.636 | +9.4 % | 1/16 | 9.8 | 0.8916 | 0.65 GB |
+| W4A16 G128, **GPTQ** | 10.020 | +3.1 % | 1/16 | 12.3 | **0.9326** | 0.65 GB |
+| W4A16 G128, **GPTQ + range clipping** | **9.874** | **+1.6 %** | 1/16 | 11.6 | 0.9102 | 0.65 GB |
+| W4A16 G128, GPTQ + clipping, GPTQ INT4 LM head | 9.894 | +1.8 % | 1/16 | 11.9 | 0.9033 | 0.55 GB |
+
+The last three rows (`runs/20261012T060832Z_quant2`, identical in `…054806Z_quant`) use the **same packed format, the
+same kernels and the same bytes per token** as the RTN row — only the INT4 values differ (§6, "Quantizers").
 
 | llama.cpp (`llama-perplexity -c 512`, full WikiText-2 test, own protocol) | perplexity | Δ vs its Q8_0 |
 |---|---:|---:|
@@ -59,15 +68,20 @@ Reading it honestly:
 
 * **Our fp16 path is numerically HF.** Same perplexity to 4 decimals; 15/16 greedy continuations identical for all 64
   tokens; the 16th diverges at token 9 (fp16 accumulation-order differences flip a close argmax).
-* **The INT4 quality cost is real and is not hidden.** Plain round-to-nearest asymmetric INT4 (no GPTQ/AWQ) costs
-  +7.6 % perplexity at G128; greedy text matches HF exactly only 1 time in 16 (it diverges after ~14 tokens on average
-  and then stays fluent — the teacher-forced top-1 agreement is 91 %). This is the price of RTN on a 1.1 B model,
-  not a kernel bug: the kernels reproduce the fp16 reference dequant-and-GEMV to ≤ 6.5e-4 relative error (§3).
-* **vs llama.cpp: faster at every context, worse quality.** +31 % at 512 tokens, +25 % at 2K, +17 % at 8K, +8 % at
-  16K. Attention v3 (§5) is what closed the long-context gap: with v2 we were 16 % *slower* than llama.cpp at 16K.
-  But llama.cpp's Q4_K_M quantizer loses only **1.6 %** perplexity to 8-bit where our RTN G128 loses **7.6 %** to fp16:
-  their speed comes with much better quality. The fair summary is "faster kernels, worse quantizer"; a GPTQ/AWQ
-  quantizer would change only the packed weights, not a kernel. (Different Kaggle node, clocks unrecorded.)
+* **The INT4 quality cost depends on the quantizer, not the kernels.** Plain round-to-nearest (RTN) costs +7.6 %
+  perplexity at G128. **GPTQ** (calibrated on 128 × 512 tokens of WikiText-2 *train*, 2 min on the T4) brings that to
+  +3.1 %, and GPTQ with per-group range clipping to **+1.6 %** — with no kernel change and no speed change (§6). Greedy
+  text still matches HF exactly in only 1 of 16 prompts for every INT4 variant: free-running 64-token exact match against
+  fp16 is a very strict test (one flipped near-tie and the continuations part), and on this 16-prompt set it does not
+  separate the quantizers; teacher-forced top-1 agreement does (0.910 RTN → 0.933 GPTQ). The kernels reproduce the fp16
+  reference dequant-and-GEMV to ≤ 6.5e-4 relative error (§3), so none of this is kernel error.
+* **vs llama.cpp: faster at every context, and with GPTQ + clipping, equal quality cost.** +31 % at 512 tokens, +25 %
+  at 2K, +17 % at 8K, +8 % at 16K. Attention v3 (§5) is what closed the long-context gap: with v2 we were 16 % *slower*
+  than llama.cpp at 16K. On quality, llama.cpp's Q4_K_M loses **1.6 %** perplexity to its 8-bit model; our RTN lost
+  7.6 % to fp16, our GPTQ + clipping loses **1.6 %** — the same relative cost (different perplexity protocols, so
+  compare the relative numbers only; Q4_K_M also spends ~4.9 bits/weight vs our 4.25 at G128). The speed numbers were
+  measured with RTN weights; GPTQ weights run at the same speed (same bytes; measured, §6). llama.cpp ran on a
+  different Kaggle node with unrecorded clocks.
 * **vs HF fp16:** 8.0× at 512 tokens. vs our own fp16 cuBLAS runtime (same kernels for everything except the weight
   GEMVs): 2.7× in the timed loop, which ran the fp16 config ~180 MHz lower; the profiled graph steps at 512 tokens are
   10.54 ms vs 3.30 ms = **3.2×**, the same as the ratio of bytes per token (2.08 GB vs 0.66 GB).
@@ -153,16 +167,17 @@ SM 1590 MHz (`kbench2`):
 | o 2048×2048 | 24.5 | 15.8 | 16.3 | **13.1** | 38.8 | 3.0× | 62 % |
 | gate_up 11264×2048 | 106.0 | 57.0 | 55.2 | **50.3** | 184.3 | 3.7× | 88 % |
 | down 2048×5632 | 57.3 | 32.2 | 32.6 | **29.1** | 94.1 | 3.2× | 76 % |
-| lm_head 32000×2048 | 773 † | 395 † | 168 † | **133.3** ‡ | 520 † | n/c (clocks differ) | 95 % |
+| lm_head 32000×2048, **interleaved, all at 780 MHz** ‡ | 620.9 | 312.7 | **158.3** | 186.4 | 556.6 | **3.0×** (3.5× vs stage 2) | — |
+| lm_head at full clock (autotuner grid, ~1500 MHz) | | | | **133.3** | | | 95 % |
 
-† measured throttled (585–960 MHz) in that run. ‡ from the autotuner grid at ~1500 MHz (same config).
-The body rows reproduce within 1 % in a second run (`final`, all at 1575–1590 MHz). The LM-head rows did not
-come out clean in **three** attempts — kbench2, `final`, and a dedicated LM-head-only job (`lmhead`) that cooled to
-40 °C before every row: each time the SM clock sampled during the LM-head loop was 585–1110 MHz with no NVML throttle
-reason, while the short body-shape loops in the same jobs ran at 1590 MHz. The ~0.4–0.8 ms LM-head kernels × 50
-iterations are the longest sustained loads in the ladder; the T4 drops its clock under them regardless of temperature.
-So the LM-head stage-0–2 timings and its cuBLAS time are low-clock numbers, and only the autotuned time (133 µs, taken
-from the grid's short loops) is comparable to the body rows.
+‡ The LM-head rows never came out at full clock when timed one after another: in kbench2, `final`, a dedicated job that
+cooled the GPU to 40 °C before every row (`lmhead`) and a burst-timed job (`quant`), the SM clock sampled during the
+LM-head loops was 585–1110 MHz with no NVML throttle reason, while the short body-shape loops in the same jobs ran at
+1590 MHz — and the first two showed the rows at *different* clocks, so their ratios were meaningless. The fix
+(`kernel_bench.py gemv_lm`, `bench.timing.time_interleaved`): run the four stages and cuBLAS **round-robin**, one call
+each per round with the L2 flushed before each, 40 rounds — every variant sees the same clock history, so the ratios
+are valid on any node (`quant2`: rounds at 585–915 MHz, median 780). Absolute full-clock time for the autotuned config
+is the grid's 133.3 µs. The body rows reproduce within 1 % in a second run (`final`, all at 1575–1590 MHz).
 End-to-end at ctx 512 the ladder is 118.8 → 205.0 → 246.7 → 287.1 tok/s (stages 0 → 3, `e2efinal`; the stage-3 point
 ran at 1170 MHz, stages 0–2 at 990–1050 MHz, so the last step is partly clock).
 
@@ -170,7 +185,14 @@ ran at 1170 MHz, stages 0–2 at 990–1050 MHz, so the last step is partly cloc
   are K/8 int32 = 16-byte multiples for every shape here, `x` is 16-byte aligned (checked in the bindings: `CHECK_ALIGN16`).
 * **Register blocking matters only where `x` traffic is a real fraction of the bytes**: for the body shapes the 4 KB
   activation stays cache-resident and R=1→2 is worth 10–14 %; for the LM head (32,000 rows) the best R=1 cell is
-  170 µs vs 133 µs at R=2 (+28 %; the 1–4-warp R=1 cells, 216–406 µs, were partly measured throttled).
+  170 µs vs 133 µs at R=2 (+28 %; the 1–4-warp R=1 cells, 216–406 µs, were partly measured throttled). At the same
+  780 MHz clock (interleaved run), vectorization and register blocking are each worth ~2× on the LM head (621 → 313 →
+  158 µs).
+* **The autotuned config is clock-dependent on the LM head:** tuned at ~1500 MHz it picks R=2 / 1 warp (133.3 µs vs
+  the stage-2 config's 139.9 µs in the same grid); at 780 MHz the stage-2 config (R=4, 4 warps, prefetch on) is **15 % faster**
+  (158 vs 186 µs). At low SM clock the kernel is issue-bound (§4 clock-sensitivity bullet), and more rows per warp
+  amortize the per-chunk scale/zero and `x` work over more weights. The runtime uses the full-clock choice; a
+  clock-aware table would be a cheap follow-up.
 * **Occupancy vs ILP, resolved by sweep:** the autotuner (R ∈ {1,2,4,8} × warps/block ∈ {1,2,4,8} × prefetch on/off ×
   G ∈ {64,128,256}, 480 cells, `configs/autotune.json`, loaded by the runtime at startup) picks **R=2, 1 warp/block**
   for 14 of 15 shape×G cells (prefetch off in 12 of 15). Many small blocks (occupancy) beat deeper per-thread ILP.
@@ -269,6 +291,35 @@ the runtime default (`lm_head="auto"`: INT4 whenever the body is INT4); the benc
 (Embedding stays fp16: it is one 4 KB row gather per token, 4 µs in the profile — not worth a kernel, per the brief's
 "only if profiling says so".)
 
+**Quantizers** — same INT4 G128 format (`runtime/quant.py`, fp16 scale + integer zero per group, nibble-packed),
+same kernels; only the choice of the 4-bit values changes (`bench/e2e.py quant`):
+
+| quantizer | perplexity | Δ vs fp16 | teacher-forced top-1 | ms / token @512, wall (A/B/A/B) | ms / token @4K, wall |
+|---|---:|---:|---:|---:|---:|
+| RTN (round to nearest, min/max range) | 10.460 | +7.6 % | 0.910 | 3.61 / 3.68 | 4.28 / 4.32 |
+| RTN + per-group MSE range clipping | 10.636 | +9.4 % | 0.892 | — | — |
+| GPTQ | 10.020 | +3.1 % | **0.933** | — | — |
+| **GPTQ + range clipping** | **9.874** | **+1.6 %** | 0.910 | 3.69 / 3.74 | 4.35 / 4.34 |
+
+* **GPTQ** (`runtime/gptq.py`, Frantar et al. 2022): quantize each weight column left to right and push its rounding
+  error onto the not-yet-quantized columns through the inverse Hessian of the layer input, H = 2XᵀX over the calibration
+  tokens — minimising the error of the layer's *output*, not of the weights. Calibrated sequentially (layer i sees the
+  outputs of the already-quantized layers 0..i−1), 128 × 512 tokens of WikiText-2 **train** (perplexity is on test),
+  damping 1 % of mean diag(H), no act-order (act-order would permute columns and break the contiguous groups the kernel
+  reads). 120 s on the T4 for all 89 matrices (q|k|v and gate|up share an input, so each pair/triple is one GPTQ call). It is deterministic: two runs gave identical perplexities to 4 decimals.
+* **Range clipping alone hurts (+9.4 % vs +7.6 %)** although it lowers every group's weight MSE (that is what it
+  minimises): shrinking a group's range clips its largest weights, and in an LLM the largest weights are
+  disproportionately the ones that matter. **Inside GPTQ the same clipping helps** (+3.1 % → +1.6 %): GPTQ compensates the
+  clipped error on the other columns, so the finer grid is a net win. Weight error is the wrong objective; output error
+  is the right one.
+* **Speed is unchanged**, as it must be — identical bytes and instructions: measured wall-clock per token, RTN and GPTQ
+  timed alternately A/B/A/B on one node, agree within the run-to-run spread (≤ 2 %).
+* **Recommended operating point: GPTQ + clipping at G128 with the INT4 LM head** (9.894, +1.8 %, 0.55 GB per token):
+  the best speed config and within 0.2 % of the best quality. Use: `qp = runtime.gptq.calibrate(hf_model, tokenizer,
+  clip=True)`, then `DecodeConfig(quant="pre", qparams=qp)`. RTN stays the zero-setup default (no calibration data needed).
+
+![quantizers](plots/quantizers.png)
+
 ![fusion](plots/fusion_ablation.png) ![groups](plots/group_size_tradeoff.png) ![profile](plots/profile_breakdown.png)
 
 ## 7. Roofline
@@ -297,11 +348,12 @@ short-context points are latency-bound and were measured on the 585 MHz node (§
 * **Clock control:** not permitted; see the caveat at the top. The timing harness samples NVML clocks *while the GPU is
   busy*, retries after cool-downs, and flags every throttled measurement (the first version sampled after
   `synchronize()` and read the 585 MHz idle clock — NOTEBOOK).
-* **Quantization** is plain RTN; GPTQ/AWQ would cut most of the perplexity gap without changing a kernel.
+* **Quantization:** RTN is the zero-setup default; GPTQ + clipping (one 2-minute calibration) closes the perplexity gap
+  to llama.cpp Q4_K_M's relative cost (§6). AWQ and act-order GPTQ were not tried.
 * **llama.cpp** was measured on a different Kaggle node (`llama-bench` doesn't record clocks), with its own quantizer;
   its perplexity uses its own protocol, so only the relative 4-bit cost is compared (§1).
-* **LM-head GEMV ladder** could not be measured at full clock in three attempts (§4); its stage-0–2 and cuBLAS rows
-  are low-clock numbers.
+* **LM-head GEMV ladder** never ran at full clock on Kaggle when timed row by row (four jobs); it is now timed
+  interleaved, so its ratios are valid, at 780 MHz; its full-clock absolute time comes from the autotuner grid (§4).
 
 ## 9. Reproduce
 
@@ -311,6 +363,7 @@ repo was produced with
 
 ```bash
 .venv/bin/python scripts/plot_all.py runs/20261011T170804Z_kbench2/results.json runs/20261011T193218Z_e2e4/results.json \
-  runs/20261011T191452Z_kbench3/clock_experiment.json runs/20261011T212701Z_final/results.json runs/20261011T225704Z_e2efinal/results.json \
+  runs/20261011T191452Z_kbench3/clock_experiment.json runs/20261011T212701Z_final/results.json runs/20261012T060832Z_quant2/results.json \
+  runs/20261011T225704Z_e2efinal/results.json \
   --llamacpp runs/20261011T102433Z_llamacpp2/llamacpp.json --llamacpp-ppl runs/20261011T205851Z_llamappl/llamacpp_ppl.json
 ```

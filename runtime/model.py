@@ -12,6 +12,7 @@ prefill speed is out of scope; it stays simple and exercises exactly the kernels
 Knobs (DecodeConfig):
     weights   "int4" (W4A16 GEMV) | "fp16" (cuBLAS via torch.mm, i.e. the HF GEMM call)
     group     quantization group size (64/128/256)
+    quant     "rtn" | "clip" (RTN + per-group MSE range clipping) | "pre" (precomputed, e.g. runtime.gptq.calibrate)
     lm_head   "auto" (INT4 iff weights are INT4) | "fp16" | "int4"
     fused     fused add+RMSNorm and SwiGLU kernels vs the HF-style torch op sequences
     backend   "cuda" (custom kernels) | "ref" (torch reference ops; runs on CPU for local validation)

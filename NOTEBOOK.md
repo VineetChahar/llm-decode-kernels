@@ -136,3 +136,25 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
   reported with their wall-clock rates and hollow markers, not re-run.
 - Merge for the final results.json: kbench2, e2e4, kbench3 clock experiment, final, e2efinal (+ llama.cpp files).
   lmhead is left out: its LM-head rows are lower-clock than final's, so substituting them would make the plot worse.
+
+## Quantizer + LM-head timing pass (2026-10-12)
+- Decision: GPTQ (not AWQ) for the better quantizer. Reason: it outputs exactly our format (per-group fp16 scale +
+  integer zero, contiguous groups) so no kernel changes; AWQ needs per-channel activation scales folded into the
+  preceding RMSNorm, which touches the runtime. No act-order: it would permute columns and break contiguous groups.
+- runtime/gptq.py: sequential layer-by-layer calibration through the HF model (Catcher on layer 0 for inputs + kwargs,
+  forward hooks accumulate X^T X, q|k|v and gate|up one call each, quantized outputs feed the next layer, weights
+  restored). Bug caught by the CPU test: `.cpu()` is a no-op on CPU tensors, so the "saved" originals were overwritten
+  — now `.cpu().clone()`. CPU check: runtime (ref backend) with GPTQ weights vs HF with the same fake-quantized weights,
+  max |dlogit| 5e-4, all argmax equal — key mapping and concat order are right.
+- quant (runs/20261012T054806Z_quant) and quant2 (…060832Z_quant2), gate 667/667 both, identical perplexities:
+  RTN 10.460 (+7.6 %), RTN+clip 10.636 (+9.4 %, worse), GPTQ 10.020 (+3.1 %), GPTQ+clip 9.874 (+1.6 % = llama.cpp
+  Q4_K_M's relative cost), GPTQ+clip+GPTQ INT4 head 9.894 (+1.8 %). Clipping minimises weight MSE and hurts alone;
+  inside GPTQ it helps. Calibration 120 s on T4. Speed RTN vs GPTQ+clip, A/B/A/B wall clock: same within 2 %.
+  (Event-timed medians at ctx 512 on that node sat at 5.39 ms for every config at 585 MHz while wall was ~3.7 ms —
+  wall clock is the trustworthy number there.)
+- LM-head ladder: 4th attempt (quant, burst timing — short bursts with idle gaps, keep only >= 1400 MHz bursts) got 0
+  full-clock bursts: that node was capped at 585 MHz. Decision: stop chasing the clock, time the 5 variants interleaved
+  (round-robin, 40 rounds) so they share one clock — ratios valid on any node. quant2 (median 780 MHz): 621 / 313 / 158 /
+  186 / 557 us. Finding: at 780 MHz the stage-2 config (R=4, 4 warps, pf) beats the ~1500 MHz autotune pick (R=2, 1 warp)
+  by 15 % — the GEMV autotune optimum is clock-dependent. time_bursts removed; time_interleaved kept.
+- One-command pipeline now includes gemv_lm and quant by default.

@@ -4678,12 +4678,12 @@
   "l2_mb": 4.0,
   "torch": "2.11.0+cu128",
   "cuda": "12.8",
-  "utc": "2026-10-11T21:28:00Z",
+  "utc": "2026-10-12T06:09:29Z",
   "clocks": {
-   "sm_mhz": 330,
+   "sm_mhz": 345,
    "mem_mhz": 405,
-   "temp_c": 46,
-   "power_w": 13.715,
+   "temp_c": 49,
+   "power_w": 14.06,
    "reasons": [
     "gpu_idle"
    ]
@@ -12423,17 +12423,58 @@
     0
    ],
    "bytes": 34884096,
-   "median_us": 701.9199728965759,
-   "iqr_us": 0.9279847145080566,
-   "p25_us": 701.3760209083557,
-   "p75_us": 702.3040056228638,
-   "sm_mhz": 645,
-   "temp_c": 71,
-   "power_w": 29.099,
-   "reasons": [],
+   "median_us": 620.8800077438354,
+   "iqr_us": 247.31199443340302,
+   "p25_us": 504.2880177497864,
+   "p75_us": 751.6000121831894,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
    "throttled": true,
-   "attempt": 0,
-   "gbps": 49.69810996550739
+   "interleaved": true,
+   "gbps": 56.184923922357285
   },
   {
    "shape": "lm_head",
@@ -12447,17 +12488,58 @@
     0
    ],
    "bytes": 34884096,
-   "median_us": 359.5679998397827,
-   "iqr_us": 0.9999945759773254,
-   "p25_us": 359.1279909014702,
-   "p75_us": 360.1279854774475,
-   "sm_mhz": 645,
-   "temp_c": 71,
-   "power_w": 37.729,
-   "reasons": [],
+   "median_us": 312.73600459098816,
+   "iqr_us": 129.2719915509224,
+   "p25_us": 257.05600529909134,
+   "p75_us": 386.32799685001373,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
    "throttled": true,
-   "attempt": 0,
-   "gbps": 97.01668673392446
+   "interleaved": true,
+   "gbps": 111.54486687781015
   },
   {
    "shape": "lm_head",
@@ -12471,17 +12553,58 @@
     1
    ],
    "bytes": 34884096,
-   "median_us": 146.28800004720688,
-   "iqr_us": 1.6799978911876678,
-   "p25_us": 145.56000009179115,
-   "p75_us": 147.23999798297882,
-   "sm_mhz": 1110,
-   "temp_c": 71,
-   "power_w": 32.144,
-   "reasons": [],
+   "median_us": 158.27200561761856,
+   "iqr_us": 15.16798883676529,
+   "p25_us": 151.5520066022873,
+   "p75_us": 166.71999543905258,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
    "throttled": true,
-   "attempt": 0,
-   "gbps": 238.4617739578295
+   "interleaved": true,
+   "gbps": 220.40597681108025
   },
   {
    "shape": "lm_head",
@@ -12495,17 +12618,58 @@
     1
    ],
    "bytes": 34884096,
-   "median_us": 152.68799662590027,
-   "iqr_us": 2.9759928584098816,
-   "p25_us": 151.10400319099426,
-   "p75_us": 154.07999604940414,
-   "sm_mhz": 1110,
-   "temp_c": 71,
-   "power_w": 40.861,
-   "reasons": [],
+   "median_us": 186.36799603700638,
+   "iqr_us": 65.84800407290459,
+   "p25_us": 157.69599378108978,
+   "p75_us": 223.54399785399437,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
    "throttled": true,
-   "attempt": 0,
-   "gbps": 228.46652501092973
+   "interleaved": true,
+   "gbps": 187.1785754088014
   },
   {
    "shape": "lm_head",
@@ -12514,17 +12678,58 @@
    "impl": "cuBLAS fp16",
    "cfg": null,
    "bytes": 131140096,
-   "median_us": 516.7839825153351,
-   "iqr_us": 0.9679943323135376,
-   "p25_us": 516.3760036230087,
-   "p75_us": 517.3439979553223,
-   "sm_mhz": 1110,
-   "temp_c": 71,
-   "power_w": 40.861,
-   "reasons": [],
+   "median_us": 556.5920174121857,
+   "iqr_us": 98.00001978874207,
+   "p25_us": 520.2239751815796,
+   "p75_us": 618.2239949703217,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
    "throttled": true,
-   "attempt": 0,
-   "gbps": 253.7619207191828
+   "interleaved": true,
+   "gbps": 235.61260653669035
   }
  ],
  "group_gemv": [
@@ -18186,6 +18391,807 @@
   ]
  },
  "attention_version": 3,
+ "gemv_lm_head": [
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "0 naive",
+   "cfg": [
+    0,
+    1,
+    4,
+    0
+   ],
+   "bytes": 34884096,
+   "median_us": 620.8800077438354,
+   "iqr_us": 247.31199443340302,
+   "p25_us": 504.2880177497864,
+   "p75_us": 751.6000121831894,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
+   "throttled": true,
+   "interleaved": true,
+   "gbps": 56.184923922357285
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "1 vectorized",
+   "cfg": [
+    1,
+    1,
+    4,
+    0
+   ],
+   "bytes": 34884096,
+   "median_us": 312.73600459098816,
+   "iqr_us": 129.2719915509224,
+   "p25_us": 257.05600529909134,
+   "p75_us": 386.32799685001373,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
+   "throttled": true,
+   "interleaved": true,
+   "gbps": 111.54486687781015
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "2 reg-blocked",
+   "cfg": [
+    2,
+    4,
+    4,
+    1
+   ],
+   "bytes": 34884096,
+   "median_us": 158.27200561761856,
+   "iqr_us": 15.16798883676529,
+   "p25_us": 151.5520066022873,
+   "p75_us": 166.71999543905258,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
+   "throttled": true,
+   "interleaved": true,
+   "gbps": 220.40597681108025
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "3 autotuned",
+   "cfg": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "bytes": 34884096,
+   "median_us": 186.36799603700638,
+   "iqr_us": 65.84800407290459,
+   "p25_us": 157.69599378108978,
+   "p75_us": 223.54399785399437,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
+   "throttled": true,
+   "interleaved": true,
+   "gbps": 187.1785754088014
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "cuBLAS fp16",
+   "cfg": null,
+   "bytes": 131140096,
+   "median_us": 556.5920174121857,
+   "iqr_us": 98.00001978874207,
+   "p25_us": 520.2239751815796,
+   "p75_us": 618.2239949703217,
+   "median_full_clock_us": null,
+   "n_full_clock": 0,
+   "sm_mhz": 780,
+   "round_mhz": [
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    915,
+    585,
+    585,
+    585,
+    645,
+    645,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615,
+    615
+   ],
+   "throttled": true,
+   "interleaved": true,
+   "gbps": 235.61260653669035
+  }
+ ],
+ "quant_ppl": {
+  "windows": 16,
+  "window_len": 512,
+  "results": {
+   "hf_fp16": {
+    "ppl": 9.72169150564008,
+    "tokens": 8176
+   },
+   "rt_int4_g128": {
+    "ppl": 10.46020503126245,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 7.596553801300088
+   },
+   "rt_int4_g128_clip": {
+    "ppl": 10.635752344042531,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 9.402281875249319
+   },
+   "rt_int4_g128_gptq": {
+    "ppl": 10.020196993490424,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 3.0705097737072196
+   },
+   "rt_int4_g128_gptq_clip": {
+    "ppl": 9.874269423580984,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 1.569458543838631
+   },
+   "rt_int4_g128_gptq_int4head": {
+    "ppl": 10.060002947896335,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 34816000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 3.47996479892394
+   },
+   "rt_int4_g128_gptq_clip_int4head": {
+    "ppl": 9.894269045785277,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 34816000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 1.775180173584756
+   },
+   "rt_int4_g128_int4head": {
+    "ppl": 10.51421221550657,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 34816000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 8.152086593230257
+   }
+  },
+  "calibration": {
+   "gptq": {
+    "calib_s": 135.84502959251404,
+    "calib_windows": 128,
+    "calib_len": 512,
+    "calib_data": "WikiText-2 train (seed 0)",
+    "clip": false
+   },
+   "gptq_clip": {
+    "calib_s": 137.60638403892517,
+    "calib_windows": 128,
+    "calib_len": 512,
+    "calib_data": "WikiText-2 train (seed 0)",
+    "clip": true
+   }
+  }
+ },
+ "quant_agreement": {
+  "n_prompts": 16,
+  "n_new": 64,
+  "results": {
+   "rt_int4_g128": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 14.25,
+    "first_divergence": [
+     2,
+     4,
+     39,
+     1,
+     0,
+     3,
+     53,
+     11,
+     64,
+     6,
+     7,
+     0,
+     11,
+     20,
+     7,
+     0
+    ],
+    "teacher_forced_top1_agreement": 0.91015625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris. What is the capital of Germany?</s> \n<|assistant|>\nThe capital of Germany is Berlin.</s> \n<|user|>\nCan you tell me the capital of the United Kingdom?</s> \n<|assistant|>\nThe capital of the United Kingdom is London"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young couple named Jack and Sarah. Jack was a handsome man in his early thirties, with a kind and gentle heart. Sarah was a beautiful woman in her early twenties, with a sharp mind and a kind heart. They had been married for only a few months when Jack received a"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    elif n == 4:\n        return 2\n    else:\n        a, b = 0, "
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy can neither be created nor destroyed, but can only be transferred from one form to another. This means that energy is conserved, and that the amount of energy in a system is always equal to the sum of the energies of the parts that make up the system. This is known as the second law of therm"
+     }
+    ]
+   },
+   "rt_int4_g128_clip": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 9.75,
+    "first_divergence": [
+     6,
+     0,
+     3,
+     0,
+     3,
+     4,
+     4,
+     1,
+     64,
+     8,
+     7,
+     0,
+     11,
+     38,
+     7,
+     0
+    ],
+    "teacher_forced_top1_agreement": 0.8916015625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The United States of America is the largest country in the world.\n\n3. The United Kingdom is the second-largest country in the world.\n\n4. China is the third-largest country in the world.\n\n5. India is the fourth-largest"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "lived a young woman named Lily. She was a kind and gentle soul, always ready to help anyone in need. One day, while walking along the beach, she saw a group of fishermen struggling to pull a large fish out of the water. Lily knew that she had to help. She gathered her"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Testing the function\nprint("
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "the first law is the conservation of energy, the second law is the conservation of mass, and the third law is the conservation of matter. These laws are based on the principle that energy cannot be created or destroyed, but only transformed from one form to another. The first law states that the sum of the total energy of"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 12.3125,
+    "first_divergence": [
+     6,
+     18,
+     3,
+     7,
+     14,
+     6,
+     20,
+     11,
+     64,
+     10,
+     4,
+     0,
+     11,
+     12,
+     7,
+     4
+    ],
+    "teacher_forced_top1_agreement": 0.9326171875,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The United States of America:\n\n- The United States of America is the largest country in the world.\n- The capital of the United States of America is Washington D.C.\n\n3. The United Kingdom:\n\n- The United Kingdom is the largest country in Europe"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young woman named Lily. She was a kind and gentle soul, always ready with a smile and a kind word. Lily had always dreamed of traveling the world, seeing new sights and experiencing new cultures. But life had other plans for her. She had been married to a"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Call the fibonacci function with n=5\nprint"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but only transformed from one form to another. This means that energy can be transferred from one form to another, but it cannot be created or destroyed. This is known as the first law of thermodynamics.\n\n2. The second law of thermodynamics states that"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq_clip": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.625,
+    "first_divergence": [
+     6,
+     4,
+     3,
+     7,
+     17,
+     4,
+     4,
+     1,
+     64,
+     10,
+     14,
+     2,
+     11,
+     29,
+     7,
+     3
+    ],
+    "teacher_forced_top1_agreement": 0.91015625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The capital of Spain is Madrid.\n\n3. The capital of Italy is Rome.\n\n4. The capital of the United Kingdom is London.\n\n5. The capital of Canada is Ottawa.\n\n6. The capital of Australia is Canberra.\n\n"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young girl named Lily. Lily was a kind and gentle girl, always smiling and always ready to help others. One day, Lily was walking home from school when she saw a group of men looting a nearby store. Lily knew that she had to do something to stop them."
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Test the function\nprint(fibonacci(1"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but can only be transferred from one place to another. This law is known as the second law of thermodynamics.\n\n2. Entropy: Entropy is a measure of the disorder or chaos of a system. It is a measure of the amount of energy"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq_int4head": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.4375,
+    "first_divergence": [
+     6,
+     18,
+     5,
+     7,
+     14,
+     6,
+     4,
+     11,
+     64,
+     10,
+     4,
+     0,
+     11,
+     12,
+     7,
+     4
+    ],
+    "teacher_forced_top1_agreement": 0.91796875,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The United States:\n\na. The capital of the United States is Washington D.C.\n\nb. The capital of California is Sacramento.\n\nc. The capital of Texas is Austin.\n\nd. The capital of New York is New York City."
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young woman named Lily. She was a kind and gentle soul, always ready with a smile and a kind word. Lily had always dreamed of traveling the world, seeing new places and experiencing new cultures. One day, Lily decided to take a leap of faith and emb"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n < 0:\n        raise ValueError(\"N must be a positive integer.\")\n    a, b = 0, 1\n    for I in range(n):\n        a, b = b, a + b\n    return a\n\n# Call the function with a value"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but only transformed from one form to another. This means that energy can be transferred from one form to another, but it cannot be created or destroyed. This is known as the second law of thermodynamics.\n\n4. The second law of thermodynamics states that"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq_clip_int4head": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.875,
+    "first_divergence": [
+     6,
+     4,
+     3,
+     7,
+     17,
+     4,
+     4,
+     1,
+     64,
+     10,
+     11,
+     2,
+     11,
+     31,
+     7,
+     8
+    ],
+    "teacher_forced_top1_agreement": 0.9033203125,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The capital of Spain is Madrid.\n\n3. The capital of Italy is Rome.\n\n4. The capital of the United Kingdom is London.\n\n5. The capital of Canada is Ottawa.\n\n6. The capital of Australia is Canberra.\n\n"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young girl named Lily. She was a kind and gentle girl, with a heart full of love and a soul full of dreams. One day, Lily woke up to find herself in a strange and magical world. She was no longer in her village, but in a world of wonder"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```\n\nIn this modified version of the program, we've"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but can only be transferred from one place to another. This law is known as the second law of thermodynamics.\n\n2. The second law of thermodynamics states that energy cannot be created or destroyed, but can only be transferred from one place to another."
+     }
+    ]
+   },
+   "rt_int4_g128_int4head": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.5625,
+    "first_divergence": [
+     2,
+     4,
+     5,
+     1,
+     0,
+     3,
+     44,
+     11,
+     64,
+     6,
+     7,
+     0,
+     11,
+     12,
+     7,
+     8
+    ],
+    "teacher_forced_top1_agreement": 0.9072265625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris. The capital of Spain is Madrid. The capital of Italy is Rome. The capital of Canada is Ottawa. The capital of Australia is Canberra. The capital of the United States is Washington, D.C. The capital of the United Kingdom is London. The capital of Japan is Tokyo. The capital"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young couple named Jack and Sarah. Jack was a fisherman, and Sarah was a seamstress. Jack was a kind and gentle man, always ready to help anyone in need. Sarah was a strong and independent woman, who loved to sew and make clothes. One day, Jack and Sarah"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n < 1:\n        return 0\n    elif n == 1:\n        return 1\n    elif n == 2:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy can neither be created nor destroyed, but rather transformed from one form to another. This means that energy is conserved, and that the amount of energy in a system is always equal to the sum of the energies of the particles in that system. This is known as the second law of thermodynamics."
+     }
+    ]
+   }
+  }
+ },
+ "quant_speed": {
+  "rt_int4_g128": [
+   {
+    "ctx": 512,
+    "median_us": 5391.456127166748,
+    "wall_us": 3613.8125781270955,
+    "tok_s": 185.47864925787826,
+    "sm_mhz": 1035
+   },
+   {
+    "ctx": 4096,
+    "median_us": 4891.744136810303,
+    "wall_us": 4284.176218749991,
+    "tok_s": 204.42606400343277,
+    "sm_mhz": 945
+   },
+   {
+    "ctx": 512,
+    "median_us": 5392.1918869018555,
+    "wall_us": 3681.3673281237416,
+    "tok_s": 185.45334086294196,
+    "sm_mhz": 585
+   },
+   {
+    "ctx": 4096,
+    "median_us": 4464.416027069092,
+    "wall_us": 4324.418859376066,
+    "tok_s": 223.99346161663706,
+    "sm_mhz": 960
+   }
+  ],
+  "rt_int4_g128_gptq_clip": [
+   {
+    "ctx": 512,
+    "median_us": 5389.440059661865,
+    "wall_us": 3686.562718748121,
+    "tok_s": 185.5480326211737,
+    "sm_mhz": 585
+   },
+   {
+    "ctx": 4096,
+    "median_us": 4530.879974365234,
+    "wall_us": 4345.891156251724,
+    "tok_s": 220.7076783445577,
+    "sm_mhz": 945
+   },
+   {
+    "ctx": 512,
+    "median_us": 5388.959884643555,
+    "wall_us": 3735.2044062473055,
+    "tok_s": 185.56456559448736,
+    "sm_mhz": 585
+   },
+   {
+    "ctx": 4096,
+    "median_us": 4535.583972930908,
+    "wall_us": 4335.900624994338,
+    "tok_s": 220.47877538331562,
+    "sm_mhz": 930
+   }
+  ]
+ },
  "llamacpp": [
   {
    "build_commit": "23b0202",

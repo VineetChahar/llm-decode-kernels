@@ -14,7 +14,7 @@ Needs a Kaggle account with API token in `~/.kaggle/` (free; T4 x2 GPU quota). N
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install kaggle matplotlib numpy torch transformers datasets
-.venv/bin/python scripts/kaggle_run.py --tag full --cmd "bash scripts/run_all.sh"   # ~1.5 h on one T4
+.venv/bin/python scripts/kaggle_run.py --tag full --cmd "bash scripts/run_all.sh"   # ~2 h on one T4
 .venv/bin/python scripts/plot_all.py runs/<stamp>_full/results.json --llamacpp runs/<stamp>_llamacpp/llamacpp.json
 ```
 
@@ -28,14 +28,18 @@ push the e2e part. (A single `run_all.sh` run needs none of this: both stages sh
 
 `scripts/run_all.sh` runs the **accuracy gate first** (`tests/test_kernels.py`: exits non-zero on any
 numerical failure, before any speed number exists), then `bench/kernel_bench.py` (bandwidth microbenchmark,
-clock probe, autotuner, GEMV stage ladder, group sweep, attention sweep, ncu attempt), then `bench/e2e.py`
-(perplexity, greedy agreement, tokens/s vs context, ablations, profiler breakdown). All results go to one
+clock probe, autotuner, GEMV stage ladder, interleaved LM-head ladder, group sweep, attention sweep, ncu attempt),
+then `bench/e2e.py` (perplexity, greedy agreement, quantizer comparison incl. GPTQ calibration, tokens/s vs context,
+ablations, profiler breakdown). All results go to one
 `results.json`; every plot is regenerated from it by `scripts/plot_all.py`.
 
 llama.cpp reference (separate kernel, CUDA build ~10 min each):
 `scripts/kaggle_run.py --slug llm-decode-llamacpp --tag llamacpp --cmd "bash scripts/llamacpp_bench.sh"` (speed) and
 `--tag llamappl --cmd "bash scripts/llamacpp_ppl.sh"` (WikiText-2 perplexity, Q4_K_M vs Q8_0); pass the outputs to
 `plot_all.py --llamacpp … --llamacpp-ppl …`.
+
+GPTQ weights (same format, same kernels; RESULTS §6): `qp = runtime.gptq.calibrate(hf_model, tokenizer, clip=True)`,
+then `DecodeConfig(quant="pre", qparams=qp)`.
 
 Local, CPU-only checks (no GPU): `python tests/test_quant_local.py`, `tests/test_ref_local.py`,
 `tests/test_runtime_local.py` (reference-backend runtime vs HF).
@@ -45,7 +49,8 @@ Local, CPU-only checks (no GPU): `python tests/test_quant_local.py`, `tests/test
 ```
 kernels/     gemv_w4a16.cu (4 stages + bandwidth microbench), paged_attention.cu (v1, v2, v3 + combines),
              fused_norm.cu, fused_swiglu.cu, rope_kv.cu, bindings.cpp
-runtime/     quant.py (group-wise INT4 + nibble packing), model.py (decode runtime, CUDA graphs), ext.py (JIT build)
+runtime/     quant.py (group-wise INT4: RTN, range clipping, GPTQ core + nibble packing), gptq.py (sequential GPTQ
+             calibration), model.py (decode runtime, CUDA graphs), ext.py (JIT build)
 reference/   ref_ops.py — fp16 PyTorch reference for every kernel (also the CPU backend)
 bench/       kernel_bench.py, e2e.py, timing.py (CUDA events, L2 flush, clock gating), analyze.py (models)
 scripts/     kaggle_run.py (push -> poll -> pull), autotune.py, plot_all.py, run_all.sh, llamacpp_bench.sh, llamacpp_ppl.sh

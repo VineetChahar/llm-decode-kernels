@@ -246,7 +246,7 @@ def try_ncu():
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("sections", nargs="*", default=["clocks", "bw", "autotune", "gemv", "groups", "attn", "ncu"])
+    ap.add_argument("sections", nargs="*", default=["clocks", "bw", "autotune", "gemv", "gemv_lm", "groups", "attn", "ncu"])
     a = ap.parse_args()
     res.put("env", env_info())
     for s in a.sections:

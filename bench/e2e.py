@@ -349,7 +349,7 @@ def bench_quant():
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("sections", nargs="*", default=["ppl", "agree", "speed", "profile"])
+    ap.add_argument("sections", nargs="*", default=["ppl", "agree", "quant", "speed", "profile"])
     a = ap.parse_args()
     res.put("env_e2e", env_info())
     failed = []

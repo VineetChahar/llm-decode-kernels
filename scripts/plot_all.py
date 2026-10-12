@@ -122,7 +122,11 @@ def plot_gemv_stages(r):
         xs = np.arange(len(shapes)) + (i - 2) * w
         ax.bar(xs, vals, w * 0.92, color=C[[6, 3, 2, 0, 1][i]], label=im)
     ax.set_xticks(range(len(shapes)))
-    ax.set_xticklabels([f"{s}\n{next(x['N'] for x in rows if x['shape'] == s)}x{next(x['K'] for x in rows if x['shape'] == s)}" for s in shapes])
+    def lab(s):
+        x0 = next(x for x in rows if x["shape"] == s)
+        clk = f"\ninterleaved @ {x0['sm_mhz']} MHz" if x0.get("interleaved") else f"\n@ {x0['sm_mhz']} MHz"
+        return f"{s}\n{x0['N']}x{x0['K']}{clk}"
+    ax.set_xticklabels([lab(s) for s in shapes], fontsize=8.5)
     ax.set_yscale("log"); ax.set_ylabel("kernel time, µs (log)"); ax.set_title("GEMV stage ladder vs cuBLAS fp16 (G=128, L2 flushed)")
     ax.legend(fontsize=8, ncol=5, loc="upper left")
     save(fig, "gemv_stages.png")
@@ -285,6 +289,33 @@ def plot_profile(r):
     save(fig, "profile_breakdown.png")
 
 
+# ------------------------------------------------------------------ quantizer comparison
+QNAMES = {"rt_int4_g128": "RTN", "rt_int4_g128_clip": "RTN + range clip", "rt_int4_g128_gptq": "GPTQ",
+          "rt_int4_g128_gptq_clip": "GPTQ + range clip", "rt_int4_g128_int4head": "RTN, INT4 head",
+          "rt_int4_g128_gptq_int4head": "GPTQ, INT4 head", "rt_int4_g128_gptq_clip_int4head": "GPTQ + clip, INT4 head"}
+
+
+def plot_quant(r):
+    res = r["quant_ppl"]["results"]
+    names = [k for k in QNAMES if k in res]
+    d = [res[k]["rel_delta_pct"] for k in names]
+    fig, ax = plt.subplots(figsize=(8, 3.6))
+    cols = [C[0] if "gptq" in k else C[1] for k in names]
+    ax.barh(range(len(names)), d, 0.6, color=cols)
+    for i, v in enumerate(d):
+        ax.annotate(f"+{v:.1f}%  (ppl {res[names[i]]['ppl']:.3f})", (v, i), xytext=(4, 0), textcoords="offset points",
+                    va="center", fontsize=8, color=INK)
+    lp = r.get("llamacpp_perplexity")
+    if lp:
+        rel = lp.get("rel_delta_pct_Q4KM_vs_Q8") or 100 * (lp["Q4_K_M"]["ppl"] / lp["Q8_0"]["ppl"] - 1)
+        ax.axvline(rel, color=C[6], ls="--", lw=1.2, label=f"llama.cpp Q4_K_M vs its own Q8_0: +{rel:.1f}%")
+        ax.legend(loc="lower right", fontsize=8)
+    ax.set_yticks(range(len(names))); ax.set_yticklabels([QNAMES[k] for k in names], fontsize=8.5); ax.invert_yaxis()
+    ax.set_xlabel("WikiText-2 perplexity increase vs HF fp16 (%)"); ax.set_xlim(0, max(d) * 1.45)
+    ax.set_title("INT4 G128 quantizers, same packed format and kernels")
+    save(fig, "quantizers.png")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("results", nargs="+", help="results.json files; later files override earlier keys")
@@ -308,7 +339,7 @@ def main():
              ("gemv_stages", lambda: plot_gemv_stages(r)), ("autotune", lambda: plot_autotune(r)),
              ("groups", lambda: plot_groups(r)), ("fusion", lambda: plot_fusion(r)),
              ("attention", lambda: plot_attention(r)), ("bw_clock", lambda: plot_bw_clock(r)),
-             ("profile", lambda: plot_profile(r))]
+             ("profile", lambda: plot_profile(r)), ("quant", lambda: plot_quant(r))]
     for name, fn in plots:
         try:
             out = fn()

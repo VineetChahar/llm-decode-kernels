@@ -1,0 +1,108 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ KERNEL_SECTIONS=gemv_lm E2E_SECTIONS=quant bash scripts/run_all.sh
+667/667 passed
+
+===== gemv_lm =====
+lm_head 0 naive            620.9us (full-clock rounds 0: None)  median 780 MHz
+lm_head 1 vectorized       312.7us (full-clock rounds 0: None)  median 780 MHz
+lm_head 2 reg-blocked      158.3us (full-clock rounds 0: None)  median 780 MHz
+lm_head 3 autotuned        186.4us (full-clock rounds 0: None)  median 780 MHz
+lm_head cuBLAS fp16        556.6us (full-clock rounds 0: None)  median 780 MHz
+loading HF model...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/201 [00:00<00:50,  3.96it/s]
+Loading weights:  25%|██▍       | 50/201 [00:00<00:00, 173.71it/s]
+Loading weights:  38%|███▊      | 77/201 [00:00<00:00, 193.32it/s]
+Loading weights:  51%|█████     | 103/201 [00:00<00:00, 195.98it/s]
+Loading weights:  65%|██████▍   | 130/201 [00:00<00:00, 212.39it/s]
+Loading weights:  77%|███████▋  | 154/201 [00:00<00:00, 216.40it/s]
+Loading weights:  89%|████████▊ | 178/201 [00:00<00:00, 211.59it/s]
+Loading weights: 100%|██████████| 201/201 [00:01<00:00, 195.82it/s]
+
+===== quant =====
+
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 66538.93 examples/s]
+
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 36718/36718 [00:00<00:00, 542197.97 examples/s]
+
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 375257.77 examples/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (341468 > 2048). Running this sequence through the model will result in indexing errors
+ppl rt_int4_g128 = 10.4602
+ppl rt_int4_g128_clip = 10.6358
+gptq layer 0: 5s
+gptq layer 1: 11s
+gptq layer 2: 16s
+gptq layer 3: 22s
+gptq layer 4: 27s
+gptq layer 5: 33s
+gptq layer 6: 38s
+gptq layer 7: 43s
+gptq layer 8: 48s
+gptq layer 9: 54s
+gptq layer 10: 59s
+gptq layer 11: 64s
+gptq layer 12: 70s
+gptq layer 13: 75s
+gptq layer 14: 80s
+gptq layer 15: 85s
+gptq layer 16: 91s
+gptq layer 17: 96s
+gptq layer 18: 101s
+gptq layer 19: 107s
+gptq layer 20: 112s
+gptq layer 21: 118s
+gptq done: 119s, 89 matrices
+ppl rt_int4_g128_gptq = 10.0202
+gptq layer 0: 5s
+gptq layer 1: 11s
+gptq layer 2: 16s
+gptq layer 3: 22s
+gptq layer 4: 27s
+gptq layer 5: 33s
+gptq layer 6: 38s
+gptq layer 7: 44s
+gptq layer 8: 49s
+gptq layer 9: 54s
+gptq layer 10: 60s
+gptq layer 11: 65s
+gptq layer 12: 71s
+gptq layer 13: 76s
+gptq layer 14: 81s
+gptq layer 15: 87s
+gptq layer 16: 92s
+gptq layer 17: 98s
+gptq layer 18: 103s
+gptq layer 19: 109s
+gptq layer 20: 114s
+gptq layer 21: 120s
+gptq done: 122s, 89 matrices
+ppl rt_int4_g128_gptq_clip = 9.8743
+ppl rt_int4_g128_gptq_int4head = 10.0600
+ppl rt_int4_g128_gptq_clip_int4head = 9.8943
+ppl rt_int4_g128_int4head = 10.5142
+agree rt_int4_g128: exact 1/16, mean first-div 14.2, teacher-forced top1 0.9102
+agree rt_int4_g128_clip: exact 1/16, mean first-div 9.8, teacher-forced top1 0.8916
+agree rt_int4_g128_gptq: exact 1/16, mean first-div 12.3, teacher-forced top1 0.9326
+agree rt_int4_g128_gptq_clip: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9102
+agree rt_int4_g128_gptq_int4head: exact 1/16, mean first-div 11.4, teacher-forced top1 0.9180
+agree rt_int4_g128_gptq_clip_int4head: exact 1/16, mean first-div 11.9, teacher-forced top1 0.9033
+agree rt_int4_g128_int4head: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9072
+speed rt_int4_g128 ctx 512: 185.5 tok/s @ 1035 MHz
+speed rt_int4_g128 ctx 4096: 204.4 tok/s @ 945 MHz
+speed rt_int4_g128_gptq_clip ctx 512: 185.5 tok/s @ 585 MHz
+speed rt_int4_g128_gptq_clip ctx 4096: 220.7 tok/s @ 945 MHz
+speed rt_int4_g128 ctx 512: 185.5 tok/s @ 585 MHz
+speed rt_int4_g128 ctx 4096: 224.0 tok/s @ 960 MHz
+speed rt_int4_g128_gptq_clip ctx 512: 185.6 tok/s @ 585 MHz
+speed rt_int4_g128_gptq_clip ctx 4096: 220.5 tok/s @ 930 MHz
+EXIT_CODE=0
