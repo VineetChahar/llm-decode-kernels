@@ -1,0 +1,103 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ KERNEL_SECTIONS=gemv_lm E2E_SECTIONS=quant bash scripts/run_all.sh
+667/667 passed
+
+===== gemv_lm =====
+lm_head  0 naive              nanus  iqr   nan     nan GB/s
+lm_head  1 vectorized         nanus  iqr   nan     nan GB/s
+lm_head  2 reg-blocked        nanus  iqr   nan     nan GB/s
+lm_head  3 autotuned          nanus  iqr   nan     nan GB/s
+lm_head  cuBLAS fp16          nanus  iqr   nan     nan GB/s
+loading HF model...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:   1%|          | 2/201 [00:00<00:10, 19.75it/s]
+Loading weights:  21%|██        | 42/201 [00:00<00:00, 239.47it/s]
+Loading weights:  33%|███▎      | 67/201 [00:00<00:00, 238.44it/s]
+Loading weights:  45%|████▌     | 91/201 [00:00<00:00, 236.12it/s]
+Loading weights:  57%|█████▋    | 115/201 [00:00<00:00, 224.28it/s]
+Loading weights:  69%|██████▉   | 139/201 [00:00<00:00, 221.67it/s]
+Loading weights:  83%|████████▎ | 166/201 [00:00<00:00, 220.46it/s]
+Loading weights:  96%|█████████▌| 193/201 [00:00<00:00, 219.12it/s]
+Loading weights: 100%|██████████| 201/201 [00:00<00:00, 225.02it/s]
+
+===== quant =====
+
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 67223.63 examples/s]
+
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 36718/36718 [00:00<00:00, 632781.88 examples/s]
+
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 429645.92 examples/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (341468 > 2048). Running this sequence through the model will result in indexing errors
+ppl rt_int4_g128 = 10.4602
+ppl rt_int4_g128_clip = 10.6358
+gptq layer 0: 5s
+gptq layer 1: 11s
+gptq layer 2: 16s
+gptq layer 3: 22s
+gptq layer 4: 27s
+gptq layer 5: 33s
+gptq layer 6: 39s
+gptq layer 7: 45s
+gptq layer 8: 50s
+gptq layer 9: 56s
+gptq layer 10: 62s
+gptq layer 11: 68s
+gptq layer 12: 74s
+gptq layer 13: 80s
+gptq layer 14: 85s
+gptq layer 15: 91s
+gptq layer 16: 97s
+gptq layer 17: 102s
+gptq layer 18: 108s
+gptq layer 19: 114s
+gptq layer 20: 120s
+gptq layer 21: 125s
+gptq done: 127s, 89 matrices
+ppl rt_int4_g128_gptq = 10.0202
+gptq layer 0: 6s
+gptq layer 1: 11s
+gptq layer 2: 17s
+gptq layer 3: 23s
+gptq layer 4: 29s
+gptq layer 5: 35s
+gptq layer 6: 41s
+gptq layer 7: 47s
+gptq layer 8: 53s
+gptq layer 9: 59s
+gptq layer 10: 64s
+gptq layer 11: 70s
+gptq layer 12: 76s
+gptq layer 13: 82s
+gptq layer 14: 88s
+gptq layer 15: 93s
+gptq layer 16: 99s
+gptq layer 17: 105s
+gptq layer 18: 111s
+gptq layer 19: 117s
+gptq layer 20: 123s
+gptq layer 21: 129s
+gptq done: 131s, 89 matrices
+ppl rt_int4_g128_gptq_clip = 9.8743
+ppl rt_int4_g128_gptq_int4head = 10.0600
+ppl rt_int4_g128_int4head = 10.5142
+agree rt_int4_g128: exact 1/16, mean first-div 14.2, teacher-forced top1 0.9102
+agree rt_int4_g128_clip: exact 1/16, mean first-div 9.8, teacher-forced top1 0.8916
+agree rt_int4_g128_gptq: exact 1/16, mean first-div 12.3, teacher-forced top1 0.9326
+agree rt_int4_g128_gptq_clip: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9102
+agree rt_int4_g128_gptq_int4head: exact 1/16, mean first-div 11.4, teacher-forced top1 0.9180
+agree rt_int4_g128_int4head: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9072
+speed rt_int4_g128 ctx 512: 216.9 tok/s @ 945 MHz
+speed rt_int4_g128 ctx 4096: 226.5 tok/s @ 1005 MHz
+speed rt_int4_g128_gptq ctx 512: 181.4 tok/s @ 585 MHz
+speed rt_int4_g128_gptq ctx 4096: 154.0 tok/s @ 960 MHz
+EXIT_CODE=0

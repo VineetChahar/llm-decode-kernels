@@ -48,6 +48,7 @@ CONFIGS = {
     "rt_int4_g128_gptq":     dict(weights="int4", group=128, lm_head="fp16", quant="pre", qp="gptq"),
     "rt_int4_g128_gptq_clip": dict(weights="int4", group=128, lm_head="fp16", quant="pre", qp="gptq_clip"),
     "rt_int4_g128_gptq_int4head": dict(weights="int4", group=128, lm_head="int4", quant="pre", qp="gptq"),
+    "rt_int4_g128_gptq_clip_int4head": dict(weights="int4", group=128, lm_head="int4", quant="pre", qp="gptq_clip"),
 }
 QP, QP_INFO = {}, {}
 
@@ -309,7 +310,7 @@ def bench_profile():
 
 
 QUANT_CONFIGS = ("rt_int4_g128", "rt_int4_g128_clip", "rt_int4_g128_gptq", "rt_int4_g128_gptq_clip",
-                 "rt_int4_g128_gptq_int4head", "rt_int4_g128_int4head")
+                 "rt_int4_g128_gptq_int4head", "rt_int4_g128_gptq_clip_int4head", "rt_int4_g128_int4head")
 
 
 def bench_quant():
@@ -331,10 +332,10 @@ def bench_quant():
         res.put("quant_ppl", out)
     bench_agree(names=QUANT_CONFIGS, key="quant_agreement")
     sp = {}
-    for name in ("rt_int4_g128", "rt_int4_g128_gptq"):
+    for name in ("rt_int4_g128", "rt_int4_g128_gptq_clip", "rt_int4_g128", "rt_int4_g128_gptq_clip"):  # ABAB: clock drift
         m = build(name)
         m.kv.normal_()
-        sp[name] = []
+        sp.setdefault(name, [])
         for ctx in (512, 4096):
             m.prepare(ctx + 80)
             cool()

@@ -80,39 +80,40 @@ def time_fn(fn, warmup=5, iters=50, flush=True, gate=True):
     return best
 
 
-def time_bursts(fn, bursts=24, per=4, gap_s=0.25, warmup=3, flush=True):
-    """Short bursts (`per` iterations, a few ms) separated by idle gaps, clock sampled during each burst; only bursts at
-    >= MIN_SM_MHZ are kept. For kernels whose 50-iteration loops (~40 ms of sustained load) pull the T4 clock down on
-    their own: the LM-head ladder sampled 585-1110 MHz in three jobs even on a 40 C GPU (RESULTS §4)."""
-    for _ in range(warmup):
-        if flush: _flush()
-        fn()
-    torch.cuda.synchronize()
-    kept, mhz_all = [], []
-    for _ in range(bursts):
-        time.sleep(gap_s)
-        st = [torch.cuda.Event(enable_timing=True) for _ in range(per)]
-        en = [torch.cuda.Event(enable_timing=True) for _ in range(per)]
-        for i in range(per):
+def time_interleaved(fns, rounds=40, gap_s=0.05, warmup=3, flush=True):
+    """Time several kernels round-robin: every round runs each fn once (L2 flushed before each), and the SM clock is
+    sampled per round. All fns therefore see the same clock history, so their *ratios* are valid even on a node that
+    never reaches full clock (four nodes in a row did not, for the LM-head ladder); absolute times are reported over
+    all rounds and, separately, over the rounds at >= MIN_SM_MHZ when there are any."""
+    for f in fns.values():
+        for _ in range(warmup):
             if flush: _flush()
-            st[i].record(); fn(); en[i].record()
-        torch.cuda._sleep(5_000_000)  # keep the GPU busy while NVML is read (see _time_once)
-        ca = clocks()
+            f()
+    torch.cuda.synchronize()
+    samples = {k: [] for k in fns}
+    mhz = []
+    for _ in range(rounds):
+        time.sleep(gap_s)
+        ev = {}
+        for k, f in fns.items():
+            if flush: _flush()
+            s, e = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
+            s.record(); f(); e.record(); ev[k] = (s, e)
+        torch.cuda._sleep(5_000_000)
+        mhz.append(clocks().get("sm_mhz", 0))
         torch.cuda.synchronize()
-        mhz = ca.get("sm_mhz", 0)
-        mhz_all.append(mhz)
-        if mhz >= MIN_SM_MHZ:
-            kept += [s.elapsed_time(e) * 1000.0 for s, e in zip(st, en)]
-    t = sorted(kept) if len(kept) >= 8 else None
-    if t is None:  # not enough full-clock bursts: report everything, flagged
-        return {"median_us": float("nan"), "iqr_us": float("nan"), "p25_us": float("nan"), "p75_us": float("nan"),
-                "min_us": float("nan"), "n": 0, "burst_mhz": mhz_all, "clocks_before": {}, "clocks_after": {"sm_mhz": max(mhz_all)},
-                "throttled": True, "attempt": 0}
-    q = statistics.quantiles(t, n=4)
-    return {"median_us": statistics.median(t), "p25_us": q[0], "p75_us": q[2], "iqr_us": q[2] - q[0], "min_us": t[0],
-            "n": len(t), "burst_mhz": mhz_all, "clocks_before": {},
-            "clocks_after": {"sm_mhz": int(statistics.median([m for m in mhz_all if m >= MIN_SM_MHZ]))},
-            "throttled": False, "attempt": 0}
+        for k, (s, e) in ev.items():
+            samples[k].append(s.elapsed_time(e) * 1000.0)
+    full = [i for i, m in enumerate(mhz) if m >= MIN_SM_MHZ]
+    out = {}
+    for k, t in samples.items():
+        q = statistics.quantiles(t, n=4)
+        tf = [t[i] for i in full]
+        out[k] = {"median_us": statistics.median(t), "p25_us": q[0], "p75_us": q[2], "iqr_us": q[2] - q[0], "n": len(t),
+                  "median_full_clock_us": statistics.median(tf) if len(tf) >= 5 else None, "n_full_clock": len(tf),
+                  "clocks_after": {"sm_mhz": int(statistics.median(mhz))}, "round_mhz": mhz,
+                  "throttled": statistics.median(mhz) < MIN_SM_MHZ, "attempt": 0}
+    return out
 
 
 def _time_once(fn, warmup, iters, flush):

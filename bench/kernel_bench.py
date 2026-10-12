@@ -5,7 +5,7 @@ sections:
   bw        achievable DRAM read bandwidth (own microbenchmark, swept launch configs) + D2D copy
   autotune  scripts/autotune.py sweep (R x warps x prefetch, per shape, per group size)
   gemv      stage ladder naive -> vectorized -> reg-blocked -> autotuned vs cuBLAS fp16, every model shape
-  gemv_lm   the same ladder for the LM head only, burst timing (only full-clock bursts kept; key gemv_lm_head)
+  gemv_lm   the same ladder for the LM head only, stages + cuBLAS timed interleaved (one shared clock; key gemv_lm_head)
   groups    GEMV time per group size (64/128/256) at autotuned configs, summed per token
   attn      paged attention: ctx 512..16K x partition size; best-partition policy; HF-style SDPA baseline
   ncu       one attempt at hardware counters (expected to be blocked on Kaggle)
@@ -14,7 +14,7 @@ import argparse, json, math, os, subprocess, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import torch
 from runtime import ext
-from bench.timing import time_fn, time_bursts, Results, env_info
+from bench.timing import time_fn, time_interleaved, Results, env_info
 from scripts.autotune import SHAPES, make, tune
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -63,16 +63,10 @@ def bench_bw():
     return out
 
 
-def bench_gemv(only=None, key="gemv_stages"):
-    """only: restrict to these shapes. `gemv_lm` re-measures just the LM head with burst timing (time_bursts: short
-    bursts with idle gaps, only full-clock bursts kept): with 50-iteration loops its rows sampled 585-1110 MHz in
-    kbench2, final and a cooled dedicated job."""
-    timer = (lambda f: time_bursts(f)) if only else time_fn
+def bench_gemv():
     best = json.load(open(ROOT / "configs" / "autotune.json"))["best"]
     rows = []
     for name, (N, K) in SHAPES.items():
-        if only and name not in only:
-            continue
         G = 128
         packed, sz = make(N, K, G)
         x = torch.randn(K, device="cuda").half(); y = torch.empty(N, dtype=torch.half, device="cuda")
@@ -83,24 +77,52 @@ def bench_gemv(only=None, key="gemv_stages"):
         stages = [("0 naive", (0, 1, 4, 0)), ("1 vectorized", (1, 1, 4, 0)), ("2 reg-blocked", (2, 4, 4, 1)),
                   ("3 autotuned", (2, R, W, pf))]
         for label, cfg in stages:
-            t = timer(lambda: K_.gemv_w4a16(*cfg, packed, sz, x, y, G))
+            t = time_fn(lambda: K_.gemv_w4a16(*cfg, packed, sz, x, y, G))
             rows.append({"shape": name, "N": N, "K": K, "impl": label, "cfg": cfg, "bytes": q_bytes, **_t(t),
                          "gbps": q_bytes / t["median_us"] / 1e3})
         xo = x.view(1, -1); yo = y.view(1, -1)
-        t = timer(lambda: torch.mm(xo, w16.t(), out=yo))
+        t = time_fn(lambda: torch.mm(xo, w16.t(), out=yo))
         rows.append({"shape": name, "N": N, "K": K, "impl": "cuBLAS fp16", "cfg": None, "bytes": f_bytes, **_t(t),
                      "gbps": f_bytes / t["median_us"] / 1e3})
         for r in rows[-5:]:
             print(f"{name:8s} {r['impl']:15s} {r['median_us']:8.1f}us  iqr {r['iqr_us']:5.1f}  {r['gbps']:6.1f} GB/s")
-    res.put(key, rows)
+    res.put("gemv_stages", rows)
+
+
+def bench_gemv_lm():
+    """LM-head ladder timed interleaved (time_interleaved): the 4 stages and cuBLAS run round-robin, so they share one
+    clock history. In kbench2, final, lmhead and quant the separately-timed LM-head rows sampled 585-1110 MHz."""
+    best = json.load(open(ROOT / "configs" / "autotune.json"))["best"]
+    N, K = SHAPES["lm_head"]; G = 128
+    packed, sz = make(N, K, G)
+    x = torch.randn(K, device="cuda").half(); y = torch.empty(N, dtype=torch.half, device="cuda")
+    w16 = (torch.randn(N, K, device="cuda") * 0.02).half()
+    xo = x.view(1, -1); yo = y.view(1, -1)
+    q_bytes = packed.numel() * 4 + sz.numel() * 2 + K * 2 + N * 2
+    f_bytes = N * K * 2 + K * 2 + N * 2
+    R, W, pf = best[f"{N}x{K}_G{G}"]
+    cfgs = {"0 naive": (0, 1, 4, 0), "1 vectorized": (1, 1, 4, 0), "2 reg-blocked": (2, 4, 4, 1), "3 autotuned": (2, R, W, pf)}
+    fns = {k: (lambda c=c: K_.gemv_w4a16(*c, packed, sz, x, y, G)) for k, c in cfgs.items()}
+    fns["cuBLAS fp16"] = lambda: torch.mm(xo, w16.t(), out=yo)
+    t = time_interleaved(fns)
+    rows = []
+    for k, r in t.items():
+        b = f_bytes if k.startswith("cuBLAS") else q_bytes
+        rows.append({"shape": "lm_head", "N": N, "K": K, "impl": k, "cfg": cfgs.get(k), "bytes": b,
+                     "median_us": r["median_us"], "iqr_us": r["iqr_us"], "p25_us": r["p25_us"], "p75_us": r["p75_us"],
+                     "median_full_clock_us": r["median_full_clock_us"], "n_full_clock": r["n_full_clock"],
+                     "sm_mhz": r["clocks_after"]["sm_mhz"], "round_mhz": r["round_mhz"], "throttled": r["throttled"],
+                     "interleaved": True, "gbps": b / r["median_us"] / 1e3})
+        print(f"lm_head {k:15s} {r['median_us']:8.1f}us (full-clock rounds {r['n_full_clock']}: {r['median_full_clock_us']})"
+              f"  median {r['clocks_after']['sm_mhz']} MHz")
+    res.put("gemv_lm_head", rows)
 
 
 def _t(t):
     ca = t["clocks_after"]
     return {"median_us": t["median_us"], "iqr_us": t["iqr_us"], "p25_us": t["p25_us"], "p75_us": t["p75_us"],
             "sm_mhz": ca.get("sm_mhz"), "temp_c": ca.get("temp_c"), "power_w": ca.get("power_w"),
-            "reasons": ca.get("reasons"), "throttled": t.get("throttled"), "attempt": t.get("attempt"),
-            **({"burst_mhz": t["burst_mhz"], "n": t["n"]} if "burst_mhz" in t else {})}
+            "reasons": ca.get("reasons"), "throttled": t.get("throttled"), "attempt": t.get("attempt")}
 
 
 def bench_groups():
@@ -232,5 +254,5 @@ if __name__ == "__main__":
         if s == "autotune":
             res.put("autotune", tune())
         else:
-            {"bw": bench_bw, "gemv": bench_gemv, "gemv_lm": lambda: bench_gemv({"lm_head"}, "gemv_lm_head"), "groups": bench_groups, "attn": bench_attn, "ncu": try_ncu,
+            {"bw": bench_bw, "gemv": bench_gemv, "gemv_lm": bench_gemv_lm, "groups": bench_groups, "attn": bench_attn, "ncu": try_ncu,
              "clocks": clock_probe}[s]()

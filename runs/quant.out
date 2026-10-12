@@ -1,0 +1,58 @@
+Kernel version 9 successfully pushed.  Please check progress at https://www.kaggle.com/code/vineetkumar0210/llm-decode-kernels 
+[   31s] KernelWorkerStatus.RUNNING
+[   63s] KernelWorkerStatus.RUNNING
+[   94s] KernelWorkerStatus.RUNNING
+[  125s] KernelWorkerStatus.RUNNING
+[  157s] KernelWorkerStatus.RUNNING
+[  188s] KernelWorkerStatus.RUNNING
+[  221s] KernelWorkerStatus.RUNNING
+[  253s] KernelWorkerStatus.RUNNING
+[  285s] KernelWorkerStatus.RUNNING
+[  317s] KernelWorkerStatus.RUNNING
+[  349s] KernelWorkerStatus.RUNNING
+[  381s] KernelWorkerStatus.RUNNING
+[  413s] KernelWorkerStatus.RUNNING
+[  445s] KernelWorkerStatus.RUNNING
+[  477s] KernelWorkerStatus.RUNNING
+[  510s] KernelWorkerStatus.RUNNING
+[  542s] KernelWorkerStatus.RUNNING
+[  573s] KernelWorkerStatus.RUNNING
+[  605s] KernelWorkerStatus.RUNNING
+[  637s] KernelWorkerStatus.RUNNING
+[  669s] KernelWorkerStatus.RUNNING
+[  700s] KernelWorkerStatus.RUNNING
+[  732s] KernelWorkerStatus.RUNNING
+[  764s] KernelWorkerStatus.RUNNING
+[  795s] KernelWorkerStatus.RUNNING
+[  828s] KernelWorkerStatus.RUNNING
+[  860s] KernelWorkerStatus.RUNNING
+[  892s] KernelWorkerStatus.RUNNING
+[  924s] KernelWorkerStatus.RUNNING
+[  956s] KernelWorkerStatus.RUNNING
+[  988s] KernelWorkerStatus.RUNNING
+[ 1020s] KernelWorkerStatus.RUNNING
+[ 1053s] KernelWorkerStatus.RUNNING
+[ 1085s] KernelWorkerStatus.RUNNING
+[ 1117s] KernelWorkerStatus.RUNNING
+[ 1149s] KernelWorkerStatus.COMPLETE
+oject/llm-decode-kernels/runs/20261012T054806Z_quant/run.log
+Output file downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261012T054806Z_quant/tests.log
+Kernel log downloaded to /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261012T054806Z_quant/llm-decode-kernels.log 
+ 
+gptq done: 131s, 89 matrices
+ppl rt_int4_g128_gptq_clip = 9.8743
+ppl rt_int4_g128_gptq_int4head = 10.0600
+ppl rt_int4_g128_int4head = 10.5142
+agree rt_int4_g128: exact 1/16, mean first-div 14.2, teacher-forced top1 0.9102
+agree rt_int4_g128_clip: exact 1/16, mean first-div 9.8, teacher-forced top1 0.8916
+agree rt_int4_g128_gptq: exact 1/16, mean first-div 12.3, teacher-forced top1 0.9326
+agree rt_int4_g128_gptq_clip: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9102
+agree rt_int4_g128_gptq_int4head: exact 1/16, mean first-div 11.4, teacher-forced top1 0.9180
+agree rt_int4_g128_int4head: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9072
+speed rt_int4_g128 ctx 512: 216.9 tok/s @ 945 MHz
+speed rt_int4_g128 ctx 4096: 226.5 tok/s @ 1005 MHz
+speed rt_int4_g128_gptq ctx 512: 181.4 tok/s @ 585 MHz
+speed rt_int4_g128_gptq ctx 4096: 154.0 tok/s @ 960 MHz
+EXIT_CODE=0
+
+OK -> /Users/vineetkumar/ML project/llm-decode-kernels/runs/20261012T054806Z_quant

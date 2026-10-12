@@ -1,0 +1,5357 @@
+{
+ "accuracy_kernels": [
+  {
+   "test": "gemv_shape1_x=1 stage(0, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(0, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(1, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(1, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 1, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 1, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 2, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 2, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 4, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 4, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 1, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 1, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 4, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 4, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 8, 0)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_shape1_x=1 stage(2, 8, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv_onehot_nibbles stage(2, 8, 8, 1)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G64 stage(0, 1, 4, 0)",
+   "max_abs": 0.000244140625,
+   "max_rel": 8.159268929503917e-05,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G64 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006527415143603133,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G64 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006527415143603133,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G64 stage(2, 8, 2, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006527415143603133,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(0, 1, 4, 0)",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.0279039584685268e-05,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 1, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 1, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 1, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 1, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 1, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 2, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 2, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 2, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 2, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 2, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 2, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 4, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 4, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 4, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 4, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 4, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 8, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 8, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 8, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 8, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 8, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G128 stage(2, 8, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006489292667099286,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G256 stage(0, 1, 4, 0)",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016307893020221786,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G256 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006523157208088715,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G256 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006523157208088715,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv qkv 2560x2048 G256 stage(2, 8, 2, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0006523157208088715,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G64 stage(0, 1, 4, 0)",
+   "max_abs": 0.000244140625,
+   "max_rel": 7.259001161440186e-05,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G64 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005807200929152149,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G64 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005807200929152149,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G64 stage(2, 8, 2, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005807200929152149,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(0, 1, 4, 0)",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.689492325855962e-05,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 1, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 1, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 1, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 1, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 1, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 2, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 2, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 2, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 2, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 2, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 2, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 4, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 4, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 4, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 4, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 4, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 8, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 8, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 8, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 8, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 8, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G128 stage(2, 8, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005903187721369539,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G256 stage(0, 1, 4, 0)",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 8.496465470364328e-06,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G256 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.000543773790103317,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G256 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.000543773790103317,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv o 2048x2048 G256 stage(2, 8, 2, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.000543773790103317,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G64 stage(0, 1, 4, 0)",
+   "max_abs": 0.000244140625,
+   "max_rel": 6.433350488934638e-05,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G64 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.000514668039114771,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G64 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.000514668039114771,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G64 stage(2, 8, 2, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.000514668039114771,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(0, 1, 4, 0)",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00027442371020856203,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 1, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 1, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 1, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 1, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 1, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 2, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 2, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 2, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 2, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 2, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 2, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 4, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 4, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 4, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 4, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 4, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 8, 1, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 8, 1, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 8, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 8, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 8, 8, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G128 stage(2, 8, 8, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005488474204171241,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G256 stage(0, 1, 4, 0)",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00026737967914438503,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G256 stage(1, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005347593582887701,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G256 stage(2, 4, 4, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005347593582887701,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv gate_up 11264x2048 G256 stage(2, 8, 2, 1)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.0005347593582887701,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G64 stage(0, 1, 4, 0)",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.556446335078534e-06,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G64 stage(1, 1, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006544502617801048,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G64 stage(2, 4, 4, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006544502617801048,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G64 stage(2, 8, 2, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006544502617801048,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(0, 1, 4, 0)",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 3.0632449811794226e-07,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(1, 1, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 1, 1, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 1, 1, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 1, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 1, 4, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 1, 8, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 1, 8, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 2, 1, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 2, 1, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 2, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 2, 4, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 2, 8, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 2, 8, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 4, 1, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 4, 1, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 4, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 4, 4, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 4, 8, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 4, 8, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 8, 1, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 8, 1, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 8, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 8, 4, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 8, 8, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G128 stage(2, 8, 8, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006273525721455458,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G256 stage(0, 1, 4, 0)",
+   "max_abs": 0.001953125,
+   "max_rel": 0.00031887755102040814,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G256 stage(1, 1, 4, 0)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006377551020408163,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G256 stage(2, 4, 4, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006377551020408163,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv down 2048x5632 G256 stage(2, 8, 2, 1)",
+   "max_abs": 0.00390625,
+   "max_rel": 0.0006377551020408163,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G64 stage(0, 1, 4, 0)",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00022831050228310502,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G64 stage(1, 1, 4, 0)",
+   "max_abs": 0.002197265625,
+   "max_rel": 0.0005136986301369863,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G64 stage(2, 4, 4, 1)",
+   "max_abs": 0.002197265625,
+   "max_rel": 0.0005136986301369863,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G64 stage(2, 8, 2, 1)",
+   "max_abs": 0.002197265625,
+   "max_rel": 0.0005136986301369863,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(0, 1, 4, 0)",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002228163992869875,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(1, 1, 4, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 1, 1, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 1, 1, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 1, 4, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 1, 4, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 1, 8, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 1, 8, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 2, 1, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 2, 1, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 2, 4, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 2, 4, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 2, 8, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 2, 8, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 4, 1, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 4, 1, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 4, 4, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 4, 4, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 4, 8, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 4, 8, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 8, 1, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 8, 1, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 8, 4, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 8, 4, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 8, 8, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G128 stage(2, 8, 8, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005570409982174688,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G256 stage(0, 1, 4, 0)",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002314814814814815,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G256 stage(1, 1, 4, 0)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005787037037037037,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G256 stage(2, 4, 4, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005787037037037037,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "gemv lm_head 32000x2048 G256 stage(2, 8, 2, 1)",
+   "max_abs": 0.00244140625,
+   "max_rel": 0.0005787037037037037,
+   "tol_rel": 0.005,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS4096 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS4096 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS4096 v3",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 3.1001984126984127e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS64 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS64 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS64 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS32 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS32 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS32 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS48 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS48 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS48 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.48015873015873e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS16 v1",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 3.1001984126984127e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS16 v2",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 3.1001984126984127e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P16 PS16 v3",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 3.1001984126984127e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS4096 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 1.564064064064064e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS4096 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 1.564064064064064e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS4096 v3",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 1.22192505005005e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS64 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 3.128128128128128e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS64 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 3.128128128128128e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS64 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 1.564064064064064e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS32 v1",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 1.22192505005005e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS32 v2",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 1.22192505005005e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS32 v3",
+   "max_abs": 1.1920928955078125e-07,
+   "max_rel": 2.4438501001001e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS48 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 3.128128128128128e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS48 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 3.128128128128128e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS48 v3",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 1.22192505005005e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS16 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 1.564064064064064e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS16 v2",
+   "max_abs": 1.1920928955078125e-07,
+   "max_rel": 2.4438501001001e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq32 hkv4 P32 PS16 v3",
+   "max_abs": 1.1920928955078125e-07,
+   "max_rel": 2.4438501001001e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS4096 v1",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS4096 v2",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS4096 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS64 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS64 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS64 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS32 v1",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS32 v2",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS32 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS48 v1",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS48 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS48 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS16 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS16 v2",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P16 PS16 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 9.889240506329114e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS4096 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS4096 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS4096 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS64 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS64 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS64 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS32 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS32 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS32 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS48 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS48 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS48 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS16 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS16 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv8 P32 PS16 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012419274714356682,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS4096 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS4096 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS4096 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS64 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS64 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS64 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS32 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS32 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS32 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS48 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS48 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS48 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS16 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS16 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P16 PS16 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 8.030941611842105e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS4096 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS4096 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS4096 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS64 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS64 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS64 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS32 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS32 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS32 v3",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS48 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS48 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS48 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS16 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS16 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 2.750880281690141e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq16 hkv4 P32 PS16 v3",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00022007042253521127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS4096 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS4096 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS4096 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS64 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS64 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS64 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS32 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS32 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS32 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS48 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS48 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS48 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS16 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS16 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P16 PS16 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012696800406297612,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS4096 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS4096 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS4096 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS64 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS64 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS64 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 1.1482216343327455e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS32 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS32 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS32 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS48 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 1.1482216343327455e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS48 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 1.1482216343327455e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS48 v3",
+   "max_abs": 2.384185791015625e-07,
+   "max_rel": 5.741108171663727e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS16 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 2.296443268665491e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS16 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 2.296443268665491e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx128 hq8 hkv4 P32 PS16 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS8192 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS8192 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS8192 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS64 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS64 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS64 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS256 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS256 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1 PS256 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS8192 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS8192 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS8192 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS64 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS64 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS64 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS256 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS256 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2 PS256 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.000363901018922853,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS8192 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS8192 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS8192 v3",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS64 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS64 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS64 v3",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS256 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS256 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx17 PS256 v3",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 5.768236857649143e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS8192 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00016490765171503957,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS8192 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00016490765171503957,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS8192 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 8.245382585751979e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS64 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00016490765171503957,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS64 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00016490765171503957,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS64 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 8.245382585751979e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS256 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00016490765171503957,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS256 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00016490765171503957,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx63 PS256 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 8.245382585751979e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS8192 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS8192 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS8192 v3",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 2.6591218515997275e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS64 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS64 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS64 v3",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS256 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS256 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 0.00017018379850238256,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx65 PS256 v3",
+   "max_abs": 1.9073486328125e-06,
+   "max_rel": 2.6591218515997275e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS8192 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS8192 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS8192 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS64 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS64 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS64 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS256 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS256 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx129 PS256 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.00012748597654258032,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS8192 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS8192 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS8192 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS64 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS64 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS64 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS256 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS256 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1000 PS256 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 7.631257631257631e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS512 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.0002153316106804479,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS512 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.0002153316106804479,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS512 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 1.3458225667527993e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS1024 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.0002153316106804479,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS1024 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.0002153316106804479,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS1024 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 1.3458225667527993e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS256 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.0002153316106804479,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS256 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 0.0002153316106804479,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS256 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS128 v1",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS128 v2",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS128 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS64 v1",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS64 v2",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky1.0 PS64 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.00010766580534022394,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS512 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS512 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS512 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS1024 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS1024 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS1024 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS256 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS256 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS256 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS128 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS128 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS128 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS64 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS64 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx512 peaky6.0 PS64 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002608242044861763,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS1024 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS1024 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS1024 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS1024 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS1024 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS1024 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS256 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS256 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS256 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS128 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS128 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.70260663507109e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS128 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS64 v1",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS64 v2",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky1.0 PS64 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 0.0001481042654028436,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS1024 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS1024 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS1024 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS1024 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS1024 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS1024 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS256 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS256 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS256 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS128 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS128 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS128 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS64 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS64 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx1024 peaky6.0 PS64 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.088903743315508e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS2048 v1",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 0.00011405109489051095,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS2048 v2",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 0.00011405109489051095,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS2048 v3",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 4.455120894160584e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS1024 v1",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS1024 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS1024 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS256 v1",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 4.455120894160584e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS256 v2",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 4.455120894160584e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS256 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS128 v1",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 4.455120894160584e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS128 v2",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 4.455120894160584e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS128 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS64 v1",
+   "max_abs": 5.960464477539063e-08,
+   "max_rel": 4.455120894160584e-07,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS64 v2",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky1.0 PS64 v3",
+   "max_abs": 4.76837158203125e-07,
+   "max_rel": 3.564096715328467e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS2048 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS2048 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS2048 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS1024 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS1024 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS1024 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS256 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS256 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS256 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS128 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS128 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS128 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS64 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS64 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx2048 peaky6.0 PS64 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00031725888324873094,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS4096 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS4096 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS4096 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 0.00017325017325017325,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS1024 v1",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 4.331254331254331e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS1024 v2",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 4.331254331254331e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS1024 v3",
+   "max_abs": 1.52587890625e-05,
+   "max_rel": 0.00017325017325017325,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS256 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS256 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS256 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 4.331254331254331e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS128 v1",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 4.331254331254331e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS128 v2",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 4.331254331254331e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS128 v3",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS64 v1",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS64 v2",
+   "max_abs": 9.5367431640625e-07,
+   "max_rel": 1.0828135828135828e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky1.0 PS64 v3",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 4.331254331254331e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS4096 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS4096 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS4096 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS1024 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS1024 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS1024 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS256 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS256 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS256 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS128 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS128 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS128 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS64 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS64 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx4096 peaky6.0 PS64 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00012768130745658836,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS8192 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS8192 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS8192 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS1024 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS1024 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS1024 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS256 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS256 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS256 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS128 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS128 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS128 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS64 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS64 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky1.0 PS64 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00011542012927054478,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS8192 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS8192 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS8192 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS1024 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS1024 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS1024 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS256 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS256 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS256 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS128 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS128 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS128 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS64 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS64 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx8192 peaky6.0 PS64 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00016469038208168644,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS16384 v1",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 6.351626016260163e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS16384 v2",
+   "max_abs": 3.814697265625e-06,
+   "max_rel": 6.351626016260163e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS16384 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS1024 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS1024 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS1024 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS256 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS256 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS256 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS128 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS128 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS128 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS64 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS64 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky1.0 PS64 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 0.00012703252032520327,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS16384 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS16384 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS16384 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS1024 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS1024 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS1024 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS256 v1",
+   "max_abs": 0.000244140625,
+   "max_rel": 8.561643835616438e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS256 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS256 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS128 v1",
+   "max_abs": 0.000244140625,
+   "max_rel": 8.561643835616438e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS128 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS128 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS64 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS64 v2",
+   "max_abs": 0.000244140625,
+   "max_rel": 8.561643835616438e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn ctx16384 peaky6.0 PS64 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00017123287671232877,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS64 spare8 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS64 spare8 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS64 spare8 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS128 spare8 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS128 spare8 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS128 spare8 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS256 spare8 v1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS256 spare8 v2",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx1 PS256 spare8 v3",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS64 spare8 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS64 spare8 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS64 spare8 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS128 spare8 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS128 spare8 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS128 spare8 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS256 spare8 v1",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS256 spare8 v2",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx40 PS256 spare8 v3",
+   "max_abs": 6.103515625e-05,
+   "max_rel": 2.2530641672674837e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS64 spare8 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS64 spare8 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS64 spare8 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS128 spare8 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS128 spare8 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS128 spare8 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS256 spare8 v1",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS256 spare8 v2",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx64 PS256 spare8 v3",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.0002946375957572186,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS64 spare8 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS64 spare8 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS64 spare8 v3",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS128 spare8 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS128 spare8 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS128 spare8 v3",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS256 spare8 v1",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS256 spare8 v2",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx100 PS256 spare8 v3",
+   "max_abs": 0.0001220703125,
+   "max_rel": 3.8940809968847354e-05,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS64 spare8 v1",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS64 spare8 v2",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS64 spare8 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS128 spare8 v1",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS128 spare8 v2",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS128 spare8 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS256 spare8 v1",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS256 spare8 v2",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx700 PS256 spare8 v3",
+   "max_abs": 3.0517578125e-05,
+   "max_rel": 9.153485647334505e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS64 spare8 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS64 spare8 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS64 spare8 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS128 spare8 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS128 spare8 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS128 spare8 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS256 spare8 v1",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS256 spare8 v2",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx2048 PS256 spare8 v3",
+   "max_abs": 7.62939453125e-06,
+   "max_rel": 3.0210750193348803e-06,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS64 spare8 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS64 spare8 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS64 spare8 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS128 spare8 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS128 spare8 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS128 spare8 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS256 spare8 v1",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS256 spare8 v2",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "attn runtime ctx5000 PS256 spare8 v3",
+   "max_abs": 0.00048828125,
+   "max_rel": 0.00018234865061998541,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "add_rmsnorm residual",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "add_rmsnorm out",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rmsnorm (no residual)",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "swiglu",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope q pos0",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope k-cache pos0",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope v-cache pos0",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "rope q pos1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope k-cache pos1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope v-cache pos1",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "rope q pos37",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope k-cache pos37",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope v-cache pos37",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "rope q pos2047",
+   "max_abs": 0.0009765625,
+   "max_rel": 0.00026954177897574127,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope k-cache pos2047",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope v-cache pos2047",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  },
+  {
+   "test": "rope q pos4095",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope k-cache pos4095",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.002,
+   "pass": true
+  },
+  {
+   "test": "rope v-cache pos4095",
+   "max_abs": 0.0,
+   "max_rel": 0.0,
+   "tol_rel": 0.0,
+   "pass": true
+  }
+ ],
+ "env": {
+  "gpu": "Tesla T4",
+  "sm": "7.5",
+  "sms": 40,
+  "mem_gb": 14.56219482421875,
+  "l2_mb": 4.0,
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "utc": "2026-10-12T05:49:04Z",
+  "clocks": {
+   "sm_mhz": 375,
+   "mem_mhz": 405,
+   "temp_c": 48,
+   "power_w": 14.707,
+   "reasons": [
+    "gpu_idle"
+   ]
+  }
+ },
+ "gemv_lm_head": [
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "0 naive",
+   "cfg": [
+    0,
+    1,
+    4,
+    0
+   ],
+   "bytes": 34884096,
+   "median_us": NaN,
+   "iqr_us": NaN,
+   "p25_us": NaN,
+   "p75_us": NaN,
+   "sm_mhz": 750,
+   "temp_c": null,
+   "power_w": null,
+   "reasons": null,
+   "throttled": true,
+   "attempt": 0,
+   "burst_mhz": [
+    750,
+    720,
+    630,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585
+   ],
+   "n": 0,
+   "gbps": NaN
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "1 vectorized",
+   "cfg": [
+    1,
+    1,
+    4,
+    0
+   ],
+   "bytes": 34884096,
+   "median_us": NaN,
+   "iqr_us": NaN,
+   "p25_us": NaN,
+   "p75_us": NaN,
+   "sm_mhz": 585,
+   "temp_c": null,
+   "power_w": null,
+   "reasons": null,
+   "throttled": true,
+   "attempt": 0,
+   "burst_mhz": [
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585
+   ],
+   "n": 0,
+   "gbps": NaN
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "2 reg-blocked",
+   "cfg": [
+    2,
+    4,
+    4,
+    1
+   ],
+   "bytes": 34884096,
+   "median_us": NaN,
+   "iqr_us": NaN,
+   "p25_us": NaN,
+   "p75_us": NaN,
+   "sm_mhz": 585,
+   "temp_c": null,
+   "power_w": null,
+   "reasons": null,
+   "throttled": true,
+   "attempt": 0,
+   "burst_mhz": [
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585
+   ],
+   "n": 0,
+   "gbps": NaN
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "3 autotuned",
+   "cfg": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "bytes": 34884096,
+   "median_us": NaN,
+   "iqr_us": NaN,
+   "p25_us": NaN,
+   "p75_us": NaN,
+   "sm_mhz": 585,
+   "temp_c": null,
+   "power_w": null,
+   "reasons": null,
+   "throttled": true,
+   "attempt": 0,
+   "burst_mhz": [
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585
+   ],
+   "n": 0,
+   "gbps": NaN
+  },
+  {
+   "shape": "lm_head",
+   "N": 32000,
+   "K": 2048,
+   "impl": "cuBLAS fp16",
+   "cfg": null,
+   "bytes": 131140096,
+   "median_us": NaN,
+   "iqr_us": NaN,
+   "p25_us": NaN,
+   "p75_us": NaN,
+   "sm_mhz": 585,
+   "temp_c": null,
+   "power_w": null,
+   "reasons": null,
+   "throttled": true,
+   "attempt": 0,
+   "burst_mhz": [
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585,
+    585
+   ],
+   "n": 0,
+   "gbps": NaN
+  }
+ ],
+ "env_e2e": {
+  "gpu": "Tesla T4",
+  "sm": "7.5",
+  "sms": 40,
+  "mem_gb": 14.56219482421875,
+  "l2_mb": 4.0,
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "utc": "2026-10-12T05:50:27Z",
+  "clocks": {
+   "sm_mhz": 690,
+   "mem_mhz": 5000,
+   "temp_c": 48,
+   "power_w": 28.21,
+   "reasons": []
+  }
+ },
+ "quant_ppl": {
+  "windows": 16,
+  "window_len": 512,
+  "results": {
+   "hf_fp16": {
+    "ppl": 9.72169150564008,
+    "tokens": 8176
+   },
+   "rt_int4_g128": {
+    "ppl": 10.46020503126245,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 7.596553801300088
+   },
+   "rt_int4_g128_clip": {
+    "ppl": 10.635752344042531,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 9.402281875249319
+   },
+   "rt_int4_g128_gptq": {
+    "ppl": 10.020196993490424,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 3.0705097737072196
+   },
+   "rt_int4_g128_gptq_clip": {
+    "ppl": 9.874269423580984,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 131072000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 1.569458543838631
+   },
+   "rt_int4_g128_gptq_int4head": {
+    "ppl": 10.060002947896335,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 34816000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 3.47996479892394
+   },
+   "rt_int4_g128_int4head": {
+    "ppl": 10.51421221550657,
+    "tokens": 8176,
+    "weight_bytes": {
+     "body": 514899968,
+     "lm_head": 34816000,
+     "embedding_row": 4096
+    },
+    "rel_delta_pct": 8.152086593230257
+   }
+  },
+  "calibration": {
+   "gptq": {
+    "calib_s": 143.77734875679016,
+    "calib_windows": 128,
+    "calib_len": 512,
+    "calib_data": "WikiText-2 train (seed 0)",
+    "clip": false
+   },
+   "gptq_clip": {
+    "calib_s": 146.78729009628296,
+    "calib_windows": 128,
+    "calib_len": 512,
+    "calib_data": "WikiText-2 train (seed 0)",
+    "clip": true
+   }
+  }
+ },
+ "quant_agreement": {
+  "n_prompts": 16,
+  "n_new": 64,
+  "results": {
+   "rt_int4_g128": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 14.25,
+    "first_divergence": [
+     2,
+     4,
+     39,
+     1,
+     0,
+     3,
+     53,
+     11,
+     64,
+     6,
+     7,
+     0,
+     11,
+     20,
+     7,
+     0
+    ],
+    "teacher_forced_top1_agreement": 0.91015625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris. What is the capital of Germany?</s> \n<|assistant|>\nThe capital of Germany is Berlin.</s> \n<|user|>\nCan you tell me the capital of the United Kingdom?</s> \n<|assistant|>\nThe capital of the United Kingdom is London"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young couple named Jack and Sarah. Jack was a handsome man in his early thirties, with a kind and gentle heart. Sarah was a beautiful woman in her early twenties, with a sharp mind and a kind heart. They had been married for only a few months when Jack received a"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    elif n == 4:\n        return 2\n    else:\n        a, b = 0, "
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy can neither be created nor destroyed, but can only be transferred from one form to another. This means that energy is conserved, and that the amount of energy in a system is always equal to the sum of the energies of the parts that make up the system. This is known as the second law of therm"
+     }
+    ]
+   },
+   "rt_int4_g128_clip": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 9.75,
+    "first_divergence": [
+     6,
+     0,
+     3,
+     0,
+     3,
+     4,
+     4,
+     1,
+     64,
+     8,
+     7,
+     0,
+     11,
+     38,
+     7,
+     0
+    ],
+    "teacher_forced_top1_agreement": 0.8916015625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The United States of America is the largest country in the world.\n\n3. The United Kingdom is the second-largest country in the world.\n\n4. China is the third-largest country in the world.\n\n5. India is the fourth-largest"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "lived a young woman named Lily. She was a kind and gentle soul, always ready to help anyone in need. One day, while walking along the beach, she saw a group of fishermen struggling to pull a large fish out of the water. Lily knew that she had to help. She gathered her"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Testing the function\nprint("
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "the first law is the conservation of energy, the second law is the conservation of mass, and the third law is the conservation of matter. These laws are based on the principle that energy cannot be created or destroyed, but only transformed from one form to another. The first law states that the sum of the total energy of"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 12.3125,
+    "first_divergence": [
+     6,
+     18,
+     3,
+     7,
+     14,
+     6,
+     20,
+     11,
+     64,
+     10,
+     4,
+     0,
+     11,
+     12,
+     7,
+     4
+    ],
+    "teacher_forced_top1_agreement": 0.9326171875,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The United States of America:\n\n- The United States of America is the largest country in the world.\n- The capital of the United States of America is Washington D.C.\n\n3. The United Kingdom:\n\n- The United Kingdom is the largest country in Europe"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young woman named Lily. She was a kind and gentle soul, always ready with a smile and a kind word. Lily had always dreamed of traveling the world, seeing new sights and experiencing new cultures. But life had other plans for her. She had been married to a"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Call the fibonacci function with n=5\nprint"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but only transformed from one form to another. This means that energy can be transferred from one form to another, but it cannot be created or destroyed. This is known as the first law of thermodynamics.\n\n2. The second law of thermodynamics states that"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq_clip": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.625,
+    "first_divergence": [
+     6,
+     4,
+     3,
+     7,
+     17,
+     4,
+     4,
+     1,
+     64,
+     10,
+     14,
+     2,
+     11,
+     29,
+     7,
+     3
+    ],
+    "teacher_forced_top1_agreement": 0.91015625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The capital of Spain is Madrid.\n\n3. The capital of Italy is Rome.\n\n4. The capital of the United Kingdom is London.\n\n5. The capital of Canada is Ottawa.\n\n6. The capital of Australia is Canberra.\n\n"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young girl named Lily. Lily was a kind and gentle girl, always smiling and always ready to help others. One day, Lily was walking home from school when she saw a group of men looting a nearby store. Lily knew that she had to do something to stop them."
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n# Test the function\nprint(fibonacci(1"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but can only be transferred from one place to another. This law is known as the second law of thermodynamics.\n\n2. Entropy: Entropy is a measure of the disorder or chaos of a system. It is a measure of the amount of energy"
+     }
+    ]
+   },
+   "rt_int4_g128_gptq_int4head": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.4375,
+    "first_divergence": [
+     6,
+     18,
+     5,
+     7,
+     14,
+     6,
+     4,
+     11,
+     64,
+     10,
+     4,
+     0,
+     11,
+     12,
+     7,
+     4
+    ],
+    "teacher_forced_top1_agreement": 0.91796875,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris.\n\n2. The United States:\n\na. The capital of the United States is Washington D.C.\n\nb. The capital of California is Sacramento.\n\nc. The capital of Texas is Austin.\n\nd. The capital of New York is New York City."
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young woman named Lily. She was a kind and gentle soul, always ready with a smile and a kind word. Lily had always dreamed of traveling the world, seeing new places and experiencing new cultures. One day, Lily decided to take a leap of faith and emb"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n < 0:\n        raise ValueError(\"N must be a positive integer.\")\n    a, b = 0, 1\n    for I in range(n):\n        a, b = b, a + b\n    return a\n\n# Call the function with a value"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy cannot be created or destroyed, but only transformed from one form to another. This means that energy can be transferred from one form to another, but it cannot be created or destroyed. This is known as the second law of thermodynamics.\n\n4. The second law of thermodynamics states that"
+     }
+    ]
+   },
+   "rt_int4_g128_int4head": {
+    "exact_match_rate": 0.0625,
+    "mean_first_divergence": 11.5625,
+    "first_divergence": [
+     2,
+     4,
+     5,
+     1,
+     0,
+     3,
+     44,
+     11,
+     64,
+     6,
+     7,
+     0,
+     11,
+     12,
+     7,
+     8
+    ],
+    "teacher_forced_top1_agreement": 0.9072265625,
+    "samples": [
+     {
+      "prompt": "The capital of France is",
+      "hf": "Paris.\n\n2. B. The capital of Germany is Berlin.\n\n3. C. The capital of the United States is Washington, D.C.\n\n4. A. The capital of Canada is Ottawa.\n\n5. D. The capital of Australia is Canberra.\n",
+      "ours": "Paris. The capital of Spain is Madrid. The capital of Italy is Rome. The capital of Canada is Ottawa. The capital of Australia is Canberra. The capital of the United States is Washington, D.C. The capital of the United Kingdom is London. The capital of Japan is Tokyo. The capital"
+     },
+     {
+      "prompt": "Once upon a time, in a small village by the sea,",
+      "hf": "there lived a young woman named Lily. She was a kind and gentle soul, always looking for ways to help others. One day, while walking along the beach, she saw a group of fishermen working hard to catch fish. They were using long ropes to pull the fish towards them, and Lily",
+      "ours": "there lived a young couple named Jack and Sarah. Jack was a fisherman, and Sarah was a seamstress. Jack was a kind and gentle man, always ready to help anyone in need. Sarah was a strong and independent woman, who loved to sew and make clothes. One day, Jack and Sarah"
+     },
+     {
+      "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+      "hf": "   if n < 2:\n        return n\n    elif n == 2:\n        return 1\n    elif n == 3:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n\n#",
+      "ours": "   if n < 1:\n        return 0\n    elif n == 1:\n        return 1\n    elif n == 2:\n        return 1\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\n```"
+     },
+     {
+      "prompt": "The three laws of thermodynamics state that",
+      "hf": "energy cannot be created or destroyed, energy can only be transferred from one form to another, and energy is conserved. These laws are fundamental to the study of thermodynamics and are used to understand the behavior of systems at different temperatures and pressures.\n\n2. The second law of thermodynam",
+      "ours": "energy can neither be created nor destroyed, but rather transformed from one form to another. This means that energy is conserved, and that the amount of energy in a system is always equal to the sum of the energies of the particles in that system. This is known as the second law of thermodynamics."
+     }
+    ]
+   }
+  }
+ },
+ "quant_speed": {
+  "rt_int4_g128": [
+   {
+    "ctx": 512,
+    "median_us": 4609.824180603027,
+    "wall_us": 3765.0537968723083,
+    "tok_s": 216.92801304825176,
+    "sm_mhz": 945
+   },
+   {
+    "ctx": 4096,
+    "median_us": 4414.144039154053,
+    "wall_us": 4318.647781250462,
+    "tok_s": 226.54448770358763,
+    "sm_mhz": 1005
+   }
+  ],
+  "rt_int4_g128_gptq": [
+   {
+    "ctx": 512,
+    "median_us": 5511.4240646362305,
+    "wall_us": 3674.9219687486348,
+    "tok_s": 181.44130959119053,
+    "sm_mhz": 585
+   },
+   {
+    "ctx": 4096,
+    "median_us": 6492.159843444824,
+    "wall_us": 4266.23864062492,
+    "tok_s": 154.0319437774944,
+    "sm_mhz": 960
+   }
+  ]
+ }
+}

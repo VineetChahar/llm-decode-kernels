@@ -1,0 +1,112 @@
+[{"stream_name":"stderr","time":0.567407336,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":0.567482601,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":0.588323753,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":0.621839741,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":0.628598156,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.633696105,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":0.652238891,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":0.652254836,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":0.652689932,"data":"$ KERNEL_SECTIONS=gemv_lm E2E_SECTIONS=quant bash scripts/run_all.sh\n"}
+,{"stream_name":"stdout","time":48.164076756,"data":"667/667 passed\n"}
+,{"stream_name":"stdout","time":50.160675465,"data":"\n"}
+,{"stream_name":"stdout","time":50.160702533,"data":"===== gemv_lm =====\n"}
+,{"stream_name":"stdout","time":85.806067447,"data":"lm_head  0 naive              nanus  iqr   nan     nan GB/s\n"}
+,{"stream_name":"stdout","time":85.806111185,"data":"lm_head  1 vectorized         nanus  iqr   nan     nan GB/s\n"}
+,{"stream_name":"stdout","time":85.806125993,"data":"lm_head  2 reg-blocked        nanus  iqr   nan     nan GB/s\n"}
+,{"stream_name":"stdout","time":85.806130729,"data":"lm_head  3 autotuned          nanus  iqr   nan     nan GB/s\n"}
+,{"stream_name":"stdout","time":85.806135337,"data":"lm_head  cuBLAS fp16          nanus  iqr   nan     nan GB/s\n"}
+,{"stream_name":"stdout","time":105.903737218,"data":"loading HF model...\n"}
+,{"stream_name":"stdout","time":106.374138194,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":122.666364636,"data":"\n"}
+,{"stream_name":"stdout","time":122.771524608,"data":"Loading weights:   0%|          | 0/201 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":122.869836863,"data":"Loading weights:   1%|          | 2/201 [00:00\u003c00:10, 19.75it/s]\n"}
+,{"stream_name":"stdout","time":122.975185907,"data":"Loading weights:  21%|██        | 42/201 [00:00\u003c00:00, 239.47it/s]\n"}
+,{"stream_name":"stdout","time":123.078380353,"data":"Loading weights:  33%|███▎      | 67/201 [00:00\u003c00:00, 238.44it/s]\n"}
+,{"stream_name":"stdout","time":123.195044546,"data":"Loading weights:  45%|████▌     | 91/201 [00:00\u003c00:00, 236.12it/s]\n"}
+,{"stream_name":"stdout","time":123.306540408,"data":"Loading weights:  57%|█████▋    | 115/201 [00:00\u003c00:00, 224.28it/s]\n"}
+,{"stream_name":"stdout","time":123.431651883,"data":"Loading weights:  69%|██████▉   | 139/201 [00:00\u003c00:00, 221.67it/s]\n"}
+,{"stream_name":"stdout","time":123.554298069,"data":"Loading weights:  83%|████████▎ | 166/201 [00:00\u003c00:00, 220.46it/s]\n"}
+,{"stream_name":"stdout","time":123.559724458,"data":"Loading weights:  96%|█████████▌| 193/201 [00:00\u003c00:00, 219.12it/s]\n"}
+,{"stream_name":"stdout","time":123.559843822,"data":"Loading weights: 100%|██████████| 201/201 [00:00\u003c00:00, 225.02it/s]\n"}
+,{"stream_name":"stdout","time":133.236340791,"data":"\n"}
+,{"stream_name":"stdout","time":133.236378846,"data":"===== quant =====\n"}
+,{"stream_name":"stdout","time":142.396493183,"data":"\n"}
+,{"stream_name":"stdout","time":142.461408471,"data":"Generating test split:   0%|          | 0/4358 [00:00\u003c?, ? examples/s]\n"}
+,{"stream_name":"stdout","time":142.461430789,"data":"Generating test split: 100%|██████████| 4358/4358 [00:00\u003c00:00, 67223.63 examples/s]\n"}
+,{"stream_name":"stdout","time":142.461757955,"data":"\n"}
+,{"stream_name":"stdout","time":142.519983932,"data":"Generating train split:   0%|          | 0/36718 [00:00\u003c?, ? examples/s]\n"}
+,{"stream_name":"stdout","time":142.520003751,"data":"Generating train split: 100%|██████████| 36718/36718 [00:00\u003c00:00, 632781.88 examples/s]\n"}
+,{"stream_name":"stdout","time":142.521680374,"data":"\n"}
+,{"stream_name":"stdout","time":142.530067682,"data":"Generating validation split:   0%|          | 0/3760 [00:00\u003c?, ? examples/s]\n"}
+,{"stream_name":"stdout","time":142.5300837,"data":"Generating validation split: 100%|██████████| 3760/3760 [00:00\u003c00:00, 429645.92 examples/s]\n"}
+,{"stream_name":"stdout","time":143.693079276,"data":"[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (341468 \u003e 2048). Running this sequence through the model will result in indexing errors\n"}
+,{"stream_name":"stdout","time":176.216941883,"data":"ppl rt_int4_g128 = 10.4602\n"}
+,{"stream_name":"stdout","time":209.575518914,"data":"ppl rt_int4_g128_clip = 10.6358\n"}
+,{"stream_name":"stdout","time":232.209690866,"data":"gptq layer 0: 5s\n"}
+,{"stream_name":"stdout","time":237.616264283,"data":"gptq layer 1: 11s\n"}
+,{"stream_name":"stdout","time":243.131651654,"data":"gptq layer 2: 16s\n"}
+,{"stream_name":"stdout","time":248.684332919,"data":"gptq layer 3: 22s\n"}
+,{"stream_name":"stdout","time":254.240746131,"data":"gptq layer 4: 27s\n"}
+,{"stream_name":"stdout","time":259.870778598,"data":"gptq layer 5: 33s\n"}
+,{"stream_name":"stdout","time":265.616810308,"data":"gptq layer 6: 39s\n"}
+,{"stream_name":"stdout","time":271.360030477,"data":"gptq layer 7: 45s\n"}
+,{"stream_name":"stdout","time":277.18847291,"data":"gptq layer 8: 50s\n"}
+,{"stream_name":"stdout","time":283.052480563,"data":"gptq layer 9: 56s\n"}
+,{"stream_name":"stdout","time":288.901052977,"data":"gptq layer 10: 62s\n"}
+,{"stream_name":"stdout","time":294.81794008,"data":"gptq layer 11: 68s\n"}
+,{"stream_name":"stdout","time":300.67633526,"data":"gptq layer 12: 74s\n"}
+,{"stream_name":"stdout","time":306.492763854,"data":"gptq layer 13: 80s\n"}
+,{"stream_name":"stdout","time":312.218111652,"data":"gptq layer 14: 85s\n"}
+,{"stream_name":"stdout","time":317.899583467,"data":"gptq layer 15: 91s\n"}
+,{"stream_name":"stdout","time":323.562844636,"data":"gptq layer 16: 97s\n"}
+,{"stream_name":"stdout","time":329.181731061,"data":"gptq layer 17: 102s\n"}
+,{"stream_name":"stdout","time":334.844791538,"data":"gptq layer 18: 108s\n"}
+,{"stream_name":"stdout","time":340.577734679,"data":"gptq layer 19: 114s\n"}
+,{"stream_name":"stdout","time":346.285315591,"data":"gptq layer 20: 120s\n"}
+,{"stream_name":"stdout","time":352.012457048,"data":"gptq layer 21: 125s\n"}
+,{"stream_name":"stdout","time":353.588628972,"data":"gptq done: 127s, 89 matrices\n"}
+,{"stream_name":"stdout","time":388.036618349,"data":"ppl rt_int4_g128_gptq = 10.0202\n"}
+,{"stream_name":"stdout","time":410.125227825,"data":"gptq layer 0: 6s\n"}
+,{"stream_name":"stdout","time":415.791037633,"data":"gptq layer 1: 11s\n"}
+,{"stream_name":"stdout","time":421.553919684,"data":"gptq layer 2: 17s\n"}
+,{"stream_name":"stdout","time":427.410854497,"data":"gptq layer 3: 23s\n"}
+,{"stream_name":"stdout","time":433.392397128,"data":"gptq layer 4: 29s\n"}
+,{"stream_name":"stdout","time":439.38554339,"data":"gptq layer 5: 35s\n"}
+,{"stream_name":"stdout","time":445.418540228,"data":"gptq layer 6: 41s\n"}
+,{"stream_name":"stdout","time":451.397989074,"data":"gptq layer 7: 47s\n"}
+,{"stream_name":"stdout","time":457.344836584,"data":"gptq layer 8: 53s\n"}
+,{"stream_name":"stdout","time":463.246355161,"data":"gptq layer 9: 59s\n"}
+,{"stream_name":"stdout","time":469.01853806,"data":"gptq layer 10: 64s\n"}
+,{"stream_name":"stdout","time":474.811996384,"data":"gptq layer 11: 70s\n"}
+,{"stream_name":"stdout","time":480.531310581,"data":"gptq layer 12: 76s\n"}
+,{"stream_name":"stdout","time":486.36257712,"data":"gptq layer 13: 82s\n"}
+,{"stream_name":"stdout","time":492.098875873,"data":"gptq layer 14: 88s\n"}
+,{"stream_name":"stdout","time":497.849141013,"data":"gptq layer 15: 93s\n"}
+,{"stream_name":"stdout","time":503.696646871,"data":"gptq layer 16: 99s\n"}
+,{"stream_name":"stdout","time":509.58692696,"data":"gptq layer 17: 105s\n"}
+,{"stream_name":"stdout","time":515.527780265,"data":"gptq layer 18: 111s\n"}
+,{"stream_name":"stdout","time":521.45309588,"data":"gptq layer 19: 117s\n"}
+,{"stream_name":"stdout","time":527.389399224,"data":"gptq layer 20: 123s\n"}
+,{"stream_name":"stdout","time":533.353870734,"data":"gptq layer 21: 129s\n"}
+,{"stream_name":"stdout","time":535.080101769,"data":"gptq done: 131s, 89 matrices\n"}
+,{"stream_name":"stdout","time":569.185822413,"data":"ppl rt_int4_g128_gptq_clip = 9.8743\n"}
+,{"stream_name":"stdout","time":599.197401921,"data":"ppl rt_int4_g128_gptq_int4head = 10.0600\n"}
+,{"stream_name":"stdout","time":629.429647839,"data":"ppl rt_int4_g128_int4head = 10.5142\n"}
+,{"stream_name":"stdout","time":668.238341647,"data":"agree rt_int4_g128: exact 1/16, mean first-div 14.2, teacher-forced top1 0.9102\n"}
+,{"stream_name":"stdout","time":680.43854341,"data":"agree rt_int4_g128_clip: exact 1/16, mean first-div 9.8, teacher-forced top1 0.8916\n"}
+,{"stream_name":"stdout","time":690.666770561,"data":"agree rt_int4_g128_gptq: exact 1/16, mean first-div 12.3, teacher-forced top1 0.9326\n"}
+,{"stream_name":"stdout","time":701.182234893,"data":"agree rt_int4_g128_gptq_clip: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9102\n"}
+,{"stream_name":"stdout","time":710.602604473,"data":"agree rt_int4_g128_gptq_int4head: exact 1/16, mean first-div 11.4, teacher-forced top1 0.9180\n"}
+,{"stream_name":"stdout","time":720.039389895,"data":"agree rt_int4_g128_int4head: exact 1/16, mean first-div 11.6, teacher-forced top1 0.9072\n"}
+,{"stream_name":"stdout","time":822.95077561,"data":"speed rt_int4_g128 ctx 512: 216.9 tok/s @ 945 MHz\n"}
+,{"stream_name":"stdout","time":925.089885441,"data":"speed rt_int4_g128 ctx 4096: 226.5 tok/s @ 1005 MHz\n"}
+,{"stream_name":"stdout","time":1028.020996487,"data":"speed rt_int4_g128_gptq ctx 512: 181.4 tok/s @ 585 MHz\n"}
+,{"stream_name":"stdout","time":1130.204667696,"data":"speed rt_int4_g128_gptq ctx 4096: 154.0 tok/s @ 960 MHz\n"}
+,{"stream_name":"stdout","time":1131.986273685,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":1133.918312848,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1133.918357255,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1134.135959795,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1134.135998976,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1134.843225481,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1135.733753957,"data":"[NbConvertApp] Writing 372856 bytes to __results__.html\n"}
+]
