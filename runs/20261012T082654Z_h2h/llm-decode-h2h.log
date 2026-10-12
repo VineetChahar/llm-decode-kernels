@@ -1,0 +1,53 @@
+[{"stream_name":"stderr","time":1.282875148,"data":"/kaggle/src/script.py:9: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":1.282918711,"data":"  tarfile.open(fileobj=io.BytesIO(base64.b64decode(PAYLOAD)), mode=\"r:gz\").extractall(repo)\n"}
+,{"stream_name":"stdout","time":1.333150764,"data":"$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2\n"}
+,{"stream_name":"stdout","time":1.363356484,"data":"index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]\n"}
+,{"stream_name":"stdout","time":1.3704585,"data":"0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":1.3763767279999999,"data":"1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz\n"}
+,{"stream_name":"stdout","time":1.415549416,"data":"Cuda compilation tools, release 12.8, V12.8.93\n"}
+,{"stream_name":"stdout","time":1.415566916,"data":"Build cuda_12.8.r12.8/compiler.35583870_0\n"}
+,{"stream_name":"stdout","time":1.416051362,"data":"$ bash scripts/h2h.sh\n"}
+,{"stream_name":"stdout","time":69.33922577,"data":"667/667 passed\n"}
+,{"stream_name":"stdout","time":74.927141899,"data":"23b0202a189c44a54625aadcb37a946dd1d6278d\n"}
+,{"stream_name":"stdout","time":76.588289388,"data":"CMAKE_BUILD_TYPE=Release\n"}
+,{"stream_name":"stdout","time":1575.904878942,"data":"[ 97%] Building CXX object tools/llama-bench/CMakeFiles/llama-bench.dir/main.cpp.o\n"}
+,{"stream_name":"stdout","time":1575.904932555,"data":"[100%] Linking CXX executable ../../bin/llama-bench\n"}
+,{"stream_name":"stdout","time":1575.904936805,"data":"[100%] Built target llama-bench\n"}
+,{"stream_name":"stdout","time":1580.429261382,"data":"/tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf\n"}
+,{"stream_name":"stdout","time":1618.623986658,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":1634.885922217,"data":"\n"}
+,{"stream_name":"stdout","time":1635.114032344,"data":"Loading weights:   0%|          | 0/201 [00:00\u003c?, ?it/s]\n"}
+,{"stream_name":"stdout","time":1635.246289368,"data":"Loading weights:   0%|          | 1/201 [00:00\u003c00:45,  4.44it/s]\n"}
+,{"stream_name":"stdout","time":1635.375034183,"data":"Loading weights:  24%|██▍       | 49/201 [00:00\u003c00:00, 166.43it/s]\n"}
+,{"stream_name":"stdout","time":1635.492307721,"data":"Loading weights:  38%|███▊      | 76/201 [00:00\u003c00:00, 184.05it/s]\n"}
+,{"stream_name":"stdout","time":1635.598675749,"data":"Loading weights:  51%|█████     | 103/201 [00:00\u003c00:00, 198.63it/s]\n"}
+,{"stream_name":"stdout","time":1635.709902248,"data":"Loading weights:  62%|██████▏   | 125/201 [00:00\u003c00:00, 201.09it/s]\n"}
+,{"stream_name":"stdout","time":1635.820735816,"data":"Loading weights:  74%|███████▎  | 148/201 [00:00\u003c00:00, 202.87it/s]\n"}
+,{"stream_name":"stdout","time":1635.906371477,"data":"Loading weights:  87%|████████▋ | 175/201 [00:00\u003c00:00, 215.36it/s]\n"}
+,{"stream_name":"stdout","time":1635.906397281,"data":"Loading weights: 100%|██████████| 201/201 [00:01\u003c00:00, 196.99it/s]\n"}
+,{"stream_name":"stdout","time":1650.834279365,"data":"r0 ctx   512 [ours first]: ours  289.3 wall /  288.5 event tok/s @ 1177.5 MHz | llama.cpp  221.8 tok/s @ 990 MHz (last gen 585) | ratio 1.305\n"}
+,{"stream_name":"stdout","time":1654.929247469,"data":"r0 ctx  1024 [llama first]: ours  279.5 wall /  279.2 event tok/s @ 1170 MHz | llama.cpp  220.0 tok/s @ 1230 MHz (last gen 1237.5) | ratio 1.271\n"}
+,{"stream_name":"stdout","time":1659.008814711,"data":"r0 ctx  2048 [ours first]: ours  265.2 wall /  264.5 event tok/s @ 1170 MHz | llama.cpp  213.2 tok/s @ 1230 MHz (last gen 1230.0) | ratio 1.244\n"}
+,{"stream_name":"stdout","time":1663.865210189,"data":"r0 ctx  4096 [llama first]: ours  245.7 wall /  245.0 event tok/s @ 1140.0 MHz | llama.cpp  201.3 tok/s @ 1230.0 MHz (last gen 1215.0) | ratio 1.221\n"}
+,{"stream_name":"stdout","time":1670.055681443,"data":"r0 ctx  8192 [ours first]: ours  215.3 wall /  215.8 event tok/s @ 1125 MHz | llama.cpp  185.2 tok/s @ 1185 MHz (last gen 1207.5) | ratio 1.162\n"}
+,{"stream_name":"stdout","time":1679.552862074,"data":"r0 ctx 16384 [llama first]: ours  169.6 wall /  168.9 event tok/s @ 1080.0 MHz | llama.cpp  161.1 tok/s @ 1140.0 MHz (last gen 1162.5) | ratio 1.053\n"}
+,{"stream_name":"stdout","time":1683.241512847,"data":"r1 ctx   512 [llama first]: ours  279.0 wall /  279.5 event tok/s @ 1095.0 MHz | llama.cpp  216.6 tok/s @ 1185 MHz (last gen 1162.5) | ratio 1.288\n"}
+,{"stream_name":"stdout","time":1693.414085395,"data":"r1 ctx  1024 [ours first]: ours  272.2 wall /  253.7 event tok/s @ 1095 MHz | llama.cpp  213.9 tok/s @ 1155.0 MHz (last gen 1155.0) | ratio 1.273\n"}
+,{"stream_name":"stdout","time":1706.847015618,"data":"r1 ctx  2048 [llama first]: ours  256.4 wall /  252.4 event tok/s @ 1065 MHz | llama.cpp  207.4 tok/s @ 1140.0 MHz (last gen 1140.0) | ratio 1.236\n"}
+,{"stream_name":"stdout","time":1817.7244858,"data":"r1 ctx  4096 [ours first]: ours  238.8 wall /  238.7 event tok/s @ 1080.0 MHz | llama.cpp  196.1 tok/s @ 1110 MHz (last gen 1110.0) | ratio 1.218\n"}
+,{"stream_name":"stdout","time":2005.928983936,"data":"r1 ctx  8192 [llama first]: ours  203.5 wall /  203.2 event tok/s @ 1012.5 MHz | llama.cpp  178.9 tok/s @ 1080 MHz (last gen 1095) | ratio 1.138\n"}
+,{"stream_name":"stdout","time":2197.573247153,"data":"r1 ctx 16384 [ours first]: ours  162.7 wall /  162.9 event tok/s @ 1005 MHz | llama.cpp  154.6 tok/s @ 1020 MHz (last gen 1050.0) | ratio 1.053\n"}
+,{"stream_name":"stdout","time":2197.595240098,"data":"ctx   512: ours  284.1 vs llama.cpp  219.2 tok/s -\u003e +29.6% (range +28.8..+30.5%) at 1136 / 1088 MHz\n"}
+,{"stream_name":"stdout","time":2197.595260371,"data":"ctx  1024: ours  275.9 vs llama.cpp  216.9 tok/s -\u003e +27.2% (range +27.1..+27.3%) at 1132 / 1192 MHz\n"}
+,{"stream_name":"stdout","time":2197.595265723,"data":"ctx  2048: ours  260.8 vs llama.cpp  210.3 tok/s -\u003e +24.0% (range +23.6..+24.4%) at 1118 / 1185 MHz\n"}
+,{"stream_name":"stdout","time":2197.595281679,"data":"ctx  4096: ours  242.2 vs llama.cpp  198.7 tok/s -\u003e +21.9% (range +21.8..+22.1%) at 1110 / 1170 MHz\n"}
+,{"stream_name":"stdout","time":2197.595394297,"data":"ctx  8192: ours  209.4 vs llama.cpp  182.1 tok/s -\u003e +15.0% (range +13.8..+16.2%) at 1069 / 1132 MHz\n"}
+,{"stream_name":"stdout","time":2197.595412191,"data":"ctx 16384: ours  166.2 vs llama.cpp  157.8 tok/s -\u003e  +5.3% (range +5.3..+5.3%) at 1042 / 1080 MHz\n"}
+,{"stream_name":"stdout","time":2199.250622747,"data":"EXIT_CODE=0\n"}
+,{"stream_name":"stderr","time":2201.761915127,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2201.761943276,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2202.170265765,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2202.170291896,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2203.030761139,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2204.387484431,"data":"[NbConvertApp] Writing 377857 bytes to __results__.html\n"}
+]

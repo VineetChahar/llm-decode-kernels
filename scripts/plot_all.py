@@ -60,7 +60,14 @@ def plot_pred_vs_measured(r, llama):
     hf = [h for h in r["speed"].get("hf", []) if "tok_s" in h]
     if hf:
         ax.plot([h["ctx"] for h in hf], [h["tok_s"] for h in hf], "^-", color=C[2], label="HF transformers fp16")
-    if llama:
+    if "h2h" in r:  # same-node, alternating, clock-recorded head-to-head (bench/h2h.py) supersedes the separate-node run
+        hs = r["h2h"]["summary"]
+        hc = sorted(int(c) for c in hs)
+        ax.plot(hc, [hs[str(c)]["llama_tok_s"] if str(c) in hs else hs[c]["llama_tok_s"] for c in hc], "D-", color=C[6],
+                label="llama.cpp Q4_K_M (fa on), same node")
+        ax.plot(hc, [hs[str(c)]["ours_tok_s_wall"] if str(c) in hs else hs[c]["ours_tok_s_wall"] for c in hc], "D:",
+                color=C[0], mfc=SURF, label="W4A16, same-node head-to-head")
+    elif llama:
         ll = sorted([x for x in llama if x.get("flash_attn") in (True, 1, "1", "on", "enabled")] or llama, key=lambda x: x["n_depth"])
         ax.plot([x["n_depth"] for x in ll], [x["avg_ts"] for x in ll], "D-", color=C[6], label="llama.cpp Q4_K_M (fa on)")
     ax.set_xscale("log", base=2); ax.set_xticks(ctx); ax.set_xticklabels([ctx_label(c) for c in ctx])

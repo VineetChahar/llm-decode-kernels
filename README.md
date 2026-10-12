@@ -36,7 +36,9 @@ ablations, profiler breakdown). All results go to one
 llama.cpp reference (separate kernel, CUDA build ~10 min each):
 `scripts/kaggle_run.py --slug llm-decode-llamacpp --tag llamacpp --cmd "bash scripts/llamacpp_bench.sh"` (speed) and
 `--tag llamappl --cmd "bash scripts/llamacpp_ppl.sh"` (WikiText-2 perplexity, Q4_K_M vs Q8_0); pass the outputs to
-`plot_all.py --llamacpp … --llamacpp-ppl …`.
+`plot_all.py --llamacpp … --llamacpp-ppl …`. Same-node head-to-head (the comparison RESULTS §1 leads with: both
+decoders alternating on one GPU, clocks recorded): `--slug llm-decode-h2h --tag h2h --cmd "bash scripts/h2h.sh"`
+(~40 min), then add its `results.json` to the `plot_all.py` inputs.
 
 GPTQ weights (same format, same kernels; RESULTS §6): `qp = runtime.gptq.calibrate(hf_model, tokenizer, clip=True)`,
 then `DecodeConfig(quant="pre", qparams=qp)`.
@@ -52,8 +54,9 @@ kernels/     gemv_w4a16.cu (4 stages + bandwidth microbench), paged_attention.cu
 runtime/     quant.py (group-wise INT4: RTN, range clipping, GPTQ core + nibble packing), gptq.py (sequential GPTQ
              calibration), model.py (decode runtime, CUDA graphs), ext.py (JIT build)
 reference/   ref_ops.py — fp16 PyTorch reference for every kernel (also the CPU backend)
-bench/       kernel_bench.py, e2e.py, timing.py (CUDA events, L2 flush, clock gating), analyze.py (models)
-scripts/     kaggle_run.py (push -> poll -> pull), autotune.py, plot_all.py, run_all.sh, llamacpp_bench.sh, llamacpp_ppl.sh
+bench/       kernel_bench.py, e2e.py, h2h.py (vs llama.cpp, same node), timing.py (CUDA events, L2 flush, clock gating), analyze.py (models)
+scripts/     kaggle_run.py (push -> poll -> pull), autotune.py, plot_all.py, run_all.sh, llamacpp_bench.sh, llamacpp_ppl.sh,
+             h2h.sh
 tests/       test_kernels.py (GPU gates), test_*_local.py (CPU)
 configs/     autotune.json, attn_policy.json — written by the sweeps, loaded by the runtime at startup
 runs/        pulled Kaggle outputs, one directory per run

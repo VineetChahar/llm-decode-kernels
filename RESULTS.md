@@ -12,7 +12,8 @@ Sources (merged into `results.json` by `scripts/plot_all.py`, later runs overrid
 profiles with attention v3 and the fixed split-size lookup), `runs/20261011T102433Z_llamacpp2` and
 `runs/20261011T205851Z_llamappl` (llama.cpp speed and perplexity), `runs/20261011T191452Z_kbench3` (a node stuck at
 585 MHz — clock-sensitivity control only), `runs/20261012T060832Z_quant2` (quantizer comparison incl. GPTQ, interleaved
-LM-head ladder; `…054806Z_quant` is its identical-perplexity repeat) and `runs/20261011T225838Z_lmhead` (a failed
+LM-head ladder; `…054806Z_quant` is its identical-perplexity repeat), `runs/20261012T082654Z_h2h` (same-node
+head-to-head vs llama.cpp, §1) and `runs/20261011T225838Z_lmhead` (a failed
 LM-head clock attempt, §4).
 
 > **Clock caveat, up front.** Kaggle does not allow clock locking (`nvidia-smi -lgc`: permission denied), and the
@@ -22,6 +23,35 @@ LM-head clock attempt, §4).
 > flagged `throttled` in `results.json`. These are what this platform delivers, not best-case T4 numbers.
 
 ## 1. Headline
+
+**4-bit vs 4-bit, same GPU, same session: our W4A16 runtime vs llama.cpp Q4_K_M (flash attention on)**
+(`bench/h2h.py`, `runs/20261012T082654Z_h2h`; accuracy gate 667/667 first in the same job). The two decoders alternate
+at every context, the order flips each round (2 rounds), each run starts from the same cool-down (< 60 °C), and an
+NVML sampler records the SM clock throughout each run. Both sides generate 128 tokens from depth ctx; both numbers are
+wall-clock means (llama-bench's `avg_ts`; ours timed the same way). llama.cpp is built at the same commit (`23b0202a`)
+as the original reference.
+
+| ctx | ours W4A16 G128 | llama.cpp Q4_K_M | **ours vs llama.cpp** | round 1 / round 2 | SM MHz (ours / llama.cpp) |
+|---:|---:|---:|---:|---:|---:|
+| 512 | 284.1 | 219.2 | **+29.6 %** | +30.5 / +28.8 % | 1136 / 1088 |
+| 1K | 275.9 | 216.9 | **+27.2 %** | +27.1 / +27.3 % | 1132 / 1192 |
+| 2K | 260.8 | 210.3 | **+24.0 %** | +24.4 / +23.6 % | 1118 / 1185 |
+| 4K | 242.2 | 198.7 | **+21.9 %** | +22.1 / +21.8 % | 1110 / 1170 |
+| 8K | 209.4 | 182.1 | **+15.0 %** | +16.2 / +13.8 % | 1069 / 1132 |
+| 16K | 166.2 | 157.8 | **+5.3 %** | +5.3 / +5.3 % | 1042 / 1080 |
+
+* Faster at every context, and the two rounds (opposite order) agree within ±1.2 points. The clock did not favour us:
+  llama.cpp's runs sampled **38–67 MHz higher** at every context except 512, where its first-round run sampled a median
+  990 MHz (585 in its last generate phase) yet gave its highest rate of the session (221.8 tok/s) — most likely the
+  sampler catching idle gaps between llama-bench repetitions, not a slow GPU. Both sides
+  ran in the T4's throttled range (~1000–1230 MHz), not at the 1590 MHz boost clock.
+* llama.cpp's sampled clock covers prefill + generate (llama-bench times only the generate; the
+  last-generate-phase clock is in `results.json` and is within ±30 MHz of the whole-run median except that one point).
+* These replace the earlier separate-node comparison (+31 % → +8 %): same picture at short context, a smaller lead at
+  16K (+5 % rather than +8 %).
+
+**Full table** (each column measured in its own job; the llama.cpp column here is the *separate-node* run, kept for
+reference — use the head-to-head above for the comparison):
 
 | ctx | **W4A16 (G128, fp16 head)** | W4A16 + INT4 head | fp16 (our runtime, cuBLAS) | HF transformers fp16 | llama.cpp Q4_K_M (FA on) |
 |---:|---:|---:|---:|---:|---:|
@@ -35,7 +65,8 @@ LM-head clock attempt, §4).
 decode tokens/s, batch 1 (median of CUDA-event-timed graph replays). † SM clock sampled at 585 / 780 MHz for that
 point; the wall-clock rate of the same loop is given beside it (hollow markers in the plot). HF =
 `model(next_token, past_key_values=…)` loop, wall-clock; it runs out of memory in the 8K/16K prefill on the 15 GB T4.
-llama.cpp = `llama-bench -n 128 -d <ctx>`, a different Kaggle node, and llama-bench does not record clocks.
+llama.cpp column = `llama-bench -n 128 -d <ctx>` on a different Kaggle node with unrecorded clocks (superseded by the
+same-node head-to-head above).
 
 **With accuracy next to it** (WikiText-2 test, 16 windows × 512 tokens = 8,176 scored tokens, BOS-prefixed;
 greedy agreement vs HF fp16 on 16 fixed prompts × 64 new tokens):
@@ -75,16 +106,20 @@ Reading it honestly:
   fp16 is a very strict test (one flipped near-tie and the continuations part), and on this 16-prompt set it does not
   separate the quantizers; teacher-forced top-1 agreement does (0.910 RTN → 0.933 GPTQ). The kernels reproduce the fp16
   reference dequant-and-GEMV to ≤ 6.5e-4 relative error (§3), so none of this is kernel error.
-* **vs llama.cpp: faster at every context, and with GPTQ + clipping, equal quality cost.** +31 % at 512 tokens, +25 %
-  at 2K, +17 % at 8K, +8 % at 16K. Attention v3 (§5) is what closed the long-context gap: with v2 we were 16 % *slower*
+* **vs llama.cpp: faster at every context, and with GPTQ + clipping, equal quality cost.** Same node, same session:
+  +30 % at 512 tokens, +24 % at 2K, +15 % at 8K, +5 % at 16K (table above). Attention v3 (§5) is what closed the long-context gap: with v2 we were 16 % *slower*
   than llama.cpp at 16K. On quality, llama.cpp's Q4_K_M loses **1.6 %** perplexity to its 8-bit model; our RTN lost
   7.6 % to fp16, our GPTQ + clipping loses **1.6 %** — the same relative cost (different perplexity protocols, so
   compare the relative numbers only; Q4_K_M also spends ~4.9 bits/weight vs our 4.25 at G128). The speed numbers were
-  measured with RTN weights; GPTQ weights run at the same speed (same bytes; measured, §6). llama.cpp ran on a
-  different Kaggle node with unrecorded clocks.
-* **vs HF fp16:** 8.0× at 512 tokens. vs our own fp16 cuBLAS runtime (same kernels for everything except the weight
-  GEMVs): 2.7× in the timed loop, which ran the fp16 config ~180 MHz lower; the profiled graph steps at 512 tokens are
-  10.54 ms vs 3.30 ms = **3.2×**, the same as the ratio of bytes per token (2.08 GB vs 0.66 GB).
+  measured with RTN weights; GPTQ weights run at the same speed (same bytes; measured, §6).
+* **vs HF transformers, like for like (fp16 vs fp16):** our fp16 runtime is **3.0×** HF fp16 at 512 tokens (106.6 vs
+  35.8 tok/s) and 3.5× at 4K — that is the runtime's own contribution (CUDA graph, fused kernels, paged split-K
+  attention), with identical weights and identical perplexity. W4A16 vs HF fp16 (8.0× at 512) mixes that with 4-bit
+  weights and is **not** a like-for-like comparison; the 4-bit-vs-4-bit comparison is llama.cpp above.
+* **INT4 vs fp16 inside our runtime** (same kernels for everything except the weight GEMVs): 2.7× in the timed loop,
+  which ran the fp16 config ~180 MHz lower; the profiled graph steps at 512 tokens are 10.54 ms vs 3.30 ms = **3.2×**,
+  the same as the ratio of bytes per token (2.08 GB vs 0.66 GB) — the gain is the bytes, as a bandwidth-bound step
+  should be.
 
 TinyLlama is trained to 2,048 positions. Beyond 2K the KV cache is filled with random values and only **speed** is
 meaningful there (quality claims stop at 2K).
@@ -161,7 +196,7 @@ order so that `(w >> 4i) & 0x000F000F | 0x64006400` yields two halves `1024 + q`
 Stage ladder at G128, L2 flushed between iterations (a 16 MB *read* — see NOTEBOOK for why a memset flush was a bug),
 SM 1590 MHz (`kbench2`):
 
-| shape (N×K) | 0 naive | 1 vectorized | 2 reg-blocked | **3 autotuned** | cuBLAS fp16 | speedup vs cuBLAS | % of 277 GB/s |
+| shape (N×K) | 0 naive | 1 vectorized | 2 reg-blocked | **3 autotuned** | cuBLAS fp16 | W4A16 vs cuBLAS fp16 | % of 277 GB/s |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | qkv 2560×2048 | 28.8 µs | 17.0 | 18.6 | **15.1** | 46.8 | 3.1× | 67 % |
 | o 2048×2048 | 24.5 | 15.8 | 16.3 | **13.1** | 38.8 | 3.0× | 62 % |
@@ -181,6 +216,13 @@ is the grid's 133.3 µs. The body rows reproduce within 1 % in a second run (`fi
 End-to-end at ctx 512 the ladder is 118.8 → 205.0 → 246.7 → 287.1 tok/s (stages 0 → 3, `e2efinal`; the stage-3 point
 ran at 1170 MHz, stages 0–2 at 990–1050 MHz, so the last step is partly clock).
 
+* **What the cuBLAS column does and does not show:** it is W4A16 against an fp16 GEMV, and at G128 the INT4 weights
+  plus scales/zeros are 4.25 bits per weight vs 16 — **3.76× fewer bytes**. A 3.0–3.7× speedup is therefore mostly the
+  format, not a faster GEMV: per byte moved, cuBLAS fp16 reaches **78–90 %** of achievable bandwidth on the body shapes
+  and our kernel **61–88 %** (95 % on the LM head at full clock) — cuBLAS is the more bandwidth-efficient kernel on the
+  small qkv/o shapes, about equal on gate_up. The INT4 kernel's job is to convert the 3.76× byte saving into time
+  without losing much of it to dequant and small-kernel overhead (it keeps 80–98 % of it); the like-for-like INT4
+  comparison is llama.cpp (§1).
 * **Vectorization is the big step** (1.55–1.86× on the body shapes at 1590 MHz): 32-bit → 128-bit loads, and it needs the alignment work — packed rows
   are K/8 int32 = 16-byte multiples for every shape here, `x` is 16-byte aligned (checked in the bindings: `CHECK_ALIGN16`).
 * **Register blocking matters only where `x` traffic is a real fraction of the bytes**: for the body shapes the 4 KB
@@ -350,8 +392,10 @@ short-context points are latency-bound and were measured on the 585 MHz node (§
   `synchronize()` and read the 585 MHz idle clock — NOTEBOOK).
 * **Quantization:** RTN is the zero-setup default; GPTQ + clipping (one 2-minute calibration) closes the perplexity gap
   to llama.cpp Q4_K_M's relative cost (§6). AWQ and act-order GPTQ were not tried.
-* **llama.cpp** was measured on a different Kaggle node (`llama-bench` doesn't record clocks), with its own quantizer;
-  its perplexity uses its own protocol, so only the relative 4-bit cost is compared (§1).
+* **llama.cpp** speed is compared on the same node in the same session, alternating, with clocks recorded (§1); both
+  sides ran throttled (~1000–1230 MHz), so the ratios hold at that clock, and how they would move at the 1590 MHz boost
+  clock is not measured (our INT4 GEMV is more clock-sensitive than cuBLAS, §4; llama.cpp's sensitivity is unknown).
+  Its perplexity uses its own protocol, so only the relative 4-bit cost is compared (§1).
 * **LM-head GEMV ladder** never ran at full clock on Kaggle when timed row by row (four jobs); it is now timed
   interleaved, so its ratios are valid, at 780 MHz; its full-clock absolute time comes from the autotuner grid (§4).
 
@@ -364,6 +408,6 @@ repo was produced with
 ```bash
 .venv/bin/python scripts/plot_all.py runs/20261011T170804Z_kbench2/results.json runs/20261011T193218Z_e2e4/results.json \
   runs/20261011T191452Z_kbench3/clock_experiment.json runs/20261011T212701Z_final/results.json runs/20261012T060832Z_quant2/results.json \
-  runs/20261011T225704Z_e2efinal/results.json \
+  runs/20261011T225704Z_e2efinal/results.json runs/20261012T082654Z_h2h/results.json \
   --llamacpp runs/20261011T102433Z_llamacpp2/llamacpp.json --llamacpp-ppl runs/20261011T205851Z_llamappl/llamacpp_ppl.json
 ```

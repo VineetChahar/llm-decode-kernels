@@ -158,3 +158,17 @@ Kaggle T4 x2: Tesla T4 sm_75, driver 580.178, CUDA 12.8, torch 2.11.0+cu128, tra
   186 / 557 us. Finding: at 780 MHz the stage-2 config (R=4, 4 warps, pf) beats the ~1500 MHz autotune pick (R=2, 1 warp)
   by 15 % — the GEMV autotune optimum is clock-dependent. time_bursts removed; time_interleaved kept.
 - One-command pipeline now includes gemv_lm and quant by default.
+
+## Review pass: like-for-like comparisons (2026-10-12)
+- Review feedback: (1) don't lead with W4A16 vs HF fp16 (mixes the runtime with 4-bit weights); (2) the llama.cpp
+  numbers came from a different node with unrecorded clocks while ours ran throttled at 1080-1170 MHz; (3) the
+  cuBLAS 3.0x claim must say W4A16 vs fp16.
+- Decision: measure (2) rather than caveat it -> bench/h2h.py + scripts/h2h.sh: same node, same session, llama.cpp at the
+  original commit 23b0202a, alternating per context with the order flipped each round, cool-down to < 60 C before every
+  run, NVML sampled every 100 ms in a background thread, 128 tokens from depth ctx on both sides, wall-clock means.
+- runs/20261012T082654Z_h2h (gate 667/667): +29.6 / +27.2 / +24.0 / +21.9 / +15.0 / +5.3 % (512 -> 16K); the two
+  rounds agree within 1.2 points; llama.cpp sampled 38-67 MHz *higher* than ours (except 512). 16K lead is +5 %, not
+  the +8 % from the separate-node run. RESULTS §1 now leads with this table.
+- (1): like-for-like HF number is our fp16 vs HF fp16 = 3.0x at 512, 3.5x at 4K; the 8x is labelled as mixed.
+- (3): checking it showed per byte cuBLAS fp16 is the *more* bandwidth-efficient GEMV on the small shapes (78-90 % of
+  achievable vs our 61-88 %); the 3.0-3.7x is the 3.76x byte saving, of which our kernel keeps 80-98 %. Stated in §4.

@@ -1,0 +1,44 @@
+$ nvidia-smi --query-gpu=index,name,driver_version,memory.total,clocks.max.sm,clocks.max.mem --format=csv; nvcc --version | tail -2
+index, name, driver_version, memory.total [MiB], clocks.max.sm [MHz], clocks.max.memory [MHz]
+0, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+1, Tesla T4, 580.178.04, 15360 MiB, 1590 MHz, 5001 MHz
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+$ bash scripts/h2h.sh
+667/667 passed
+23b0202a189c44a54625aadcb37a946dd1d6278d
+CMAKE_BUILD_TYPE=Release
+[ 97%] Building CXX object tools/llama-bench/CMakeFiles/llama-bench.dir/main.cpp.o
+[100%] Linking CXX executable ../../bin/llama-bench
+[100%] Built target llama-bench
+/tmp/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/201 [00:00<00:45,  4.44it/s]
+Loading weights:  24%|██▍       | 49/201 [00:00<00:00, 166.43it/s]
+Loading weights:  38%|███▊      | 76/201 [00:00<00:00, 184.05it/s]
+Loading weights:  51%|█████     | 103/201 [00:00<00:00, 198.63it/s]
+Loading weights:  62%|██████▏   | 125/201 [00:00<00:00, 201.09it/s]
+Loading weights:  74%|███████▎  | 148/201 [00:00<00:00, 202.87it/s]
+Loading weights:  87%|████████▋ | 175/201 [00:00<00:00, 215.36it/s]
+Loading weights: 100%|██████████| 201/201 [00:01<00:00, 196.99it/s]
+r0 ctx   512 [ours first]: ours  289.3 wall /  288.5 event tok/s @ 1177.5 MHz | llama.cpp  221.8 tok/s @ 990 MHz (last gen 585) | ratio 1.305
+r0 ctx  1024 [llama first]: ours  279.5 wall /  279.2 event tok/s @ 1170 MHz | llama.cpp  220.0 tok/s @ 1230 MHz (last gen 1237.5) | ratio 1.271
+r0 ctx  2048 [ours first]: ours  265.2 wall /  264.5 event tok/s @ 1170 MHz | llama.cpp  213.2 tok/s @ 1230 MHz (last gen 1230.0) | ratio 1.244
+r0 ctx  4096 [llama first]: ours  245.7 wall /  245.0 event tok/s @ 1140.0 MHz | llama.cpp  201.3 tok/s @ 1230.0 MHz (last gen 1215.0) | ratio 1.221
+r0 ctx  8192 [ours first]: ours  215.3 wall /  215.8 event tok/s @ 1125 MHz | llama.cpp  185.2 tok/s @ 1185 MHz (last gen 1207.5) | ratio 1.162
+r0 ctx 16384 [llama first]: ours  169.6 wall /  168.9 event tok/s @ 1080.0 MHz | llama.cpp  161.1 tok/s @ 1140.0 MHz (last gen 1162.5) | ratio 1.053
+r1 ctx   512 [llama first]: ours  279.0 wall /  279.5 event tok/s @ 1095.0 MHz | llama.cpp  216.6 tok/s @ 1185 MHz (last gen 1162.5) | ratio 1.288
+r1 ctx  1024 [ours first]: ours  272.2 wall /  253.7 event tok/s @ 1095 MHz | llama.cpp  213.9 tok/s @ 1155.0 MHz (last gen 1155.0) | ratio 1.273
+r1 ctx  2048 [llama first]: ours  256.4 wall /  252.4 event tok/s @ 1065 MHz | llama.cpp  207.4 tok/s @ 1140.0 MHz (last gen 1140.0) | ratio 1.236
+r1 ctx  4096 [ours first]: ours  238.8 wall /  238.7 event tok/s @ 1080.0 MHz | llama.cpp  196.1 tok/s @ 1110 MHz (last gen 1110.0) | ratio 1.218
+r1 ctx  8192 [llama first]: ours  203.5 wall /  203.2 event tok/s @ 1012.5 MHz | llama.cpp  178.9 tok/s @ 1080 MHz (last gen 1095) | ratio 1.138
+r1 ctx 16384 [ours first]: ours  162.7 wall /  162.9 event tok/s @ 1005 MHz | llama.cpp  154.6 tok/s @ 1020 MHz (last gen 1050.0) | ratio 1.053
+ctx   512: ours  284.1 vs llama.cpp  219.2 tok/s -> +29.6% (range +28.8..+30.5%) at 1136 / 1088 MHz
+ctx  1024: ours  275.9 vs llama.cpp  216.9 tok/s -> +27.2% (range +27.1..+27.3%) at 1132 / 1192 MHz
+ctx  2048: ours  260.8 vs llama.cpp  210.3 tok/s -> +24.0% (range +23.6..+24.4%) at 1118 / 1185 MHz
+ctx  4096: ours  242.2 vs llama.cpp  198.7 tok/s -> +21.9% (range +21.8..+22.1%) at 1110 / 1170 MHz
+ctx  8192: ours  209.4 vs llama.cpp  182.1 tok/s -> +15.0% (range +13.8..+16.2%) at 1069 / 1132 MHz
+ctx 16384: ours  166.2 vs llama.cpp  157.8 tok/s ->  +5.3% (range +5.3..+5.3%) at 1042 / 1080 MHz
+EXIT_CODE=0
